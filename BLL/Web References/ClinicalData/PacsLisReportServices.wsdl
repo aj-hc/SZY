@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="NetTestPacs">
+        <s:complexType />
+      </s:element>
+      <s:element name="NetTestPacsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NetTestPacsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NetTestLis">
+        <s:complexType />
+      </s:element>
+      <s:element name="NetTestLisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NetTestLisResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPacsItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPacsItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPacsItemsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNormalLisItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNormalLisItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNormalLisItemsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PacsReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PacsReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PacsReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NormalLisReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NormalLisReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NormalLisReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientDiagnose">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientDiagnoseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPatientDiagnoseResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="NetTestPacsSoapIn">
+    <wsdl:part name="parameters" element="tns:NetTestPacs" />
+  </wsdl:message>
+  <wsdl:message name="NetTestPacsSoapOut">
+    <wsdl:part name="parameters" element="tns:NetTestPacsResponse" />
+  </wsdl:message>
+  <wsdl:message name="NetTestLisSoapIn">
+    <wsdl:part name="parameters" element="tns:NetTestLis" />
+  </wsdl:message>
+  <wsdl:message name="NetTestLisSoapOut">
+    <wsdl:part name="parameters" element="tns:NetTestLisResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPacsItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPacsItems" />
+  </wsdl:message>
+  <wsdl:message name="GetPacsItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPacsItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNormalLisItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNormalLisItems" />
+  </wsdl:message>
+  <wsdl:message name="GetNormalLisItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNormalLisItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PacsReportSoapIn">
+    <wsdl:part name="parameters" element="tns:PacsReport" />
+  </wsdl:message>
+  <wsdl:message name="PacsReportSoapOut">
+    <wsdl:part name="parameters" element="tns:PacsReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="NormalLisReportSoapIn">
+    <wsdl:part name="parameters" element="tns:NormalLisReport" />
+  </wsdl:message>
+  <wsdl:message name="NormalLisReportSoapOut">
+    <wsdl:part name="parameters" element="tns:NormalLisReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDiagnoseSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPatientDiagnose" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDiagnoseSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPatientDiagnoseResponse" />
+  </wsdl:message>
+  <wsdl:message name="NetTestPacsHttpGetIn" />
+  <wsdl:message name="NetTestPacsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="NetTestLisHttpGetIn" />
+  <wsdl:message name="NetTestLisHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPacsItemsHttpGetIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPacsItemsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNormalLisItemsHttpGetIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNormalLisItemsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PacsReportHttpGetIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PacsReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="NormalLisReportHttpGetIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NormalLisReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDiagnoseHttpGetIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDiagnoseHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="NetTestPacsHttpPostIn" />
+  <wsdl:message name="NetTestPacsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="NetTestLisHttpPostIn" />
+  <wsdl:message name="NetTestLisHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPacsItemsHttpPostIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPacsItemsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNormalLisItemsHttpPostIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNormalLisItemsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PacsReportHttpPostIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PacsReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="NormalLisReportHttpPostIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NormalLisReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDiagnoseHttpPostIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDiagnoseHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="PacsLisReportServicesSoap">
+    <wsdl:operation name="NetTestPacs">
+      <wsdl:input message="tns:NetTestPacsSoapIn" />
+      <wsdl:output message="tns:NetTestPacsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NetTestLis">
+      <wsdl:input message="tns:NetTestLisSoapIn" />
+      <wsdl:output message="tns:NetTestLisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPacsItems">
+      <wsdl:input message="tns:GetPacsItemsSoapIn" />
+      <wsdl:output message="tns:GetPacsItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNormalLisItems">
+      <wsdl:input message="tns:GetNormalLisItemsSoapIn" />
+      <wsdl:output message="tns:GetNormalLisItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PacsReport">
+      <wsdl:input message="tns:PacsReportSoapIn" />
+      <wsdl:output message="tns:PacsReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NormalLisReport">
+      <wsdl:input message="tns:NormalLisReportSoapIn" />
+      <wsdl:output message="tns:NormalLisReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDiagnose">
+      <wsdl:input message="tns:GetPatientDiagnoseSoapIn" />
+      <wsdl:output message="tns:GetPatientDiagnoseSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PacsLisReportServicesHttpGet">
+    <wsdl:operation name="NetTestPacs">
+      <wsdl:input message="tns:NetTestPacsHttpGetIn" />
+      <wsdl:output message="tns:NetTestPacsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NetTestLis">
+      <wsdl:input message="tns:NetTestLisHttpGetIn" />
+      <wsdl:output message="tns:NetTestLisHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPacsItems">
+      <wsdl:input message="tns:GetPacsItemsHttpGetIn" />
+      <wsdl:output message="tns:GetPacsItemsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNormalLisItems">
+      <wsdl:input message="tns:GetNormalLisItemsHttpGetIn" />
+      <wsdl:output message="tns:GetNormalLisItemsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PacsReport">
+      <wsdl:input message="tns:PacsReportHttpGetIn" />
+      <wsdl:output message="tns:PacsReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NormalLisReport">
+      <wsdl:input message="tns:NormalLisReportHttpGetIn" />
+      <wsdl:output message="tns:NormalLisReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDiagnose">
+      <wsdl:input message="tns:GetPatientDiagnoseHttpGetIn" />
+      <wsdl:output message="tns:GetPatientDiagnoseHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PacsLisReportServicesHttpPost">
+    <wsdl:operation name="NetTestPacs">
+      <wsdl:input message="tns:NetTestPacsHttpPostIn" />
+      <wsdl:output message="tns:NetTestPacsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NetTestLis">
+      <wsdl:input message="tns:NetTestLisHttpPostIn" />
+      <wsdl:output message="tns:NetTestLisHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPacsItems">
+      <wsdl:input message="tns:GetPacsItemsHttpPostIn" />
+      <wsdl:output message="tns:GetPacsItemsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNormalLisItems">
+      <wsdl:input message="tns:GetNormalLisItemsHttpPostIn" />
+      <wsdl:output message="tns:GetNormalLisItemsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PacsReport">
+      <wsdl:input message="tns:PacsReportHttpPostIn" />
+      <wsdl:output message="tns:PacsReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NormalLisReport">
+      <wsdl:input message="tns:NormalLisReportHttpPostIn" />
+      <wsdl:output message="tns:NormalLisReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDiagnose">
+      <wsdl:input message="tns:GetPatientDiagnoseHttpPostIn" />
+      <wsdl:output message="tns:GetPatientDiagnoseHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PacsLisReportServicesSoap" type="tns:PacsLisReportServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NetTestPacs">
+      <soap:operation soapAction="http://tempuri.org/NetTestPacs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetTestLis">
+      <soap:operation soapAction="http://tempuri.org/NetTestLis" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPacsItems">
+      <soap:operation soapAction="http://tempuri.org/GetPacsItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNormalLisItems">
+      <soap:operation soapAction="http://tempuri.org/GetNormalLisItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PacsReport">
+      <soap:operation soapAction="http://tempuri.org/PacsReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NormalLisReport">
+      <soap:operation soapAction="http://tempuri.org/NormalLisReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDiagnose">
+      <soap:operation soapAction="http://tempuri.org/GetPatientDiagnose" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PacsLisReportServicesSoap12" type="tns:PacsLisReportServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NetTestPacs">
+      <soap12:operation soapAction="http://tempuri.org/NetTestPacs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetTestLis">
+      <soap12:operation soapAction="http://tempuri.org/NetTestLis" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPacsItems">
+      <soap12:operation soapAction="http://tempuri.org/GetPacsItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNormalLisItems">
+      <soap12:operation soapAction="http://tempuri.org/GetNormalLisItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PacsReport">
+      <soap12:operation soapAction="http://tempuri.org/PacsReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NormalLisReport">
+      <soap12:operation soapAction="http://tempuri.org/NormalLisReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDiagnose">
+      <soap12:operation soapAction="http://tempuri.org/GetPatientDiagnose" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PacsLisReportServicesHttpGet" type="tns:PacsLisReportServicesHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="NetTestPacs">
+      <http:operation location="/NetTestPacs" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetTestLis">
+      <http:operation location="/NetTestLis" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPacsItems">
+      <http:operation location="/GetPacsItems" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNormalLisItems">
+      <http:operation location="/GetNormalLisItems" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PacsReport">
+      <http:operation location="/PacsReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NormalLisReport">
+      <http:operation location="/NormalLisReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDiagnose">
+      <http:operation location="/GetPatientDiagnose" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PacsLisReportServicesHttpPost" type="tns:PacsLisReportServicesHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="NetTestPacs">
+      <http:operation location="/NetTestPacs" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetTestLis">
+      <http:operation location="/NetTestLis" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPacsItems">
+      <http:operation location="/GetPacsItems" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNormalLisItems">
+      <http:operation location="/GetNormalLisItems" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PacsReport">
+      <http:operation location="/PacsReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NormalLisReport">
+      <http:operation location="/NormalLisReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDiagnose">
+      <http:operation location="/GetPatientDiagnose" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PacsLisReportServices">
+    <wsdl:port name="PacsLisReportServicesSoap" binding="tns:PacsLisReportServicesSoap">
+      <soap:address location="http://192.9.198.41:8030/PacsLisReportServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PacsLisReportServicesSoap12" binding="tns:PacsLisReportServicesSoap12">
+      <soap12:address location="http://192.9.198.41:8030/PacsLisReportServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PacsLisReportServicesHttpGet" binding="tns:PacsLisReportServicesHttpGet">
+      <http:address location="http://192.9.198.41:8030/PacsLisReportServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PacsLisReportServicesHttpPost" binding="tns:PacsLisReportServicesHttpPost">
+      <http:address location="http://192.9.198.41:8030/PacsLisReportServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

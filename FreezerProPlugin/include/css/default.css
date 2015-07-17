@@ -1,0 +1,87 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+#FreezerPro {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#MenuBar {
+    position: absolute;
+    width: 200px;
+    height: 27px;
+    top: 25px;
+    right: 40px;
+    font-size: 11px;
+    color: white;
+    text-align: right;
+}
+
+    #MenuBar button {
+        font-size: 12px;
+        overflow: hidden;
+    }
+    #messager{
+        text-align:center;
+        
+    }
+
+#formDiv {
+    border: 1px,solid,#0094ff;
+    position: center;
+    align-content: center;
+    margin:0px auto;
+    text-align:left;
+    width:500px;
+    background:#ccc;
+}
+#LCbody{
+    margin:0px;
+}
+#LCtable{
+    border:1px,solid,#0094ff;
+    align-content:center;
+    position:center;
+    height:auto;
+    width:100%;
+}
+table{
+    border:#0094ff;
+}
+table tr{
+    padding:5px;
+    margin:5px;
+}
+#fc td {
+    font-weight: bold;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+#main {
+    width:90%;
+    margin:0 auto;
+    margin-top:20px;
+}
+#fc{
+    margin-top:20px;
+}

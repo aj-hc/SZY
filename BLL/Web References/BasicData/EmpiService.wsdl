@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetEmpiInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Request" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpiInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpiInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetEmpiInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpiInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpiInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpiInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpiInfoHttpGetIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpiInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpiInfoHttpPostIn">
+    <wsdl:part name="Request" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpiInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="EmpiServiceSoap">
+    <wsdl:operation name="GetEmpiInfo">
+      <wsdl:input message="tns:GetEmpiInfoSoapIn" />
+      <wsdl:output message="tns:GetEmpiInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="EmpiServiceHttpGet">
+    <wsdl:operation name="GetEmpiInfo">
+      <wsdl:input message="tns:GetEmpiInfoHttpGetIn" />
+      <wsdl:output message="tns:GetEmpiInfoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="EmpiServiceHttpPost">
+    <wsdl:operation name="GetEmpiInfo">
+      <wsdl:input message="tns:GetEmpiInfoHttpPostIn" />
+      <wsdl:output message="tns:GetEmpiInfoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EmpiServiceSoap" type="tns:EmpiServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmpiInfo">
+      <soap:operation soapAction="http://tempuri.org/GetEmpiInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EmpiServiceSoap12" type="tns:EmpiServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmpiInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetEmpiInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EmpiServiceHttpGet" type="tns:EmpiServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetEmpiInfo">
+      <http:operation location="/GetEmpiInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EmpiServiceHttpPost" type="tns:EmpiServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetEmpiInfo">
+      <http:operation location="/GetEmpiInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EmpiService">
+    <wsdl:port name="EmpiServiceSoap" binding="tns:EmpiServiceSoap">
+      <soap:address location="http://192.9.198.41:8016/EmpiService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EmpiServiceSoap12" binding="tns:EmpiServiceSoap12">
+      <soap12:address location="http://192.9.198.41:8016/EmpiService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EmpiServiceHttpGet" binding="tns:EmpiServiceHttpGet">
+      <http:address location="http://192.9.198.41:8016/EmpiService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EmpiServiceHttpPost" binding="tns:EmpiServiceHttpPost">
+      <http:address location="http://192.9.198.41:8016/EmpiService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
