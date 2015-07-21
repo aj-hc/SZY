@@ -1,0 +1,12 @@
+﻿[
+    { "baseinfo": { "sucess": "", "msg": "", "state": "" } },
+    { "clien": { "sucess": "", "msg": "", "state": "" } },
+    {
+        "sampleinfo": [
+            { "sucess": "", "msg": "", "state": "","num": "1" },
+            { "sucess": "", "msg": "", "state": "","num": "2" },
+            { "sucess": "", "msg": "", "state": "","num": "3" }
+        ]
+    }
+
+]
