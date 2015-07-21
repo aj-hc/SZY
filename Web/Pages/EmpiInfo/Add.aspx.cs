@@ -30,7 +30,7 @@ namespace RuRo.Web.EmpiInfo
 			}
 			if(this.txtSex.Text.Trim().Length==0)
 			{
-				strErr+="患者姓名不能为空！\\n";	
+				strErr+="性别不能为空！\\n";	
 			}
 			if(this.txtBirthday.Text.Trim().Length==0)
 			{

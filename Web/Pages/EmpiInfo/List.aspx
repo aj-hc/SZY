@@ -42,7 +42,7 @@
                             </asp:TemplateField> 
                             
 		<asp:BoundField DataField="PatientName" HeaderText="姓名" SortExpression="PatientName" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="Sex" HeaderText="患者姓名" SortExpression="Sex" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="Sex" HeaderText="性别" SortExpression="Sex" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="Birthday" HeaderText="出生日期" SortExpression="Birthday" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="CardId" HeaderText="身份证号" SortExpression="CardId" ItemStyle-HorizontalAlign="Center"  /> 
                             

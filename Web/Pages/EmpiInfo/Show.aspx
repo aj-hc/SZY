@@ -23,7 +23,7 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		患者姓名
+		性别
 	：</td>
 	<td height="25" width="*" align="left">
 		<asp:Label id="lblSex" runat="server"></asp:Label>
