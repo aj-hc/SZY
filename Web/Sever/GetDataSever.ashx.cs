@@ -23,7 +23,6 @@ namespace RuRo.Web.Sever
                 default:
                     break;
             }
-
         }
 
         private void GetData(HttpContext context)
