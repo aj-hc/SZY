@@ -35,8 +35,8 @@ namespace RuRo.Web.NormalLisReport
 		this.lblId.Text=model.Id.ToString();
 		this.txthospnum.Text=model.hospnum;
 		this.txtpatname.Text=model.patname;
-		this.txtSex.Text=model.Sex;
-		this.txtAge.Text=model.Age;
+		this.txtSex.Text=model.sex;
+		this.txtAge.Text=model.age;
 		this.txtage_month.Text=model.age_month;
 		this.txtext_mthd.Text=model.ext_mthd;
 		this.txtchinese.Text=model.chinese;
@@ -149,8 +149,8 @@ namespace RuRo.Web.NormalLisReport
 			model.Id=Id;
 			model.hospnum=hospnum;
 			model.patname=patname;
-			model.Sex=Sex;
-			model.Age=Age;
+			model.sex=Sex;
+			model.age=Age;
 			model.age_month=age_month;
 			model.ext_mthd=ext_mthd;
 			model.chinese=chinese;

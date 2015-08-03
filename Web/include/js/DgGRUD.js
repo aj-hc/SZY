@@ -69,7 +69,8 @@ function destroy(url) {
                 $.post(url+'?mode=del&pk=' + pkSelect, function (result) {
                     if (result.success) {
                         $.messager.alert('提示', result.msg, 'info', function () {
-                            $('#datagrid').datagrid('reload');    //重新加载载数据
+                            //$('#datagrid').datagrid('reload');    //重新加载载数据
+                            
                         });
                     } else {
                         $.messager.alert('错误', result.msg, 'warning');

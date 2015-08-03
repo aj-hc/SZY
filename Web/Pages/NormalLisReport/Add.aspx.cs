@@ -114,8 +114,8 @@ namespace RuRo.Web.NormalLisReport
 			RuRo.Model.NormalLisReport model=new RuRo.Model.NormalLisReport();
 			model.hospnum=hospnum;
 			model.patname=patname;
-			model.Sex=Sex;
-			model.Age=Age;
+			model.sex=Sex;
+			model.age=Age;
 			model.age_month=age_month;
 			model.ext_mthd=ext_mthd;
 			model.chinese=chinese;

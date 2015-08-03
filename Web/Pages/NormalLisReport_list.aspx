@@ -12,7 +12,6 @@
     <link href="../include/jquery-easyui-1.4.3/themes/color.css" rel="stylesheet" />
     <script src="../include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
     <link href="../include/css/kfmis.css" rel="stylesheet" />
-    <script src="../include/js/page.js"></script>
     <title></title>
 </head>
 <body>
@@ -20,7 +19,7 @@
     <table id="datagrid" title="检验报告" class="easyui-datagrid" style="width: auto; height: 260px"
         fit='false'
         pagination="true" idfield="id" rownumbers="true"
-        fitcolumns="true" singleselect="true" toolbar="#toolbarN"
+        fitcolumns="true" singleselect="flase" toolbar="#toolbarN"
         striped="false" pagelist="[5,10,15]"
         selectoncheck="true" checkonselect="true" remotesort="true">
         <thead>
@@ -77,7 +76,7 @@
                 </td>--%>
                 <!--button按钮工具栏-->
                 <td style="text-align: left;">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonDel" iconcls="icon-cancel" plain="false" onclick="destroy('NormalLisReport_handler.ashx');">删除</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonDel" iconcls="icon-cancel" plain="false" onclick="destroy('/Sever/NormalLisReport_handler.ashx');">删除</a>
                 </td>
             </tr>
         </table>

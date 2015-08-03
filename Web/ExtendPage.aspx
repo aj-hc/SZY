@@ -6,6 +6,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="../include/jquery-easyui-1.4.3/jquery.min.js"></script>
+    <script src="include/js/DateFmt.js"></script>
     <script src="../include/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
     <script src="include/js/jquery.cookie.js"></script>
     <link href="../include/jquery-easyui-1.4.3/themes/default/easyui.css" rel="stylesheet" />
@@ -16,6 +17,7 @@
     <script src="include/js/page.js"></script>
     <script src="include/js/BindFuncToId.js"></script>
     <script src="include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+    <script src="include/js/DgGRUD.js"></script>
     <title>信息导入</title>
 </head>
 <body style="overflow: auto;">
@@ -48,20 +50,20 @@
                                 <td>姓名：</td>
                                 <td>
                                     <input class="easyui-textbox" name="PatientName" id="PatientName" data-options="required:true" /></td>
-                                <td class="name">住院号：</td>
+                                <td class="name">住院号、卡号：</td>
                                 <td>
-                                    <input class="easyui-textbox" name="IPSeqNoText" id="IPSeqNoText" data-options="required:false" /></td>
-                                <td>卡号：</td>
-                                <td>
-                                    <input class="easyui-textbox" name="PatientCardNo" id="PatientCardNo" data-options="required:false" /></td>
+                                    <input class="easyui-textbox" name="PatientNo" id="PatientNo" data-options="required:false" /></td>
                             </tr>
                             <tr>
                                 <td>性别：</td>
                                 <td>
-                                    <input class="easyui-combobox" name="Sex" id="Sex" style="width: 204px" data-options=" required:false" /></td>
+                                    <input class="easyui-textbox" name="Sex" id="Sex" style="width: 204px" data-options=" required:false" /></td>
                                 <td>出生日期：</td>
                                 <td>
                                     <input class="easyui-datebox" name="Birthday" id="Birthday" data-options="required:false" /></td>
+                                <td>身份证号：</td>
+                                <td>
+                                    <input class="easyui-textbox" name="CardId" id="CardId" style="width: 204px" data-options=" required:false" /></td>
                             </tr>
                         </table>
                     </div>

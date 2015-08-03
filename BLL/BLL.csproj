@@ -103,6 +103,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -132,6 +136,7 @@
     <Compile Include="QueryRecoder.cs" />
     <Compile Include="SysManage.cs" />
     <Compile Include="SZY\Bll_ClinicalData.cs" />
+    <Compile Include="SZY\EmpiInfo.cs" />
     <Compile Include="SZY\FpRelated\ImportDataToFp.cs" />
     <Compile Include="SZY\FpRelated\Samples.cs" />
     <Compile Include="SZY\FpRelated\SampleSocrce.cs" />
@@ -140,6 +145,8 @@
     <Compile Include="SZY\FpRelated\UserFields.cs" />
     <Compile Include="SZY\GetDataFromHospital.cs" />
     <Compile Include="SZY\HospitalXmlStrHelper.cs" />
+    <Compile Include="SZY\NormalLisReport.cs" />
+    <Compile Include="SZY\PatientDiagnose.cs" />
     <Compile Include="SZY\ValidationData.cs" />
     <Compile Include="SZY\Web References\BasicData\Reference.cs" />
     <Compile Include="SZY\Web References\ClinicalData\Reference.cs" />

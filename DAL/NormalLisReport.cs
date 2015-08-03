@@ -70,8 +70,8 @@ namespace RuRo.DAL
 					new SqlParameter("@prnt_order", SqlDbType.NVarChar,50)};
 			parameters[0].Value = model.hospnum;
 			parameters[1].Value = model.patname;
-			parameters[2].Value = model.Sex;
-			parameters[3].Value = model.Age;
+			parameters[2].Value = model.sex;
+			parameters[3].Value = model.age;
 			parameters[4].Value = model.age_month;
 			parameters[5].Value = model.ext_mthd;
 			parameters[6].Value = model.chinese;
@@ -139,8 +139,8 @@ namespace RuRo.DAL
 					new SqlParameter("@Id", SqlDbType.Int,4)};
 			parameters[0].Value = model.hospnum;
 			parameters[1].Value = model.patname;
-			parameters[2].Value = model.Sex;
-			parameters[3].Value = model.Age;
+			parameters[2].Value = model.sex;
+			parameters[3].Value = model.age;
 			parameters[4].Value = model.age_month;
 			parameters[5].Value = model.ext_mthd;
 			parameters[6].Value = model.chinese;
@@ -259,11 +259,11 @@ namespace RuRo.DAL
 				}
 				if(row["Sex"]!=null)
 				{
-					model.Sex=row["Sex"].ToString();
+					model.sex=row["Sex"].ToString();
 				}
 				if(row["Age"]!=null)
 				{
-					model.Age=row["Age"].ToString();
+					model.age=row["Age"].ToString();
 				}
 				if(row["age_month"]!=null)
 				{

@@ -615,6 +615,7 @@
     <Content Include="include\jquery-easyui-1.4.3\themes\metro\window.css" />
     <Content Include="include\jquery-easyui-1.4.3\themes\mobile.css" />
     <Content Include="include\js\BindFuncToId.js" />
+    <Content Include="include\js\DateFmt.js" />
     <Content Include="include\js\default.js" />
     <Content Include="include\js\DgGRUD.js" />
     <Content Include="include\js\jquery.cookie.js" />
@@ -644,8 +645,12 @@
     <Content Include="Pages\QueryRecoder\Modify.aspx" />
     <Content Include="Pages\QueryRecoder\Show.aspx" />
     <Content Include="Pages\SampleInfo.html" />
-    <Content Include="SZY\configXML\MatchFieldsWithClinicalData.xml" />
-    <Content Include="SZY\configXML\MatchFieldWithBasicData.xml" />
+    <Content Include="SZY\configXML\MatchFieldsWithClinicalData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SZY\configXML\MatchFieldWithBasicData.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SZY\configXML\UriConfigXml.xml" />
     <Content Include="SZY\configXML\XMLTestFile.xml" />
     <Content Include="SZY\configXML\XMLTestFile2.xml" />
@@ -1012,6 +1017,7 @@
     <Content Include="SZY\include\js\default.js" />
     <Content Include="SZY\TestData.aspx" />
     <Content Include="SZY\TestXmlData.aspx" />
+    <Content Include="Test\WebForm1.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1201,6 +1207,7 @@
       <DependentUpon>Show.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sever\ReturnData.cs" />
     <Compile Include="Sever\EmpiInfo.ashx.cs">
       <DependentUpon>EmpiInfo.ashx</DependentUpon>
     </Compile>
@@ -1239,6 +1246,13 @@
     </Compile>
     <Compile Include="SZY\TestXmlData.aspx.designer.cs">
       <DependentUpon>TestXmlData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="ValidateCode.aspx.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>

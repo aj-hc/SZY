@@ -55,7 +55,7 @@ namespace RuRo.Model
 		/// <summary>
 		/// 性别
 		/// </summary>
-		public string Sex
+		public string sex
 		{
 			set{ _sex=value;}
 			get{return _sex;}
@@ -63,7 +63,7 @@ namespace RuRo.Model
 		/// <summary>
 		/// 年龄
 		/// </summary>
-		public string Age
+		public string age
 		{
 			set{ _age=value;}
 			get{return _age;}
