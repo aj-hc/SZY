@@ -19,6 +19,7 @@ namespace RuRo.Web.QueryRecoder {
     public partial class Modify {
         	protected global::System.Web.UI.WebControls.Label lblId;
 		protected global::System.Web.UI.WebControls.TextBox txtUname;
+		protected global::System.Web.UI.WebControls.TextBox txtAddDate;
 		protected global::System.Web.UI.WebControls.TextBox txtLastQueryDate;
 		protected global::System.Web.UI.WebControls.TextBox txtCode;
 		protected global::System.Web.UI.WebControls.TextBox txtCodeType;

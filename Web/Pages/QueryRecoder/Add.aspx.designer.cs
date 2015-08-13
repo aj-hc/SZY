@@ -20,6 +20,7 @@ namespace RuRo.Web.QueryRecoder {
     {
         
 		protected global::System.Web.UI.WebControls.TextBox txtUname;
+		protected global::System.Web.UI.WebControls.TextBox txtAddDate;
 		protected global::System.Web.UI.WebControls.TextBox txtLastQueryDate;
 		protected global::System.Web.UI.WebControls.TextBox txtCode;
 		protected global::System.Web.UI.WebControls.TextBox txtCodeType;

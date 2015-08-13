@@ -22,6 +22,7 @@ namespace RuRo.Web.EmpiInfo {
 	protected global::System.Web.UI.WebControls.Label lblSex;
 	protected global::System.Web.UI.WebControls.Label lblBirthday;
 	protected global::System.Web.UI.WebControls.Label lblCardId;
+	protected global::System.Web.UI.WebControls.Label lblisDel;
 
 
        

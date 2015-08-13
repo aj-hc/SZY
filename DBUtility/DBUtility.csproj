@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseSqlMapDao.cs" />
+    <Compile Include="DbHelper.cs" />
     <Compile Include="DbHelperSQLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

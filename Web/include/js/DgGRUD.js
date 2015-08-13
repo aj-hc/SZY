@@ -6,22 +6,22 @@ function newForm(url) {
         height: 450,
         closed: false,
         cache: false,
-        href: url+'?mode=ins'
+        href: url + '?mode=ins'
     });
 }
 /*查看数据*/
-function infoForm(url) {
-    var rows = $('#datagrid').datagrid('getSelections');
+function infoForm($dg, url) {
+    var rows = $dg.datagrid('getSelections');
     if (rows.length > 0) {
         if (rows.length == 1) {
-            var row = $('#datagrid').datagrid('getSelected');
+            var row = $dg.datagrid('getSelected');
             $('#dlg').dialog({
                 title: '查看数据',
                 width: 650,
                 height: 450,
                 closed: false,
                 cache: true,
-                href: url+ '?mode=inf&pk=' + row.id
+                href: url + '?mode=inf&pk=' + row.id
             });
         } else {
             $.messager.alert('警告', '查看操作只能选择一条数据', 'warning');
@@ -31,18 +31,18 @@ function infoForm(url) {
     }
 }
 /*修改数据*/
-function editForm(url) {
-    var rows = $('#datagrid').datagrid('getSelections');
+function editForm($dg, url) {
+    var rows = $dg.datagrid('getSelections');
     if (rows.length > 0) {
         if (rows.length == 1) {
-            var row = $('#datagrid').datagrid('getSelected');
+            var row = $dg.datagrid('getSelected');
             $('#dlg').dialog({
                 title: '修改数据',
                 width: 650,
                 height: 450,
                 closed: false,
                 cache: true,
-                href:url+ '?mode=upd&pk=' + row.id
+                href: url + '?mode=upd&pk=' + row.id
             });
         } else {
             $.messager.alert('警告', '修改操作只能选择一条数据', 'warning');
@@ -52,30 +52,19 @@ function editForm(url) {
     }
 }
 /*删除选择数据,多条记录PK主键参数用逗号,分开*/
-function destroy(url) {
-    var rows = $('#datagrid').datagrid('getSelections');
-    if (rows.length > 0) {
-        var pkSelect = "";
-        for (var i = 0; i < rows.length; i++) {
-            row = rows[i];
-            if (i == 0) {
-                pkSelect += row.id;
-            } else {
-                pkSelect += ',' + row.id;
-            }
-        }
+function destroy($dg,url) {
+    var selecRows = $dg.datagrid('getSelections');
+    if (selecRows.length > 0) {
         $.messager.confirm('提示', '是否确认删除数据？', function (r) {
             if (r) {
-                $.post(url+'?mode=del&pk=' + pkSelect, function (result) {
-                    if (result.success) {
-                        $.messager.alert('提示', result.msg, 'info', function () {
-                            //$('#datagrid').datagrid('reload');    //重新加载载数据
-                            
-                        });
-                    } else {
-                        $.messager.alert('错误', result.msg, 'warning');
-                    }
-                }, 'json');
+                var copyRows = [];
+                for (var j = 0; j < selecRows.length; j++) {
+                    copyRows.push(selecRows[j]);
+                }
+                for (var i = 0; i < copyRows.length; i++) {
+                    var index = $dg.datagrid('getRowIndex', copyRows[i]);
+                    $dg.datagrid('deleteRow', index);
+                }
             }
         });
     } else {
@@ -98,14 +87,14 @@ function getSearchParm() {
 function searchData(url) {
     /*兼顾导出Excel公用条件，在这里datagrid不用load函数加载参数，直接用URL传递参数*/
     var Parm = getSearchParm();//获得查询条件参数构建，用URL传递查询参数
-    var QryUrl = url+'?mode=qry&' + Parm;
-    $('#datagrid').datagrid({ url: QryUrl });
+    var QryUrl = url + '?mode=qry&' + Parm;
+    $dg.datagrid({ url: QryUrl });
 }
 
 /*导出数据*/
 function exportData(url) {
     var Parm = getSearchParm();//获得查询条件参数构建，用URL传递查询参数
-    var QryUrl = url+'?mode=exp&' + Parm;
+    var QryUrl = url + '?mode=exp&' + Parm;
     $.post(QryUrl, function (result) {
         if (result.success) {
             window.location.href = result.msg;

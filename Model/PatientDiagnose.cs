@@ -25,6 +25,7 @@ namespace RuRo.Model
 		private string _type;
 		private string _flag;
 		private string _diagnosedate;
+		private bool _isdel;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -136,6 +137,14 @@ namespace RuRo.Model
 		{
 			set{ _diagnosedate=value;}
 			get{return _diagnosedate;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool isDel
+		{
+			set{ _isdel=value;}
+			get{return _isdel;}
 		}
 		#endregion Model
 

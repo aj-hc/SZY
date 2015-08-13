@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 using System.Collections.Generic;
 using RuRo.Common;
@@ -14,6 +15,22 @@ namespace RuRo.BLL
 		public QueryRecoder()
 		{}
 		#region  BasicMethod
+
+		/// <summary>
+		/// 得到最大ID
+		/// </summary>
+		public int GetMaxId()
+		{
+			return dal.GetMaxId();
+		}
+
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		public bool Exists(int Id)
+		{
+			return dal.Exists(Id);
+		}
 
 		/// <summary>
 		/// 增加一条数据

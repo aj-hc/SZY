@@ -15,6 +15,29 @@ namespace RuRo.DAL
 		{}
 		#region  BasicMethod
 
+		/// <summary>
+		/// 得到最大ID
+		/// </summary>
+		public int GetMaxId()
+		{
+		return DbHelperSQL.GetMaxID("Id", "QueryRecoder"); 
+		}
+
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		public bool Exists(int Id)
+		{
+			StringBuilder strSql=new StringBuilder();
+			strSql.Append("select count(1) from QueryRecoder");
+			strSql.Append(" where Id=@Id");
+			SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+			};
+			parameters[0].Value = Id;
+
+			return DbHelperSQL.Exists(strSql.ToString(),parameters);
+		}
 
 
 		/// <summary>
@@ -24,23 +47,25 @@ namespace RuRo.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into QueryRecoder(");
-			strSql.Append("Uname,LastQueryDate,Code,CodeType,QueryType,QueryResult)");
+			strSql.Append("Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult)");
 			strSql.Append(" values (");
-			strSql.Append("@Uname,@LastQueryDate,@Code,@CodeType,@QueryType,@QueryResult)");
+			strSql.Append("@Uname,@AddDate,@LastQueryDate,@Code,@CodeType,@QueryType,@QueryResult)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Uname", SqlDbType.NVarChar,50),
-					new SqlParameter("@LastQueryDate", SqlDbType.NVarChar,50),
+					new SqlParameter("@AddDate", SqlDbType.DateTime),
+					new SqlParameter("@LastQueryDate", SqlDbType.DateTime),
 					new SqlParameter("@Code", SqlDbType.NVarChar,50),
 					new SqlParameter("@CodeType", SqlDbType.NVarChar,50),
 					new SqlParameter("@QueryType", SqlDbType.NVarChar,50),
 					new SqlParameter("@QueryResult", SqlDbType.NVarChar,-1)};
 			parameters[0].Value = model.Uname;
-			parameters[1].Value = model.LastQueryDate;
-			parameters[2].Value = model.Code;
-			parameters[3].Value = model.CodeType;
-			parameters[4].Value = model.QueryType;
-			parameters[5].Value = model.QueryResult;
+			parameters[1].Value = model.AddDate;
+			parameters[2].Value = model.LastQueryDate;
+			parameters[3].Value = model.Code;
+			parameters[4].Value = model.CodeType;
+			parameters[5].Value = model.QueryType;
+			parameters[6].Value = model.QueryResult;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -60,6 +85,7 @@ namespace RuRo.DAL
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update QueryRecoder set ");
 			strSql.Append("Uname=@Uname,");
+			strSql.Append("AddDate=@AddDate,");
 			strSql.Append("LastQueryDate=@LastQueryDate,");
 			strSql.Append("Code=@Code,");
 			strSql.Append("CodeType=@CodeType,");
@@ -68,19 +94,21 @@ namespace RuRo.DAL
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Uname", SqlDbType.NVarChar,50),
-					new SqlParameter("@LastQueryDate", SqlDbType.NVarChar,50),
+					new SqlParameter("@AddDate", SqlDbType.DateTime),
+					new SqlParameter("@LastQueryDate", SqlDbType.DateTime),
 					new SqlParameter("@Code", SqlDbType.NVarChar,50),
 					new SqlParameter("@CodeType", SqlDbType.NVarChar,50),
 					new SqlParameter("@QueryType", SqlDbType.NVarChar,50),
 					new SqlParameter("@QueryResult", SqlDbType.NVarChar,-1),
 					new SqlParameter("@Id", SqlDbType.Int,4)};
 			parameters[0].Value = model.Uname;
-			parameters[1].Value = model.LastQueryDate;
-			parameters[2].Value = model.Code;
-			parameters[3].Value = model.CodeType;
-			parameters[4].Value = model.QueryType;
-			parameters[5].Value = model.QueryResult;
-			parameters[6].Value = model.Id;
+			parameters[1].Value = model.AddDate;
+			parameters[2].Value = model.LastQueryDate;
+			parameters[3].Value = model.Code;
+			parameters[4].Value = model.CodeType;
+			parameters[5].Value = model.QueryType;
+			parameters[6].Value = model.QueryResult;
+			parameters[7].Value = model.Id;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -144,7 +172,7 @@ namespace RuRo.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 Id,Uname,LastQueryDate,Code,CodeType,QueryType,QueryResult from QueryRecoder ");
+			strSql.Append("select  top 1 Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult from QueryRecoder ");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.Int,4)
@@ -180,9 +208,13 @@ namespace RuRo.DAL
 				{
 					model.Uname=row["Uname"].ToString();
 				}
-				if(row["LastQueryDate"]!=null)
+				if(row["AddDate"]!=null && row["AddDate"].ToString()!="")
 				{
-					model.LastQueryDate=row["LastQueryDate"].ToString();
+					model.AddDate=DateTime.Parse(row["AddDate"].ToString());
+				}
+				if(row["LastQueryDate"]!=null && row["LastQueryDate"].ToString()!="")
+				{
+					model.LastQueryDate=DateTime.Parse(row["LastQueryDate"].ToString());
 				}
 				if(row["Code"]!=null)
 				{
@@ -210,7 +242,7 @@ namespace RuRo.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,Uname,LastQueryDate,Code,CodeType,QueryType,QueryResult ");
+			strSql.Append("select Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult ");
 			strSql.Append(" FROM QueryRecoder ");
 			if(strWhere.Trim()!="")
 			{
@@ -230,7 +262,7 @@ namespace RuRo.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" Id,Uname,LastQueryDate,Code,CodeType,QueryType,QueryResult ");
+			strSql.Append(" Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult ");
 			strSql.Append(" FROM QueryRecoder ");
 			if(strWhere.Trim()!="")
 			{

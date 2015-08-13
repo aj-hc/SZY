@@ -20,8 +20,8 @@ namespace RuRo.Web.NormalLisReport {
         	protected global::System.Web.UI.WebControls.Label lblId;
 	protected global::System.Web.UI.WebControls.Label lblhospnum;
 	protected global::System.Web.UI.WebControls.Label lblpatname;
-	protected global::System.Web.UI.WebControls.Label lblSex;
-	protected global::System.Web.UI.WebControls.Label lblAge;
+	protected global::System.Web.UI.WebControls.Label lblsex;
+	protected global::System.Web.UI.WebControls.Label lblage;
 	protected global::System.Web.UI.WebControls.Label lblage_month;
 	protected global::System.Web.UI.WebControls.Label lblext_mthd;
 	protected global::System.Web.UI.WebControls.Label lblchinese;
@@ -34,6 +34,7 @@ namespace RuRo.Web.NormalLisReport {
 	protected global::System.Web.UI.WebControls.Label lblcheck_date;
 	protected global::System.Web.UI.WebControls.Label lblcheck_by_name;
 	protected global::System.Web.UI.WebControls.Label lblprnt_order;
+	protected global::System.Web.UI.WebControls.Label lblisDel;
 
 
        

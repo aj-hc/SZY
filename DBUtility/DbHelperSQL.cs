@@ -871,8 +871,6 @@ namespace Maticsoft.DBUtility
             cmd.CommandType = CommandType.Text;//cmdType;
             if (cmdParms != null)
             {
-
-
                 foreach (SqlParameter parameter in cmdParms)
                 {
                     if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&

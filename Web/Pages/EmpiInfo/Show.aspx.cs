@@ -36,6 +36,7 @@ namespace RuRo.Web.EmpiInfo
 		this.lblSex.Text=model.Sex;
 		this.lblBirthday.Text=model.Birthday;
 		this.lblCardId.Text=model.CardId;
+		this.lblisDel.Text=model.isDel?"是":"否";
 
 	}
 

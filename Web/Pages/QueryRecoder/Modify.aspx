@@ -23,10 +23,17 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
+		AddDate
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox ID="txtAddDate" runat="server" Width="70px"  onfocus="setday(this)"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		最后一次查询日期
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtLastQueryDate" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox ID="txtLastQueryDate" runat="server" Width="70px"  onfocus="setday(this)"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
@@ -57,6 +64,7 @@
 		<asp:TextBox id="txtQueryResult" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 </table>
+<script src="/js/calendar1.js" type="text/javascript"></script>
 
             </td>
         </tr>

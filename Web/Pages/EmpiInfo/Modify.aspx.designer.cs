@@ -22,6 +22,7 @@ namespace RuRo.Web.EmpiInfo {
 		protected global::System.Web.UI.WebControls.TextBox txtSex;
 		protected global::System.Web.UI.WebControls.TextBox txtBirthday;
 		protected global::System.Web.UI.WebControls.TextBox txtCardId;
+		protected global::System.Web.UI.WebControls.CheckBox chkisDel;
 	protected global::System.Web.UI.WebControls.Button btnSave;
 	protected global::System.Web.UI.WebControls.Button btnCancel;
 

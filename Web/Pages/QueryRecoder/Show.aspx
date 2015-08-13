@@ -23,6 +23,13 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
+		AddDate
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblAddDate" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		最后一次查询日期
 	：</td>
 	<td height="25" width="*" align="left">

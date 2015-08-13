@@ -33,7 +33,8 @@ namespace RuRo.Web.QueryRecoder
 		RuRo.Model.QueryRecoder model=bll.GetModel(Id);
 		this.lblId.Text=model.Id.ToString();
 		this.lblUname.Text=model.Uname;
-		this.lblLastQueryDate.Text=model.LastQueryDate;
+		this.lblAddDate.Text=model.AddDate.ToString();
+		this.lblLastQueryDate.Text=model.LastQueryDate.ToString();
 		this.lblCode.Text=model.Code;
 		this.lblCodeType.Text=model.CodeType;
 		this.lblQueryType.Text=model.QueryType;

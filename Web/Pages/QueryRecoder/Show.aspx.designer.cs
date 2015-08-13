@@ -19,6 +19,7 @@ namespace RuRo.Web.QueryRecoder {
     public partial class Show {
         	protected global::System.Web.UI.WebControls.Label lblId;
 	protected global::System.Web.UI.WebControls.Label lblUname;
+	protected global::System.Web.UI.WebControls.Label lblAddDate;
 	protected global::System.Web.UI.WebControls.Label lblLastQueryDate;
 	protected global::System.Web.UI.WebControls.Label lblCode;
 	protected global::System.Web.UI.WebControls.Label lblCodeType;

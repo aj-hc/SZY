@@ -13,7 +13,8 @@ namespace RuRo.Model
 		#region Model
 		private int _id;
 		private string _uname;
-		private string _lastquerydate;
+		private DateTime? _adddate;
+		private DateTime? _lastquerydate;
 		private string _code;
 		private string _codetype;
 		private string _querytype;
@@ -35,9 +36,17 @@ namespace RuRo.Model
 			get{return _uname;}
 		}
 		/// <summary>
+		/// 
+		/// </summary>
+		public DateTime? AddDate
+		{
+			set{ _adddate=value;}
+			get{return _adddate;}
+		}
+		/// <summary>
 		/// 最后一次查询日期
 		/// </summary>
-		public string LastQueryDate
+		public DateTime? LastQueryDate
 		{
 			set{ _lastquerydate=value;}
 			get{return _lastquerydate;}

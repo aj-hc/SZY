@@ -28,6 +28,7 @@ namespace RuRo.Model
 		private string _check_date;
 		private string _check_by_name;
 		private string _prnt_order;
+		private bool _isdel;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -163,6 +164,14 @@ namespace RuRo.Model
 		{
 			set{ _prnt_order=value;}
 			get{return _prnt_order;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool isDel
+		{
+			set{ _isdel=value;}
+			get{return _isdel;}
 		}
 		#endregion Model
 

@@ -31,6 +31,7 @@ namespace RuRo.Web.PatientDiagnose {
 		protected global::System.Web.UI.WebControls.TextBox txtType;
 		protected global::System.Web.UI.WebControls.TextBox txtFlag;
 		protected global::System.Web.UI.WebControls.TextBox txtDiagnoseDate;
+		protected global::System.Web.UI.WebControls.CheckBox chkisDel;
 	protected global::System.Web.UI.WebControls.Button btnSave;
 	protected global::System.Web.UI.WebControls.Button btnCancel;
 

@@ -16,6 +16,7 @@ namespace RuRo.Model
 		private string _sex;
 		private string _birthday;
 		private string _cardid;
+		private bool _isdel;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -55,6 +56,14 @@ namespace RuRo.Model
 		{
 			set{ _cardid=value;}
 			get{return _cardid;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool isDel
+		{
+			set{ _isdel=value;}
+			get{return _isdel;}
 		}
 		#endregion Model
 

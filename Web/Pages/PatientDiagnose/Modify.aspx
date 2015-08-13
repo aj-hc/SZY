@@ -105,6 +105,13 @@
 	<td height="25" width="*" align="left">
 		<asp:TextBox id="txtDiagnoseDate" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		isDel
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:CheckBox ID="chkisDel" Text="isDel" runat="server" Checked="False" />
+	</td></tr>
 </table>
 <script src="/js/calendar1.js" type="text/javascript"></script>
 

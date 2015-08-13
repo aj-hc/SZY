@@ -31,6 +31,7 @@ namespace RuRo.Web.PatientDiagnose {
 	protected global::System.Web.UI.WebControls.Label lblType;
 	protected global::System.Web.UI.WebControls.Label lblFlag;
 	protected global::System.Web.UI.WebControls.Label lblDiagnoseDate;
+	protected global::System.Web.UI.WebControls.Label lblisDel;
 
 
        

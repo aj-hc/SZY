@@ -639,6 +639,7 @@
     <Content Include="Pages\PatientDiagnose\List.aspx" />
     <Content Include="Pages\PatientDiagnose\Modify.aspx" />
     <Content Include="Pages\PatientDiagnose\Show.aspx" />
+    <Content Include="Pages\PatientDiagnose.aspx" />
     <Content Include="Pages\PatientDiagnose_list.aspx" />
     <Content Include="Pages\QueryRecoder\Add.aspx" />
     <Content Include="Pages\QueryRecoder\List.aspx" />
@@ -1171,6 +1172,13 @@
     <Compile Include="Pages\PatientDiagnose\Show.aspx.designer.cs">
       <DependentUpon>Show.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PatientDiagnose.aspx.cs">
+      <DependentUpon>PatientDiagnose.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\PatientDiagnose.aspx.designer.cs">
+      <DependentUpon>PatientDiagnose.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PatientDiagnose_list.aspx.cs">
       <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1296,6 +1304,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
+    <Folder Include="Error\AppError\" />
+    <Folder Include="Error\AppExError\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="include\JSON\Employee.json" />

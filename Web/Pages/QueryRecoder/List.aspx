@@ -42,6 +42,7 @@
                             </asp:TemplateField> 
                             
 		<asp:BoundField DataField="Uname" HeaderText="查询的用户" SortExpression="Uname" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="AddDate" HeaderText="AddDate" SortExpression="AddDate" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="LastQueryDate" HeaderText="最后一次查询日期" SortExpression="LastQueryDate" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="Code" HeaderText="查询的条码号" SortExpression="Code" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="CodeType" HeaderText="条码号类型" SortExpression="CodeType" ItemStyle-HorizontalAlign="Center"  /> 

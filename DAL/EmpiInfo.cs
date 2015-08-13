@@ -4,6 +4,7 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using Maticsoft.DBUtility;//Please add references
+
 namespace RuRo.DAL
 {
 	/// <summary>
@@ -20,7 +21,7 @@ namespace RuRo.DAL
 		/// </summary>
 		public int GetMaxId()
 		{
-		return DbHelperSQL.GetMaxID("Id", "EmpiInfo"); 
+		    return DbHelperSQL.GetMaxID("Id", "EmpiInfo"); 
 		}
 
 		/// <summary>
@@ -47,19 +48,21 @@ namespace RuRo.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into EmpiInfo(");
-			strSql.Append("PatientName,Sex,Birthday,CardId)");
+			strSql.Append("PatientName,Sex,Birthday,CardId,isDel)");
 			strSql.Append(" values (");
-			strSql.Append("@PatientName,@Sex,@Birthday,@CardId)");
+			strSql.Append("@PatientName,@Sex,@Birthday,@CardId,@isDel)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@PatientName", SqlDbType.NVarChar,50),
 					new SqlParameter("@Sex", SqlDbType.NVarChar,50),
 					new SqlParameter("@Birthday", SqlDbType.NVarChar,50),
-					new SqlParameter("@CardId", SqlDbType.NVarChar,50)};
+					new SqlParameter("@CardId", SqlDbType.NVarChar,50),
+					new SqlParameter("@isDel", SqlDbType.Bit,1)};
 			parameters[0].Value = model.PatientName;
 			parameters[1].Value = model.Sex;
 			parameters[2].Value = model.Birthday;
 			parameters[3].Value = model.CardId;
+			parameters[4].Value = model.isDel;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -81,19 +84,22 @@ namespace RuRo.DAL
 			strSql.Append("PatientName=@PatientName,");
 			strSql.Append("Sex=@Sex,");
 			strSql.Append("Birthday=@Birthday,");
-			strSql.Append("CardId=@CardId");
+			strSql.Append("CardId=@CardId,");
+			strSql.Append("isDel=@isDel");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@PatientName", SqlDbType.NVarChar,50),
 					new SqlParameter("@Sex", SqlDbType.NVarChar,50),
 					new SqlParameter("@Birthday", SqlDbType.NVarChar,50),
 					new SqlParameter("@CardId", SqlDbType.NVarChar,50),
+					new SqlParameter("@isDel", SqlDbType.Bit,1),
 					new SqlParameter("@Id", SqlDbType.Int,4)};
 			parameters[0].Value = model.PatientName;
 			parameters[1].Value = model.Sex;
 			parameters[2].Value = model.Birthday;
 			parameters[3].Value = model.CardId;
-			parameters[4].Value = model.Id;
+			parameters[4].Value = model.isDel;
+			parameters[5].Value = model.Id;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -157,7 +163,7 @@ namespace RuRo.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 Id,PatientName,Sex,Birthday,CardId from EmpiInfo ");
+			strSql.Append("select  top 1 Id,PatientName,Sex,Birthday,CardId,isDel from EmpiInfo ");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.Int,4)
@@ -205,6 +211,17 @@ namespace RuRo.DAL
 				{
 					model.CardId=row["CardId"].ToString();
 				}
+				if(row["isDel"]!=null && row["isDel"].ToString()!="")
+				{
+					if((row["isDel"].ToString()=="1")||(row["isDel"].ToString().ToLower()=="true"))
+					{
+						model.isDel=true;
+					}
+					else
+					{
+						model.isDel=false;
+					}
+				}
 			}
 			return model;
 		}
@@ -215,7 +232,7 @@ namespace RuRo.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,PatientName,Sex,Birthday,CardId ");
+			strSql.Append("select Id,PatientName,Sex,Birthday,CardId,isDel ");
 			strSql.Append(" FROM EmpiInfo ");
 			if(strWhere.Trim()!="")
 			{
@@ -235,7 +252,7 @@ namespace RuRo.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" Id,PatientName,Sex,Birthday,CardId ");
+			strSql.Append(" Id,PatientName,Sex,Birthday,CardId,isDel ");
 			strSql.Append(" FROM EmpiInfo ");
 			if(strWhere.Trim()!="")
 			{
@@ -291,8 +308,7 @@ namespace RuRo.DAL
 			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
 			return DbHelperSQL.Query(strSql.ToString());
 		}
-
-		/*
+		
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
@@ -315,7 +331,7 @@ namespace RuRo.DAL
 			parameters[5].Value = 0;
 			parameters[6].Value = strWhere;	
 			return DbHelperSQL.RunProcedure("UP_GetRecordByPage",parameters,"ds");
-		}*/
+		}
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod

@@ -21,8 +21,8 @@ namespace RuRo.Web.NormalLisReport
         {
             if (!Page.IsPostBack)
             {
-                gridView.BorderColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_bordercolorlight"].ToString());
-                gridView.HeaderStyle.BackColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_titlebgcolor"].ToString());
+                //gridView.BorderColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_bordercolorlight"].ToString());
+                //gridView.HeaderStyle.BackColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_titlebgcolor"].ToString());
                 btnDelete.Attributes.Add("onclick", "return confirm(\"你确认要删除吗？\")");
                 BindData();
             }

@@ -1,14 +1,4 @@
-﻿//输入框默认值
-$(function () {
-    //设置时间
-    var begindate = new Date();
-    //采集日期
-    $('#_103').textbox('setValue', myformatter(begindate))
-    var time = begindate.getHours() + ":" + begindate.getMinutes()
-    $('#_104').textbox('setValue', time);
-});
-
-//设置页面DataGrid分页
+﻿//设置页面DataGrid分页
 function pagerFilter(data) {
     if (typeof data.length == 'number' && typeof data.splice == 'function') {	// is array
         data = { total: data.length, rows: data }
@@ -59,7 +49,8 @@ function querybycode() {
                     else {
                         $("#BaseInfoForm").form("load", obj._data);
                         $('#PatientNo').textbox('setValue', code);
-                        GetNormalLisReportInfo(code);
+                        GetNormalLisReportInfo();
+                        GetPatientDiagnoseInfo();
                         //发送请求请求临床数据
                         //请求条件？1、条码号；2、日期
                     }
@@ -85,50 +76,75 @@ function AddHours(d, value) {
 }
 
 
-function GetNormalLisReportInfo(code) {
+function GetNormalLisReportInfo() {
     //<Request>
     //  <hospnum></hospnum>
     //  <ksrq00></ksrq00>
     //  <jsrq00></jsrq00>
     //</Request>
-    var ksrq00 = AddDays(new Date(), -5);
-    var jsrq00 = AddDays(new Date(), 5);
-    $.ajax({
-        type: "POST",
-        url: "/Sever/NormalLisReport.ashx",
-        data: {
-            "mode": "qry",
-            "code": code,
-            "ksrq00": ksrq00,
-            "jsrq00": jsrq00
-        },
-        success: function (data) {
-            if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
-            else {
-                var obj = $.parseJSON(data);
-                if (!obj.success) {
-                    $.messager.alert('提示', obj.msg, 'error')
-                    return;
-                }
+    var code = $('#PatientNo').textbox('getValue');
+    if (code) {
+        var ksrq00 = AddDays(new Date(), -5);
+        var jsrq00 = AddDays(new Date(), 5);
+        $.ajax({
+            type: "POST",
+            url: "/Sever/NormalLisReport.ashx",
+            data: {
+                "mode": "qry",
+                "code": code,
+                "ksrq00": ksrq00,
+                "jsrq00": jsrq00
+            },
+            success: function (data) {
+                $('#datagridN').datagrid("loading");
+                if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
                 else {
-                    $('#datagrid').datagrid("loading");
-                    $('#datagrid').datagrid("loadData", obj._data);
-                    $('#datagrid').datagrid("loaded");
-                    
+                    var obj = $.parseJSON(data);
+                    if (!obj.success) {
+                        $.messager.alert('提示', obj.msg, 'error')
+                        return;
+                    }
+                    else {
+                        $('#datagridN').datagrid("loadData", obj._data);
+                    }
                 }
+                $('#datagridN').datagrid("loaded");
             }
-        }
-    });
+        });
+    }
 }
 
-function GetPatientDiagnoseInfo(code) {
+function GetPatientDiagnoseInfo() {
     //<Request>
     //  <cardno></cardno>
     //  <cxrq00></cxrq00>
     //</Request>
-
-    var cxrq00 = AddDays(new Date(), 0);
-
+    var code = $('#PatientNo').textbox('getValue');
+    if (code) {
+        var cxrq00 = AddDays(new Date(), 0);
+        $.ajax({
+            type: "POST",
+            url: "/Sever/PatientDiagnose.ashx",
+            data: {
+                "mode": "qry",
+                "code": code,
+                "cxrq00": cxrq00
+            },
+            success: function (data) {
+                if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+                else {
+                    var obj = $.parseJSON(data);
+                    if (!obj.success) {
+                        $.messager.alert('提示', obj.msg, 'error')
+                        return;
+                    }
+                    else {
+                        $('#PatientDiagnoseForm').form("load", obj._data);
+                    }
+                }
+            }
+        });
+    }
 }
 //清除控件值
 function clearForm() {

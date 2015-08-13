@@ -37,6 +37,7 @@ namespace RuRo.Web.EmpiInfo
 		this.txtSex.Text=model.Sex;
 		this.txtBirthday.Text=model.Birthday;
 		this.txtCardId.Text=model.CardId;
+		this.chkisDel.Checked=model.isDel;
 
 	}
 
@@ -71,6 +72,7 @@ namespace RuRo.Web.EmpiInfo
 			string Sex=this.txtSex.Text;
 			string Birthday=this.txtBirthday.Text;
 			string CardId=this.txtCardId.Text;
+			bool isDel=this.chkisDel.Checked;
 
 
 			RuRo.Model.EmpiInfo model=new RuRo.Model.EmpiInfo();
@@ -79,6 +81,7 @@ namespace RuRo.Web.EmpiInfo
 			model.Sex=Sex;
 			model.Birthday=Birthday;
 			model.CardId=CardId;
+			model.isDel=isDel;
 
 			RuRo.BLL.EmpiInfo bll=new RuRo.BLL.EmpiInfo();
 			bll.Update(model);

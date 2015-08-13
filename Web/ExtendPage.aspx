@@ -70,14 +70,10 @@
                 </form>
             </div>
             <div class="h"></div>
-            <form id="NormalLisReportForm">
-                <div class="easyui-panel" data-options="href:'Pages/NormalLisReport_list.aspx'">
-                </div>
-            </form>
-            <form id="PatientDiagnoseForm">
-                <div class="easyui-panel" data-options="href:'Pages/PatientDiagnose_list.aspx'">
-                </div>
-            </form>
+            <div class="easyui-panel" data-options="href:'Pages/PatientDiagnose.aspx'"></div>
+            <div class="h"></div>
+                <div class="easyui-panel" data-options="href:'Pages/NormalLisReport_list.aspx'"></div>
+
         </div>
         <!--diaglog窗口，用于编辑数据-->
         <div id="dlg" class="easyui-dialog" closed="true"></div>

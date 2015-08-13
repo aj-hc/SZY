@@ -46,6 +46,7 @@ namespace RuRo.Web.PatientDiagnose
 		this.txtType.Text=model.Type;
 		this.txtFlag.Text=model.Flag;
 		this.txtDiagnoseDate.Text=model.DiagnoseDate;
+		this.chkisDel.Checked=model.isDel;
 
 	}
 
@@ -125,6 +126,7 @@ namespace RuRo.Web.PatientDiagnose
 			string Type=this.txtType.Text;
 			string Flag=this.txtFlag.Text;
 			string DiagnoseDate=this.txtDiagnoseDate.Text;
+			bool isDel=this.chkisDel.Checked;
 
 
 			RuRo.Model.PatientDiagnose model=new RuRo.Model.PatientDiagnose();
@@ -142,6 +144,7 @@ namespace RuRo.Web.PatientDiagnose
 			model.Type=Type;
 			model.Flag=Flag;
 			model.DiagnoseDate=DiagnoseDate;
+			model.isDel=isDel;
 
 			RuRo.BLL.PatientDiagnose bll=new RuRo.BLL.PatientDiagnose();
 			bll.Update(model);

@@ -32,11 +32,11 @@ namespace RuRo.Web.NormalLisReport
 			{
 				strErr+="姓名不能为空！\\n";	
 			}
-			if(this.txtSex.Text.Trim().Length==0)
+			if(this.txtsex.Text.Trim().Length==0)
 			{
 				strErr+="性别不能为空！\\n";	
 			}
-			if(this.txtAge.Text.Trim().Length==0)
+			if(this.txtage.Text.Trim().Length==0)
 			{
 				strErr+="年龄不能为空！\\n";	
 			}
@@ -96,8 +96,8 @@ namespace RuRo.Web.NormalLisReport
 			}
 			string hospnum=this.txthospnum.Text;
 			string patname=this.txtpatname.Text;
-			string Sex=this.txtSex.Text;
-			string Age=this.txtAge.Text;
+			string sex=this.txtsex.Text;
+			string age=this.txtage.Text;
 			string age_month=this.txtage_month.Text;
 			string ext_mthd=this.txtext_mthd.Text;
 			string chinese=this.txtchinese.Text;
@@ -110,12 +110,13 @@ namespace RuRo.Web.NormalLisReport
 			string check_date=this.txtcheck_date.Text;
 			string check_by_name=this.txtcheck_by_name.Text;
 			string prnt_order=this.txtprnt_order.Text;
+			bool isDel=this.chkisDel.Checked;
 
 			RuRo.Model.NormalLisReport model=new RuRo.Model.NormalLisReport();
 			model.hospnum=hospnum;
 			model.patname=patname;
-			model.sex=Sex;
-			model.age=Age;
+			model.sex=sex;
+			model.age=age;
 			model.age_month=age_month;
 			model.ext_mthd=ext_mthd;
 			model.chinese=chinese;
@@ -128,6 +129,7 @@ namespace RuRo.Web.NormalLisReport
 			model.check_date=check_date;
 			model.check_by_name=check_by_name;
 			model.prnt_order=prnt_order;
+			model.isDel=isDel;
 
 			RuRo.BLL.NormalLisReport bll=new RuRo.BLL.NormalLisReport();
 			bll.Add(model);

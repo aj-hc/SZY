@@ -28,14 +28,14 @@
 		性别
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtSex" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtsex" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
 		年龄
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtAge" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtage" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
@@ -120,6 +120,13 @@
 	：</td>
 	<td height="25" width="*" align="left">
 		<asp:TextBox id="txtprnt_order" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		isDel
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:CheckBox ID="chkisDel" Text="isDel" runat="server" Checked="False" />
 	</td></tr>
 </table>
 

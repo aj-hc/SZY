@@ -124,6 +124,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmpiInfo.cs" />
+    <Compile Include="KF\EmpiInfo_BLL.cs" />
+    <Compile Include="KF\NormalLisReport_BLL.cs" />
+    <Compile Include="KF\PatientDiagnose_BLL.cs" />
+    <Compile Include="KF\QueryRecoder_BLL.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

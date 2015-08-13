@@ -140,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmpiInfo.cs" />
+    <Compile Include="KF\EmpiInfo_DAL.cs" />
+    <Compile Include="KF\NormalLisReport_DAL.cs" />
+    <Compile Include="KF\PatientDiagnose_DAL.cs" />
+    <Compile Include="KF\QueryRecoder_DAL.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -175,6 +179,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

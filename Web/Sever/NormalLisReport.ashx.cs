@@ -1,8 +1,9 @@
-﻿using System;
+﻿using RuRo.Common;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
-
 namespace RuRo.Web.Sever
 {
     /// <summary>
@@ -37,14 +38,13 @@ namespace RuRo.Web.Sever
                 }
             }
             else
-                QueryData(context, false);
+                QueryData(context, true);
         }
 
         private void QueryData(HttpContext context, bool p)
         {
             if (p)
             {
-
             }
             else
             {
@@ -64,7 +64,13 @@ namespace RuRo.Web.Sever
 
         private void DeleteData(HttpContext context)
         {
-            throw new NotImplementedException();
+            string pk = context.Request["pk"];
+            bool success = true;
+            Object obj = pk;
+            string msg = "删除成功";
+            ReturnData resd = new ReturnData(obj, success,msg);
+            string jsonStrResult = resd.Res();
+            context.Response.Write(jsonStrResult);
         }
 
         private void SaveData(HttpContext context)
@@ -72,11 +78,10 @@ namespace RuRo.Web.Sever
             throw new NotImplementedException();
         }
 
-        private void InfoData(HttpContext context)
+        private static void InfoData(HttpContext context)
         {
-            throw new NotImplementedException();
+            
         }
-
         public bool IsReusable
         {
             get

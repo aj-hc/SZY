@@ -43,8 +43,8 @@
                             
 		<asp:BoundField DataField="hospnum" HeaderText="病人门诊号、住院号" SortExpression="hospnum" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="patname" HeaderText="姓名" SortExpression="patname" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="Sex" HeaderText="性别" SortExpression="Sex" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="Age" HeaderText="年龄" SortExpression="Age" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="sex" HeaderText="性别" SortExpression="sex" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="age" HeaderText="年龄" SortExpression="age" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="age_month" HeaderText="月" SortExpression="age_month" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="ext_mthd" HeaderText="项目总称" SortExpression="ext_mthd" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="chinese" HeaderText="项目名称" SortExpression="chinese" ItemStyle-HorizontalAlign="Center"  /> 
@@ -57,6 +57,7 @@
 		<asp:BoundField DataField="check_date" HeaderText="批准时间" SortExpression="check_date" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="check_by_name" HeaderText="批准人" SortExpression="check_by_name" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="prnt_order" HeaderText="打印顺序序号" SortExpression="prnt_order" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="isDel" HeaderText="isDel" SortExpression="isDel" ItemStyle-HorizontalAlign="Center"  /> 
                             
                             <asp:HyperLinkField HeaderText="详细" ControlStyle-Width="50" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="Show.aspx?id={0}"
                                 Text="详细"  />

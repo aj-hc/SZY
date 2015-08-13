@@ -69,7 +69,6 @@ namespace RuRo.BLL
 		/// </summary>
 		public RuRo.Model.NormalLisReport GetModel(int Id)
 		{
-			
 			return dal.GetModel(Id);
 		}
 

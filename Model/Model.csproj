@@ -121,6 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmpiInfo.cs" />
+    <Compile Include="KF\EmpiInfo.cs" />
+    <Compile Include="KF\NormalLisReport.cs" />
+    <Compile Include="KF\PatientDiagnose.cs" />
+    <Compile Include="KF\QueryRecoder.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

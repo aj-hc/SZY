@@ -28,9 +28,13 @@ namespace RuRo.Web.QueryRecoder
 			{
 				strErr+="查询的用户不能为空！\\n";	
 			}
-			if(this.txtLastQueryDate.Text.Trim().Length==0)
+			if(!PageValidate.IsDateTime(txtAddDate.Text))
 			{
-				strErr+="最后一次查询日期不能为空！\\n";	
+				strErr+="AddDate格式错误！\\n";	
+			}
+			if(!PageValidate.IsDateTime(txtLastQueryDate.Text))
+			{
+				strErr+="最后一次查询日期格式错误！\\n";	
 			}
 			if(this.txtCode.Text.Trim().Length==0)
 			{
@@ -55,7 +59,8 @@ namespace RuRo.Web.QueryRecoder
 				return;
 			}
 			string Uname=this.txtUname.Text;
-			string LastQueryDate=this.txtLastQueryDate.Text;
+			DateTime AddDate=DateTime.Parse(this.txtAddDate.Text);
+			DateTime LastQueryDate=DateTime.Parse(this.txtLastQueryDate.Text);
 			string Code=this.txtCode.Text;
 			string CodeType=this.txtCodeType.Text;
 			string QueryType=this.txtQueryType.Text;
@@ -63,6 +68,7 @@ namespace RuRo.Web.QueryRecoder
 
 			RuRo.Model.QueryRecoder model=new RuRo.Model.QueryRecoder();
 			model.Uname=Uname;
+			model.AddDate=AddDate;
 			model.LastQueryDate=LastQueryDate;
 			model.Code=Code;
 			model.CodeType=CodeType;
