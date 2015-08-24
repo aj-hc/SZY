@@ -18,7 +18,7 @@
 </head>
 <body>
     <!--datagridÀ¸-->
-    <table id="NormalLisReportDg" title="ÁÙ´²¼ì²â" class="easyui-datagrid" style="width: auto; height: 460px"
+    <table id="NormalLisReportDg" title="ÁÙ´²¼ì²â" class="easyui-datagrid" style="width: auto; height: 260px"
         url="" fit='false'
         pagination="false" rownumbers="true"
         fitcolumns="true" singleselect="false" toolbar="#toolbarN"
