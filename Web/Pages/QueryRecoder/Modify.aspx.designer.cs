@@ -25,6 +25,7 @@ namespace RuRo.Web.QueryRecoder {
 		protected global::System.Web.UI.WebControls.TextBox txtCodeType;
 		protected global::System.Web.UI.WebControls.TextBox txtQueryType;
 		protected global::System.Web.UI.WebControls.TextBox txtQueryResult;
+		protected global::System.Web.UI.WebControls.CheckBox chkIsDel;
 	protected global::System.Web.UI.WebControls.Button btnSave;
 	protected global::System.Web.UI.WebControls.Button btnCancel;
 

@@ -34,8 +34,8 @@ namespace RuRo.Web.NormalLisReport
 		this.lblId.Text=model.Id.ToString();
 		this.lblhospnum.Text=model.hospnum;
 		this.lblpatname.Text=model.patname;
-		this.lblsex.Text=model.sex;
-		this.lblage.Text=model.age;
+		this.lblSex.Text=model.Sex;
+		this.lblAge.Text=model.Age;
 		this.lblage_month.Text=model.age_month;
 		this.lblext_mthd.Text=model.ext_mthd;
 		this.lblchinese.Text=model.chinese;
@@ -48,7 +48,7 @@ namespace RuRo.Web.NormalLisReport
 		this.lblcheck_date.Text=model.check_date;
 		this.lblcheck_by_name.Text=model.check_by_name;
 		this.lblprnt_order.Text=model.prnt_order;
-		this.lblisDel.Text=model.isDel?"是":"否";
+		this.lblIsDel.Text=model.IsDel?"是":"否";
 
 	}
 

@@ -25,7 +25,11 @@ namespace RuRo.BLL
                 string xmlHead = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
                 xmlHospitalDt.LoadXml(xmlHead + xmlStr);
             }
-            catch (Exception ex) { xmlHospitalDt = null; }
+            catch (Exception ex)
+            {
+                LogHelper.WriteError(ex);
+                xmlHospitalDt = null;
+            }
             return xmlHospitalDt;
         }
         #endregion

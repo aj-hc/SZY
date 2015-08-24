@@ -86,7 +86,7 @@ namespace RuRo.Web
             //记录出现错误的IP地址
             string strIP = Request.UserHostAddress;
             string err = "Ip【" + strIP + "】" + Environment.NewLine + "Error in【" + Request.Url.ToString() +
-                               "】" + Environment.NewLine + "Error Message【" + objErr.Message.ToString() + "】" + "Error InnerException【" + objErr.InnerException.ToString() + "】" + "Error TargetSite【" + objErr.TargetSite.ToString() + "】" + "Error Source【" + objErr.Source.ToString() + "】";
+                               "】" + Environment.NewLine + "Error Message【" + objErr.Message.ToString() + "】"  + "Error TargetSite【" + objErr.TargetSite.ToString() + "】" + "Error Source【" + objErr.Source.ToString() + "】";
             //记录错误
             WriteError(err);
 			

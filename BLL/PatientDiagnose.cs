@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Data;
 using System.Collections.Generic;
 using RuRo.Common;
@@ -61,7 +60,7 @@ namespace RuRo.BLL
 		/// </summary>
 		public bool DeleteList(string idlist )
 		{
-			return dal.DeleteList(RuRo.Common.PageValidate.SafeLongFilter(idlist,0) );
+			return dal.DeleteList(idlist );
 		}
 
 		/// <summary>
@@ -135,7 +134,7 @@ namespace RuRo.BLL
 					if (model != null)
 					{
 						modelList.Add(model);
-					}
+				}
 				}
 			}
 			return modelList;

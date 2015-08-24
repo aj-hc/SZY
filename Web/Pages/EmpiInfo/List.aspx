@@ -45,7 +45,7 @@
 		<asp:BoundField DataField="Sex" HeaderText="性别" SortExpression="Sex" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="Birthday" HeaderText="出生日期" SortExpression="Birthday" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="CardId" HeaderText="身份证号" SortExpression="CardId" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="isDel" HeaderText="isDel" SortExpression="isDel" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="SourceType" HeaderText="SourceType" SortExpression="SourceType" ItemStyle-HorizontalAlign="Center"  /> 
                             
                             <asp:HyperLinkField HeaderText="详细" ControlStyle-Width="50" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="Show.aspx?id={0}"
                                 Text="详细"  />

@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
 using System.Data;
-using RuRo.Common;
+using Maticsoft.Common;
 using System.Drawing;
 using LTP.Accounts.Bus;
 namespace RuRo.Web.QueryRecoder

@@ -109,10 +109,10 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		isDel
+		IsDel
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:CheckBox ID="chkisDel" Text="isDel" runat="server" Checked="False" />
+		<asp:CheckBox ID="chkIsDel" Text="IsDel" runat="server" Checked="False" />
 	</td></tr>
 </table>
 <script src="/js/calendar1.js" type="text/javascript"></script>

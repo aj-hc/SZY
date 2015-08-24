@@ -34,10 +34,20 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
+                    case "post":/*查询*/
+                        PostData(context);
+                        break;
                 }
             }
             else
                 QueryData(context, false);
+        }
+
+        private void PostData(HttpContext context)
+        {
+            string empiInfo = context.Request.Params["empiInfo"];
+            BLL.EmpiInfo bll = new BLL.EmpiInfo();
+            string result = bll.PostData(empiInfo);
         }
 
         private void QueryData(HttpContext context, bool p)
@@ -48,14 +58,15 @@ namespace RuRo.Web.Sever
             }
             else
             {
-                string Mzzybz = context.Request["Mzzybz"];//0 门诊 1住院
-                string Mzhzyh = context.Request["Mzhzyh"];//住院号或门诊号
+                string mzzybz = context.Request["Mzzybz"];//0 门诊 1住院
+                string mzhzyh = context.Request["Mzhzyh"];//住院号或门诊号
                 BLL.EmpiInfo EmpiInfo = new BLL.EmpiInfo();
-                bool success;
-                object obj = EmpiInfo.GetDataByCode(Mzhzyh, Mzzybz, out success);
-                ReturnData state = new ReturnData(obj,success);
-                string jsonStrResult = state.Res();
-                context.Response.Write(jsonStrResult);
+                Model.DTO.EmpiInfoRequest request = new Model.DTO.EmpiInfoRequest(mzhzyh, mzzybz);
+                string result = EmpiInfo.GetSampleSourceData(request);
+                //object obj = EmpiInfo.GetDataByCode(Mzhzyh, Mzzybz, out success);
+                //ReturnData state = new ReturnData(obj,success);
+                //string jsonStrResult = state.Res();
+                context.Response.Write(result);
             }
 
         }

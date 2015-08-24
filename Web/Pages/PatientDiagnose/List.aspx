@@ -55,7 +55,7 @@
 		<asp:BoundField DataField="Type" HeaderText="诊断类型:1：中医疾病 2：中" SortExpression="Type" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="Flag" HeaderText="诊断类别:1：西医诊断 2 中" SortExpression="Flag" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="DiagnoseDate" HeaderText="诊断日期" SortExpression="DiagnoseDate" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="isDel" HeaderText="isDel" SortExpression="isDel" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="IsDel" HeaderText="IsDel" SortExpression="IsDel" ItemStyle-HorizontalAlign="Center"  /> 
                             
                             <asp:HyperLinkField HeaderText="详细" ControlStyle-Width="50" DataNavigateUrlFields="id" DataNavigateUrlFormatString="Show.aspx?id={0}"
                                 Text="详细"  />

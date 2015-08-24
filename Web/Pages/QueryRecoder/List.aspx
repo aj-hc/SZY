@@ -48,6 +48,7 @@
 		<asp:BoundField DataField="CodeType" HeaderText="条码号类型" SortExpression="CodeType" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="QueryType" HeaderText="查询的数据类型" SortExpression="QueryType" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="QueryResult" HeaderText="QueryResult" SortExpression="QueryResult" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="IsDel" HeaderText="IsDel" SortExpression="IsDel" ItemStyle-HorizontalAlign="Center"  /> 
                             
                             <asp:HyperLinkField HeaderText="详细" ControlStyle-Width="50" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="Show.aspx?id={0}"
                                 Text="详细"  />

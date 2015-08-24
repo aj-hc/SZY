@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 namespace RuRo.Model
 {
 	/// <summary>
@@ -56,7 +55,7 @@ namespace RuRo.Model
 		/// <summary>
 		/// 性别
 		/// </summary>
-		public string sex
+		public string Sex
 		{
 			set{ _sex=value;}
 			get{return _sex;}
@@ -64,7 +63,7 @@ namespace RuRo.Model
 		/// <summary>
 		/// 年龄
 		/// </summary>
-		public string age
+		public string Age
 		{
 			set{ _age=value;}
 			get{return _age;}
@@ -168,7 +167,7 @@ namespace RuRo.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public bool isDel
+		public bool IsDel
 		{
 			set{ _isdel=value;}
 			get{return _isdel;}

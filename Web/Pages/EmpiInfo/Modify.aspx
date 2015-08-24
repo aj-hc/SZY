@@ -44,10 +44,10 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		isDel
+		SourceType
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:CheckBox ID="chkisDel" Text="isDel" runat="server" Checked="False" />
+		<asp:TextBox id="txtSourceType" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 </table>
 

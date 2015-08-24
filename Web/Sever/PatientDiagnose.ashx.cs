@@ -49,14 +49,13 @@ namespace RuRo.Web.Sever
             {
                 //查询数据
                 //string Mzzybz = context.Request["Mzzybz"];//0 门诊 1住院
-                string code = context.Request["code"];//住院号或门诊号
+                string cardno = context.Request["code"];//住院号或门诊号
                 string cxrq00 = context.Request["cxrq00"];
                 BLL.PatientDiagnose n = new BLL.PatientDiagnose();
-                bool success;
-                object obj = n.GetData(code, cxrq00,out success);
-                ReturnData resd = new ReturnData(obj,success);
-                string jsonStrResult = resd.Res();
-                context.Response.Write(jsonStrResult);
+                //object obj = n.GetData(code, cxrq00,out success);
+                //ReturnData resd = new ReturnData(obj,success);
+                string jsonStrResult = n.GetSampleSourceData(new Model.DTO.PatientDiagnoseResuest(cardno,cxrq00));
+               context.Response.Write(jsonStrResult);
             }
         }
 

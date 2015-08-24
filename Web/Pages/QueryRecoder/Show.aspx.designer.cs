@@ -25,6 +25,7 @@ namespace RuRo.Web.QueryRecoder {
 	protected global::System.Web.UI.WebControls.Label lblCodeType;
 	protected global::System.Web.UI.WebControls.Label lblQueryType;
 	protected global::System.Web.UI.WebControls.Label lblQueryResult;
+	protected global::System.Web.UI.WebControls.Label lblIsDel;
 
 
        

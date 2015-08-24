@@ -1,20 +1,4 @@
-﻿/**  版本信息模板在安装目录下，可自行修改。
-* NormalLisReport.cs
-*
-* 功 能： N/A
-* 类 名： NormalLisReport
-*
-* Ver    变更日期             负责人  变更内容
-* ───────────────────────────────────
-* V0.01  2015/8/3 17:25:28   N/A    初版
-*
-* Copyright (c) 2012 Maticsoft Corporation. All rights reserved.
-*┌──────────────────────────────────┐
-*│　此技术信息为本公司机密信息，未经本公司书面同意禁止向第三方披露．　│
-*│　版权所有：动软卓越（北京）科技有限公司　　　　　　　　　　　　　　│
-*└──────────────────────────────────┘
-*/
-using System;
+﻿using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
@@ -62,19 +46,19 @@ namespace RuRo.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into NormalLisReport(");
-			strSql.Append("hospnum,patname,sex,age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,isDel)");
+			strSql.Append("hospnum,patname,Sex,Age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,IsDel)");
 			strSql.Append(" values (");
-			strSql.Append("@hospnum,@patname,@sex,@age,@age_month,@ext_mthd,@chinese,@result,@units,@ref_flag,@lowvalue,@highvalue,@print_ref,@check_date,@check_by_name,@prnt_order,@isDel)");
+			strSql.Append("@hospnum,@patname,@Sex,@Age,@age_month,@ext_mthd,@chinese,@result,@units,@ref_flag,@lowvalue,@highvalue,@print_ref,@check_date,@check_by_name,@prnt_order,@IsDel)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@hospnum", SqlDbType.NVarChar,50),
 					new SqlParameter("@patname", SqlDbType.NVarChar,50),
-					new SqlParameter("@sex", SqlDbType.NChar,10),
-					new SqlParameter("@age", SqlDbType.NChar,10),
+					new SqlParameter("@Sex", SqlDbType.NChar,10),
+					new SqlParameter("@Age", SqlDbType.NChar,10),
 					new SqlParameter("@age_month", SqlDbType.NChar,10),
 					new SqlParameter("@ext_mthd", SqlDbType.NVarChar,50),
 					new SqlParameter("@chinese", SqlDbType.NVarChar,50),
-					new SqlParameter("@result", SqlDbType.NVarChar,-1),
+					new SqlParameter("@result", SqlDbType.NVarChar),
 					new SqlParameter("@units", SqlDbType.NChar,10),
 					new SqlParameter("@ref_flag", SqlDbType.NChar,10),
 					new SqlParameter("@lowvalue", SqlDbType.NVarChar,50),
@@ -83,11 +67,11 @@ namespace RuRo.DAL
 					new SqlParameter("@check_date", SqlDbType.NVarChar,50),
 					new SqlParameter("@check_by_name", SqlDbType.NVarChar,50),
 					new SqlParameter("@prnt_order", SqlDbType.NVarChar,50),
-					new SqlParameter("@isDel", SqlDbType.Bit,1)};
+					new SqlParameter("@IsDel", SqlDbType.Bit,1)};
 			parameters[0].Value = model.hospnum;
 			parameters[1].Value = model.patname;
-			parameters[2].Value = model.sex;
-			parameters[3].Value = model.age;
+			parameters[2].Value = model.Sex;
+			parameters[3].Value = model.Age;
 			parameters[4].Value = model.age_month;
 			parameters[5].Value = model.ext_mthd;
 			parameters[6].Value = model.chinese;
@@ -100,7 +84,7 @@ namespace RuRo.DAL
 			parameters[13].Value = model.check_date;
 			parameters[14].Value = model.check_by_name;
 			parameters[15].Value = model.prnt_order;
-			parameters[16].Value = model.isDel;
+			parameters[16].Value = model.IsDel;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -121,8 +105,8 @@ namespace RuRo.DAL
 			strSql.Append("update NormalLisReport set ");
 			strSql.Append("hospnum=@hospnum,");
 			strSql.Append("patname=@patname,");
-			strSql.Append("sex=@sex,");
-			strSql.Append("age=@age,");
+			strSql.Append("Sex=@Sex,");
+			strSql.Append("Age=@Age,");
 			strSql.Append("age_month=@age_month,");
 			strSql.Append("ext_mthd=@ext_mthd,");
 			strSql.Append("chinese=@chinese,");
@@ -135,17 +119,17 @@ namespace RuRo.DAL
 			strSql.Append("check_date=@check_date,");
 			strSql.Append("check_by_name=@check_by_name,");
 			strSql.Append("prnt_order=@prnt_order,");
-			strSql.Append("isDel=@isDel");
+			strSql.Append("IsDel=@IsDel");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@hospnum", SqlDbType.NVarChar,50),
 					new SqlParameter("@patname", SqlDbType.NVarChar,50),
-					new SqlParameter("@sex", SqlDbType.NChar,10),
-					new SqlParameter("@age", SqlDbType.NChar,10),
+					new SqlParameter("@Sex", SqlDbType.NChar,10),
+					new SqlParameter("@Age", SqlDbType.NChar,10),
 					new SqlParameter("@age_month", SqlDbType.NChar,10),
 					new SqlParameter("@ext_mthd", SqlDbType.NVarChar,50),
 					new SqlParameter("@chinese", SqlDbType.NVarChar,50),
-					new SqlParameter("@result", SqlDbType.NVarChar,-1),
+					new SqlParameter("@result", SqlDbType.NVarChar),
 					new SqlParameter("@units", SqlDbType.NChar,10),
 					new SqlParameter("@ref_flag", SqlDbType.NChar,10),
 					new SqlParameter("@lowvalue", SqlDbType.NVarChar,50),
@@ -154,12 +138,12 @@ namespace RuRo.DAL
 					new SqlParameter("@check_date", SqlDbType.NVarChar,50),
 					new SqlParameter("@check_by_name", SqlDbType.NVarChar,50),
 					new SqlParameter("@prnt_order", SqlDbType.NVarChar,50),
-					new SqlParameter("@isDel", SqlDbType.Bit,1),
+					new SqlParameter("@IsDel", SqlDbType.Bit,1),
 					new SqlParameter("@Id", SqlDbType.Int,4)};
 			parameters[0].Value = model.hospnum;
 			parameters[1].Value = model.patname;
-			parameters[2].Value = model.sex;
-			parameters[3].Value = model.age;
+			parameters[2].Value = model.Sex;
+			parameters[3].Value = model.Age;
 			parameters[4].Value = model.age_month;
 			parameters[5].Value = model.ext_mthd;
 			parameters[6].Value = model.chinese;
@@ -172,7 +156,7 @@ namespace RuRo.DAL
 			parameters[13].Value = model.check_date;
 			parameters[14].Value = model.check_by_name;
 			parameters[15].Value = model.prnt_order;
-			parameters[16].Value = model.isDel;
+			parameters[16].Value = model.IsDel;
 			parameters[17].Value = model.Id;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
@@ -237,7 +221,7 @@ namespace RuRo.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 Id,hospnum,patname,sex,age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,isDel from NormalLisReport ");
+			strSql.Append("select  top 1 Id,hospnum,patname,Sex,Age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,IsDel from NormalLisReport ");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.Int,4)
@@ -277,13 +261,13 @@ namespace RuRo.DAL
 				{
 					model.patname=row["patname"].ToString();
 				}
-				if(row["sex"]!=null)
+				if(row["Sex"]!=null)
 				{
-					model.sex=row["sex"].ToString();
+					model.Sex=row["Sex"].ToString();
 				}
-				if(row["age"]!=null)
+				if(row["Age"]!=null)
 				{
-					model.age=row["age"].ToString();
+					model.Age=row["Age"].ToString();
 				}
 				if(row["age_month"]!=null)
 				{
@@ -333,15 +317,15 @@ namespace RuRo.DAL
 				{
 					model.prnt_order=row["prnt_order"].ToString();
 				}
-				if(row["isDel"]!=null && row["isDel"].ToString()!="")
+				if(row["IsDel"]!=null && row["IsDel"].ToString()!="")
 				{
-					if((row["isDel"].ToString()=="1")||(row["isDel"].ToString().ToLower()=="true"))
+					if((row["IsDel"].ToString()=="1")||(row["IsDel"].ToString().ToLower()=="true"))
 					{
-						model.isDel=true;
+						model.IsDel=true;
 					}
 					else
 					{
-						model.isDel=false;
+						model.IsDel=false;
 					}
 				}
 			}
@@ -354,7 +338,7 @@ namespace RuRo.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,hospnum,patname,sex,age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,isDel ");
+			strSql.Append("select Id,hospnum,patname,Sex,Age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,IsDel ");
 			strSql.Append(" FROM NormalLisReport ");
 			if(strWhere.Trim()!="")
 			{
@@ -374,7 +358,7 @@ namespace RuRo.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" Id,hospnum,patname,sex,age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,isDel ");
+			strSql.Append(" Id,hospnum,patname,Sex,Age,age_month,ext_mthd,chinese,result,units,ref_flag,lowvalue,highvalue,print_ref,check_date,check_by_name,prnt_order,IsDel ");
 			strSql.Append(" FROM NormalLisReport ");
 			if(strWhere.Trim()!="")
 			{

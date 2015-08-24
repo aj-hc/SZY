@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
@@ -47,9 +46,9 @@ namespace RuRo.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into QueryRecoder(");
-			strSql.Append("Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult)");
+			strSql.Append("Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult,IsDel)");
 			strSql.Append(" values (");
-			strSql.Append("@Uname,@AddDate,@LastQueryDate,@Code,@CodeType,@QueryType,@QueryResult)");
+			strSql.Append("@Uname,@AddDate,@LastQueryDate,@Code,@CodeType,@QueryType,@QueryResult,@IsDel)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Uname", SqlDbType.NVarChar,50),
@@ -58,7 +57,8 @@ namespace RuRo.DAL
 					new SqlParameter("@Code", SqlDbType.NVarChar,50),
 					new SqlParameter("@CodeType", SqlDbType.NVarChar,50),
 					new SqlParameter("@QueryType", SqlDbType.NVarChar,50),
-					new SqlParameter("@QueryResult", SqlDbType.NVarChar,-1)};
+					new SqlParameter("@QueryResult", SqlDbType.NVarChar),
+					new SqlParameter("@IsDel", SqlDbType.Bit,1)};
 			parameters[0].Value = model.Uname;
 			parameters[1].Value = model.AddDate;
 			parameters[2].Value = model.LastQueryDate;
@@ -66,6 +66,7 @@ namespace RuRo.DAL
 			parameters[4].Value = model.CodeType;
 			parameters[5].Value = model.QueryType;
 			parameters[6].Value = model.QueryResult;
+			parameters[7].Value = model.IsDel;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -90,7 +91,8 @@ namespace RuRo.DAL
 			strSql.Append("Code=@Code,");
 			strSql.Append("CodeType=@CodeType,");
 			strSql.Append("QueryType=@QueryType,");
-			strSql.Append("QueryResult=@QueryResult");
+			strSql.Append("QueryResult=@QueryResult,");
+			strSql.Append("IsDel=@IsDel");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Uname", SqlDbType.NVarChar,50),
@@ -99,7 +101,8 @@ namespace RuRo.DAL
 					new SqlParameter("@Code", SqlDbType.NVarChar,50),
 					new SqlParameter("@CodeType", SqlDbType.NVarChar,50),
 					new SqlParameter("@QueryType", SqlDbType.NVarChar,50),
-					new SqlParameter("@QueryResult", SqlDbType.NVarChar,-1),
+					new SqlParameter("@QueryResult", SqlDbType.NVarChar),
+					new SqlParameter("@IsDel", SqlDbType.Bit,1),
 					new SqlParameter("@Id", SqlDbType.Int,4)};
 			parameters[0].Value = model.Uname;
 			parameters[1].Value = model.AddDate;
@@ -108,7 +111,8 @@ namespace RuRo.DAL
 			parameters[4].Value = model.CodeType;
 			parameters[5].Value = model.QueryType;
 			parameters[6].Value = model.QueryResult;
-			parameters[7].Value = model.Id;
+			parameters[7].Value = model.IsDel;
+			parameters[8].Value = model.Id;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -172,7 +176,7 @@ namespace RuRo.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult from QueryRecoder ");
+			strSql.Append("select  top 1 Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult,IsDel from QueryRecoder ");
 			strSql.Append(" where Id=@Id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Id", SqlDbType.Int,4)
@@ -232,6 +236,17 @@ namespace RuRo.DAL
 				{
 					model.QueryResult=row["QueryResult"].ToString();
 				}
+				if(row["IsDel"]!=null && row["IsDel"].ToString()!="")
+				{
+					if((row["IsDel"].ToString()=="1")||(row["IsDel"].ToString().ToLower()=="true"))
+					{
+						model.IsDel=true;
+					}
+					else
+					{
+						model.IsDel=false;
+					}
+				}
 			}
 			return model;
 		}
@@ -242,7 +257,7 @@ namespace RuRo.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult ");
+			strSql.Append("select Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult,IsDel ");
 			strSql.Append(" FROM QueryRecoder ");
 			if(strWhere.Trim()!="")
 			{
@@ -262,7 +277,7 @@ namespace RuRo.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult ");
+			strSql.Append(" Id,Uname,AddDate,LastQueryDate,Code,CodeType,QueryType,QueryResult,IsDel ");
 			strSql.Append(" FROM QueryRecoder ");
 			if(strWhere.Trim()!="")
 			{

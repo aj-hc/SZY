@@ -39,6 +39,7 @@ namespace RuRo.Web.QueryRecoder
 		this.lblCodeType.Text=model.CodeType;
 		this.lblQueryType.Text=model.QueryType;
 		this.lblQueryResult.Text=model.QueryResult;
+		this.lblIsDel.Text=model.IsDel?"是":"否";
 
 	}
 
