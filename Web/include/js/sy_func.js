@@ -193,6 +193,7 @@ function postPatientInfo() {
     var kk = $("#BaseInfoForm").form('validate');
     if (kk) {
         postEmpiInfo();
+        PostNormalLisReport_list();
     }
 }
 
