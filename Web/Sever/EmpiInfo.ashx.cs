@@ -34,7 +34,7 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
-                    case "post":/*查询*/
+                    case "post":/*提交*/
                         PostData(context);
                         break;
                 }
@@ -50,6 +50,8 @@ namespace RuRo.Web.Sever
             string codeType = context.Request.Params["codeType"];
             BLL.EmpiInfo bll = new BLL.EmpiInfo();
             string result = bll.PostData(empiInfo,code, codeType);
+            context.Response.Write(result);
+
         }
 
         private void QueryData(HttpContext context, bool p)

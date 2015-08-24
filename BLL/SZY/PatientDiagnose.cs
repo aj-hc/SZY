@@ -21,10 +21,51 @@ namespace RuRo.BLL
             Model.DTO.JsonModel jsonmodel = StrTObject(xmlStr, request);
             return JsonConvert.SerializeObject(jsonmodel);
         }
-        public string PostData(string data)
+        public string PostData(string formData, string code, string codeType)
         {
-            return "";
+            Dictionary<string, string> dic = GetBaseInfoDic(formData);
+            Dictionary<string, string> newDic = new Dictionary<string, string>();
+            newDic.Add("Name", code);
+            foreach (KeyValuePair<string, string> item in dic)
+            {
+                newDic.Add(Common.MatchDic.EmpiInfoDic[item.Key], item.Value);
+
+            }
+            //调用方法提交数据
+            string result = PostData(newDic);
+            if (result.Contains("\"success\":true,") || result.Contains("should be unique."))
+            {
+                Model.PatientDiagnose e = JsonConvert.DeserializeObject<Model.PatientDiagnose>(JsonConvert.SerializeObject(dic));
+                PatientDiagnose eee = new PatientDiagnose();
+                bool i = eee.Add(e);
+            }
+            return result;
         }
+        #region 获取基本信息字典（样本源） +  private Dictionary<string, string> GetBaseInfoDic()
+        //获取基本信息字典（样本源）
+        private Dictionary<string, string> GetBaseInfoDic(string formStr)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Model.PatientDiagnose data = new Model.PatientDiagnose();
+
+            if (!string.IsNullOrEmpty(formStr) && formStr != "[]")
+            {
+                List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
+                dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(formStr);
+                data = FormToDic.GetFromInfo<Model.PatientDiagnose>(dicList);
+                dic = FormToDic.ConvertBaseInfoObjToDic(data);
+            }
+            return dic;
+        }
+        #endregion
+
+        private string PostData(Dictionary<string, string> dic)
+        {
+            UnameAndPwd up = new UnameAndPwd();
+            string result = FreezerProUtility.Fp_BLL.SampleSocrce.ImportSampleSourceDataToFp(up.GetUp(), "患者信息", dic);
+            return result;
+        }
+
         #region 获取数据
         /// <summary>
         /// 获取数据

@@ -67,31 +67,28 @@
     </form>
 
     <script type="text/javascript">
-        var mode = $('#mode').val();
-        var pk = $('#pk').val();
-
-        /*编辑或查看状态下控件赋值*/
-        if (mode == 'upd' || mode == 'inf') {
-            url = 'PatientDiagnose_handler.ashx?mode=inf&pk=' + pk;
-            $.post(url, function (data) {
-                $('#frmAjax').form('load', data);
-            }, 'json');
-            $('#linkbuttonClear').linkbutton({ disabled: true });
-        }
-
-        /*查看状态下disabled控件*/
-        if (mode == 'inf') {
-            $('#linkbuttonSave').linkbutton({ disabled: true });
-            $('input').attr('disabled', 'disabled');
-            $('textarea').attr('disabled', 'disabled');
-        }
-
-        if (mode == 'ins') url = 'PatientDiagnose_handler.ashx?mode=ins';
-        if (mode == 'upd') url = 'PatientDiagnose_handler.ashx?mode=upd&pk=' + pk;
-
-        /*清空充填*/
-        function clearForm() {
-            $('#frmAjax').form('clear');
+        function postPatientDiagnose_info() {
+            var formData = $("#PatientDiagnoseForm").serializeArray();
+            var Tem;
+            if (formData) { Tem = JSON.stringify(formData); } else {
+                return;
+            }
+            var code = $('#oldCode').textbox('getValue');
+            var codeType = $('#oldCodeType').textbox('getValue');
+            
+            $.ajax({
+                type: "POST",
+                url: "/Sever/PatientDiagnose.ashx?mode=post",
+                data: {
+                    "mode": "post",
+                    "formData": Tem,
+                    "code": code,
+                    "codeType": codeType
+                },
+                success: function (response) {
+                    alert(response);
+                }
+            });
         }
 
     </script>
