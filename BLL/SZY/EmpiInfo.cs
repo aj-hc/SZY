@@ -25,7 +25,7 @@ namespace RuRo.BLL
             Model.DTO.JsonModel jsonmodel = StrTObject(xmlStr);
             return JsonConvert.SerializeObject(jsonmodel);
         }
-        public string PostData(string formData,string code,string codeType)
+        public string PostData(string formData, string code, string codeType)
         {
             Dictionary<string, string> dic = GetBaseInfoDic(formData);
             Dictionary<string, string> newDic = new Dictionary<string, string>();
@@ -45,7 +45,7 @@ namespace RuRo.BLL
             {
                 if (Common.MatchDic.EmpiInfoDic.Keys.Contains(item.Key))
                 {
-                    if (item.Key== "PatientName")
+                    if (item.Key == "PatientName")
                     {
                         newDic.Add("", item.Value);
                         newDic.Add(Common.MatchDic.EmpiInfoDic[item.Key], item.Value);
@@ -57,7 +57,15 @@ namespace RuRo.BLL
                 }
             }
             //调用方法提交数据
-            return PostData(newDic);
+            string result = PostData(newDic);
+            if (result.Contains("\"success\":true,") || result.Contains("should be unique."))
+            {
+                Model.EmpiInfo e = JsonConvert.DeserializeObject<Model.EmpiInfo>(JsonConvert.SerializeObject(dic));
+                EmpiInfo eee = new EmpiInfo();
+                e.SourceType = "患者信息";
+                int i = eee.Add(e);
+            }
+            return result;
         }
         #region 获取基本信息字典（样本源） +  private Dictionary<string, string> GetBaseInfoDic()
         //获取基本信息字典（样本源）
