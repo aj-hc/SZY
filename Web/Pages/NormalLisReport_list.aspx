@@ -20,7 +20,7 @@
     <!--datagrid栏-->
     <table id="NormalLisReportDg" title="临床检测" class="easyui-datagrid" style="width: auto; height: 460px"
         url="" fit='false'
-        pagination="false" idfield="id" rownumbers="true"
+        pagination="false" rownumbers="true"
         fitcolumns="true" singleselect="false" toolbar="#toolbarN"
         striped="false"
         selectoncheck="true" checkonselect="true" remotesort="true">
@@ -65,25 +65,59 @@
     </div>
 
     <script type="text/javascript">
-        var url;
         /*删除选择数据,多条记录PK主键参数用逗号,分开*/
         function destroy() {
-            var rows = $('#NormalLisReportDg').datagrid('getSelections');
-            alert(rows);
-            var allRows = $('#NormalLisReportDg').datagrid('getData');
-            alert(allRows);
-            if (rows.length > 0) {
-                $.messager.confirm('提示', '是否确认删除数据？', function (r) {
-                    for (var row in rows) {
-                        $.removeData(allRows,rows[row])
-                        delete allRows[rows[row]]
-                    }
-                    $('#NormalLisReportDg').datagrid('loadData', allRows);    //重新加载载数据
-                })
+            var $NormalLisReportDg = $('#NormalLisReportDg');
+            var row = $('#NormalLisReportDg').datagrid('getSelections');
+            for (var i = 0; i < row.length; i++) {
+                var rowIndex = $NormalLisReportDg.datagrid('getRowIndex', row[i]);
+                $NormalLisReportDg.datagrid('deleteRow', rowIndex);
             }
-            else {
-                $.messager.alert('警告', '请选择数据', 'warning');
+            $("#NormalLisReportDg").datagrid("clearSelections");
+
+            //var rows = $('#NormalLisReportDg').datagrid('getSelections');
+            //alert(rows);
+            //var allRows = $('#NormalLisReportDg').datagrid('getData');
+            //alert(allRows);
+            //if (rows.length > 0) {
+            //    $.messager.confirm('提示', '是否确认删除数据？', function (r) {
+            //        for (var row in rows) {
+            //            $('#NormalLisReportDg').datagrid('deleteRow', allRows);
+            //            $.removeData(allRows,rows[row])
+            //            delete allRows[rows[row]]
+            //        }
+            //        $('#NormalLisReportDg').datagrid('loadData', allRows);    //重新加载载数据
+            //    })
+            //}
+            //else {
+            //    $.messager.alert('警告', '请选择数据', 'warning');
+            //}
+        }
+
+        //POST临床数据到后台
+        function PostNormalLisReport_list()
+        {
+            var _NormalLisReport = $('#NormalLisReportDg').datagrid('getChecked');
+            if (_NormalLisReport.length <= 0) {
+                $.messager.alert('提示', '未选择诊断信息或诊断信息为空', 'error'); return;
             }
+           var  count = Math.random();
+            var rowNormalLisReport = JSON.stringify(_NormalLisReport);
+            $.ajax({
+                type: 'post',
+                dataType: "json",
+                url: '/Sever/NormalLisReport.ashx',
+                data: {
+                    "mode": "post",
+                    "count":count,
+                    "NormalLis": rowNormalLisReport
+                },
+                success: function (data)
+                {
+
+                }
+            });
+
         }
 </script>
 

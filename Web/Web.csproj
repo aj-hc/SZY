@@ -289,11 +289,13 @@
     <Content Include="Images\szy_Logo.jpg" />
     <Content Include="include\css\default.css" />
     <Content Include="include\css\kfmis.css" />
+    <Content Include="include\css\index.css" />
     <Content Include="include\jquery-easyui-1.4.3\easyloader.js" />
     <Content Include="include\jquery-easyui-1.4.3\jquery.easyui.min.js" />
     <Content Include="include\jquery-easyui-1.4.3\jquery.easyui.mobile.js" />
     <Content Include="include\jquery-easyui-1.4.3\jquery.min.js" />
     <Content Include="include\jquery-easyui-1.4.3\locale\easyui-lang-zh_CN.js" />
+    <Content Include="include\jquery-easyui-1.4.3\outlook2.js" />
     <Content Include="include\jquery-easyui-1.4.3\plugins\jquery.accordion.js" />
     <Content Include="include\jquery-easyui-1.4.3\plugins\jquery.calendar.js" />
     <Content Include="include\jquery-easyui-1.4.3\plugins\jquery.combo.js" />
@@ -645,6 +647,7 @@
     <Content Include="include\js\page.js" />
     <Content Include="include\js\samplepage.js" />
     <Content Include="include\js\sy_func.js" />
+    <Content Include="index.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
     <Content Include="js\calendar1.js" />
@@ -1070,6 +1073,13 @@
     </Compile>
     <Compile Include="Fp_Ajax\PageConData.aspx.designer.cs">
       <DependentUpon>PageConData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

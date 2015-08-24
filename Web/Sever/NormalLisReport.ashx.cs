@@ -35,10 +35,20 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
+                    case "post":/*上传*/
+                        PostData(context);
+                        break;
                 }
             }
             else
                 QueryData(context, true);
+        }
+
+        private void PostData(HttpContext context)
+        {
+            string strNormalLis = context.Request.Params["NormalLis"];
+            BLL.NormalLisReport bll = new BLL.NormalLisReport();
+            string result = bll.PostData(strNormalLis);
         }
 
         private void QueryData(HttpContext context, bool p)

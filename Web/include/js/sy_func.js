@@ -110,6 +110,7 @@ function GetNormalLisReportInfo() {
                     }
                     else {
                         $('#NormalLisReportDg').datagrid("loadData", obj.Data);
+                        var row = $('#NormalLisReportDg').datagrid('getRows');
                     }
                 }
                 $('#NormalLisReportDg').datagrid("loaded");
