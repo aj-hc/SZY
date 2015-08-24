@@ -22,7 +22,8 @@ namespace RuRo.Web
             {
                 if (CheckLoginByCookie())
                 {
-                    Response.Redirect("ExtendPage.aspx");
+                    //Response.Redirect("ExtendPage.aspx");
+                    Response.Redirect("index.aspx");
                 }
             }
             //登陆
