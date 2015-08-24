@@ -22,8 +22,8 @@
     <div id="main" style="width: 900px; padding: 1px;">
         <div class="easyui-panel">
             <div>
-                <a href="javascript:void(0)" id="loginOut" class="easyui-linkbutton" data-options="plain:true" style="position: absolute; right: 15px; top: 10px" onclick="loginOut()">注销</a><%--注销操作，清除cookie，关闭--%>
-                <asp:Label ID="lakeshi" runat="server" Text=""></asp:Label>
+                <%--<a href="javascript:void(0)" id="loginOut" class="easyui-linkbutton" data-options="plain:true" style="position: absolute; right: 15px; top: 10px" onclick="loginOut()">注销</a>--%><%--注销操作，清除cookie，关闭--%>
+                <%--<asp:Label ID="lakeshi" runat="server" Text=""></asp:Label>--%>
                 <ul>
                     <li><b>查找患者</b></li>
                 </ul>

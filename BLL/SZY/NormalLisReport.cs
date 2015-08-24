@@ -24,9 +24,18 @@ namespace RuRo.BLL
 
         public string PostData(string data)
         {
+            string mes = "";
+            if (data=="")
+            {
+                mes = "上传数据为空，请检查网络";
+            }
+            else
+            {
+                    
+            }
             return "";
         }
-       #region 获取数据
+        #region 获取数据
         /// <summary>
         /// 获取数据
         /// </summary>
@@ -1881,7 +1890,6 @@ namespace RuRo.BLL
             return str;
         }
         #endregion
-
         #region 将数据转换成对象
         /// <summary>
         /// 将数据转换成对象
