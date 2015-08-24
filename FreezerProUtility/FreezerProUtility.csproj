@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>G:\02.study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
 using System.Data;
-using RuRo.Common;
+using Maticsoft.Common;
 using System.Drawing;
 using LTP.Accounts.Bus;
 namespace RuRo.Web.EmpiInfo
@@ -21,8 +21,8 @@ namespace RuRo.Web.EmpiInfo
         {
             if (!Page.IsPostBack)
             {
-                //gridView.BorderColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_bordercolorlight"].ToString());
-                //gridView.HeaderStyle.BackColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_titlebgcolor"].ToString());
+                gridView.BorderColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_bordercolorlight"].ToString());
+                gridView.HeaderStyle.BackColor = ColorTranslator.FromHtml(Application[Session["Style"].ToString() + "xtable_titlebgcolor"].ToString());
                 btnDelete.Attributes.Add("onclick", "return confirm(\"你确认要删除吗？\")");
                 BindData();
             }

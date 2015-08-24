@@ -112,7 +112,7 @@
       <HintPath>..\Lib\Excel.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>G:\02.study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OpenSmtp, Version=1.11.0.34196, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -200,8 +200,6 @@
     <Compile Include="SZY\Record.cs" />
     <Compile Include="SZY\StateEnum.cs" />
     <Compile Include="SZY\UserHelper.cs" />
-    <Compile Include="DirFile.cs" />
-    <Compile Include="SysHelper.cs" />
     <Compile Include="XMl\XmlHelper.cs" />
     <Compile Include="XMl\XMLProcess.cs" />
     <Compile Include="SZY\页面辅助类\CssHelper.cs" />
@@ -210,6 +208,7 @@
     <Compile Include="SZY\页面辅助类\PageHelper.cs" />
     <Compile Include="TimeParser.cs" />
     <Compile Include="UrlOper.cs" />
+    <Compile Include="XMl\XmlUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

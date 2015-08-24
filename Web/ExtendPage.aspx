@@ -15,9 +15,7 @@
     <script src="../include/js/default.js"></script>
     <script src="include/js/sy_func.js"></script>
     <script src="include/js/page.js"></script>
-    <script src="include/js/BindFuncToId.js"></script>
     <script src="include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
-    <script src="include/js/DgGRUD.js"></script>
     <title>信息导入</title>
 </head>
 <body style="overflow: auto;">
@@ -38,41 +36,24 @@
                     <a href="javascript:void(0)" id="btnGet" class="easyui-linkbutton" onclick="querybycode()">查询患者信息</a>
                 </div>
             </form>
+            <div style="display: none">
+                <input class="easyui-textbox" id="oldCode"  name="oldCode"/>
+                <input class="easyui-textbox" id="oldCodeType" name="oldCodeType" />
+            </div>
         </div>
         <div class="h"></div>
         <div class="easyui-panel">
             <div style="padding: 2px">
                 <b>基本资料：</b>
-                <form id="BaseInfoForm">
-                    <div id="BaseInfoDiv" runat="server" style="padding: 5px;">
-                        <table>
-                            <tr>
-                                <td>姓名：</td>
-                                <td>
-                                    <input class="easyui-textbox" name="PatientName" id="PatientName" data-options="required:true" /></td>
-                                <td class="name">住院号、卡号：</td>
-                                <td>
-                                    <input class="easyui-textbox" name="PatientNo" id="PatientNo" data-options="required:false" /></td>
-                            </tr>
-                            <tr>
-                                <td>性别：</td>
-                                <td>
-                                    <input class="easyui-textbox" name="Sex" id="Sex" style="width: 204px" data-options=" required:false" /></td>
-                                <td>出生日期：</td>
-                                <td>
-                                    <input class="easyui-datebox" name="Birthday" id="Birthday" data-options="required:false" /></td>
-                                <td>身份证号：</td>
-                                <td>
-                                    <input class="easyui-textbox" name="CardId" id="CardId" style="width: 204px" data-options=" required:false" /></td>
-                            </tr>
-                        </table>
-                    </div>
-                </form>
+                <div class="easyui-panel" data-options="href:'Pages/EmpiInfo_info.aspx'"></div>
             </div>
             <div class="h"></div>
-            <div class="easyui-panel" data-options="href:'Pages/PatientDiagnose.aspx'"></div>
+            <div style="padding: 2px">
+                <b>诊断信息：</b>
+                <div class="easyui-panel" data-options="href:'Pages/PatientDiagnose_info.aspx'"></div>
+            </div>
             <div class="h"></div>
-                <div class="easyui-panel" data-options="href:'Pages/NormalLisReport_list.aspx'"></div>
+            <div class="easyui-panel" data-options="href:'Pages/NormalLisReport_list.aspx'"></div>
 
         </div>
         <!--diaglog窗口，用于编辑数据-->

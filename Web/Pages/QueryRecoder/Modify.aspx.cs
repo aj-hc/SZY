@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Text;
-using RuRo.Common;
+using Maticsoft.Common;
 using LTP.Accounts.Bus;
 namespace RuRo.Web.QueryRecoder
 {
@@ -40,6 +40,7 @@ namespace RuRo.Web.QueryRecoder
 		this.txtCodeType.Text=model.CodeType;
 		this.txtQueryType.Text=model.QueryType;
 		this.txtQueryResult.Text=model.QueryResult;
+		this.chkIsDel.Checked=model.IsDel;
 
 	}
 
@@ -89,6 +90,7 @@ namespace RuRo.Web.QueryRecoder
 			string CodeType=this.txtCodeType.Text;
 			string QueryType=this.txtQueryType.Text;
 			string QueryResult=this.txtQueryResult.Text;
+			bool IsDel=this.chkIsDel.Checked;
 
 
 			RuRo.Model.QueryRecoder model=new RuRo.Model.QueryRecoder();
@@ -100,10 +102,11 @@ namespace RuRo.Web.QueryRecoder
 			model.CodeType=CodeType;
 			model.QueryType=QueryType;
 			model.QueryResult=QueryResult;
+			model.IsDel=IsDel;
 
 			RuRo.BLL.QueryRecoder bll=new RuRo.BLL.QueryRecoder();
 			bll.Update(model);
-			RuRo.Common.MessageBox.ShowAndRedirect(this,"保存成功！","list.aspx");
+			Maticsoft.Common.MessageBox.ShowAndRedirect(this,"保存成功！","list.aspx");
 
 		}
 

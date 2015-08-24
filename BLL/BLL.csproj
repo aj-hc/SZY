@@ -105,7 +105,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>G:\02.study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -124,21 +124,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmpiInfo.cs" />
-    <Compile Include="KF\EmpiInfo_BLL.cs" />
-    <Compile Include="KF\NormalLisReport_BLL.cs" />
-    <Compile Include="KF\PatientDiagnose_BLL.cs" />
-    <Compile Include="KF\QueryRecoder_BLL.cs" />
+    <Compile Include="FormToDic.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="QueryRecoder.cs" />
-    <Compile Include="SysManage.cs" />
     <Compile Include="SZY\Bll_ClinicalData.cs" />
     <Compile Include="SZY\EmpiInfo.cs" />
     <Compile Include="SZY\FpRelated\ImportDataToFp.cs" />
@@ -154,6 +148,7 @@
     <Compile Include="SZY\ValidationData.cs" />
     <Compile Include="SZY\Web References\BasicData\Reference.cs" />
     <Compile Include="SZY\Web References\ClinicalData\Reference.cs" />
+    <Compile Include="UnameAndPwd.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -163,6 +158,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{9FE00521-3A8B-42B1-814E-585E99407B2E}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FreezerProUtility\FreezerProUtility.csproj">
+      <Project>{8f8a2679-a4e7-4f84-8306-74c7bc8cd24c}</Project>
+      <Name>FreezerProUtility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{53995DBB-9836-4647-AD22-865884FDEB9E}</Project>

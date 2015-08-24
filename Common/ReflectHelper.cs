@@ -35,7 +35,7 @@ namespace RuRo.Common
             if (IsType(propertyInfo.PropertyType, "System.Int32"))
             {
                 if (fieldValue != "")
-                    propertyInfo.SetValue(entity,Convert.ToInt32(fieldValue), null);
+                    propertyInfo.SetValue(entity, Convert.ToInt32(fieldValue), null);
                 else
                     propertyInfo.SetValue(entity, 0, null);
 
@@ -127,5 +127,33 @@ namespace RuRo.Common
 
         }
 
+        public static Dictionary<string, string> ModelToDic(object obj)
+        {
+            Type tp = obj.GetType();
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            System.Reflection.PropertyInfo[] pros = tp.GetProperties();
+
+            foreach (var item in pros)
+            {
+                try
+                {
+                    if (dic.Keys.Contains(item.Name))
+                    {
+                        dic[item.Name] = Common.ReflectHelper.GetValue(obj, item.Name);
+                    }
+                    else
+                    {
+                        dic.Add(item.Name, Common.ReflectHelper.GetValue(obj, item.Name));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Common.LogHelper.WriteError(ex);
+                    continue;
+                }
+            }
+
+            return dic;
+        }
     }
 }

@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Text;
-using RuRo.Common;
+using Maticsoft.Common;
 using LTP.Accounts.Bus;
 namespace RuRo.Web.EmpiInfo
 {
@@ -37,7 +37,7 @@ namespace RuRo.Web.EmpiInfo
 		this.txtSex.Text=model.Sex;
 		this.txtBirthday.Text=model.Birthday;
 		this.txtCardId.Text=model.CardId;
-		this.chkisDel.Checked=model.isDel;
+		this.txtSourceType.Text=model.SourceType;
 
 	}
 
@@ -61,6 +61,10 @@ namespace RuRo.Web.EmpiInfo
 			{
 				strErr+="身份证号不能为空！\\n";	
 			}
+			if(this.txtSourceType.Text.Trim().Length==0)
+			{
+				strErr+="SourceType不能为空！\\n";	
+			}
 
 			if(strErr!="")
 			{
@@ -72,7 +76,7 @@ namespace RuRo.Web.EmpiInfo
 			string Sex=this.txtSex.Text;
 			string Birthday=this.txtBirthday.Text;
 			string CardId=this.txtCardId.Text;
-			bool isDel=this.chkisDel.Checked;
+			string SourceType=this.txtSourceType.Text;
 
 
 			RuRo.Model.EmpiInfo model=new RuRo.Model.EmpiInfo();
@@ -81,11 +85,11 @@ namespace RuRo.Web.EmpiInfo
 			model.Sex=Sex;
 			model.Birthday=Birthday;
 			model.CardId=CardId;
-			model.isDel=isDel;
+			model.SourceType=SourceType;
 
 			RuRo.BLL.EmpiInfo bll=new RuRo.BLL.EmpiInfo();
 			bll.Update(model);
-			RuRo.Common.MessageBox.ShowAndRedirect(this,"保存成功！","list.aspx");
+			Maticsoft.Common.MessageBox.ShowAndRedirect(this,"保存成功！","list.aspx");
 
 		}
 

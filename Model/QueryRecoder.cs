@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 namespace RuRo.Model
 {
 	/// <summary>
@@ -13,12 +12,13 @@ namespace RuRo.Model
 		#region Model
 		private int _id;
 		private string _uname;
-		private DateTime? _adddate;
+		private DateTime _adddate;
 		private DateTime? _lastquerydate;
 		private string _code;
 		private string _codetype;
 		private string _querytype;
 		private string _queryresult;
+		private bool _isdel;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -38,7 +38,7 @@ namespace RuRo.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? AddDate
+		public DateTime AddDate
 		{
 			set{ _adddate=value;}
 			get{return _adddate;}
@@ -82,6 +82,14 @@ namespace RuRo.Model
 		{
 			set{ _queryresult=value;}
 			get{return _queryresult;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsDel
+		{
+			set{ _isdel=value;}
+			get{return _isdel;}
 		}
 		#endregion Model
 

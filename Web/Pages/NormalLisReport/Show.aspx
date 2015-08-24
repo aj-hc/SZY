@@ -33,14 +33,14 @@
 		性别
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lblsex" runat="server"></asp:Label>
+		<asp:Label id="lblSex" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
 		年龄
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lblage" runat="server"></asp:Label>
+		<asp:Label id="lblAge" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
@@ -128,10 +128,10 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		isDel
+		IsDel
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lblisDel" runat="server"></asp:Label>
+		<asp:Label id="lblIsDel" runat="server"></asp:Label>
 	</td></tr>
 </table>
 

@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Text;
-using RuRo.Common;
+using Maticsoft.Common;
 using LTP.Accounts.Bus;
 namespace RuRo.Web.PatientDiagnose
 {
@@ -46,7 +46,7 @@ namespace RuRo.Web.PatientDiagnose
 		this.txtType.Text=model.Type;
 		this.txtFlag.Text=model.Flag;
 		this.txtDiagnoseDate.Text=model.DiagnoseDate;
-		this.chkisDel.Checked=model.isDel;
+		this.chkIsDel.Checked=model.IsDel;
 
 	}
 
@@ -126,7 +126,7 @@ namespace RuRo.Web.PatientDiagnose
 			string Type=this.txtType.Text;
 			string Flag=this.txtFlag.Text;
 			string DiagnoseDate=this.txtDiagnoseDate.Text;
-			bool isDel=this.chkisDel.Checked;
+			bool IsDel=this.chkIsDel.Checked;
 
 
 			RuRo.Model.PatientDiagnose model=new RuRo.Model.PatientDiagnose();
@@ -144,11 +144,11 @@ namespace RuRo.Web.PatientDiagnose
 			model.Type=Type;
 			model.Flag=Flag;
 			model.DiagnoseDate=DiagnoseDate;
-			model.isDel=isDel;
+			model.IsDel=IsDel;
 
 			RuRo.BLL.PatientDiagnose bll=new RuRo.BLL.PatientDiagnose();
 			bll.Update(model);
-			RuRo.Common.MessageBox.ShowAndRedirect(this,"保存成功！","list.aspx");
+			Maticsoft.Common.MessageBox.ShowAndRedirect(this,"保存成功！","list.aspx");
 
 		}
 

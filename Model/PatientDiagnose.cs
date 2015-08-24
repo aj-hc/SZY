@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 namespace RuRo.Model
 {
 	/// <summary>
@@ -110,7 +109,7 @@ namespace RuRo.Model
 		/// 诊断名称
 		/// </summary>
 		public string Diagnose
-		{
+        {
 			set{ _diagnose=value;}
 			get{return _diagnose;}
 		}
@@ -141,7 +140,7 @@ namespace RuRo.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public bool isDel
+		public bool IsDel
 		{
 			set{ _isdel=value;}
 			get{return _isdel;}

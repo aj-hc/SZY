@@ -1,20 +1,4 @@
-﻿/**  版本信息模板在安装目录下，可自行修改。
-* PatientDiagnose.cs
-*
-* 功 能： N/A
-* 类 名： PatientDiagnose
-*
-* Ver    变更日期             负责人  变更内容
-* ───────────────────────────────────
-* V0.01  2015/8/3 17:25:29   N/A    初版
-*
-* Copyright (c) 2012 Maticsoft Corporation. All rights reserved.
-*┌──────────────────────────────────┐
-*│　此技术信息为本公司机密信息，未经本公司书面同意禁止向第三方披露．　│
-*│　版权所有：动软卓越（北京）科技有限公司　　　　　　　　　　　　　　│
-*└──────────────────────────────────┘
-*/
-using System;
+﻿using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
@@ -61,9 +45,9 @@ namespace RuRo.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into PatientDiagnose(");
-			strSql.Append("id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,isDel)");
+			strSql.Append("id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,IsDel)");
 			strSql.Append(" values (");
-			strSql.Append("@id,@Cardno,@Csrq00,@PatientName,@Sex,@Brithday,@CardId,@Tel,@RegisterNo,@Icd,@Diagnose,@Type,@Flag,@DiagnoseDate,@isDel)");
+			strSql.Append("@id,@Cardno,@Csrq00,@PatientName,@Sex,@Brithday,@CardId,@Tel,@RegisterNo,@Icd,@Diagnose,@Type,@Flag,@DiagnoseDate,@IsDel)");
 			SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4),
 					new SqlParameter("@Cardno", SqlDbType.NVarChar,50),
@@ -79,7 +63,7 @@ namespace RuRo.DAL
 					new SqlParameter("@Type", SqlDbType.NVarChar,50),
 					new SqlParameter("@Flag", SqlDbType.NVarChar,50),
 					new SqlParameter("@DiagnoseDate", SqlDbType.NVarChar,50),
-					new SqlParameter("@isDel", SqlDbType.Bit,1)};
+					new SqlParameter("@IsDel", SqlDbType.Bit,1)};
 			parameters[0].Value = model.id;
 			parameters[1].Value = model.Cardno;
 			parameters[2].Value = model.Csrq00;
@@ -94,7 +78,7 @@ namespace RuRo.DAL
 			parameters[11].Value = model.Type;
 			parameters[12].Value = model.Flag;
 			parameters[13].Value = model.DiagnoseDate;
-			parameters[14].Value = model.isDel;
+			parameters[14].Value = model.IsDel;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -126,7 +110,7 @@ namespace RuRo.DAL
 			strSql.Append("Type=@Type,");
 			strSql.Append("Flag=@Flag,");
 			strSql.Append("DiagnoseDate=@DiagnoseDate,");
-			strSql.Append("isDel=@isDel");
+			strSql.Append("IsDel=@IsDel");
 			strSql.Append(" where id=@id ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Cardno", SqlDbType.NVarChar,50),
@@ -142,7 +126,7 @@ namespace RuRo.DAL
 					new SqlParameter("@Type", SqlDbType.NVarChar,50),
 					new SqlParameter("@Flag", SqlDbType.NVarChar,50),
 					new SqlParameter("@DiagnoseDate", SqlDbType.NVarChar,50),
-					new SqlParameter("@isDel", SqlDbType.Bit,1),
+					new SqlParameter("@IsDel", SqlDbType.Bit,1),
 					new SqlParameter("@id", SqlDbType.Int,4)};
 			parameters[0].Value = model.Cardno;
 			parameters[1].Value = model.Csrq00;
@@ -157,7 +141,7 @@ namespace RuRo.DAL
 			parameters[10].Value = model.Type;
 			parameters[11].Value = model.Flag;
 			parameters[12].Value = model.DiagnoseDate;
-			parameters[13].Value = model.isDel;
+			parameters[13].Value = model.IsDel;
 			parameters[14].Value = model.id;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
@@ -221,7 +205,7 @@ namespace RuRo.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,isDel from PatientDiagnose ");
+			strSql.Append("select  top 1 id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,IsDel from PatientDiagnose ");
 			strSql.Append(" where id=@id ");
 			SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)			};
@@ -304,15 +288,15 @@ namespace RuRo.DAL
 				{
 					model.DiagnoseDate=row["DiagnoseDate"].ToString();
 				}
-				if(row["isDel"]!=null && row["isDel"].ToString()!="")
+				if(row["IsDel"]!=null && row["IsDel"].ToString()!="")
 				{
-					if((row["isDel"].ToString()=="1")||(row["isDel"].ToString().ToLower()=="true"))
+					if((row["IsDel"].ToString()=="1")||(row["IsDel"].ToString().ToLower()=="true"))
 					{
-						model.isDel=true;
+						model.IsDel=true;
 					}
 					else
 					{
-						model.isDel=false;
+						model.IsDel=false;
 					}
 				}
 			}
@@ -325,7 +309,7 @@ namespace RuRo.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,isDel ");
+			strSql.Append("select id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,IsDel ");
 			strSql.Append(" FROM PatientDiagnose ");
 			if(strWhere.Trim()!="")
 			{
@@ -345,7 +329,7 @@ namespace RuRo.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,isDel ");
+			strSql.Append(" id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,IsDel ");
 			strSql.Append(" FROM PatientDiagnose ");
 			if(strWhere.Trim()!="")
 			{

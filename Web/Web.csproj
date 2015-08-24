@@ -24,6 +24,9 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +48,14 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LTP.Accounts, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\LTP.Accounts.dll</HintPath>
@@ -60,8 +71,21 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.98.1\lib\net40\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.98.1\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.98.1\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.DynamicData" />
@@ -615,7 +639,6 @@
     <Content Include="include\jquery-easyui-1.4.3\themes\metro\window.css" />
     <Content Include="include\jquery-easyui-1.4.3\themes\mobile.css" />
     <Content Include="include\js\BindFuncToId.js" />
-    <Content Include="include\js\DateFmt.js" />
     <Content Include="include\js\default.js" />
     <Content Include="include\js\DgGRUD.js" />
     <Content Include="include\js\jquery.cookie.js" />
@@ -626,25 +649,10 @@
     <Content Include="Global.asax" />
     <Content Include="js\calendar1.js" />
     <Content Include="js\CheckBox.js" />
-    <Content Include="Pages\EmpiInfo\Add.aspx" />
-    <Content Include="Pages\EmpiInfo\List.aspx" />
-    <Content Include="Pages\EmpiInfo\Modify.aspx" />
-    <Content Include="Pages\EmpiInfo\Show.aspx" />
-    <Content Include="Pages\NormalLisReport\Add.aspx" />
-    <Content Include="Pages\NormalLisReport\List.aspx" />
-    <Content Include="Pages\NormalLisReport\Modify.aspx" />
-    <Content Include="Pages\NormalLisReport\Show.aspx" />
+    <Content Include="Pages\EmpiInfo_info.aspx" />
     <Content Include="Pages\NormalLisReport_list.aspx" />
-    <Content Include="Pages\PatientDiagnose\Add.aspx" />
-    <Content Include="Pages\PatientDiagnose\List.aspx" />
-    <Content Include="Pages\PatientDiagnose\Modify.aspx" />
-    <Content Include="Pages\PatientDiagnose\Show.aspx" />
-    <Content Include="Pages\PatientDiagnose.aspx" />
-    <Content Include="Pages\PatientDiagnose_list.aspx" />
-    <Content Include="Pages\QueryRecoder\Add.aspx" />
-    <Content Include="Pages\QueryRecoder\List.aspx" />
-    <Content Include="Pages\QueryRecoder\Modify.aspx" />
-    <Content Include="Pages\QueryRecoder\Show.aspx" />
+    <Content Include="Pages\PatientDiagnose_info.aspx" />
+    <Content Include="Pages\QueryRecoder_list.aspx" />
     <Content Include="Pages\SampleInfo.html" />
     <Content Include="SZY\configXML\MatchFieldsWithClinicalData.xml">
       <SubType>Designer</SubType>
@@ -1018,7 +1026,6 @@
     <Content Include="SZY\include\js\default.js" />
     <Content Include="SZY\TestData.aspx" />
     <Content Include="SZY\TestXmlData.aspx" />
-    <Content Include="Test\WebForm1.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1081,61 +1088,12 @@
     <Compile Include="MasterPage.master.designer.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EmpiInfo\Add.aspx.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
+    <Compile Include="Pages\EmpiInfo_info.aspx.cs">
+      <DependentUpon>EmpiInfo_info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\EmpiInfo\Add.aspx.designer.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo\List.aspx.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo\List.aspx.designer.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo\Modify.aspx.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo\Modify.aspx.designer.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo\Show.aspx.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo\Show.aspx.designer.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\Add.aspx.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\Add.aspx.designer.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\List.aspx.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\List.aspx.designer.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\Modify.aspx.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\Modify.aspx.designer.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\Show.aspx.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\NormalLisReport\Show.aspx.designer.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
+    <Compile Include="Pages\EmpiInfo_info.aspx.designer.cs">
+      <DependentUpon>EmpiInfo_info.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\NormalLisReport_list.aspx.cs">
       <DependentUpon>NormalLisReport_list.aspx</DependentUpon>
@@ -1144,78 +1102,21 @@
     <Compile Include="Pages\NormalLisReport_list.aspx.designer.cs">
       <DependentUpon>NormalLisReport_list.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PatientDiagnose\Add.aspx.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
+    <Compile Include="Pages\PatientDiagnose_info.aspx.cs">
+      <DependentUpon>PatientDiagnose_info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\PatientDiagnose\Add.aspx.designer.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
+    <Compile Include="Pages\PatientDiagnose_info.aspx.designer.cs">
+      <DependentUpon>PatientDiagnose_info.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PatientDiagnose\List.aspx.cs">
-      <DependentUpon>List.aspx</DependentUpon>
+    <Compile Include="Pages\QueryRecoder_list.aspx.cs">
+      <DependentUpon>QueryRecoder_list.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\PatientDiagnose\List.aspx.designer.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose\Modify.aspx.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose\Modify.aspx.designer.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose\Show.aspx.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose\Show.aspx.designer.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose.aspx.cs">
-      <DependentUpon>PatientDiagnose.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose.aspx.designer.cs">
-      <DependentUpon>PatientDiagnose.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose_list.aspx.cs">
-      <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose_list.aspx.designer.cs">
-      <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\Add.aspx.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\Add.aspx.designer.cs">
-      <DependentUpon>Add.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\List.aspx.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\List.aspx.designer.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\Modify.aspx.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\Modify.aspx.designer.cs">
-      <DependentUpon>Modify.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\Show.aspx.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\QueryRecoder\Show.aspx.designer.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
+    <Compile Include="Pages\QueryRecoder_list.aspx.designer.cs">
+      <DependentUpon>QueryRecoder_list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sever\ReturnData.cs" />
     <Compile Include="Sever\EmpiInfo.ashx.cs">
       <DependentUpon>EmpiInfo.ashx</DependentUpon>
     </Compile>
@@ -1254,13 +1155,6 @@
     </Compile>
     <Compile Include="SZY\TestXmlData.aspx.designer.cs">
       <DependentUpon>TestXmlData.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="ValidateCode.aspx.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>
@@ -1306,6 +1200,10 @@
     <Folder Include="Components\" />
     <Folder Include="Error\AppError\" />
     <Folder Include="Error\AppExError\" />
+    <Folder Include="Pages\EmpiInfo\" />
+    <Folder Include="Pages\NormalLisReport\" />
+    <Folder Include="Pages\PatientDiagnose\" />
+    <Folder Include="Pages\QueryRecoder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="include\JSON\Employee.json" />
@@ -1329,6 +1227,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sever\PatientDiagnose.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1363,4 +1264,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets'))" />
+  </Target>
 </Project>

@@ -45,10 +45,7 @@ namespace RuRo.Web.PatientDiagnose
 		this.lblType.Text=model.Type;
 		this.lblFlag.Text=model.Flag;
 		this.lblDiagnoseDate.Text=model.DiagnoseDate;
-		this.lblisDel.Text=model.isDel?"是":"否";
-
+		this.lblIsDel.Text=model.IsDel?"是":"否";
 	}
-
-
     }
 }

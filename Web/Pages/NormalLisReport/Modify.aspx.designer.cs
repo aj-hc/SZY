@@ -20,8 +20,8 @@ namespace RuRo.Web.NormalLisReport {
         	protected global::System.Web.UI.WebControls.Label lblId;
 		protected global::System.Web.UI.WebControls.TextBox txthospnum;
 		protected global::System.Web.UI.WebControls.TextBox txtpatname;
-		protected global::System.Web.UI.WebControls.TextBox txtsex;
-		protected global::System.Web.UI.WebControls.TextBox txtage;
+		protected global::System.Web.UI.WebControls.TextBox txtSex;
+		protected global::System.Web.UI.WebControls.TextBox txtAge;
 		protected global::System.Web.UI.WebControls.TextBox txtage_month;
 		protected global::System.Web.UI.WebControls.TextBox txtext_mthd;
 		protected global::System.Web.UI.WebControls.TextBox txtchinese;
@@ -34,7 +34,7 @@ namespace RuRo.Web.NormalLisReport {
 		protected global::System.Web.UI.WebControls.TextBox txtcheck_date;
 		protected global::System.Web.UI.WebControls.TextBox txtcheck_by_name;
 		protected global::System.Web.UI.WebControls.TextBox txtprnt_order;
-		protected global::System.Web.UI.WebControls.CheckBox chkisDel;
+		protected global::System.Web.UI.WebControls.CheckBox chkIsDel;
 	protected global::System.Web.UI.WebControls.Button btnSave;
 	protected global::System.Web.UI.WebControls.Button btnCancel;
 

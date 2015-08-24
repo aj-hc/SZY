@@ -120,18 +120,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DiagnoseInfoModel.cs" />
+    <Compile Include="DTO\EmpiInfoRequest.cs" />
+    <Compile Include="DTO\JsonModel.cs" />
+    <Compile Include="DTO\NormalLisReportRequest.cs" />
+    <Compile Include="DTO\PatientDiagnoseResuest.cs" />
+    <Compile Include="DTO\Request.cs" />
     <Compile Include="EmpiInfo.cs" />
-    <Compile Include="KF\EmpiInfo.cs" />
-    <Compile Include="KF\NormalLisReport.cs" />
-    <Compile Include="KF\PatientDiagnose.cs" />
-    <Compile Include="KF\QueryRecoder.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="QueryRecoder.cs" />
-    <Compile Include="SysNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -160,6 +161,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

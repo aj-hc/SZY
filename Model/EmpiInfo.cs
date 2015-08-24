@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 namespace RuRo.Model
 {
 	/// <summary>
@@ -16,7 +15,7 @@ namespace RuRo.Model
 		private string _sex;
 		private string _birthday;
 		private string _cardid;
-		private bool _isdel;
+		private string _sourcetype;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -60,10 +59,10 @@ namespace RuRo.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public bool isDel
+		public string SourceType
 		{
-			set{ _isdel=value;}
-			get{return _isdel;}
+			set{ _sourcetype=value;}
+			get{return _sourcetype;}
 		}
 		#endregion Model
 
