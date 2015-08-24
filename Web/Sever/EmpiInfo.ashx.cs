@@ -50,6 +50,8 @@ namespace RuRo.Web.Sever
             string codeType = context.Request.Params["codeType"];
             BLL.EmpiInfo bll = new BLL.EmpiInfo();
             string result = bll.PostData(empiInfo,code, codeType);
+            context.Response.Write(result);
+
         }
 
         private void QueryData(HttpContext context, bool p)
