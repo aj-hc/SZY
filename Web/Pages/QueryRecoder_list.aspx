@@ -26,169 +26,51 @@
     <thead>    
 			<tr>
 			    <th field="ck" checkbox="true"></th>
-                <th field="Id" width="100" sortable="true">id</th>
+                <th field="Id"  sortable="true" hidden="true">id</th>
                 <th field="Uname" width="100" sortable="true">查询的用户</th>
-                <th field="Adddate" width="100" sortable="true">adddate</th>
+                <th field="Adddate" width="100" sortable="true">添加时间</th>
                 <th field="Lastquerydate" width="100" sortable="true">最后一次查询日期</th>
                 <th field="Code" width="100" sortable="true">查询的条码号</th>
                 <th field="Codetype" width="100" sortable="true">条码号类型</th>
                 <th field="Querytype" width="100" sortable="true">查询的数据类型</th>
                 <th field="Queryresult" width="100" sortable="true">查询结果</th>
-                <th field="Isdel" width="100" sortable="true">isdel</th>
+                <th field="Isdel" width="100" sortable="true" hidden="true">isdel</th>
             </tr>
     </thead>
 </table>
 
 <!--toolbar栏，用于datagrid的toolbar自定义内容--> 
-<div id="toolbar">
-<table style="width:100%;">
-<tr>
-    <td>
-        <!--查询输入栏--> 
-        <table>
+    <!--toolbar栏，用于datagrid的toolbar自定义内容-->
+    <div id="toolbarN">
+        <table style="width: 100%;">
             <tr>
-               <!--Page数据选择模式-->  
-                <td><select onchange="$('#datagrid').datagrid({singleSelect:(this.value==0)})"><option value="0">单选模式</option><option value="1">多选模式</option></select></td>
-
-                <!--查询控件-->
-                <td>
-                    <!--
-                    编码字段<input id="so_字段名称"  class="easyui-combobox" panelHeight="auto"  data-options="valueField:'编码表对应code字段名',textField:'编码表对应name字段名', url:'/common/codeDataHandler.ashx?tabName=编码表名'"/>
-                    <input id="date"     class="easyui-datebox" type="text" />
-                    -->
+                <!--button按钮工具栏-->
+                <td style="text-align: right;">
+                    <%--<a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonInfo" iconCls="icon-search" plain="false" onclick="infoForm();">查看</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonAdd" iconCls="icon-add" plain="false" onclick="newForm();">添加</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonEdit" iconCls="icon-edit" plain="false" onclick="editForm();">编辑</a>--%>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonDel" iconcls="icon-cancel" plain="false" onclick="destroy();">删除</a>
                 </td>
-                <!--检索关键字-->
-                <td><input id="so_keywords"  class="easyui-searchbox" data-options="prompt:'请输入查询关键字',searcher:searchData" ></input></td>
             </tr>
-        </table> 
-    </td>
-    <!--button按钮工具栏--> 
-    <td  style="text-align:right;">
-        <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonInfo" iconCls="icon-search" plain="false" onclick="infoForm();">查看</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonAdd" iconCls="icon-add" plain="false" onclick="newForm();">添加</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonEdit" iconCls="icon-edit" plain="false" onclick="editForm();">编辑</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonDel" iconCls="icon-cancel" plain="false" onclick="destroy();">删除</a>
-    </td>
-</tr>
-</table>  
-</div>
+        </table>
+    </div>
 
-<!--diaglog窗口，用于编辑数据--> 
-<div id="dlg"  class="easyui-dialog" closed="true"></div>
+    <div id="footer" style="padding: 5px; margin: 10px" data-options="region:'south',">
+        <a href="javascript:void(0)" class="easyui-linkbutton" id="submit" style="width: auto" onclick="postPatientInfo()">导入信息</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancleSubmit" style="width: auto" onclick="CloseWebPage()">取消导入</a>
+    </div>
 
 <script type="text/javascript">
-	var url;
-	/*新增表单*/
-	function newForm(){
-		$('#dlg').dialog({    
-            title: 'QueryRecoder-添加数据',    
-            width: 650, 
-            height: 450,    
-            closed: false,  
-            cache: false,    
-            href: 'QueryRecoder_info.aspx?mode=ins'
-        });     
-	}
-
-	/*查看数据*/
-	function infoForm(){
-	    var rows = $('#QueryRecoderDg').datagrid('getSelections');
-	    if(rows.length>0){
-	       if(rows.length==1){
-	           var row = $('#QueryRecoderDg').datagrid('getSelected');
-				$('#dlg').dialog({    
-                    title: 'QueryRecoder-查看数据',    
-                    width: 650,    
-                    height: 450,    
-                    closed: false,    
-                    cache: true,    
-                    href: 'QueryRecoder_info.aspx?mode=inf&pk='+ row.id
-                });     
-			}else{ 
-				$.messager.alert('警告', '查看操作只能选择一条数据', 'warning'); 
-			}  
-	    }else{
-	         $.messager.alert('警告', '请选择数据', 'warning');
-	    }
-	}
-
-	/*修改数据*/
-	function editForm(){
-		var rows = $('#datagrid').datagrid('getSelections');
-	    if(rows.length>0){
-	       if(rows.length==1){
-				var row = $('#datagrid').datagrid('getSelected');
-				$('#dlg').dialog({    
-                    title: 'QueryRecoder-修改数据',    
-                    width: 650,    
-                    height: 450,    
-                    closed: false,    
-                    cache: true,    
-                    href: 'QueryRecoder_info.aspx?mode=upd&pk='+ row.id
-                });     
-			}else{ 
-				$.messager.alert('警告', '修改操作只能选择一条数据', 'warning'); 
-			}  
-	    }else{
-	         $.messager.alert('警告', '请选择数据', 'warning');
-	    }
-	}
-
 	/*删除选择数据,多条记录PK主键参数用逗号,分开*/
-	function destroy(){
-		var rows = $('#datagrid').datagrid('getSelections');
-		if(rows.length>0){ 
-				var pkSelect="";
-				for(var i=0;i<rows.length;i++){
-					row = rows[i];
-					if(i==0){
-						pkSelect+= row.id;
-					}else{
-						pkSelect+=','+row.id;
-					}
-				}
-				$.messager.confirm('提示','是否确认删除数据？',function(r){
-				if (r){
-						$.post('QueryRecoder_handler.ashx?mode=del&pk='+pkSelect,function(result){
-							if (result.success){
-								$.messager.alert('提示', result.msg, 'info',function(){
-									$('#datagrid').datagrid('reload');    //重新加载载数据
-								}); 
-							} else {
-								$.messager.alert('错误', result.msg, 'warning');
-							}
-						},'json');
-					}
-				}); 
-		}else{
-			 $.messager.alert('警告', '请选择数据', 'warning');
-		}
-	}
-
-	/*查询条件参数构建*/
-	function getSearchParm(){
-		//增加条件，请追加参数名称
-		/*combobox值获取方法,用于下拉条件查询条件组合*/
-		//var v_so_字段名称 = $('#so_字段名称').combobox('getValue');
-		var v_parm
-		var v_so_keywords = $('#so_keywords').searchbox('getValue');
-		v_parm = 'so_keywords='+escape(v_so_keywords);
-		return v_parm;
-	}
-
-	/*查询数据*/
-	function searchData(){
-		/*兼顾导出Excel公用条件，在这里datagrid不用load函数加载参数，直接用URL传递参数*/
-		var Parm = getSearchParm();//获得查询条件参数构建，用URL传递查询参数
-		var QryUrl='QueryRecoder_handler.ashx?mode=qry&'+Parm; 
-		$('#datagrid').datagrid({url:QryUrl});
-	}
-
-    ///*关闭dialog重新加载datagrid数据*/
-    //$('#dlg').dialog({onClose:function(){ 
-    //    $('#datagrid').datagrid('reload'); //重新加载载数据
-    //}});
-
+    function destroy() {
+        var $QueryRecoderDg = $('#QueryRecoderDg');
+        var row = $('#QueryRecoderDg').datagrid('getSelections');
+        for (var i = 0; i < row.length; i++) {
+            var rowIndex = $QueryRecoderDg.datagrid('getRowIndex', row[i]);
+            $QueryRecoderDg.datagrid('deleteRow', rowIndex);
+        }
+        $("#QueryRecoderDg").datagrid("clearSelections");
+    }
 </script>
 
 </body>

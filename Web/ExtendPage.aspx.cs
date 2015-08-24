@@ -40,7 +40,7 @@ namespace RuRo.Web
                 //{
                 //    lakeshi.Text = keshi + "/" + username;
                 //}
-                lakeshi.Text = username;
+               // lakeshi.Text = username;
             }
         }
     }

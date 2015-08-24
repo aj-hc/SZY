@@ -67,9 +67,6 @@
 <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
 
     <form id="Form1" method="post" runat="server">
-        <div id="mianlogo" style="width: 20%; height: 40px; position: absolute; top: 110px; left: 190px;">
-            <img src="../Images/szy_Logo.jpg" style="width: 190px; height: 40px; z-index: 100"/>
-        </div>
         <br/>
         <br/>
         <br/>
@@ -86,7 +83,7 @@
                     <td align="center" background="Images/Images/login_p_img03.gif">
                         <br/>
                         <table width="570" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
+<%--                            <tr>
                                 <td>
                                     <table cellspacing="0" cellpadding="0" width="570" border="0">
                                         <tbody>
@@ -96,8 +93,9 @@
                                         </tbody>
                                     </table>
                                 </td>
-                            </tr>
+                            </tr>--%>
                             <tr>
+                                <img src="../Images/szy_Logo.jpg" style="width: 380px; height: 50px; z-index: 100;float:left; padding-left:40px"></img>
                                 <td>
                                     <img src="Images/Images/a_te01.gif" width="570" height="3">
                                 </td>

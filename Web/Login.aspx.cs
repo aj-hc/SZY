@@ -83,7 +83,8 @@ namespace RuRo.Web
                 LoginOut();
                 //重写cookie
                 WriteCookie(userName, passWord);
-                Response.Redirect("ExtendPage.aspx");
+               // Response.Redirect("ExtendPage.aspx");
+                Response.Redirect("index.aspx");
             }
             else
             {
