@@ -34,10 +34,21 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
+                    case "post":/*提交*/
+                        PostData(context);
+                        break;
                 }
             }
             else
                 QueryData(context, true);
+        }
+        private void PostData(HttpContext context)
+        {
+            string empiInfo = context.Request.Params["formData"];
+            string code = context.Request.Params["code"];
+            string codeType = context.Request.Params["codeType"];
+            BLL.PatientDiagnose bll = new BLL.PatientDiagnose();
+            string result = bll.PostData(empiInfo, code, codeType);
         }
 
         private void QueryData(HttpContext context, bool p)

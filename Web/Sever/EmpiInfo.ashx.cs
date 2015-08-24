@@ -34,7 +34,7 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
-                    case "post":/*查询*/
+                    case "post":/*提交*/
                         PostData(context);
                         break;
                 }

@@ -72,15 +72,14 @@ namespace RuRo.BLL
         private Dictionary<string, string> GetBaseInfoDic(string formStr)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            string baseinfo = formStr;
             //基本信息对象
             Model.EmpiInfo empiInfo = new Model.EmpiInfo();
 
-            if (!string.IsNullOrEmpty(baseinfo) && baseinfo != "[]")
+            if (!string.IsNullOrEmpty(formStr) && formStr != "[]")
             {
                 //转换页面上的baseinfo为对象
                 List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
-                dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(baseinfo);
+                dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(formStr);
                 empiInfo = FormToDic.GetFromInfo<Model.EmpiInfo>(dicList);
                 dic = FormToDic.ConvertBaseInfoObjToDic(empiInfo);
             }
@@ -94,6 +93,7 @@ namespace RuRo.BLL
             string result = FreezerProUtility.Fp_BLL.SampleSocrce.ImportSampleSourceDataToFp(up.GetUp(), "患者信息", dic);
             return result;
         }
+
         #region 获取数据
         /// <summary>
         /// 获取数据
