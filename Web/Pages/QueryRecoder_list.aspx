@@ -8,22 +8,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="head">
 <title>QueryRecoder</title>
-    <link rel="stylesheet" type="text/css" href="/js/easyui/themes/default/easyui.css" />
-	<link rel="stylesheet" type="text/css" href="/js/easyui/themes/icon.css" />
-	<script type="text/javascript" src="/js/easyui/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="/js/easyui/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="/js/gridPrint.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/kfmis.css"/>
+    <link href="../include/jquery-easyui-1.4.3/themes/default/easyui.css" rel="stylesheet" />
+    <link href="../include/jquery-easyui-1.4.3/themes/icon.css" rel="stylesheet" />
+    <script src="../include/jquery-easyui-1.4.3/jquery.min.js"></script>
+    <script src="../include/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
+    <script src="../include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+    <link href="../include/css/kfmis.css" rel="stylesheet" />
 </head>
 <body>
 <!--datagrid栏--> 
-<table id="datagrid" title="QueryRecoder" class="easyui-datagrid" style="width:auto;height:460px"
-             url="QueryRecoder_handler.ashx?mode=qry" fit='false'
-             pagination="true" idField="id" rownumbers="true" 
-             fitColumns="true"  singleSelect="true" toolbar="#toolbar"
-             striped="false" pageList="[15,30,50,100,500]"
-             SelectOnCheck="true" CheckOnSelect="true" remoteSort="true">
+<table id="QueryRecoderDg" title="批量导入" class="easyui-datagrid" style="width:auto;height:460px"
+            url="" fit='false'
+            pagination="false" rownumbers="true"
+            fitcolumns="true" singleselect="false" toolbar="#toolbarN"
+            striped="false"
+            selectoncheck="true" checkonselect="true" remotesort="true">
     <thead>    
 			<tr>
 			    <th field="ck" checkbox="true"></th>
@@ -93,10 +92,10 @@
 
 	/*查看数据*/
 	function infoForm(){
-		var rows = $('#datagrid').datagrid('getSelections');
+	    var rows = $('#QueryRecoderDg').datagrid('getSelections');
 	    if(rows.length>0){
 	       if(rows.length==1){
-				var row = $('#datagrid').datagrid('getSelected');
+	           var row = $('#QueryRecoderDg').datagrid('getSelected');
 				$('#dlg').dialog({    
                     title: 'QueryRecoder-查看数据',    
                     width: 650,    
@@ -185,10 +184,10 @@
 		$('#datagrid').datagrid({url:QryUrl});
 	}
 
-    /*关闭dialog重新加载datagrid数据*/
-    $('#dlg').dialog({onClose:function(){ 
-        $('#datagrid').datagrid('reload'); //重新加载载数据
-    }});
+    ///*关闭dialog重新加载datagrid数据*/
+    //$('#dlg').dialog({onClose:function(){ 
+    //    $('#datagrid').datagrid('reload'); //重新加载载数据
+    //}});
 
 </script>
 
