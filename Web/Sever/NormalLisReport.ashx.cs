@@ -65,8 +65,8 @@ namespace RuRo.Web.Sever
                 //查询数据
                 //string Mzzybz = context.Request["Mzzybz"];//0 门诊 1住院
                 string code = context.Request.Params["code"];//住院号或门诊号
-                string dateNow = context.Request.Params["dateNow"];
                 string codeType = context.Request.Params["codeType"];
+                string dateNow = context.Request.Params["dateNow"];
                 Model.DTO.NormalLisReportRequest request = new Model.DTO.NormalLisReportRequest(code,dateNow);
                 BLL.NormalLisReport normalLisReport = new BLL.NormalLisReport();
                 //bool success;

@@ -32,7 +32,7 @@ namespace RuRo.BLL
             if (!string.IsNullOrEmpty(Msg))
             {
                 //保存记录--无数据
-                bool b = SaveQueryRecord(request, Msg, codeType);
+                bool bb = SaveQueryRecord(request, Msg, codeType);
             }
             else
             {
@@ -2222,14 +2222,12 @@ namespace RuRo.BLL
                 }
                 //本地数据库有数据
                 result = queryRecoder.Update(model);
-
             }
             else
             {
                 model.AddDate = DateTime.Now;
                 model.LastQueryDate = DateTime.Now;
                 result = queryRecoder.Add(model) > 0;
-
             }
             return result;
         }

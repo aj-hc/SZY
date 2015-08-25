@@ -63,9 +63,8 @@ namespace RuRo.Web.Sever
                 //string Mzzybz = context.Request["Mzzybz"];//0 门诊 1住院
                 string cardno = context.Request["code"];//住院号或门诊号
                 string cxrq00 = context.Request["cxrq00"];
+                string dateNow = context.Request.Params["dateNow"];
                 BLL.PatientDiagnose n = new BLL.PatientDiagnose();
-                //object obj = n.GetData(code, cxrq00,out success);
-                //ReturnData resd = new ReturnData(obj,success);
                 string jsonStrResult = n.GetSampleSourceData(new Model.DTO.PatientDiagnoseResuest(cardno,cxrq00));
                context.Response.Write(jsonStrResult);
             }

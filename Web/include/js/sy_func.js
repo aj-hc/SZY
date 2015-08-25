@@ -85,6 +85,7 @@ function GetNormalLisReportInfo() {
     //  <jsrq00></jsrq00>
     //</Request>
     var code = $('#oldCode').textbox('getValue');
+    var codeType = $('#oldCodeType').combobox('getValue');
     if (code) {
         //开始查询日期为当前日期前五天
         //结束日期为当前日期后一天
@@ -95,6 +96,7 @@ function GetNormalLisReportInfo() {
             data: {
                 "mode": "qry",
                 "code": code,
+                "codeType":codeType,
                 "dateNow": dateNow
             },
             success: function (data) {
@@ -123,6 +125,7 @@ function GetPatientDiagnoseInfo() {
     //  <cxrq00></cxrq00>
     //</Request>
     var code = $('#oldCode').textbox('getValue');
+    var codeType = $('#oldCodeType').combobox('getValue');
     if (code) {
         var dateNow = AddDays(new Date(), 0);
         $.ajax({
@@ -131,6 +134,7 @@ function GetPatientDiagnoseInfo() {
             data: {
                 "mode": "qry",
                 "code": code,
+                "codeType": codeType,
                 "dateNow": dateNow
             },
             success: function (data) {
