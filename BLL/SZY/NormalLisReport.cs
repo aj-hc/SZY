@@ -17,10 +17,12 @@ namespace RuRo.BLL
         /// 前台调用方法
         /// </summary>
         /// <returns></returns>
-        public string GetSampleSourceData(Model.DTO.NormalLisReportRequest request, string codeType)
+        public string GetData(Model.DTO.NormalLisReportRequest request, string codeType)
         {
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel();
             this.request = request;
+            //保存记录（查询记录数据）
+            bool b = SaveQueryRecord(request, "", codeType);
             //调用接口获取数据
             string xmlStr = GetData(request);
             string Msg = "";
@@ -29,13 +31,13 @@ namespace RuRo.BLL
             //此处保存查询记录
             if (!string.IsNullOrEmpty(Msg))
             {
-              //保存记录--无数据
-              bool b= SaveQueryRecord(request, Msg, codeType);
+                //保存记录--无数据
+                bool b = SaveQueryRecord(request, Msg, codeType);
             }
             else
             {
 
-            }  
+            }
             if (!string.IsNullOrEmpty(xmlStr))
             {
                 jsonmodel = StrTObject(xmlStr);
@@ -47,13 +49,13 @@ namespace RuRo.BLL
             return JsonConvert.SerializeObject(jsonmodel);
         }
 
-        public string PostData(string dataStr, string codeType)
+        public string PostData(string code, string codeType, string dataStr)
         {
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
             List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList, codeType);
             //判断该条数据数据库中是否存在
             //不存在就添加
-            //
+
             return "";
         }
 
@@ -2190,29 +2192,43 @@ namespace RuRo.BLL
         {
             bool result;
             QueryRecoder queryRecoder = new QueryRecoder();
+            //根据传入的查询字符串创建的当此查询的记录model
             Model.QueryRecoder model = new Model.QueryRecoder();
 
-            model.AddDate = DateTime.Now;
+            //model.AddDate = DateTime.Now;
             model.Code = request.hospnum;
             model.CodeType = codeType;
-            model.IsDel = false;
             model.QueryResult = Msg;
             model.QueryType = "NormalLisReport";
             model.Uname = Common.CookieHelper.GetCookieValue("username");
 
             List<Model.QueryRecoder> list = CheckQueryRecord(model);
-            if (list.Count>0)
+            if (list.Count > 0)
             {
-                model.AddDate = list.FirstOrDefault().AddDate;
-                model.LastQueryDate = DateTime.Now;
+               //判断查询出来的数据是否满足要求（时间差距lastdate<dateNow-5）
+                Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
+
+                if (oldModel.AddDate<DateTime.Now.AddDays(-6))
+                {
+                    //添加日期是5天前的
+                    model.IsDel = true;
+                }
+                else
+                {
+                    //添加日期是距离当前日期是5天内的
+                    //更改最后查询时间为今天
+                    model.IsDel = false;
+                    model.LastQueryDate = DateTime.Now;
+                }
                 //本地数据库有数据
-                result = queryRecoder.Update(model); 
+                result = queryRecoder.Update(model);
 
             }
             else
             {
+                model.AddDate = DateTime.Now;
                 model.LastQueryDate = DateTime.Now;
-                result= queryRecoder.Add(model)>0;
+                result = queryRecoder.Add(model) > 0;
 
             }
             return result;
@@ -2223,14 +2239,14 @@ namespace RuRo.BLL
             QueryRecoder queryRecoder = new QueryRecoder();
             //查询本地数据库有没有数据
             StringBuilder strWhere = new StringBuilder();
+            strWhere.AppendFormat("Uname = {0} and", model.Uname);
             strWhere.AppendFormat("Code = {0} and", model.Code);
             strWhere.AppendFormat("CodeType = {0} and", model.CodeType);
             strWhere.AppendFormat("IsDel = {0} and", model.IsDel);
-            strWhere.AppendFormat("Uname = {0} and", model.Uname);
             strWhere.AppendFormat("QueryType = {0}", model.QueryType);
 
-            queryRecoder.GetModelList(strWhere.ToString());
-            return new List<Model.QueryRecoder>();
+            //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
+            return queryRecoder.GetModelList(strWhere.ToString());
         }
     }
 }

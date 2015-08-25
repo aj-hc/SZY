@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FreezerProUtility.Fp_BLL
 {
@@ -17,12 +18,34 @@ namespace FreezerProUtility.Fp_BLL
         public static string ImportTestData(Fp_Common.UnameAndPwd up, string test_data_type, Dictionary<string, string> dataDic)
         {
             string result = string.Empty;
-            string jsonDic = Fp_Common.FpJsonHelper.DictionaryToJsonString(dataDic); ;
+            //string jsonDic = Fp_Common.FpJsonHelper.DictionaryToJsonString(dataDic);
+            string jsonDic = JsonConvert.SerializeObject(dataDic);
+
             if (!string.IsNullOrEmpty(jsonDic))
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 dic.Add("test_data_type", test_data_type);
                 dic.Add("json", jsonDic);
+                result = ImportTestDataToFp(up, dic);
+            }
+            return result;
+        }
+        /// <summary>
+        /// 提交临床数据到Fp
+        /// </summary>
+        /// <param name="up"></param>
+        /// <param name="test_data_type">临床数据类型</param>
+        /// <param name="jsonStr">数据字符串(需包含Sample Source)</param>
+        /// <returns></returns>
+        public static string ImportTestData(Fp_Common.UnameAndPwd up, string test_data_type, string jsonStr)
+        {
+            string result = string.Empty;
+            //string jsonDic = Fp_Common.FpJsonHelper.DictionaryToJsonString(dataDic);
+            if (!string.IsNullOrEmpty(jsonStr))
+            {
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                dic.Add("test_data_type", test_data_type);
+                dic.Add("json", jsonStr);
                 result = ImportTestDataToFp(up, dic);
             }
             return result;

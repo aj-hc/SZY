@@ -24,9 +24,14 @@ namespace RuRo.BLL
                 Common.LogHelper.WriteError(ex);
             }
         }
-        public  FreezerProUtility.Fp_Common.UnameAndPwd GetUp()
+        public UnameAndPwd(string username, string password)
         {
-            return new FreezerProUtility.Fp_Common.UnameAndPwd(this.username,this.password);
+            this.username = username;
+            this.password = password;
+        }
+        public FreezerProUtility.Fp_Common.UnameAndPwd GetUp()
+        {
+            return new FreezerProUtility.Fp_Common.UnameAndPwd(this.username, this.password);
         }
     }
 }

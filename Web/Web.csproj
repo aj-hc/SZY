@@ -1030,6 +1030,7 @@
     <Content Include="SZY\include\js\default.js" />
     <Content Include="SZY\TestData.aspx" />
     <Content Include="SZY\TestXmlData.aspx" />
+    <Content Include="Test\PostTestData.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1166,6 +1167,13 @@
     </Compile>
     <Compile Include="SZY\TestXmlData.aspx.designer.cs">
       <DependentUpon>TestXmlData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\PostTestData.aspx.cs">
+      <DependentUpon>PostTestData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\PostTestData.aspx.designer.cs">
+      <DependentUpon>PostTestData.aspx</DependentUpon>
     </Compile>
     <Compile Include="ValidateCode.aspx.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>

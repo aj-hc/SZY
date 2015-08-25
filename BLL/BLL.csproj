@@ -149,6 +149,7 @@
     <Compile Include="SZY\ValidationData.cs" />
     <Compile Include="SZY\Web References\BasicData\Reference.cs" />
     <Compile Include="SZY\Web References\ClinicalData\Reference.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="UnameAndPwd.cs" />
   </ItemGroup>
   <ItemGroup>
