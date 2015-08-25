@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 
@@ -35,6 +36,51 @@ namespace RuRo.BLL
             }
             return "";
         }
+
+        private List<Dictionary<string, string>> GetClinicalInfoDgDicList(string dataStr)
+        {
+            string clinicalInfoDg = dataStr;//dg
+            //页面上临床数据对象集合
+            List<Model.NormalLisReport> pageClinicalInfoList = new List<Model.NormalLisReport>();
+            List<Dictionary<string, string>> ClinicalInfoDgDicList = new List<Dictionary<string, string>>();
+            //将页面上的临床信息转换成对象集合
+
+            if (!string.IsNullOrEmpty(clinicalInfoDg) && clinicalInfoDg != "[]")
+            {
+                //转换页面上的clinicalInfoDg为对象集合
+                pageClinicalInfoList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Model.NormalLisReport>>(clinicalInfoDg);//转换ok
+            }
+            Model.NormalLisReport cl = new Model.NormalLisReport();
+
+            foreach (Model.NormalLisReport item in pageClinicalInfoList)
+            {
+                //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
+                ClinicalInfoDgDicList.Add(ConvertClinicalDgObjToDic(item));
+            }
+            return ClinicalInfoDgDicList;
+        }
+
+        private Dictionary<string, string> ConvertClinicalDgObjToDic(object obj)
+        {
+            Dictionary<string, string> clinicalInfoDic = new Dictionary<string, string>();
+            Type type = obj.GetType();
+            PropertyInfo[] propertys = type.GetProperties();
+            foreach (PropertyInfo item in propertys)
+            {
+                try
+                {
+                    string value = Common.ReflectHelper.GetValue(obj, item.Name);
+                    clinicalInfoDic.Add(item.Name, value);
+                }
+                catch (Exception ex)
+                {
+                    Common.LogHelper.WriteError(ex);
+                    continue;
+                }
+            }
+            return clinicalInfoDic;
+        }
+
         #region 获取数据
         /// <summary>
         /// 获取数据

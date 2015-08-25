@@ -49,6 +49,7 @@ namespace RuRo.Web.Sever
             string codeType = context.Request.Params["codeType"];
             BLL.PatientDiagnose bll = new BLL.PatientDiagnose();
             string result = bll.PostData(empiInfo, code, codeType);
+            context.Response.Write(result);
         }
 
         private void QueryData(HttpContext context, bool p)
