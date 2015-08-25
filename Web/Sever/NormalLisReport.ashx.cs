@@ -46,10 +46,12 @@ namespace RuRo.Web.Sever
 
         private void PostData(HttpContext context)
         {
-            string strNormalLis = context.Request.Params["NormalLis"];
+            string code = context.Request.Params["code"];
             string codeType = context.Request.Params["codeType"];
+            string strNormalLis = context.Request.Params["NormalLis"];
+
             BLL.NormalLisReport bll = new BLL.NormalLisReport();
-            string result = bll.PostData(strNormalLis,codeType);
+            string result = bll.PostData(code, codeType, strNormalLis);
             context.Response.Write(result);
         }
 
@@ -62,16 +64,16 @@ namespace RuRo.Web.Sever
             {
                 //查询数据
                 //string Mzzybz = context.Request["Mzzybz"];//0 门诊 1住院
-                string code = context.Request["code"];//住院号或门诊号
-                string ksrq00 = context.Request["ksrq00"];
-                string jsrq00 = context.Request["jsrq00"];
-                Model.DTO.NormalLisReportRequest request = new Model.DTO.NormalLisReportRequest(code, ksrq00, jsrq00);
+                string code = context.Request.Params["code"];//住院号或门诊号
+                string dateNow = context.Request.Params["dateNow"];
+                string codeType = context.Request.Params["codeType"];
+                Model.DTO.NormalLisReportRequest request = new Model.DTO.NormalLisReportRequest(code,dateNow);
                 BLL.NormalLisReport normalLisReport = new BLL.NormalLisReport();
                 //bool success;
                 //object obj = n.GetData(code, ksrq00, jsrq00, out success);
                 //ReturnData resd = new ReturnData(obj, success);
                 //string jsonStrResult = resd.Res();
-                string result = normalLisReport.GetSampleSourceData(request);
+                string result = normalLisReport.GetData(request, codeType);
                 context.Response.Write(result);
             }
         }

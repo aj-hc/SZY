@@ -87,17 +87,15 @@ function GetNormalLisReportInfo() {
     var code = $('#oldCode').textbox('getValue');
     if (code) {
         //开始查询日期为当前日期前五天
-        var ksrq00 = AddDays(new Date(), -5);
         //结束日期为当前日期后一天
-        var jsrq00 = AddDays(new Date(), 1);
+        var dateNow = AddDays(new Date(), 0);
         $.ajax({
             type: "POST",
             url: "/Sever/NormalLisReport.ashx",
             data: {
                 "mode": "qry",
                 "code": code,
-                "ksrq00": ksrq00,
-                "jsrq00": jsrq00
+                "dateNow": dateNow
             },
             success: function (data) {
                 $('#NormalLisReportDg').datagrid("loading");
@@ -126,14 +124,14 @@ function GetPatientDiagnoseInfo() {
     //</Request>
     var code = $('#oldCode').textbox('getValue');
     if (code) {
-        var cxrq00 = AddDays(new Date(), 0);
+        var dateNow = AddDays(new Date(), 0);
         $.ajax({
             type: "POST",
             url: "/Sever/PatientDiagnose.ashx",
             data: {
                 "mode": "qry",
                 "code": code,
-                "cxrq00": cxrq00
+                "dateNow": dateNow
             },
             success: function (data) {
                 if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
