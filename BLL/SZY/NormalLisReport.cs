@@ -23,19 +23,43 @@ namespace RuRo.BLL
             return JsonConvert.SerializeObject(jsonmodel);
         }
 
-        public string PostData(string data)
+        public string PostData(string dataStr)
         {
-            string mes = "";
-            if (data=="")
-            {
-                mes = "上传数据为空，请检查网络";
-            }
-            else
-            {
-                    
-            }
+            List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
+            List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList);
+
+
             return "";
         }
+        #region 匹配临床信息字典 + private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList)
+        /// <summary>
+        /// 匹配临床信息字典
+        /// </summary>
+        /// <param name="clinicalDicList">临床信息字典</param>
+        /// <returns>匹配完成的字典</returns>
+        private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList)
+        {
+            Dictionary<string, string> dic = Common.MatchDic.NormalLisReportDic;
+            List<Dictionary<string, string>> resDicList = new List<Dictionary<string, string>>();
+            foreach (var clinicalDic in clinicalDicList)
+            {
+                Dictionary<string, string> resDic = new Dictionary<string, string>();
+                foreach (KeyValuePair<string, string> item in clinicalDic)
+                {
+                    if (dic.ContainsKey(item.Key))
+                    {
+                        string key = dic[item.Key];
+                        if (!resDic.ContainsKey(key))
+                        {
+                            resDic.Add(key, item.Value);
+                        }
+                    }
+                }
+                resDicList.Add(resDic);
+            }
+            return resDicList;
+        }
+        #endregion
 
         private List<Dictionary<string, string>> GetClinicalInfoDgDicList(string dataStr)
         {
@@ -55,32 +79,10 @@ namespace RuRo.BLL
             foreach (Model.NormalLisReport item in pageClinicalInfoList)
             {
                 //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
-                ClinicalInfoDgDicList.Add(ConvertClinicalDgObjToDic(item));
+                ClinicalInfoDgDicList.Add(FormToDic.ConvertModelToDic(item));
             }
             return ClinicalInfoDgDicList;
         }
-
-        private Dictionary<string, string> ConvertClinicalDgObjToDic(object obj)
-        {
-            Dictionary<string, string> clinicalInfoDic = new Dictionary<string, string>();
-            Type type = obj.GetType();
-            PropertyInfo[] propertys = type.GetProperties();
-            foreach (PropertyInfo item in propertys)
-            {
-                try
-                {
-                    string value = Common.ReflectHelper.GetValue(obj, item.Name);
-                    clinicalInfoDic.Add(item.Name, value);
-                }
-                catch (Exception ex)
-                {
-                    Common.LogHelper.WriteError(ex);
-                    continue;
-                }
-            }
-            return clinicalInfoDic;
-        }
-
         #region 获取数据
         /// <summary>
         /// 获取数据

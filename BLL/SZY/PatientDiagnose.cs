@@ -53,7 +53,7 @@ namespace RuRo.BLL
                 List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
                 dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(formStr);
                 data = FormToDic.GetFromInfo<Model.PatientDiagnose>(dicList);
-                dic = FormToDic.ConvertBaseInfoObjToDic(data);
+                dic = FormToDic.ConvertModelToDic(data);
             }
             return dic;
         }

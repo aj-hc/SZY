@@ -68,6 +68,13 @@
                     "codeType": codeType
                 },
                 success: function (response) {
+                    if (response) {
+                        var res = JSON.parse(response);
+                        if (res.success || res.Msg.indexOf('should be unique.') > -1) {
+                            //调用方法查询数据
+                            PostNormalLisReport_list();
+                        }
+                    }
                     alert(response);
                 }
             });

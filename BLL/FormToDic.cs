@@ -14,9 +14,9 @@ namespace RuRo.BLL
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public  static Dictionary<string, string> ConvertBaseInfoObjToDic(object obj)
+        public  static Dictionary<string, string> ConvertModelToDic(object obj)
         {
-            Dictionary<string, string> pageBaseInfoDic = new Dictionary<string, string>();
+            Dictionary<string, string> dic = new Dictionary<string, string>();
             Type type = obj.GetType();
             PropertyInfo[] propertys = type.GetProperties();
             foreach (PropertyInfo item in propertys)
@@ -24,7 +24,7 @@ namespace RuRo.BLL
                 try
                 {
                     string value = Common.ReflectHelper.GetValue(obj, item.Name);
-                    pageBaseInfoDic.Add(item.Name, value);
+                    dic.Add(item.Name, value);
                 }
                 catch (Exception ex)
                 {
@@ -32,7 +32,7 @@ namespace RuRo.BLL
                     continue;
                 }
             }
-            return pageBaseInfoDic;
+            return dic;
         }
         #endregion
         #region 将前台返回的form字典转换成对象 + private T GetFromInfo<T>(List<Dictionary<string, string>> dicList) where T : class,new()
