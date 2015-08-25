@@ -172,7 +172,10 @@ namespace RuRo.BLL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
-
+        public DataSet GetQueryRecoderTrue_bll(int size, int count, string where, string strorder)
+        {
+            return dal.GetQueryRecoderTrue(size, count, where, strorder);
+        }
 		#endregion  ExtensionMethod
 	}
 }
