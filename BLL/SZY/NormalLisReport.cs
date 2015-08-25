@@ -23,10 +23,10 @@ namespace RuRo.BLL
             return JsonConvert.SerializeObject(jsonmodel);
         }
 
-        public string PostData(string dataStr)
+        public string PostData(string dataStr,string codeType)
         {
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
-            List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList);
+            List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList,codeType);
 
 
             return "";
@@ -37,7 +37,7 @@ namespace RuRo.BLL
         /// </summary>
         /// <param name="clinicalDicList">临床信息字典</param>
         /// <returns>匹配完成的字典</returns>
-        private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList)
+        private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList,string codeType)
         {
             Dictionary<string, string> dic = Common.MatchDic.NormalLisReportDic;
             List<Dictionary<string, string>> resDicList = new List<Dictionary<string, string>>();
