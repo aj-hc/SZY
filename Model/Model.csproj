@@ -128,6 +128,7 @@
     <Compile Include="DTO\Request.cs" />
     <Compile Include="EmpiInfo.cs" />
     <Compile Include="NormalLisReport.cs" />
+    <Compile Include="PageAction.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

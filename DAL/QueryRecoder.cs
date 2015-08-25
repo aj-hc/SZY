@@ -362,6 +362,19 @@ namespace RuRo.DAL
 		#endregion  BasicMethod
 		#region  ExtensionMethod
 
+        public DataSet GetQueryRecoderTrue(int size,int count,string where,string strorder)
+        {
+            count = count - 1;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select top "+size+" *");
+            sb.Append("from (");
+            sb.Append("select row_number() over(order by id) as rownumber,* from QueryRecoder) A ");
+            sb.Append("where rownumber >" + size * count);
+            sb.Append(" and "+where);
+            sb.Append("order by " + strorder);
+            string sqlstr = sb.ToString();
+            return DbHelperSQL.Query(sqlstr);
+        }
 		#endregion  ExtensionMethod
 	}
 }
