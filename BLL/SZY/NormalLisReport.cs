@@ -83,6 +83,35 @@ namespace RuRo.BLL
             }
             return ClinicalInfoDgDicList;
         }
+
+        #region 获取基本信息字典（样本源） +  private Dictionary<string, string> GetBaseInfoDic()
+        //获取基本信息字典（样本源）
+        private Dictionary<string, string> GetBaseInfoDic(string formStr)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            string baseinfo = formStr;
+            //基本信息对象
+            Model.EmpiInfo empiInfo = new Model.EmpiInfo();
+
+            if (!string.IsNullOrEmpty(baseinfo) && baseinfo != "[]")
+            {
+                //转换页面上的baseinfo为对象
+                List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
+                dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(baseinfo);
+                empiInfo = FormToDic.GetFromInfo<Model.EmpiInfo>(dicList);
+                dic = FormToDic.ConvertBaseInfoObjToDic(empiInfo);
+            }
+            return dic;
+        }
+        #endregion
+
+
+        private string PostData(Dictionary<string, string> dic)
+        {
+            UnameAndPwd up = new UnameAndPwd();
+            string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), "临床检验数据", dic);
+            return result;
+        }
         #region 获取数据
         /// <summary>
         /// 获取数据
