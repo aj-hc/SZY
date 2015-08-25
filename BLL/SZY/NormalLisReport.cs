@@ -21,7 +21,7 @@ namespace RuRo.BLL
         {
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel();
             this.request = request;
-            //保存记录（查询记录数据）
+            //保存记录（查询记录数据,更新或添加）
             bool b = SaveQueryRecord(request, "", codeType);
             //调用接口获取数据
             string xmlStr = GetData(request);
@@ -2198,12 +2198,12 @@ namespace RuRo.BLL
             //model.AddDate = DateTime.Now;
             model.Code = request.hospnum;
             model.CodeType = codeType;
-            model.QueryResult = Msg;
+            model.QueryResult += "&nbsp" +DateTime.Now.ToLocalTime()+" "+Msg.Trim();
             model.QueryType = "NormalLisReport";
             model.Uname = Common.CookieHelper.GetCookieValue("username");
 
             List<Model.QueryRecoder> list = CheckQueryRecord(model);
-            if (list.Count > 0)
+            if (list!=null&&list.Count > 0)
             {
                //判断查询出来的数据是否满足要求（时间差距lastdate<dateNow-5）
                 Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
