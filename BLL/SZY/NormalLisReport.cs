@@ -2212,18 +2212,16 @@ namespace RuRo.BLL
                 Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
                 model.AddDate = oldModel.AddDate;
                 model.Id = oldModel.Id;
-                if (oldModel.AddDate < DateTime.Now.AddDays(-6))
+                if (oldModel.AddDate < (oldModel.LastQueryDate))
                 {
                     //添加日期是5天前的
                     model.IsDel = true;
                 }
                 else
                 {
-
-                    //添加日期是距离当前日期是5天内的
-                    //更改最后查询时间为今天
+                    //添加日期是距离添加日期是5天内的
                     model.IsDel = false;
-                    model.LastQueryDate = DateTime.Now;
+
                     model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " "+Msg + oldModel.QueryResult;
                 }
                 //本地数据库有数据
@@ -2248,7 +2246,8 @@ namespace RuRo.BLL
             strWhere.AppendFormat("Code = {0} and ", "'" + model.Code + "'");
             strWhere.AppendFormat("CodeType = {0} and ", "'" + model.CodeType + "'");
             strWhere.AppendFormat("IsDel = {0} and ", "'" + model.IsDel + "'");
-            strWhere.AppendFormat("QueryType = {0}", "'" + model.QueryType + "'");
+            strWhere.AppendFormat("QueryType = {0} and  ", "'" + model.QueryType + "'");
+            strWhere.AppendFormat("IsDel = {0}", "'" + false + "'");
 
             //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
             return queryRecoder.GetModelList(strWhere.ToString());
