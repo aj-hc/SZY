@@ -33,7 +33,7 @@ function querybycode() {
         ajaxLoading();
         $.ajax({
             type: 'GET',
-            url: '/Sever/EmpiInfo.ashx?mode=qry&Mzzybz=' + codeType + '&Mzhzyh=' + code,
+            url: '/Sever/EmpiInfo.ashx?mode=qry&codeType=' + codeType + '&code=' + code,
             onSubmit: function () { },
             success: function (data) {
                 ajaxLoadEnd();
@@ -85,11 +85,11 @@ function GetNormalLisReportInfo() {
     //  <jsrq00></jsrq00>
     //</Request>
     var code = $('#oldCode').textbox('getValue');
-    var codeType = $('#oldCodeType').combobox('getValue');
+    var codeType = $('#oldCodeType').textbox('getValue');
     if (code) {
         //开始查询日期为当前日期前五天
         //结束日期为当前日期后一天
-        var dateNow = AddDays(new Date(), 0);
+        var dateNow = AddDays(new Date(), 0).toDateString();
         $.ajax({
             type: "POST",
             url: "/Sever/NormalLisReport.ashx",
@@ -125,9 +125,9 @@ function GetPatientDiagnoseInfo() {
     //  <cxrq00></cxrq00>
     //</Request>
     var code = $('#oldCode').textbox('getValue');
-    var codeType = $('#oldCodeType').combobox('getValue');
+    var codeType = $('#oldCodeType').textbox('getValue');
     if (code) {
-        var dateNow = AddDays(new Date(), 0);
+        var dateNow = AddDays(new Date(), 0).toDateString();
         $.ajax({
             type: "POST",
             url: "/Sever/PatientDiagnose.ashx",
@@ -136,6 +136,7 @@ function GetPatientDiagnoseInfo() {
                 "code": code,
                 "codeType": codeType,
                 "dateNow": dateNow
+                
             },
             success: function (data) {
                 if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }

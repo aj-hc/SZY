@@ -19,32 +19,30 @@ namespace RuRo.BLL
         /// <returns></returns>
         public string GetData(Model.DTO.NormalLisReportRequest request, string codeType)
         {
-            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel();
+            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() {  Statu="err", Msg="无数据",Data=""};
             this.request = request;
             //保存记录（查询记录数据,更新或添加）
             bool b = SaveQueryRecord(request, "", codeType);
-            //调用接口获取数据
-            string xmlStr = GetData(request);
-            string Msg = "";
-            //将xml数据转换成list集合会查询本地数据库去除重复项
-            List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
-            //此处保存查询记录
-            if (!string.IsNullOrEmpty(Msg))
+            if (b)
             {
-                //保存记录--无数据
-                bool bb = SaveQueryRecord(request, Msg, codeType);
-            }
-            else
-            {
+                //调用接口获取数据
+                string xmlStr = GetData(request);
+                string Msg = "";
+                //将xml数据转换成list集合会查询本地数据库去除重复项
+                List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
+              
+                if (nnn != null && nnn.Count > 0)
+                {
+                    //有数据
+                    jsonmodel = CreatJsonMode("ok", Msg, nnn);
+                }
+                else
+                {
+                    //无数据
+                    jsonmodel = CreatJsonMode("err", Msg, nnn);
+                    bool bb = SaveQueryRecord(request, Msg, codeType);
+                }
 
-            }
-            if (!string.IsNullOrEmpty(xmlStr))
-            {
-                jsonmodel = StrTObject(xmlStr);
-            }
-            else
-            {
-                //保存查询记录
             }
             return JsonConvert.SerializeObject(jsonmodel);
         }
@@ -1999,9 +1997,12 @@ namespace RuRo.BLL
                                 foreach (XmlNode item in xnl)
                                 {
                                     Model.NormalLisReport nn = this.XmlTomModel(item);
-                                    if (!this.CheckData(nn))
+                                    if (Common.MatchDic.NeedRecordDic.Keys.Contains(nn.chinese))
                                     {
-                                        list.Add(nn);
+                                        if (!this.CheckData(nn))
+                                        {
+                                            list.Add(nn);
+                                        }
                                     }
                                 }
                             }
@@ -2090,7 +2091,7 @@ namespace RuRo.BLL
             bool result = false;
             if (data != null)
             {
-                string whereStr = string.Format("chinese ={0} and hospnum ={1} and check_date ={2} and patname={3}", data.chinese, data.hospnum, data.check_date, data.patname);
+                string whereStr = string.Format("chinese ='{0}' and hospnum ='{1}' and check_date ='{2}' and patname='{3}'", data.chinese, data.hospnum, data.check_date, data.patname);
                 List<Model.NormalLisReport> list = this.GetModelList(whereStr);
                 if (list != null && list.Count > 0)
                 {
@@ -2159,9 +2160,12 @@ namespace RuRo.BLL
                                 foreach (XmlNode item in xnl)
                                 {
                                     Model.NormalLisReport nn = this.XmlTomModel(item);
-                                    if (!this.CheckData(nn))
+                                    if (Common.MatchDic.NeedRecordDic.Keys.Contains(nn.chinese))
                                     {
-                                        list.Add(nn);
+                                        if (!this.CheckData(nn))
+                                        {
+                                            list.Add(nn);
+                                        }
                                     }
                                 }
                                 if (list.Count > 0)
@@ -2198,33 +2202,36 @@ namespace RuRo.BLL
             //model.AddDate = DateTime.Now;
             model.Code = request.hospnum;
             model.CodeType = codeType;
-            model.QueryResult += "&nbsp" +DateTime.Now.ToLocalTime()+" "+Msg.Trim();
             model.QueryType = "NormalLisReport";
             model.Uname = Common.CookieHelper.GetCookieValue("username");
 
             List<Model.QueryRecoder> list = CheckQueryRecord(model);
-            if (list!=null&&list.Count > 0)
+            if (list != null && list.Count > 0)
             {
-               //判断查询出来的数据是否满足要求（时间差距lastdate<dateNow-5）
+                //判断查询出来的数据是否满足要求（时间差距lastdate<dateNow-5）
                 Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
-
-                if (oldModel.AddDate<DateTime.Now.AddDays(-6))
+                model.AddDate = oldModel.AddDate;
+                model.Id = oldModel.Id;
+                if (oldModel.AddDate < DateTime.Now.AddDays(-6))
                 {
                     //添加日期是5天前的
                     model.IsDel = true;
                 }
                 else
                 {
+
                     //添加日期是距离当前日期是5天内的
                     //更改最后查询时间为今天
                     model.IsDel = false;
                     model.LastQueryDate = DateTime.Now;
+                    model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " "+Msg + oldModel.QueryResult;
                 }
                 //本地数据库有数据
                 result = queryRecoder.Update(model);
             }
             else
             {
+                model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg.Trim();
                 model.AddDate = DateTime.Now;
                 model.LastQueryDate = DateTime.Now;
                 result = queryRecoder.Add(model) > 0;
@@ -2237,14 +2244,30 @@ namespace RuRo.BLL
             QueryRecoder queryRecoder = new QueryRecoder();
             //查询本地数据库有没有数据
             StringBuilder strWhere = new StringBuilder();
-            strWhere.AppendFormat("Uname = {0} and", model.Uname);
-            strWhere.AppendFormat("Code = {0} and", model.Code);
-            strWhere.AppendFormat("CodeType = {0} and", model.CodeType);
-            strWhere.AppendFormat("IsDel = {0} and", model.IsDel);
-            strWhere.AppendFormat("QueryType = {0}", model.QueryType);
+            strWhere.AppendFormat("Uname = {0} and ", "'" + model.Uname + "'");
+            strWhere.AppendFormat("Code = {0} and ", "'" + model.Code + "'");
+            strWhere.AppendFormat("CodeType = {0} and ", "'" + model.CodeType + "'");
+            strWhere.AppendFormat("IsDel = {0} and ", "'" + model.IsDel + "'");
+            strWhere.AppendFormat("QueryType = {0}", "'" + model.QueryType + "'");
 
             //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
             return queryRecoder.GetModelList(strWhere.ToString());
+        }
+        private Model.DTO.JsonModel CreatJsonMode(string statu, string msg, object data)
+        {
+            Model.DTO.JsonModel jsonModel = new Model.DTO.JsonModel();
+            if (statu == "err")
+            {
+                jsonModel.Statu = statu;
+                jsonModel.Msg = msg;
+            }
+            else
+            {
+                jsonModel.Statu = statu;
+                jsonModel.Msg = msg;
+                jsonModel.Data = data;
+            }
+            return jsonModel;
         }
     }
 }
