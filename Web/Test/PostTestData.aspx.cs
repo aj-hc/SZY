@@ -28,7 +28,7 @@ namespace RuRo.Web.Test
         {
             string da;
             da = d.Text.Trim();
-            if (da=="1")
+            if (da == "1")
             {
                 List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
                 list.Add(new Dictionary<string, string>() { { "Sample Source", "21" }, { "姓名", "张三1" } });
@@ -37,12 +37,25 @@ namespace RuRo.Web.Test
                 list.Add(new Dictionary<string, string>() { { "Sample Source", "21" }, { "姓名", "张三4" } });
                 da = FreezerProUtility.Fp_Common.FpJsonHelper.ObjectToJsonStr(list);
             }
-            else if(da=="2")
+            else if (da == "2")
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>() { { "Sample Source", "21" }, { "姓名", "李四" } };
                 da = FreezerProUtility.Fp_Common.FpJsonHelper.ObjectToJsonStr(dic);
             }
+            else if (da == "3")
+            {
+                bool statu = false;
+
+
+            }
             return da;
+        }
+        private bool GetBool(ref string str)
+        {
+            //判断字符串长度>5，并返回字符串+长度  111   111+3
+            str+="+"+str.Length;
+            
+            return str.Length > 5;
         }
     }
 }
