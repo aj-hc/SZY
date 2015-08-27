@@ -79,9 +79,18 @@ namespace RuRo.BLL.SZY
               {
                   mes = mes + "," + jsonModel_N.Msg;
               }
-              Model.DTO.PatientDiagnoseResuest ro = new Model.DTO.PatientDiagnoseResuest(code, date);
+              Model.DTO.PatientDiagnoseResuest po = new Model.DTO.PatientDiagnoseResuest(code, date);
               BLL.PatientDiagnose bll_P = new PatientDiagnose();
-              //Model.DTO.JsonModel jsonModel_P=bll_P
+              Model.DTO.JsonModel jsonModel_P = bll_P.GetData(po, codeType, "");
+              if (jsonModel_P.Statu == "ok")
+              {
+                  mes = bll_N.PostData(code, codeType, JsonConvert.SerializeObject(jsonModel_P.Data));//导入到患者信息
+              }
+              else
+              {
+                  mes = mes + "," + jsonModel_P.Msg;
+              }
+
             }
             return mes;
         }

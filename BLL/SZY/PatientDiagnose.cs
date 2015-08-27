@@ -48,7 +48,6 @@ namespace RuRo.BLL
                     jsonmodel = CreatJsonMode("err", Msg, nnn);
                     bool bb = SaveQueryRecord(ref request, Msg, codeType);
                 }
-
             }
             return jsonmodel;
         }

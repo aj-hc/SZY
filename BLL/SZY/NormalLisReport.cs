@@ -60,7 +60,6 @@ namespace RuRo.BLL
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
                 List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
-
                 if (nnn != null && nnn.Count > 0)
                 {
                     //有数据
@@ -72,7 +71,6 @@ namespace RuRo.BLL
                     jsonmodel = CreatJsonMode("err", Msg, nnn);
                     bool bb = SaveQueryRecord(ref request, Msg, codeType);
                 }
-
             }
             return jsonmodel;
         }
