@@ -53,9 +53,9 @@ namespace RuRo.BLL.SZY
         /// <summary>
         /// 上传数据
         /// </summary>
-        /// <param name="code"></param>
-        /// <param name="codeType"></param>
-        /// <param name="dataStr"></param>
+        /// <param name="code">条码</param>
+        /// <param name="codeType">条码的类型：0 卡号，1 住院号</param>
+        /// <param name="dataStr">传入数据</param>
         /// <returns></returns>
         public string PostData(string dataStr)
         {
@@ -67,7 +67,6 @@ namespace RuRo.BLL.SZY
               string code= dicList[i]["Code"];
               string codeType = dicList[i]["CodeType"];
               string date = dicList[i]["LastQueryDate"];
-
               Model.DTO.NormalLisReportRequest mo = new Model.DTO.NormalLisReportRequest(code, date);
               BLL.NormalLisReport bll_N = new NormalLisReport();
               Model.DTO.JsonModel jsonModel_N = bll_N.GetData(mo, codeType, "");
@@ -90,34 +89,14 @@ namespace RuRo.BLL.SZY
               {
                   mes = mes + "," + jsonModel_P.Msg;
               }
-
             }
             return mes;
         }
-
-        private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList, string codeType)
-        {
-            Dictionary<string, string> dic = Common.MatchDic.NormalLisReportDic;
-            List<Dictionary<string, string>> resDicList = new List<Dictionary<string, string>>();
-            foreach (var clinicalDic in clinicalDicList)
-            {
-                Dictionary<string, string> resDic = new Dictionary<string, string>();
-                foreach (KeyValuePair<string, string> item in clinicalDic)
-                {
-                    if (dic.ContainsKey(item.Key))
-                    {
-                        string key = dic[item.Key];
-                        if (!resDic.ContainsKey(key))
-                        {
-                            resDic.Add(key, item.Value);
-                        }
-                    }
-                }
-                resDicList.Add(resDic);
-            }
-            return resDicList;
-        }
-
+        /// <summary>
+        /// 将数据转化为List
+        /// </summary>
+        /// <param name="dataStr"></param>
+        /// <returns></returns>
         private List<Dictionary<string, string>> GetClinicalInfoDgDicList(string dataStr)
         {
             string clinicalInfoDg = dataStr;//dg
