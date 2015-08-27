@@ -52,6 +52,13 @@ namespace RuRo.Model.DTO
             this._jsrq00 = DateTime.Parse(dateNow).AddDays(1).ToString("yyyy-MM-dd");
             this._requset = string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", hospnum, ksrq00, jsrq00);
         }
+        public NormalLisReportRequest(string hospnum, string ksrq00,string jsrq00)
+        {
+            this._hospnum = hospnum;
+            this._ksrq00 = ksrq00;
+            this._jsrq00 = jsrq00;
+            this._requset = string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", hospnum, ksrq00, jsrq00);
+        }
 
     }
 }

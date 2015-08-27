@@ -75,7 +75,7 @@
             }
             var code = $('#oldCode').textbox('getValue');
             var codeType = $('#oldCodeType').textbox('getValue');
-            
+            ajaxLoading();
             $.ajax({
                 type: "POST",
                 url: "/Sever/PatientDiagnose.ashx?mode=post",
@@ -86,10 +86,18 @@
                     "codeType": codeType
                 },
                 success: function (response) {
+                    ajaxLoadEnd();
+                    var obj = $.parseJSON(response);
+                    if (obj.success) {
+
+                    } else {
+                        $.messager.alert('ÌבÊ¾', obj.message, 'error'); return;
+                    }
 
                 }
             });
         }
+
 
     </script>
 
