@@ -64,9 +64,20 @@ namespace RuRo.Web.Sever
                 string cardno = context.Request["code"];//住院号或门诊号
                 string cxrq00 = context.Request["cxrq00"];
                 string dateNow = context.Request.Params["dateNow"];
+                string codeType = context.Request.Params["codeType"];
+                string date = DateTime.Now.ToString("yyyy-MM-dd");
+                //Model.QueryRecoder model_Q = new Model.QueryRecoder();
+                //model_Q.Uname = Common.CookieHelper.GetCookieValue("username");
+                //model_Q.Code = cardno;
+                //model_Q.AddDate = Convert.ToDateTime(date);
+                //model_Q.LastQueryDate = Convert.ToDateTime(date);
+                //BLL.QueryRecoder bll = new BLL.QueryRecoder();
+                //bll.Add(model_Q);
+                //bll.Add(model_Q);
                 BLL.PatientDiagnose n = new BLL.PatientDiagnose();
+               // BLL.NormalLisReport cd = new BLL.NormalLisReport();
                 string jsonStrResult = n.GetSampleSourceData(new Model.DTO.PatientDiagnoseResuest(cardno,cxrq00));
-               context.Response.Write(jsonStrResult);
+                context.Response.Write(jsonStrResult);
             }
         }
 

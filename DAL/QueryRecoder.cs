@@ -361,7 +361,14 @@ namespace RuRo.DAL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
-
+        /// <summary>
+        /// 读取分页的查询数据
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="count"></param>
+        /// <param name="where"></param>
+        /// <param name="strorder"></param>
+        /// <returns></returns>
         public DataSet GetQueryRecoderTrue(int size,int count,string where,string strorder)
         {
             count = count - 1;
@@ -373,6 +380,20 @@ namespace RuRo.DAL
             sb.Append(" and "+where);
             sb.Append("order by " + strorder);
             string sqlstr = sb.ToString();
+            return DbHelperSQL.Query(sqlstr);
+        }
+        /// <summary>
+        /// 查询倒数第二条数据
+        /// </summary>
+        /// <returns></returns>
+        public DataSet GetLastSecondData() 
+        {
+            string sqlstr = "SELECT * FROM QueryRecoder a WHERE(SELECT COUNT(Id) FROM QueryRecoder WHERE a.Id < QueryRecoder.Id) = 1";
+            return DbHelperSQL.Query(sqlstr);
+        }
+        public DataSet GetReciprocalFirstData() 
+        {
+            string sqlstr = "SELECT * FROM QueryRecoder a WHERE(SELECT COUNT(Id) FROM QueryRecoder WHERE a.Id < QueryRecoder.Id) = 0";
             return DbHelperSQL.Query(sqlstr);
         }
 		#endregion  ExtensionMethod

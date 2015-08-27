@@ -38,16 +38,29 @@ namespace RuRo
                     case "qryt":/*导出*/
                         QueryTData(context);
                         break;
+                    case "post":/*上传*/
+                        PostData(context);
+                        break;
                 }
             }
             else
                 QueryData(context);
         }
 
-        private static void queryDataSZY(HttpContext context) 
+        /// <summary>
+        /// 上传到freezerpro临床检验数据
+        /// </summary>
+        /// <param name="context"></param>
+        private void PostData(HttpContext context)
         {
-
+            string code = context.Request.Params["code"];
+            string codeType = context.Request.Params["codeType"];
+            string strRecoder = context.Request.Params["Recoder"];
+            BLL.SZY.QueryRecoder bll = new BLL.SZY.QueryRecoder();
+            string result = bll.PostData(strRecoder);
+            context.Response.Write(result);
         }
+
         /// <summary>
         /// 查询info数据实体类
         /// </summary>
@@ -216,19 +229,19 @@ namespace RuRo
             string strorder = "AddDate ASC";
             int startIndex =Convert.ToInt32(pageNum);
             int endIndex = Convert.ToInt32(pageSize);
-            RuRo.BLL.QueryRecoder bll = new BLL.QueryRecoder();
+           // RuRo.BLL.QueryRecoder bll = new BLL.QueryRecoder();
+            RuRo.BLL.SZY.QueryRecoder bll_QueryRecoder = new BLL.SZY.QueryRecoder();
            // DataSet ds = bll.GetListByPage(strwhere,strorder,startIndex,endIndex);
-            DataSet ds = bll.GetQueryRecoderTrue_bll(endIndex, startIndex, strwhere, strorder);//按照页码获取列表
-            List<Model.QueryRecoder> list = bll.DataTableToList(ds.Tables[0]);//转换为List
+            DataSet ds = bll_QueryRecoder.GetQueryRecoderTrue_bll(endIndex, startIndex, strwhere, strorder);//按照页码获取列表
+            List<Model.QueryRecoder> list = bll_QueryRecoder.DataTableToList(ds.Tables[0]);//转换为List
             Dictionary<string, string> dic = new Dictionary<string, string>();
             //List<Model.QueryRecoder> list = bll.GetModelList("IsDel=0 and AddDate!='" + adddate + "' and Uname='" + username + "' order by AddDate DESC");
             string kk = FreezerProUtility.Fp_Common.FpJsonHelper.ObjectToJsonStr(list);
             dic.Add("Qdata",kk);//添加到DIC
-            int count = bll.GetRecordCount("IsDel=0 and AddDate!='" + adddate + "' and Uname='" + username + "'");//获取表的总记录数
+            int count = bll_QueryRecoder.GetRecordCount("IsDel=0 and AddDate!='" + adddate + "' and Uname='" + username + "'");//获取表的总记录数
             dic.Add("total", count.ToString());//添加到DIC
             string mes = FreezerProUtility.Fp_Common.FpJsonHelper.ObjectToJsonStr(dic);
             context.Response.Write(mes);
-
         }
         
         public bool IsReusable

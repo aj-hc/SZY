@@ -1,7 +1,3 @@
-<!--基础代码由科发EasyUi代码生成器v3.5(build 20140519)代码生成器生成,免费版自动增加版权注释,请保留版权信息，尊重作者劳动成果，如您有更好的建议请发至邮箱：843330160@qq.com-->
-<!--编辑表单form与datagrid列表数据分别放在两个独立的aspx页面中-->
-<!--datagrid页面:NormalLisReport_list.aspx-->
-
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NormalLisReport_list.aspx.cs" Inherits="RuRo.NormalLisReport_list" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -114,7 +110,6 @@
                 },
                 success: function (data)
                 {
-                    alert(data);
                 }
             });
 

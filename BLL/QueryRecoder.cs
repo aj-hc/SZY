@@ -118,27 +118,27 @@ namespace RuRo.BLL
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
 		}
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public List<RuRo.Model.QueryRecoder> DataTableToList(DataTable dt)
-		{
-			List<RuRo.Model.QueryRecoder> modelList = new List<RuRo.Model.QueryRecoder>();
-			int rowsCount = dt.Rows.Count;
-			if (rowsCount > 0)
-			{
-				RuRo.Model.QueryRecoder model;
-				for (int n = 0; n < rowsCount; n++)
-				{
-					model = dal.DataRowToModel(dt.Rows[n]);
-					if (model != null)
-					{
-						modelList.Add(model);
-				}
-				}
-			}
-			return modelList;
-		}
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<RuRo.Model.QueryRecoder> DataTableToList(DataTable dt)
+        {
+            List<RuRo.Model.QueryRecoder> modelList = new List<RuRo.Model.QueryRecoder>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                RuRo.Model.QueryRecoder model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = dal.DataRowToModel(dt.Rows[n]);
+                    if (model != null)
+                    {
+                        modelList.Add(model);
+                    }
+                }
+            }
+            return modelList;
+        }
 
 		/// <summary>
 		/// 获得数据列表
@@ -172,10 +172,10 @@ namespace RuRo.BLL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
-        public DataSet GetQueryRecoderTrue_bll(int size, int count, string where, string strorder)
-        {
-            return dal.GetQueryRecoderTrue(size, count, where, strorder);
-        }
+        //public DataSet GetQueryRecoderTrue_bll(int size, int count, string where, string strorder)
+        //{
+        //    return dal.GetQueryRecoderTrue(size, count, where, strorder);
+        //}
 		#endregion  ExtensionMethod
 	}
 }

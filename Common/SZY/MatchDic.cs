@@ -14,7 +14,7 @@ namespace RuRo.Common
             { "CardId", "身份证号" }
         };
         public static Dictionary<string, string> NormalLisReportDic  = new Dictionary<string, string>() {
-            //{ "hospnum", "" },
+            //{ "hospnum", "Sample Source" },
             { "patname", "姓名" },
             { "Sex", "性别" },
             { "Age", "年龄" },
