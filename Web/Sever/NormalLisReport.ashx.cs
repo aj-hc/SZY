@@ -51,7 +51,7 @@ namespace RuRo.Web.Sever
             string strNormalLis = context.Request.Params["NormalLis"];
 
             BLL.NormalLisReport bll = new BLL.NormalLisReport();
-            string result = bll.PostData(code, codeType, strNormalLis);
+            string result = bll.PostData("", codeType, strNormalLis);
             context.Response.Write(result);
         }
 

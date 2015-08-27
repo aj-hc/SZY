@@ -86,7 +86,7 @@
                     "codeType": codeType
                 },
                 success: function (response) {
-                    alert(response);
+
                 }
             });
         }

@@ -70,16 +70,18 @@
                 success: function (response) {
                     if (response) {
                         var res = JSON.parse(response);
-                        if (res.success || res.Msg.indexOf('should be unique.') > -1) {
+                        //|| res.Msg.indexOf('should be unique.') > -1
+                        if (res.success ) {
                             //调用方法查询数据
                             PostNormalLisReport_list();
+                            alert(res.success);
+                            postPatientDiagnose_info();
                         }
                     }
-                    alert(response);
+                    alert(response.Msg);
                 }
             });
         }
-        
     </script>
 </body>
 </html>

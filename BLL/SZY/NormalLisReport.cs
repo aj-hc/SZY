@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -46,15 +47,60 @@ namespace RuRo.BLL
             }
             return JsonConvert.SerializeObject(jsonmodel);
         }
+        public Model.DTO.JsonModel GetData(Model.DTO.NormalLisReportRequest request, string codeType,string t)
+        {
+            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
+            this.request = request;
+            //保存记录（查询记录数据,更新或添加）
+            bool b = SaveQueryRecord(request, "", codeType);
+            if (b)
+            {
+                //调用接口获取数据
+                string xmlStr = GetData(request);
+                string Msg = "";
+                //将xml数据转换成list集合会查询本地数据库去除重复项
+                List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
+
+                if (nnn != null && nnn.Count > 0)
+                {
+                    //有数据
+                    jsonmodel = CreatJsonMode("ok", Msg, nnn);
+                }
+                else
+                {
+                    //无数据
+                    jsonmodel = CreatJsonMode("err", Msg, nnn);
+                    bool bb = SaveQueryRecord(request, Msg, codeType);
+                }
+
+            }
+            return jsonmodel;
+        }
 
         public string PostData(string code, string codeType, string dataStr)
         {
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
             List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList, codeType);
-            //判断该条数据数据库中是否存在
-            //不存在就添加
-
-            return "";
+            for (int i = 0; i < newDicList.Count; i++)
+            {
+                newDicList[i].Add("Sample Source",code);
+                switch (newDicList[i]["性别"]) 
+                {
+                    case "M": newDicList[i]["性别"] = "男";
+                    break;
+                    case "F": newDicList[i]["性别"] = "女";
+                    break;
+                    default: newDicList[i].Remove("性别");
+                    break;
+                }
+            }
+           string strList= JsonConvert.SerializeObject(newDicList);
+           string mes=  PostData(strList);
+           if (true)
+           {
+               
+           }
+           return mes;
         }
 
         private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList, string codeType)
@@ -103,10 +149,10 @@ namespace RuRo.BLL
             return ClinicalInfoDgDicList;
         }
 
-        private string PostData(Dictionary<string, string> dic)
+        private string PostData(string str)
         {
             UnameAndPwd up = new UnameAndPwd();
-            string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), "临床检验数据", dic);
+            string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), "临床检验数据", str);
             return result;
         }
         #region 获取数据 + private string GetData(Model.DTO.NormalLisReportRequest request)
@@ -2170,6 +2216,43 @@ namespace RuRo.BLL
                                 }
                                 if (list.Count > 0)
                                 {
+                                    
+                                    for (int i = 0; i < list.Count; i++)
+                                    {
+                                        //插入数据到数据库
+                                        Model.NormalLisReport kk = new Model.NormalLisReport();
+                                        kk.hospnum = list[i].hospnum;
+                                        kk.patname = list[i].patname;
+                                        kk.Sex = list[i].Sex;
+                                        kk.Age = list[i].Age;
+                                        kk.age_month = list[i].age_month;
+                                        kk.ext_mthd = list[i].ext_mthd;
+                                        kk.chinese = list[i].chinese;
+                                        kk.result = list[i].result;
+                                        kk.units = list[i].units;
+                                        kk.ref_flag = list[i].ref_flag;
+                                        kk.lowvalue = list[i].lowvalue;
+                                        kk.highvalue = list[i].highvalue;
+                                        kk.print_ref = list[i].print_ref;
+                                        kk.check_date = list[i].check_date;
+                                        kk.check_by_name = list[i].check_by_name;
+                                        kk.prnt_order = list[i].prnt_order;
+                                        kk.IsDel = false;
+                                        NormalLisReport no = new NormalLisReport();
+                                        no.Add(kk);
+                                    }
+                                    BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
+                                    QueryRecoder bl_Q = new QueryRecoder();
+                                    //更新记录表
+                                    //DataSet ds = bll_Q.GetReciprocalFirstData_BLL();
+                                    //Model.QueryRecoder model_Q = new Model.QueryRecoder();
+                                    //model_Q.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
+                                    //model_Q.Uname = ds.Tables[0].Rows[0]["Uname"].ToString();
+                                    //model_Q.Code = ds.Tables[0].Rows[0]["Code"].ToString();
+                                    //model_Q.AddDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["AddDate"].ToString());
+                                    //model_Q.LastQueryDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["LastQueryDate"].ToString());
+                                    //model_Q.QueryType = "NormalLisReport";
+                                    //bl_Q.Update(model_Q);
                                     Msg = "";
                                 }
                             }
@@ -2232,7 +2315,8 @@ namespace RuRo.BLL
                 model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg.Trim();
                 model.AddDate = DateTime.Now;
                 model.LastQueryDate = DateTime.Now;
-                result = queryRecoder.Add(model) > 0;
+                result = queryRecoder.Add(model) > 0;//使用的话会添加三条数据到Q表
+                result = true;
             }
             return result;
         }

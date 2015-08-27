@@ -45,11 +45,10 @@ namespace RuRo.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into PatientDiagnose(");
-			strSql.Append("id,Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,IsDel)");
+			strSql.Append("Cardno,Csrq00,PatientName,Sex,Brithday,CardId,Tel,RegisterNo,Icd,Diagnose,Type,Flag,DiagnoseDate,IsDel)");
 			strSql.Append(" values (");
-			strSql.Append("@id,@Cardno,@Csrq00,@PatientName,@Sex,@Brithday,@CardId,@Tel,@RegisterNo,@Icd,@Diagnose,@Type,@Flag,@DiagnoseDate,@IsDel)");
+			strSql.Append("@Cardno,@Csrq00,@PatientName,@Sex,@Brithday,@CardId,@Tel,@RegisterNo,@Icd,@Diagnose,@Type,@Flag,@DiagnoseDate,@IsDel)");
 			SqlParameter[] parameters = {
-					new SqlParameter("@id", SqlDbType.Int,4),
 					new SqlParameter("@Cardno", SqlDbType.NVarChar,50),
 					new SqlParameter("@Csrq00", SqlDbType.NVarChar,50),
 					new SqlParameter("@PatientName", SqlDbType.NVarChar,50),
@@ -64,21 +63,20 @@ namespace RuRo.DAL
 					new SqlParameter("@Flag", SqlDbType.NVarChar,50),
 					new SqlParameter("@DiagnoseDate", SqlDbType.NVarChar,50),
 					new SqlParameter("@IsDel", SqlDbType.Bit,1)};
-			parameters[0].Value = model.id;
-			parameters[1].Value = model.Cardno;
-			parameters[2].Value = model.Csrq00;
-			parameters[3].Value = model.PatientName;
-			parameters[4].Value = model.Sex;
-			parameters[5].Value = model.Brithday;
-			parameters[6].Value = model.CardId;
-			parameters[7].Value = model.Tel;
-			parameters[8].Value = model.RegisterNo;
-			parameters[9].Value = model.Icd;
-			parameters[10].Value = model.Diagnose;
-			parameters[11].Value = model.Type;
-			parameters[12].Value = model.Flag;
-			parameters[13].Value = model.DiagnoseDate;
-			parameters[14].Value = model.IsDel;
+			parameters[0].Value = model.Cardno;
+			parameters[1].Value = model.Csrq00;
+			parameters[2].Value = model.PatientName;
+			parameters[3].Value = model.Sex;
+			parameters[4].Value = model.Brithday;
+			parameters[5].Value = model.CardId;
+			parameters[6].Value = model.Tel;
+			parameters[7].Value = model.RegisterNo;
+			parameters[8].Value = model.Icd;
+			parameters[9].Value = model.Diagnose;
+			parameters[10].Value = model.Type;
+			parameters[11].Value = model.Flag;
+			parameters[12].Value = model.DiagnoseDate;
+			parameters[13].Value = model.IsDel;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)

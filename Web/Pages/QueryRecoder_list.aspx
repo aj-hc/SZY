@@ -28,8 +28,8 @@
                 <th field="AddDate" width="100" sortable="true">添加时间</th>
                 <th field="LastQueryDate" width="100" sortable="true">最后一次查询日期</th>
                 <th field="Code" width="100" sortable="true">查询的条码号</th>
-                <th field="CodeType" width="100" sortable="true">条码号类型</th>
-                <th field="QueryType" width="100" sortable="true">查询的数据类型</th>
+                <th field="CodeType" width="100" sortable="true" hidden="true">条码号类型</th>
+                <th field="QueryType" width="100" sortable="true" hidden="true">查询的数据类型</th>
                 <th field="QueryResult" width="100" sortable="true">查询结果</th>
                 <th field="IsDel" width="100" sortable="true" hidden="true">isdel</th>
             </tr>
@@ -53,11 +53,12 @@
     </div>
 
     <div id="footer" style="padding: 5px; margin: 10px" data-options="region:'south',">
-        <a href="javascript:void(0)" class="easyui-linkbutton" id="submit" style="width: auto" onclick="postPatientInfo()">导入信息</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" id="submit" style="width: auto" onclick="postQueryRecoder()">导入信息</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" id="cancleSubmit" style="width: auto" onclick="CloseWebPage()">取消导入</a>
     </div>
 
 <script type="text/javascript">
+    //设置分页
     $(function (){
         $("#QueryRecoderDg").datagrid("getPager").pagination({
             beforePageText: '第',
@@ -131,6 +132,7 @@
         });
         $("#QueryRecoderDg").datagrid("clearSelections");
     }
+    //查询数据
     function infoForm()
     {
         var myDate = new Date();
@@ -171,6 +173,42 @@
                
             }
         });
+    }
+    //上传数据
+    function postQueryRecoder()
+    {
+        var _QueryRecoder = $('#QueryRecoderDg').datagrid('getChecked');
+        if (_QueryRecoder.length <= 0) {
+            $.messager.alert('提示', '未选择导入信息或导入信息为空', 'error'); return;
+        }
+        var count = Math.random();
+        var rowQueryRecoder = JSON.stringify(_QueryRecoder);
+        ajaxLoading();
+        $.ajax({
+            type: 'post',
+            dataType: "json",
+            url: '/Sever/QueryRecoder_handler.ashx',
+            data: {
+                "mode": "post",
+                "count": count,
+                "Recoder": rowQueryRecoder
+            },
+            success: function (data)
+            {
+                ajaxLoadEnd();
+                $.messager.alert('提示', data.message, "");
+                return;
+            }
+        });
+    }
+    //采用jquery easyui loading css效果 
+    function ajaxLoading() {
+        $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");
+        $("<div class=\"datagrid-mask-msg\"></div>").html("正在处理，请稍候。。。").appendTo("body").css({ display: "block", left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
+    }
+    function ajaxLoadEnd() {
+        $(".datagrid-mask").remove();
+        $(".datagrid-mask-msg").remove();
     }
 </script>
 

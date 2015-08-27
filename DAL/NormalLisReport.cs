@@ -442,7 +442,10 @@ namespace RuRo.DAL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
-
+        //public DataSet GetNormalLisReportcode() 
+        //{
+        //    string sqlstr = "SELECT * FROM NormalLisReport WHERE HOSPNUM='";
+        //}
 		#endregion  ExtensionMethod
 	}
 }
