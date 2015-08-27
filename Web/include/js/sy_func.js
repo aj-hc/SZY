@@ -39,7 +39,7 @@ function querybycode() {
                 ajaxLoadEnd();
                 $('#code').textbox('setValue', '');
                 clearForm();
-                if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+                if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error'); }
                 else {
                     //测试代码
                     var obj = $.parseJSON(data);
@@ -136,7 +136,6 @@ function GetPatientDiagnoseInfo() {
                 "code": code,
                 "codeType": codeType,
                 "dateNow": dateNow
-                
             },
             success: function (data) {
                 if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }

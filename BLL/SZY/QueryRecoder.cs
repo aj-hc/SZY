@@ -131,21 +131,38 @@ namespace RuRo.BLL.SZY
             }
             return ClinicalInfoDgDicList;
         }
+
+
         /// <summary>
         /// 返回倒数第二条
         /// </summary>
         /// <returns></returns>
-        public DataSet GetLastSecondData_BLL() 
+        public List<RuRo.Model.QueryRecoder> GetLastSecondData_BLL()
         {
-            return dal.GetLastSecondData();
+            DataSet ds = dal.GetLastSecondData();
+            return DataTableToList(ds.Tables[0]);
         }
         /// <summary>
         /// 返回倒数第一条
         /// </summary>
         /// <returns></returns>
-        public DataSet GetReciprocalFirstData_BLL() 
+        /// 
+        public List<RuRo.Model.QueryRecoder> GetReciprocalFirstData_BLL()
         {
-            return dal.GetReciprocalFirstData();
+            DataSet ds = dal.GetReciprocalFirstData();
+            return DataTableToList(ds.Tables[0]);
+        }
+        /// <summary>
+        /// 修改记录为true
+        /// </summary>
+        /// <param name="uname"></param>
+        /// <param name="adddate"></param>
+        /// <param name="code"></param>
+        /// <param name="queryType"></param>
+        /// <returns></returns>
+        public int UpdataQueryRecoderIsDel_BLL(string uname, string adddate, string code, string queryType)
+        {
+            return dal.UpdataQueryRecoderIsDel(uname, adddate, code, queryType);
         }
     }
 }

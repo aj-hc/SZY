@@ -396,6 +396,12 @@ namespace RuRo.DAL
             string sqlstr = "SELECT * FROM QueryRecoder a WHERE(SELECT COUNT(Id) FROM QueryRecoder WHERE a.Id < QueryRecoder.Id) = 0";
             return DbHelperSQL.Query(sqlstr);
         }
+
+        public int UpdataQueryRecoderIsDel(string uname,string adddate,string code,string queryType)
+        {
+            string sqlstr = "UPDATE QueryRecoder SET IsDel=" + true + " WHERE Uname='" + uname + "' AND AddDate='" + adddate + "' AND Code='" + code + "' AND QueryType='" + queryType + "'";
+            return DbHelperSQL.ExecuteSql(sqlstr);
+        }
 		#endregion  ExtensionMethod
 	}
 }

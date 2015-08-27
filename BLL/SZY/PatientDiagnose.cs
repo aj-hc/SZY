@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Xml;
+using System.Web.Configuration;
 
 namespace RuRo.BLL
 {
@@ -27,7 +28,7 @@ namespace RuRo.BLL
         {
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
             //保存记录（查询记录数据,更新或添加）
-            bool b = SaveQueryRecord(request, "", codeType);
+            bool b = SaveQueryRecord(ref request, "", codeType);
             if (b)
             {
                 //调用接口获取数据
@@ -45,7 +46,7 @@ namespace RuRo.BLL
                 {
                     //无数据
                     jsonmodel = CreatJsonMode("err", Msg, nnn);
-                    bool bb = SaveQueryRecord(request, Msg, codeType);
+                    bool bb = SaveQueryRecord(ref request, Msg, codeType);
                 }
 
             }
@@ -57,6 +58,7 @@ namespace RuRo.BLL
             Dictionary<string, string> newDic = new Dictionary<string, string>();
             
             newDic.Add("Name", code);
+            newDic.Add("Sample Source", code);
             foreach (KeyValuePair<string, string> item in dic)
             {
                 if (Common.MatchDic.PatientDiagnoseDic.ContainsKey(item.Key))
@@ -109,11 +111,11 @@ namespace RuRo.BLL
         private string PostData(Dictionary<string, string> dic)
         {
             UnameAndPwd up = new UnameAndPwd();
-            string result = FreezerProUtility.Fp_BLL.SampleSocrce.ImportSampleSourceDataToFp(up.GetUp(), "患者信息", dic);
+            string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), "诊断信息", dic);
             return result;
         }
 
-        private bool SaveQueryRecord(Model.DTO.PatientDiagnoseResuest resquet, string Msg, string codeType)
+        private bool SaveQueryRecord(ref Model.DTO.PatientDiagnoseResuest resquet, string Msg, string codeType)
         {
             bool result;
             QueryRecoder queryRecoder = new QueryRecoder();
@@ -133,18 +135,23 @@ namespace RuRo.BLL
                 Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
                 model.AddDate = oldModel.AddDate;
                 model.Id = oldModel.Id;
-                if (oldModel.AddDate < DateTime.Now.AddDays(-6))
+                DateTime dtAdd = Convert.ToDateTime(oldModel.AddDate);
+                DateTime dtLastQuery = Convert.ToDateTime(oldModel.LastQueryDate);
+                DateTime dt = DateTime.Now;//当前时间
+                int days = (dt - dtAdd).Days;//获取当前日期与添加日期时间差
+                int getDays = 0;
+                if (days > getDays)
                 {
-                    //添加日期是5天前的
                     model.IsDel = true;
+                    model.LastQueryDate = dtAdd.AddDays(5);
                 }
                 else
                 {
-
                     //添加日期是距离当前日期是5天内的
                     //更改最后查询时间为今天
                     model.IsDel = false;
                     model.LastQueryDate = DateTime.Now;
+                    resquet.cxrq00 = DateTime.Now.ToString("yyyy-MM-dd");
                     model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg + oldModel.QueryResult;
                 }
                 //本地数据库有数据
@@ -433,22 +440,26 @@ namespace RuRo.BLL
                             {
 
                                 jsonData.Data = data;
-                                PatientDiagnose bll = new PatientDiagnose();
-                                bll.Add(data);
-                                BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
-                                QueryRecoder bl_Q = new QueryRecoder();
-                                //更新记录表
-                                DataSet ds = bll_Q.GetReciprocalFirstData_BLL();
-                                Model.QueryRecoder model_Q = new Model.QueryRecoder();
-                                model_Q.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
-                                model_Q.Code = ds.Tables[0].Rows[0]["Code"].ToString();
-                                model_Q.Uname = ds.Tables[0].Rows[0]["Uname"].ToString();
-                                model_Q.AddDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["AddDate"].ToString());
-                                model_Q.LastQueryDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["LastQueryDate"].ToString());
-                                model_Q.QueryType = "PatientDiagnose";
-                                model_Q.QueryResult = ds.Tables[0].Rows[0]["QueryResult"].ToString();
-                                model_Q.IsDel = false;
-                                bl_Q.Add(model_Q);
+                                //PatientDiagnose bll = new PatientDiagnose();
+                                //bll.Add(data);
+                                //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
+                                //QueryRecoder bl_Q = new QueryRecoder();
+                                ////更新记录表
+                                //DataSet ds = bll_Q.GetReciprocalFirstData_BLL();
+                                //if (ds.Tables[0].Rows.Count>0)
+                                //{
+                                    
+                                //}
+                                //Model.QueryRecoder model_Q = new Model.QueryRecoder();
+                                //model_Q.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
+                                //model_Q.Code = ds.Tables[0].Rows[0]["Code"].ToString();
+                                //model_Q.Uname = ds.Tables[0].Rows[0]["Uname"].ToString();
+                                //model_Q.AddDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["AddDate"].ToString());
+                                //model_Q.LastQueryDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["LastQueryDate"].ToString());
+                                //model_Q.QueryType = "PatientDiagnose";
+                                //model_Q.QueryResult = ds.Tables[0].Rows[0]["QueryResult"].ToString();
+                                //model_Q.IsDel = false;
+                                //bl_Q.Add(model_Q);
                                 jsonData.Statu = "ok";
                                 jsonData.Msg = "查询成功";
                             }

@@ -47,7 +47,7 @@ namespace RuRo.BLL
                 {
                     if (item.Key == "PatientName")
                     {
-                        newDic.Add("", item.Value);
+                        newDic.Add("Description", item.Value);
                         newDic.Add(Common.MatchDic.EmpiInfoDic[item.Key], item.Value);
                     }
                     else

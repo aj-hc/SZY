@@ -23,7 +23,7 @@ namespace RuRo.BLL
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() {  Statu="err", Msg="无数据",Data=""};
             this.request = request;
             //保存记录（查询记录数据,更新或添加）
-            bool b = SaveQueryRecord(request, "", codeType);
+            bool b = SaveQueryRecord(ref request, "", codeType);
             if (b)
             {
                 //调用接口获取数据
@@ -41,7 +41,7 @@ namespace RuRo.BLL
                 {
                     //无数据
                     jsonmodel = CreatJsonMode("err", Msg, nnn);
-                    bool bb = SaveQueryRecord(request, Msg, codeType);
+                    bool bb = SaveQueryRecord(ref request, Msg, codeType);
                 }
 
             }
@@ -52,7 +52,7 @@ namespace RuRo.BLL
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
             this.request = request;
             //保存记录（查询记录数据,更新或添加）
-            bool b = SaveQueryRecord(request, "", codeType);
+            bool b = SaveQueryRecord(ref request, "", codeType);
             if (b)
             {
                 //调用接口获取数据
@@ -70,7 +70,7 @@ namespace RuRo.BLL
                 {
                     //无数据
                     jsonmodel = CreatJsonMode("err", Msg, nnn);
-                    bool bb = SaveQueryRecord(request, Msg, codeType);
+                    bool bb = SaveQueryRecord(ref request, Msg, codeType);
                 }
 
             }
@@ -96,12 +96,39 @@ namespace RuRo.BLL
             }
            string strList= JsonConvert.SerializeObject(newDicList);
            string mes=  PostData(strList);
-           if (true)
+           if (mes.Contains("{\"success\":true,"))
            {
-               
+               for (int i = 0; i < dicList.Count; i++)
+               {
+                   //把数据添加到数据库
+                   Model.NormalLisReport model = new Model.NormalLisReport();
+                   model = DicToNormalLisReportModel(dicList[i]);
+                   NormalLisReport n = new NormalLisReport();
+                   n.Add(model);
+               }
+               //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
+               //List<Model.QueryRecoder> list= bll_Q.GetReciprocalFirstData_BLL();
+               //if (list!=null||list.Count>0)
+               //{
+               //    Model.QueryRecoder = list[0];
+               //}
+              // bll_Q.UpdataQueryRecoderIsDel_BLL("user");
+               //修改QueryRecoder表为true
            }
            return mes;
         }
+
+        /// <summary>
+        /// 字典转化为model
+        /// </summary>
+        /// <returns></returns>
+        public Model.NormalLisReport DicToNormalLisReportModel(Dictionary<string,string> dic) 
+        {
+            string str = JsonConvert.SerializeObject(dic);
+            Model.NormalLisReport normalLisReport = JsonConvert.DeserializeObject<Model.NormalLisReport>(str);
+            return normalLisReport;
+        }
+
 
         private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList, string codeType)
         {
@@ -2216,43 +2243,44 @@ namespace RuRo.BLL
                                 }
                                 if (list.Count > 0)
                                 {
-                                    
-                                    for (int i = 0; i < list.Count; i++)
-                                    {
-                                        //插入数据到数据库
-                                        Model.NormalLisReport kk = new Model.NormalLisReport();
-                                        kk.hospnum = list[i].hospnum;
-                                        kk.patname = list[i].patname;
-                                        kk.Sex = list[i].Sex;
-                                        kk.Age = list[i].Age;
-                                        kk.age_month = list[i].age_month;
-                                        kk.ext_mthd = list[i].ext_mthd;
-                                        kk.chinese = list[i].chinese;
-                                        kk.result = list[i].result;
-                                        kk.units = list[i].units;
-                                        kk.ref_flag = list[i].ref_flag;
-                                        kk.lowvalue = list[i].lowvalue;
-                                        kk.highvalue = list[i].highvalue;
-                                        kk.print_ref = list[i].print_ref;
-                                        kk.check_date = list[i].check_date;
-                                        kk.check_by_name = list[i].check_by_name;
-                                        kk.prnt_order = list[i].prnt_order;
-                                        kk.IsDel = false;
-                                        NormalLisReport no = new NormalLisReport();
-                                        no.Add(kk);
-                                    }
-                                    BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
-                                    QueryRecoder bl_Q = new QueryRecoder();
-                                    //更新记录表
-                                    //DataSet ds = bll_Q.GetReciprocalFirstData_BLL();
-                                    //Model.QueryRecoder model_Q = new Model.QueryRecoder();
-                                    //model_Q.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
-                                    //model_Q.Uname = ds.Tables[0].Rows[0]["Uname"].ToString();
-                                    //model_Q.Code = ds.Tables[0].Rows[0]["Code"].ToString();
-                                    //model_Q.AddDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["AddDate"].ToString());
-                                    //model_Q.LastQueryDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["LastQueryDate"].ToString());
-                                    //model_Q.QueryType = "NormalLisReport";
-                                    //bl_Q.Update(model_Q);
+                                    #region
+                                    //for (int i = 0; i < list.Count; i++)
+                                    //{
+                                    //    //插入数据到数据库
+                                    //    Model.NormalLisReport kk = new Model.NormalLisReport();
+                                    //    kk.hospnum = list[i].hospnum;
+                                    //    kk.patname = list[i].patname;
+                                    //    kk.Sex = list[i].Sex;
+                                    //    kk.Age = list[i].Age;
+                                    //    kk.age_month = list[i].age_month;
+                                    //    kk.ext_mthd = list[i].ext_mthd;
+                                    //    kk.chinese = list[i].chinese;
+                                    //    kk.result = list[i].result;
+                                    //    kk.units = list[i].units;
+                                    //    kk.ref_flag = list[i].ref_flag;
+                                    //    kk.lowvalue = list[i].lowvalue;
+                                    //    kk.highvalue = list[i].highvalue;
+                                    //    kk.print_ref = list[i].print_ref;
+                                    //    kk.check_date = list[i].check_date;
+                                    //    kk.check_by_name = list[i].check_by_name;
+                                    //    kk.prnt_order = list[i].prnt_order;
+                                    //    kk.IsDel = false;
+                                    //    NormalLisReport no = new NormalLisReport();
+                                    //    no.Add(kk);
+                                    //}
+                                    //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
+                                    //QueryRecoder bl_Q = new QueryRecoder();
+                                    ////更新记录表
+                                    ////DataSet ds = bll_Q.GetReciprocalFirstData_BLL();
+                                    ////Model.QueryRecoder model_Q = new Model.QueryRecoder();
+                                    ////model_Q.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
+                                    ////model_Q.Uname = ds.Tables[0].Rows[0]["Uname"].ToString();
+                                    ////model_Q.Code = ds.Tables[0].Rows[0]["Code"].ToString();
+                                    ////model_Q.AddDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["AddDate"].ToString());
+                                    ////model_Q.LastQueryDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["LastQueryDate"].ToString());
+                                    ////model_Q.QueryType = "NormalLisReport";
+                                    ////bl_Q.Update(model_Q);
+                                    #endregion
                                     Msg = "";
                                 }
                             }
@@ -2275,9 +2303,9 @@ namespace RuRo.BLL
         }
         #endregion
 
-        private bool SaveQueryRecord(Model.DTO.NormalLisReportRequest resquet, string Msg, string codeType)
+        private bool SaveQueryRecord(ref Model.DTO.NormalLisReportRequest resquet, string Msg, string codeType)
         {
-            bool result;
+            bool result = false;
             QueryRecoder queryRecoder = new QueryRecoder();
             //根据传入的查询字符串创建的当此查询的记录model
             Model.QueryRecoder model = new Model.QueryRecoder();
@@ -2287,6 +2315,7 @@ namespace RuRo.BLL
             model.CodeType = codeType;
             model.QueryType = "NormalLisReport";
             model.Uname = Common.CookieHelper.GetCookieValue("username");
+            model.IsDel = false;
 
             List<Model.QueryRecoder> list = CheckQueryRecord(model);
             if (list != null && list.Count > 0)
@@ -2295,17 +2324,51 @@ namespace RuRo.BLL
                 Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
                 model.AddDate = oldModel.AddDate;
                 model.Id = oldModel.Id;
-                if (oldModel.AddDate < (oldModel.LastQueryDate))
+                DateTime dtAdd = Convert.ToDateTime(oldModel.AddDate);
+                DateTime dtLastQuery = Convert.ToDateTime(oldModel.LastQueryDate);
+                DateTime dt=DateTime.Now;//当前时间
+                int days = (dt - dtAdd).Days;//获取当前日期与添加日期时间差
+                int getDays = 0;
+                if (days > getDays)
                 {
-                    //添加日期是5天前的
                     model.IsDel = true;
+                    model.LastQueryDate = dtAdd.AddDays(5);
                 }
                 else
                 {
-                    //添加日期是距离添加日期是5天内的
-                    model.IsDel = false;
-
-                    model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " "+Msg + oldModel.QueryResult;
+                    int chaday = (dtLastQuery - dtAdd).Days;//获取最后查询日期与添加日期时间差
+                    int nowday = (dt - dtLastQuery).Days;//当前时间与最后查询时间差
+                    int addnowDay = (dt - dtAdd).Days;//当前时间与添加时间差
+                    if (nowday==0)
+                    {
+                        //resquet.jsrq00 = "";
+                        //resquet.ksrq00 = "";
+                        result = true;
+                        model.IsDel = false;
+                        model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg + oldModel.QueryResult;
+                    }
+                    if (nowday > 0)//当前时间与最后查询时间差大于0
+                    {
+                        if (addnowDay == 0)
+                        {
+                            result = true;
+                            model.IsDel = false;
+                            model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg + oldModel.QueryResult;
+                        }
+                        if (chaday >= getDays)
+                        {
+                            model.IsDel = true;
+                        }
+                        else
+                        {
+                            resquet.ksrq00 = dtLastQuery.ToString("yyyy-MM-dd");
+                            resquet.jsrq00 = dtLastQuery.AddDays(1).ToString("yyyy-MM-dd");
+                            result = true;
+                            //添加日期是距离添加日期是5天内的
+                            model.IsDel = false;
+                            model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg + oldModel.QueryResult;
+                        }
+                    }
                 }
                 //本地数据库有数据
                 result = queryRecoder.Update(model);
@@ -2315,8 +2378,15 @@ namespace RuRo.BLL
                 model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg.Trim();
                 model.AddDate = DateTime.Now;
                 model.LastQueryDate = DateTime.Now;
-                result = queryRecoder.Add(model) > 0;//使用的话会添加三条数据到Q表
-                result = true;
+                bool bo = queryRecoder.Add(model) > 0;
+                model.QueryType = "PatientDiagnose";
+                bool boo = queryRecoder.Add(model) > 0;
+                if (bo && boo)
+                {
+                    result = true;
+                }
+                else { result = false; }
+                
             }
             return result;
         }

@@ -57,7 +57,7 @@
             var code = $('#oldCode').textbox('getValue');
             var codeType = $('#oldCodeType').textbox('getValue');
             //[{ "name": "SourceType", "value": "" }, { "name": "PatientName", "value": "项恺" }, { "name": "Sex", "value": "男" }, { "name": "Birthday", "value": "2015-08-24" }, { "name": "CardId", "value": "110" }]
-
+            ajaxLoading();
             $.ajax({
                 type: "POST",
                 url: "/Sever/EmpiInfo.ashx?mode=post",
@@ -68,20 +68,23 @@
                     "codeType": codeType
                 },
                 success: function (response) {
+                    ajaxLoadEnd();
                     if (response) {
                         var res = JSON.parse(response);
-                        //|| res.Msg.indexOf('should be unique.') > -1
-                        if (res.success ) {
+                        //alert(response);
+                        if (res.success || res.message.indexOf('should be unique.') > -1) {
                             //调用方法查询数据
-                            PostNormalLisReport_list();
-                            alert(res.success);
                             postPatientDiagnose_info();
+                            PostNormalLisReport_list();
+                            $.messager.alert('提示', '样品源导入成功', 'error');
+                            //alert(res.success);
                         }
                     }
-                    alert(response.Msg);
+                    else { $.messager.alert('提示', '查询不到样品源', 'error'); }
                 }
             });
         }
+
     </script>
 </body>
 </html>

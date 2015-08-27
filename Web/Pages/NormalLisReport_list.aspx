@@ -97,8 +97,12 @@
             if (_NormalLisReport.length <= 0) {
                 $.messager.alert('提示', '未选择诊断信息或诊断信息为空', 'error'); return;
             }
+
+            var code = $('#oldCode').textbox('getValue');
+            var codeType = $('#oldCodeType').textbox('getValue');
            var  count = Math.random();
-            var rowNormalLisReport = JSON.stringify(_NormalLisReport);
+           var rowNormalLisReport = JSON.stringify(_NormalLisReport);
+           ajaxLoading();
             $.ajax({
                 type: 'post',
                 dataType: "json",
@@ -106,14 +110,24 @@
                 data: {
                     "mode": "post",
                     "count":count,
-                    "NormalLis": rowNormalLisReport
+                    "NormalLis": rowNormalLisReport,
+                    "code": code,
+                    "codeType": codeType
                 },
                 success: function (data)
                 {
+                    ajaxLoadEnd();
+                    if (data.success) {
+                        alert("OK" + data.message);
+                    }
+                    else {
+                        $.messager.alert('提示', obj.message, 'error');
+                    }
                 }
             });
 
         }
+
 </script>
 
 </body>
