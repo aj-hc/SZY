@@ -16,9 +16,9 @@ namespace RuRo.BLL
         /// 前台调用方法
         /// </summary>
         /// <returns></returns>
-        public string GetSampleSourceData(Model.DTO.PatientDiagnoseResuest request)
+        public string GetData(Model.DTO.PatientDiagnoseResuest request)
         {
-            string xmlStr = GetData(request.Request);
+            string xmlStr = GetWebServiceData(request);
             Model.DTO.JsonModel jsonmodel = StrTObject(xmlStr, request);
             return JsonConvert.SerializeObject(jsonmodel);
         }
@@ -321,25 +321,7 @@ namespace RuRo.BLL
         }
 
         #region 获取数据
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="request">获取数据的参数</param>
-        /// <returns>返回数据</returns>
-        private string GetData(string request)
-        {
-            try
-            {
-                return Test(request).Replace("\r\n","").Replace(" ","");
-                //return string.IsNullOrEmpty(request) ? "" : clinicalData.GetPatientDiagnose(request);
-            }
-            catch (Exception ex)
-            {
-                Common.LogHelper.WriteError(ex);
-                return ex.Message + "--" + DateTime.Now.ToLongTimeString();
-            }
-        }
-        private string GetData(Model.DTO.PatientDiagnoseResuest request)
+        private string GetWebServiceData(Model.DTO.PatientDiagnoseResuest request)
         {
             try
             {

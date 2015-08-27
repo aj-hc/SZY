@@ -76,7 +76,7 @@ namespace RuRo.Web.Sever
                 //bll.Add(model_Q);
                 BLL.PatientDiagnose n = new BLL.PatientDiagnose();
                // BLL.NormalLisReport cd = new BLL.NormalLisReport();
-                string jsonStrResult = n.GetSampleSourceData(new Model.DTO.PatientDiagnoseResuest(cardno,cxrq00));
+                string jsonStrResult = n.GetData(new Model.DTO.PatientDiagnoseResuest(cardno,cxrq00));
                 context.Response.Write(jsonStrResult);
             }
         }

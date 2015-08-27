@@ -27,7 +27,7 @@ namespace RuRo.BLL
             if (b)
             {
                 //调用接口获取数据
-                string xmlStr = GetData(request);
+                string xmlStr = GetWebServiceData(request);
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
                 List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
@@ -56,7 +56,7 @@ namespace RuRo.BLL
             if (b)
             {
                 //调用接口获取数据
-                string xmlStr = GetData(request);
+                string xmlStr = GetWebServiceData(request);
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
                 List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
@@ -161,7 +161,7 @@ namespace RuRo.BLL
         /// </summary>
         /// <param name="request">获取数据的参数</param>
         /// <returns>返回数据</returns>
-        private string GetData(Model.DTO.NormalLisReportRequest request)
+        private string GetWebServiceData(Model.DTO.NormalLisReportRequest request)
         {
             try
             {
