@@ -44,8 +44,8 @@
                 <!--button按钮工具栏-->
                 <td style="text-align: right;">
                     <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonInfo" iconCls="icon-search" plain="false" onclick="infoForm();">查询</a>
-                   <%-- <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonAdd" iconCls="icon-add" plain="false" onclick="newForm();">添加</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonEdit" iconCls="icon-edit" plain="false" onclick="editForm();">编辑</a>--%>
+                    <%--<a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonAdd" iconCls="icon-add" plain="false" onclick="newForm();">添加</a>--%>
+                    <%--<a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonEdit" iconCls="icon-edit" plain="false" onclick="editForm();">编辑</a>--%>
                     <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonDel" iconcls="icon-cancel" plain="false" onclick="destroy();">删除</a>
                 </td>
             </tr>
@@ -85,7 +85,7 @@
                     success: function (data) {
                         var obj = $.parseJSON(data);
                         if (obj.Qdata == "") {
-
+                           // $.messager.alert('提示', '后面没有啦！'); return;
                         }
                         else {
                             var Qdata = $.parseJSON(obj.Qdata);
@@ -97,19 +97,16 @@
                                 Qdata[i].LastQueryDate = txtqueryDate;
                             }
                             $('#QueryRecoderDg').datagrid('loadData', Qdata).datagrid('reload');
-                            $("#QueryRecoderDg").datagrid("getPager").pagination({
-                                total: total,
-                                pageNumber: page 
-                            });
+                            $("#QueryRecoderDg").datagrid("getPager").pagination({total: total, pageNumber: page });
                         }
-
                     }
                 });
             }
         });
     })
 	/*删除选择数据,多条记录PK主键参数用逗号,分开*/
-    function destroy() {
+    function destroy()
+    {
         var $QueryRecoderDg = $('#QueryRecoderDg');
         var row = $('#QueryRecoderDg').datagrid('getSelections');
         var pk = "";
@@ -126,9 +123,7 @@
                 "mode": "del",
                 "pk": pk
             },
-            success: function (data) {
-                alert(data);
-            }
+            success: function (data) { $.messager.alert('提示',data); return;}
         });
         $("#QueryRecoderDg").datagrid("clearSelections");
     }
@@ -151,9 +146,7 @@
             },
             success: function (data) {
                 var obj = $.parseJSON(data);
-                if (obj.Qdata == "") {
-
-                }
+                if (obj.Qdata == "") { $.messager.alert('错误', '查询不到数据','error'); }
                 else
                 {
                     var Qdata = $.parseJSON(obj.Qdata);
@@ -161,16 +154,13 @@
                     for (var i = 0; i < Qdata.length; i++) {
                         var txtadddate = Qdata[i].AddDate.substring(0, 10);
                         Qdata[i].AddDate = txtadddate;
-                        var txtqueryDate = Qdata[i].LastQueryDate.substring(0, 10);
+                        var txtqueryDate="";
+                        if (Qdata[i].LastQueryDate!=null) {txtqueryDate = Qdata[i].LastQueryDate.substring(0, 10);}
                         Qdata[i].LastQueryDate = txtqueryDate;
                     }
                     $('#QueryRecoderDg').datagrid('loadData', Qdata).datagrid('reload');
-                    $("#QueryRecoderDg").datagrid("getPager").pagination({
-                        total: total
-                       // pageNumber: rownumbers + 1
-                    });
+                    $("#QueryRecoderDg").datagrid("getPager").pagination({total: total});
                 }
-               
             }
         });
     }
@@ -178,9 +168,7 @@
     function postQueryRecoder()
     {
         var _QueryRecoder = $('#QueryRecoderDg').datagrid('getChecked');
-        if (_QueryRecoder.length <= 0) {
-            $.messager.alert('提示', '未选择导入信息或导入信息为空', 'error'); return;
-        }
+        if (_QueryRecoder.length <= 0) { $.messager.alert('提示', '未选择导入信息或导入信息为空', 'error'); return;}
         var count = Math.random();
         var rowQueryRecoder = JSON.stringify(_QueryRecoder);
         ajaxLoading();

@@ -20,7 +20,6 @@ function pagerFilter(data) {
     data.rows = (data.originalRows.slice(start, end));
     return data;
 }
-
 //绑定数据
 function querybycode() {
     clearForm();
@@ -76,8 +75,7 @@ function AddHours(d, value) {
     d.setHours(d.getHours() + value);
     return d;
 }
-
-
+//查询NormalLisReport数据
 function GetNormalLisReportInfo() {
     //<Request>
     //  <hospnum></hospnum>
@@ -118,7 +116,7 @@ function GetNormalLisReportInfo() {
         });
     }
 }
-
+//查询PatientDiagnose数据
 function GetPatientDiagnoseInfo() {
     //<Request>
     //  <cardno></cardno>
@@ -160,7 +158,6 @@ function clearForm() {
     $('#NormalLisReportForm').form('clear');
     $('#NormalLisReportForm').form('clear');
 }
-
 //条码框按钮回车事件
 $(function () {
     $("input", $("#code").next("span")).keydown(function (e) {
@@ -197,8 +194,6 @@ function postPatientInfo() {
         postEmpiInfo();
     }
 }
-
-
 function getSampleInfoFormData() {
     var sampleinfo = $("#SampleInfoForm").serializeArray();
     var ii = $("#_116").combobox('getText');
@@ -226,9 +221,7 @@ function submitFormClinicalInfoDg() {
         $('#w').window('close');
     }
 }
-function clearsetClinicalInfoDg() {
-    $('#setClinicalInfoDg').form('clear');
-}
+function clearsetClinicalInfoDg() {$('#setClinicalInfoDg').form('clear');}
 //添加样本信息到Dg
 function AddSampleInfoToDg() {
     var isValid = $('#sampleInfoFormToDg').form('validate');
@@ -245,11 +238,7 @@ function AddSampleInfoToDg() {
 
     }
 }
-function clearSampleInfoAddForm() {
-    $('#sampleInfoFormToDg').form('clear');
-}
-
-
+function clearSampleInfoAddForm() { $('#sampleInfoFormToDg').form('clear');}
 //采用jquery easyui loading css效果 
 function ajaxLoading() {
     $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");
