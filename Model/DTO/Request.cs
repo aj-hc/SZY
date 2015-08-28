@@ -5,8 +5,9 @@ using System.Text;
 
 namespace RuRo.Model.DTO
 {
-    class Request
+    public abstract class Request
     {
-        public string RequestStr { get; set; }
+        public string  Code { get; set; }
+        public string  CodeType { get; set; }
     }
 }

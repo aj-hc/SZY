@@ -147,6 +147,10 @@
     <Compile Include="SZY\NormalLisReport.cs" />
     <Compile Include="SZY\PatientDiagnose.cs" />
     <Compile Include="SZY\QueryRecoder.cs" />
+    <Compile Include="SZY\Request\EmpiInfoRequest.cs" />
+    <Compile Include="SZY\Request\NormalLisReportRequest.cs" />
+    <Compile Include="SZY\Request\PatientDiagnoseResuest.cs" />
+    <Compile Include="SZY\Request\Request.cs" />
     <Compile Include="SZY\ValidationData.cs" />
     <Compile Include="SZY\Web References\BasicData\Reference.cs" />
     <Compile Include="SZY\Web References\ClinicalData\Reference.cs" />

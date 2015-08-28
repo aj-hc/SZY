@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RuRo.Model.DTO
 {
-    public class EmpiInfoRequest
+    public class EmpiInfoRequest 
     {
         // string request = string.Format("<Request><Mzhzyh>{0}</Mzhzyh><Mzzybz>{1}</Mzzybz></Request>", Mzhzyh, Mzzybz);
         /// <summary>

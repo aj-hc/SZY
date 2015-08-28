@@ -46,7 +46,6 @@ namespace RuRo.Web.Test
             {
                 bool statu = false;
 
-
             }
             return da;
         }
