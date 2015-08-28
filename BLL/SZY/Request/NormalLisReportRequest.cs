@@ -7,14 +7,7 @@ namespace RuRo.BLL.Request
 {
     public class NormalLisReportRequest : Request
     {
-        /// <summary>
-        /// 开始日期
-        /// </summary>
-        public string ksrq00 { get; set; }
-        /// <summary>
-        /// 结束日期
-        /// </summary>
-        public string jsrq00 { get; set; }
+
         /// <summary>
         /// datagrid查询数据
         /// </summary>
@@ -30,37 +23,37 @@ namespace RuRo.BLL.Request
         public override void CreatRequest(bool quertByCode)
         {
             //此方法this.RequestStr 赋值
-            
+
             //01.按照code查询数据
             if (quertByCode)
             {
-               //检查数据是否有记录
+                //检查数据是否有记录
                 //根据code、username、type、isdel 查询数据记录
-                BLL.QueryRecoder queryRecoder = new QueryRecoder();
                 Model.QueryRecoder newModel = this.QueryRecoderModel;
+                BLL.QueryRecoder queryRecoder = new QueryRecoder();
                 List<Model.QueryRecoder> list = CheckQueryRecord(newModel);
                 if (list != null && list.Count > 0)
                 {
                     //本地数据库有数据
                     Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
                     //对比数据库数据，并更新数据库数据
+                    ContrastQueryRecoderModel(newModel, oldModel);
                 }
                 else
                 {
                     //本地数据库无数据
+                    ContrastQueryRecoderModel(newModel, null);
                 }
             }
-            else if(this.QueryRecoderModel!=null)
-            {
-                //数据肯定有记录
-            }
+            //02.datagrid 提交过来的数据
             else
             {
-
+                //数据肯定有记录
+                Model.QueryRecoder newModel = this.QueryRecoderModel;
+                //更新数据库的记录--更新X内容
             }
             //02.列表数据
         }
-
         private Model.QueryRecoder CreatQueryRecoderModel()
         {
             Model.QueryRecoder model = new Model.QueryRecoder();
@@ -87,17 +80,44 @@ namespace RuRo.BLL.Request
         }
         private Model.QueryRecoder ContrastQueryRecoderModel(Model.QueryRecoder newModel, Model.QueryRecoder oldModel)
         {
+            Model.QueryRecoder resultModel = new Model.QueryRecoder();
+            BLL.QueryRecoder queryRecoder = new QueryRecoder();
             //对比创建的model和数据库中的model。
             //对比方面：addDate、lastQueryDate、QueryResult
             int QueryDateInterval = 5;
-            var nModel = newModel;
-            int addDateDifference  = (a.AddDate - oldModel.AddDate).Days;
-            if (addDateDifference > QueryDateInterval)
+            if (newModel == null)
             {
-                //当前添加日期大于记录数据的5天
-                
+                //datatrid传回的数据
+                //
+                if ((DateTime.Now - oldModel.AddDate).Days > 6)
+                {
+                    //超时
+                    //标记删除
+                    oldModel.IsDel = true;
+                    oldModel.LastQueryDate = DateTime.Now;
+                    resultModel = oldModel;
+                    bool updateResult = if (queryRecoder.Update(resultModel))
+                    {
+                        
+                    } 
+                }
+                else if (oldModel.LastQueryDate < DateTime.Now)
+                {
+                    oldModel.LastQueryDate = DateTime.Now;
+                    resultModel = oldModel;
+                    queryRecoder.Update(resultModel);
+                }
+            }
+            else
+            {
+
             }
             return new Model.QueryRecoder();
+        }
+
+        private void CreatRequestStr(string ksrq00, string jsrq00)
+        {
+            this.RequestStr = string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", this.Code, ksrq00, jsrq00);
         }
     }
 }
