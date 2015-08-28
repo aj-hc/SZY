@@ -62,13 +62,8 @@ namespace RuRo.BLL.SZY
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
             string mes = "";
             //读取code和codeType
-            List<Model.QueryRecoder> queryRecoderList = new List<Model.QueryRecoder>();
-            foreach (Dictionary<string, string> item in dicList)
-            {
-                string listStr = JsonConvert.SerializeObject(item);
-                queryRecoderList.Add(JsonConvert.DeserializeObject<Model.QueryRecoder>(listStr));
-            }
-         //  List<Model.QueryRecoder> queryRecoderList = JsonConvert.DeserializeObject<List<Model.QueryRecoder>>(listStr);
+            string listStr = JsonConvert.SerializeObject(dicList);
+            List<Model.QueryRecoder> queryRecoderList = JsonConvert.DeserializeObject<List<Model.QueryRecoder>>(listStr);
             foreach (Model.QueryRecoder item in queryRecoderList)
             {
                 if (item.QueryType=="NormalLisReport")
