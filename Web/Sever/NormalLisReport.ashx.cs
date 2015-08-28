@@ -72,10 +72,9 @@ namespace RuRo.Web.Sever
                 //object obj = n.GetData(code, ksrq00, jsrq00, out success);
                 //ReturnData resd = new ReturnData(obj, success);
                 //string jsonStrResult = resd.Res();
-                string result = normalLisReport.GetData(request, codeType);
-                context.Response.Write(result);
 
-
+                //string result = normalLisReport.GetData(request, codeType);
+                //context.Response.Write(result);
                 Model.QueryRecoder qqq = new Model.QueryRecoder();
                 qqq.Code= code;
                 qqq.CodeType = codeType;
@@ -83,12 +82,11 @@ namespace RuRo.Web.Sever
                 qqq.Uname =Common.CookieHelper.GetCookieValue("username");
                 qqq.AddDate = DateTime.Parse(dateNow);
                 qqq.IsDel = false;
-
                 BLL.Request.NormalLisReportRequest nnnnn = new BLL.Request.NormalLisReportRequest(qqq);
                 BLL.NormalLisReport NData = new BLL.NormalLisReport();
-                NData.GetData(qqq, true);
+                string result= NData.GetData(qqq, true);
+                context.Response.Write(result);
                 //NData.GetData(BLL.Request.Request r);
-
             }
         }
 

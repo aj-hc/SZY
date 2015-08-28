@@ -91,7 +91,7 @@ namespace RuRo.BLL.Request
             //对比方面：addDate、lastQueryDate、QueryResult
             int QueryDateInterval = 5;
             var nModel = newModel;
-            int addDateDifference  = (a.AddDate - oldModel.AddDate).Days;
+            int addDateDifference = (nModel.AddDate - oldModel.AddDate).Days;
             if (addDateDifference > QueryDateInterval)
             {
                 //当前添加日期大于记录数据的5天

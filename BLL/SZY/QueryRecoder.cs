@@ -67,8 +67,12 @@ namespace RuRo.BLL.SZY
               string code= dicList[i]["Code"];
               string codeType = dicList[i]["CodeType"];
               string date = dicList[i]["LastQueryDate"];
-              Model.DTO.NormalLisReportRequest mo = new Model.DTO.NormalLisReportRequest(code, date);
+              Model.QueryRecoder model= new Model.QueryRecoder();
+              model = DicToQueryRecoderModel(dicList[i]);
               BLL.NormalLisReport bll_N = new NormalLisReport();
+              string result = bll_N.GetData(model,false);
+
+              Model.DTO.NormalLisReportRequest mo = new Model.DTO.NormalLisReportRequest(code, date);
               Model.DTO.JsonModel jsonModel_N = bll_N.GetData(mo, codeType, "");
               if (jsonModel_N.Statu=="ok")
               {
@@ -91,6 +95,17 @@ namespace RuRo.BLL.SZY
               }
             }
             return mes;
+        }
+
+        /// <summary>
+        /// 字典转化为model
+        /// </summary>
+        /// <returns></returns>
+        public Model.QueryRecoder DicToQueryRecoderModel(Dictionary<string, string> dic)
+        {
+            string str = JsonConvert.SerializeObject(dic);
+            Model.QueryRecoder queryRecoder = JsonConvert.DeserializeObject<Model.QueryRecoder>(str);
+            return queryRecoder;
         }
         /// <summary>
         /// 将数据转化为List
