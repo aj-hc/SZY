@@ -62,6 +62,30 @@ namespace RuRo.BLL.SZY
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
             string mes = "";
             //读取code和codeType
+            List<Model.QueryRecoder> queryRecoderList = new List<Model.QueryRecoder>();
+            foreach (Dictionary<string, string> item in dicList)
+            {
+                string listStr = JsonConvert.SerializeObject(item);
+                queryRecoderList.Add(JsonConvert.DeserializeObject<Model.QueryRecoder>(listStr));
+            }
+         //  List<Model.QueryRecoder> queryRecoderList = JsonConvert.DeserializeObject<List<Model.QueryRecoder>>(listStr);
+            foreach (Model.QueryRecoder item in queryRecoderList)
+            {
+                if (item.QueryType=="NormalLisReport")
+                {
+                    BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(item);
+                    BLL.NormalLisReport nr = new NormalLisReport();
+                    nrr.CreatRequest(false);
+                    nr.GetData(item,false);
+                }
+                else if (item.QueryType == "PatientDiagnose")
+                {
+                    BLL.Request.PatientDiagnoseResuest nrr = new Request.PatientDiagnoseResuest(item);
+                    //BLL.PatientDiagnoseResuest nr = new PatientDiagnoseResuest();
+                    //nrr.CreatRequest(false);
+                    //nr.GetData(item, false);
+                }
+            }
             for (int i = 0; i < dicList.Count; i++)
             {
               string code= dicList[i]["Code"];
@@ -130,7 +154,12 @@ namespace RuRo.BLL.SZY
             foreach (Model.QueryRecoder item in pageClinicalInfoList)
             {
                 //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
-                ClinicalInfoDgDicList.Add(FormToDic.ConvertModelToDic(item));
+                Dictionary<string, string> dic = FormToDic.ConvertModelToDic(item);
+                if (dic.Keys.Contains("AddDate"))
+                {
+                    dic["AddDate"] = item.AddDate.ToString("yyyy-MM-dd");
+                }
+                ClinicalInfoDgDicList.Add(dic);
             }
             return ClinicalInfoDgDicList;
         }
