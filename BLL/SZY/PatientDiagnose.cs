@@ -19,8 +19,38 @@ namespace RuRo.BLL
         /// <returns></returns>
         public string GetData(Model.DTO.PatientDiagnoseResuest request)
         {
-            string xmlStr = GetWebServiceData(request);
-            Model.DTO.JsonModel jsonmodel = StrTObject(xmlStr, request);
+            //string xmlStr = GetWebServiceData(request);
+            //Model.DTO.JsonModel jsonmodel = StrTObject(xmlStr, request);
+            //return JsonConvert.SerializeObject(jsonmodel);
+            return "";
+        }
+
+        public string GetData(Model.QueryRecoder model, bool queryBycode)
+        {
+            BLL.Request.PatientDiagnoseResuest cq = new Request.PatientDiagnoseResuest(model);
+            cq.CreatRequest(true);
+            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
+            //保存记录（查询记录数据,更新或添加）
+            if (string.IsNullOrEmpty(cq.RequestStr))
+            {
+                //调用接口获取数据
+                string xmlStr = GetWebServiceData(cq.RequestStr);
+                string Msg = "";
+                //将xml数据转换成list集合会查询本地数据库去除重复项
+                List<Model.PatientDiagnose> nnn = this.GetList(xmlStr, out Msg);
+
+                if (nnn != null && nnn.Count > 0)
+                {
+                    //有数据
+                    jsonmodel = CreatJsonMode("ok", Msg, nnn);
+                }
+                else
+                {
+                    //无数据
+                    jsonmodel = CreatJsonMode("err", Msg, nnn);
+                }
+
+            }
             return JsonConvert.SerializeObject(jsonmodel);
         }
 
@@ -51,6 +81,8 @@ namespace RuRo.BLL
             }
             return jsonmodel;
         }
+
+
         public string PostData(string formData, string code, string codeType)
         {
             Dictionary<string, string> dic = GetBaseInfoDic(formData);
@@ -327,11 +359,11 @@ namespace RuRo.BLL
         }
 
         #region 获取数据
-        private string GetWebServiceData(Model.DTO.PatientDiagnoseResuest request)
+        private string GetWebServiceData(string request)
         {
             try
             {
-                return TestAnd(request).Replace("\r\n", "").Replace(" ", "");
+                return TestAnd(new Model.DTO.PatientDiagnoseResuest("", "")).Replace("\r\n", "").Replace(" ", "");
                 //return string.IsNullOrEmpty(request.Request) ? "" : clinicalData.GetPatientDiagnose(request.Request);
             }
             catch (Exception ex)

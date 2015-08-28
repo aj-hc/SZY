@@ -66,17 +66,18 @@ namespace RuRo.Web.Sever
                 string dateNow = context.Request.Params["dateNow"];
                 string codeType = context.Request.Params["codeType"];
                 string date = DateTime.Now.ToString("yyyy-MM-dd");
-                //Model.QueryRecoder model_Q = new Model.QueryRecoder();
-                //model_Q.Uname = Common.CookieHelper.GetCookieValue("username");
-                //model_Q.Code = cardno;
-                //model_Q.AddDate = Convert.ToDateTime(date);
-                //model_Q.LastQueryDate = Convert.ToDateTime(date);
-                //BLL.QueryRecoder bll = new BLL.QueryRecoder();
-                //bll.Add(model_Q);
-                //bll.Add(model_Q);
                 BLL.PatientDiagnose n = new BLL.PatientDiagnose();
-               // BLL.NormalLisReport cd = new BLL.NormalLisReport();
-                string jsonStrResult = n.GetData(new Model.DTO.PatientDiagnoseResuest(cardno,cxrq00));
+                Model.QueryRecoder qqq = new Model.QueryRecoder();
+                qqq.Code = cardno;
+                qqq.CodeType = codeType;
+                qqq.QueryType = "PatientDiagnose";
+                qqq.Uname = Common.CookieHelper.GetCookieValue("username");
+                qqq.AddDate = DateTime.Parse(dateNow);
+                qqq.IsDel = false;
+                BLL.Request.PatientDiagnoseResuest nnnnn = new BLL.Request.PatientDiagnoseResuest(qqq);
+                BLL.PatientDiagnose NData = new BLL.PatientDiagnose();
+                string jsonStrResult= NData.GetData(qqq, true);
+                //string jsonStrResult = n.GetData(new Model.DTO.PatientDiagnoseResuest(cardno,cxrq00));
                 context.Response.Write(jsonStrResult);
             }
         }
