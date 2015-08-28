@@ -11,7 +11,7 @@ namespace RuRo.BLL.Request
         //{
         //    this.RequestStr = string.Format("<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00></Request>", cardno, cxrq00);
         //}
-        public override void CreatRequest()
+        public override void CreatRequest(bool quertByCode)
         {
             throw new NotImplementedException();
         }

@@ -13,7 +13,7 @@ namespace RuRo.BLL.Request
             this.Code = code;
             this.CodeType = codeType;
         }
-        public override void CreatRequest()
+        public override void CreatRequest(bool quertByCode)
         {
            this.RequestStr =string.Format("<Request><Mzhzyh>{0}</Mzhzyh><Mzzybz>{1}</Mzzybz></Request>", this.Code, this.CodeType);
         }

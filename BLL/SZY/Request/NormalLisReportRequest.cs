@@ -16,36 +16,23 @@ namespace RuRo.BLL.Request
         /// </summary>
         public string jsrq00 { get; set; }
         /// <summary>
-        /// 构造函数 按照code查询数据
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="date"></param>
-        public NormalLisReportRequest(string code, DateTime date)
-        {
-            this.Date = date;
-            this.Code = code;
-        }
-        /// <summary>
         /// datagrid查询数据
         /// </summary>
-        /// <param name="ksrq00"></param>
-        /// <param name="jsrq00"></param>
-        public NormalLisReportRequest(string ksrq00, string jsrq00)
+        public NormalLisReportRequest(Model.QueryRecoder queryRecoder)
         {
-            this.ksrq00 = ksrq00;
-            this.jsrq00 = jsrq00;
+            this.QueryRecoderModel = queryRecoder;
         }
 
         /// <summary>
         /// 创建获取webservice数据的连接字符串
         /// </summary>
         /// <returns></returns>
-        public override void CreatRequest()
+        public override void CreatRequest(bool quertByCode)
         {
             //此方法this.RequestStr 赋值
             
-            //01.按照code查询数据--会传入查询日期
-            if (this.Date!=null)
+            //01.按照code查询数据
+            if (quertByCode)
             {
                //检查数据是否有记录
                 //根据code、username、type、isdel 查询数据记录
@@ -63,10 +50,13 @@ namespace RuRo.BLL.Request
                     //本地数据库无数据
                 }
             }
+            else if(this.QueryRecoderModel!=null)
+            {
+                //数据肯定有记录
+            }
             else
             {
-                //日期为空
-                //数据肯定有记录----需要更新查询记录信息
+
             }
             //02.列表数据
         }
@@ -94,6 +84,12 @@ namespace RuRo.BLL.Request
 
             //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
             return queryRecoder.GetModelList(strWhere.ToString());
+        }
+        private Model.QueryRecoder ChangeQueryRecoderModel(Model.QueryRecoder model,Model.QueryRecoder oldModel)
+        {
+            //对比创建的model和数据库中的model。
+            //对比方面：lastQueryDate
+            return model;
         }
     }
 }

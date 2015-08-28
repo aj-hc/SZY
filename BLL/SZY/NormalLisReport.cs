@@ -47,6 +47,13 @@ namespace RuRo.BLL
             }
             return JsonConvert.SerializeObject(jsonmodel);
         }
+
+        public string GetData(BLL.Request.Request request ,bool queryBycode)
+        {
+            request.CreatRequest(true);
+            string rStr = request.RequestStr;
+            return "";
+        }
         public Model.DTO.JsonModel GetData(Model.DTO.NormalLisReportRequest request, string codeType,string t)
         {
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };

@@ -28,6 +28,6 @@ namespace RuRo.BLL.Request
         /// 创建查询字符串
         /// </summary>
         /// <returns></returns>
-        public abstract void CreatRequest();
+        public abstract void CreatRequest(bool quertByCode);
     }
 }
