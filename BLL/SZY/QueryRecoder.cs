@@ -62,6 +62,25 @@ namespace RuRo.BLL.SZY
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
             string mes = "";
             //读取code和codeType
+            string listStr = JsonConvert.SerializeObject(dicList);
+            List<Model.QueryRecoder> queryRecoderList = JsonConvert.DeserializeObject<List<Model.QueryRecoder>>(listStr);
+            foreach (Model.QueryRecoder item in queryRecoderList)
+            {
+                if (item.QueryType=="NormalLisReport")
+                {
+                    BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(item);
+                    BLL.NormalLisReport nr = new NormalLisReport();
+                    nrr.CreatRequest(false);
+                    nr.GetData(item,false);
+                }
+                else if (item.QueryType == "PatientDiagnose")
+                {
+                    BLL.Request.PatientDiagnoseResuest nrr = new Request.PatientDiagnoseResuest(item);
+                    //BLL.PatientDiagnoseResuest nr = new PatientDiagnoseResuest();
+                    //nrr.CreatRequest(false);
+                    //nr.GetData(item, false);
+                }
+            }
             for (int i = 0; i < dicList.Count; i++)
             {
               string code= dicList[i]["Code"];

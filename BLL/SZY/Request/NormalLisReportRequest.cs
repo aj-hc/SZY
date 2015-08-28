@@ -96,7 +96,8 @@ namespace RuRo.BLL.Request
                     oldModel.IsDel = true;
                     oldModel.LastQueryDate = DateTime.Now;
                     resultModel = oldModel;
-                    bool updateResult = if (queryRecoder.Update(resultModel))
+                    bool updateResult =queryRecoder.Update(resultModel);
+                    if (updateResult)
                     {
                         
                     } 
