@@ -79,13 +79,14 @@ namespace RuRo.Web.Sever
                 Model.QueryRecoder qqq = new Model.QueryRecoder();
                 qqq.Code= code;
                 qqq.CodeType = codeType;
-                qqq.QueryType = "N";
+                qqq.QueryType = "NormalLisReport";
                 qqq.Uname =Common.CookieHelper.GetCookieValue("username");
                 qqq.AddDate = DateTime.Parse(dateNow);
                 qqq.IsDel = false;
 
                 BLL.Request.NormalLisReportRequest nnnnn = new BLL.Request.NormalLisReportRequest(qqq);
                 BLL.NormalLisReport NData = new BLL.NormalLisReport();
+                NData.GetData(qqq, true);
                 //NData.GetData(BLL.Request.Request r);
 
             }

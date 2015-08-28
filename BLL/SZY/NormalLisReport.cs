@@ -20,7 +20,7 @@ namespace RuRo.BLL
         /// <returns></returns>
         public string GetData(Model.DTO.NormalLisReportRequest request, string codeType)
         {
-            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() {  Statu="err", Msg="无数据",Data=""};
+            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
             this.request = request;
             //保存记录（查询记录数据,更新或添加）
             bool b = SaveQueryRecord(ref request, "", codeType);
@@ -31,7 +31,7 @@ namespace RuRo.BLL
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
                 List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
-              
+
                 if (nnn != null && nnn.Count > 0)
                 {
                     //有数据
@@ -48,13 +48,36 @@ namespace RuRo.BLL
             return JsonConvert.SerializeObject(jsonmodel);
         }
 
-        public string GetData(BLL.Request.Request request ,bool queryBycode)
+        public string GetData(Model.QueryRecoder model, bool queryBycode)
         {
-            request.CreatRequest(true);
-            string rStr = request.RequestStr;
-            return "";
+            BLL.Request.NormalLisReportRequest cq = new Request.NormalLisReportRequest(model);
+            cq.CreatRequest(true);
+            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
+
+            //保存记录（查询记录数据,更新或添加）
+            if (string.IsNullOrEmpty(cq.RequestStr))
+            {
+                //调用接口获取数据
+                string xmlStr = GetWebServiceData(cq.RequestStr);
+                string Msg = "";
+                //将xml数据转换成list集合会查询本地数据库去除重复项
+                List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
+
+                if (nnn != null && nnn.Count > 0)
+                {
+                    //有数据
+                    jsonmodel = CreatJsonMode("ok", Msg, nnn);
+                }
+                else
+                {
+                    //无数据
+                    jsonmodel = CreatJsonMode("err", Msg, nnn);
+                }
+
+            }
+            return JsonConvert.SerializeObject(jsonmodel);
         }
-        public Model.DTO.JsonModel GetData(Model.DTO.NormalLisReportRequest request, string codeType,string t)
+        public Model.DTO.JsonModel GetData(Model.DTO.NormalLisReportRequest request, string codeType, string t)
         {
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
             this.request = request;
@@ -88,46 +111,46 @@ namespace RuRo.BLL
             List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList, codeType);
             for (int i = 0; i < newDicList.Count; i++)
             {
-                newDicList[i].Add("Sample Source",code);
-                switch (newDicList[i]["性别"]) 
+                newDicList[i].Add("Sample Source", code);
+                switch (newDicList[i]["性别"])
                 {
                     case "M": newDicList[i]["性别"] = "男";
-                    break;
+                        break;
                     case "F": newDicList[i]["性别"] = "女";
-                    break;
+                        break;
                     default: newDicList[i].Remove("性别");
-                    break;
+                        break;
                 }
             }
-           string strList= JsonConvert.SerializeObject(newDicList);
-           string mes=  PostData(strList);
-           if (mes.Contains("{\"success\":true,"))
-           {
-               for (int i = 0; i < dicList.Count; i++)
-               {
-                   //把数据添加到数据库
-                   Model.NormalLisReport model = new Model.NormalLisReport();
-                   model = DicToNormalLisReportModel(dicList[i]);
-                   NormalLisReport n = new NormalLisReport();
-                   n.Add(model);
-               }
-               //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
-               //List<Model.QueryRecoder> list= bll_Q.GetReciprocalFirstData_BLL();
-               //if (list!=null||list.Count>0)
-               //{
-               //    Model.QueryRecoder = list[0];
-               //}
-              // bll_Q.UpdataQueryRecoderIsDel_BLL("user");
-               //修改QueryRecoder表为true
-           }
-           return mes;
+            string strList = JsonConvert.SerializeObject(newDicList);
+            string mes = PostData(strList);
+            if (mes.Contains("{\"success\":true,"))
+            {
+                for (int i = 0; i < dicList.Count; i++)
+                {
+                    //把数据添加到数据库
+                    Model.NormalLisReport model = new Model.NormalLisReport();
+                    model = DicToNormalLisReportModel(dicList[i]);
+                    NormalLisReport n = new NormalLisReport();
+                    n.Add(model);
+                }
+                //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
+                //List<Model.QueryRecoder> list= bll_Q.GetReciprocalFirstData_BLL();
+                //if (list!=null||list.Count>0)
+                //{
+                //    Model.QueryRecoder = list[0];
+                //}
+                // bll_Q.UpdataQueryRecoderIsDel_BLL("user");
+                //修改QueryRecoder表为true
+            }
+            return mes;
         }
 
         /// <summary>
         /// 字典转化为model
         /// </summary>
         /// <returns></returns>
-        public Model.NormalLisReport DicToNormalLisReportModel(Dictionary<string,string> dic) 
+        public Model.NormalLisReport DicToNormalLisReportModel(Dictionary<string, string> dic)
         {
             string str = JsonConvert.SerializeObject(dic);
             Model.NormalLisReport normalLisReport = JsonConvert.DeserializeObject<Model.NormalLisReport>(str);
@@ -199,6 +222,19 @@ namespace RuRo.BLL
             {
                 return Test(request);
                 // return string.IsNullOrEmpty(request.Request) ? "" : clinicalData.GetNormalLisItems(request.Request);
+            }
+            catch (Exception ex)
+            {
+                Common.LogHelper.WriteError(ex);
+                return ex.Message + "--" + DateTime.Now.ToLongTimeString();
+            }
+        }
+        private string GetWebServiceData(string request)
+        {
+            try
+            {
+                return Test(new Model.DTO.NormalLisReportRequest("", ""));
+                // return string.IsNullOrEmpty(request) ? "" : clinicalData.GetNormalLisItems(request);
             }
             catch (Exception ex)
             {
@@ -2331,7 +2367,7 @@ namespace RuRo.BLL
                 model.Id = oldModel.Id;
                 DateTime dtAdd = Convert.ToDateTime(oldModel.AddDate);
                 DateTime dtLastQuery = Convert.ToDateTime(oldModel.LastQueryDate);
-                DateTime dt=DateTime.Now;//当前时间
+                DateTime dt = DateTime.Now;//当前时间
                 int days = (dt - dtAdd).Days;//获取当前日期与添加日期时间差
                 int getDays = 0;
                 if (days > getDays)
@@ -2344,7 +2380,7 @@ namespace RuRo.BLL
                     int chaday = (dtLastQuery - dtAdd).Days;//获取最后查询日期与添加日期时间差
                     int nowday = (dt - dtLastQuery).Days;//当前时间与最后查询时间差
                     int addnowDay = (dt - dtAdd).Days;//当前时间与添加时间差
-                    if (nowday==0)
+                    if (nowday == 0)
                     {
                         //resquet.jsrq00 = "";
                         //resquet.ksrq00 = "";
@@ -2391,7 +2427,7 @@ namespace RuRo.BLL
                     result = true;
                 }
                 else { result = false; }
-                
+
             }
             return result;
         }

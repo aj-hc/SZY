@@ -37,13 +37,13 @@ namespace RuRo.BLL.Request
                //检查数据是否有记录
                 //根据code、username、type、isdel 查询数据记录
                 BLL.QueryRecoder queryRecoder = new QueryRecoder();
-                Model.QueryRecoder model = CreatQueryRecoderModel();
-                List<Model.QueryRecoder> list = CheckQueryRecord(model);
+                Model.QueryRecoder newModel = this.QueryRecoderModel;
+                List<Model.QueryRecoder> list = CheckQueryRecord(newModel);
                 if (list != null && list.Count > 0)
                 {
                     //本地数据库有数据
                     Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
-
+                    //对比数据库数据，并更新数据库数据
                 }
                 else
                 {
@@ -80,16 +80,24 @@ namespace RuRo.BLL.Request
             strWhere.AppendFormat("Code = {0} and ", "'" + model.Code + "'");
             strWhere.AppendFormat("CodeType = {0} and ", "'" + model.CodeType + "'");
             strWhere.AppendFormat("QueryType = {0} and  ", "'" + model.QueryType + "'");
-            strWhere.AppendFormat("IsDel = {0}", "'" + false + "'");
+            strWhere.AppendFormat("IsDel = {0}", "'" + model.IsDel + "'");
 
             //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
             return queryRecoder.GetModelList(strWhere.ToString());
         }
-        private Model.QueryRecoder ChangeQueryRecoderModel(Model.QueryRecoder model,Model.QueryRecoder oldModel)
+        private Model.QueryRecoder ContrastQueryRecoderModel(Model.QueryRecoder newModel, Model.QueryRecoder oldModel)
         {
             //对比创建的model和数据库中的model。
-            //对比方面：lastQueryDate
-            return model;
+            //对比方面：addDate、lastQueryDate、QueryResult
+            int QueryDateInterval = 5;
+            var nModel = newModel;
+            int addDateDifference  = (a.AddDate - oldModel.AddDate).Days;
+            if (addDateDifference > QueryDateInterval)
+            {
+                //当前添加日期大于记录数据的5天
+                
+            }
+            return new Model.QueryRecoder();
         }
     }
 }
