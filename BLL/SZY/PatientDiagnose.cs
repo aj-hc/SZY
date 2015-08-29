@@ -29,27 +29,28 @@ namespace RuRo.BLL
         {
             BLL.Request.PatientDiagnoseResuest cq = new Request.PatientDiagnoseResuest(model);
             cq.CreatRequest(true);
+            Model.QueryRecoder queryRecoderModel = cq.QueryRecoderModel;
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
-            //保存记录（查询记录数据,更新或添加）
-            if (string.IsNullOrEmpty(cq.RequestStr))
+            //保存记录（查询记录数据,更新或添加）  string.IsNullOrEmpty(cq.RequestStr)存在值 修改修！string.IsNullOrEmpty(cq.RequestStr) kaka
+            if (!string.IsNullOrEmpty(cq.RequestStr))
             {
                 //调用接口获取数据
                 string xmlStr = GetWebServiceData(cq.RequestStr);
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
                 List<Model.PatientDiagnose> nnn = this.GetList(xmlStr, out Msg);
-
                 if (nnn != null && nnn.Count > 0)
                 {
                     //有数据
                     jsonmodel = CreatJsonMode("ok", Msg, nnn);
+                    ChangeQueryRecordStatu(cq, Msg);
                 }
                 else
                 {
                     //无数据
                     jsonmodel = CreatJsonMode("err", Msg, nnn);
+                    ChangeQueryRecordStatu(cq, Msg);
                 }
-
             }
             return JsonConvert.SerializeObject(jsonmodel);
         }
@@ -230,7 +231,8 @@ namespace RuRo.BLL
                                 foreach (XmlNode item in xnl)
                                 {
                                     Model.PatientDiagnose nn = this.XmlTomModel(item);
-                                    if (Common.MatchDic.NeedRecordDic.Keys.Contains(nn.Cardno))//这里需要改
+                                    if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.CardId))//这里需要改
+                                    //if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.Cardno))//这里需要改
                                     {
                                         if (!this.CheckData(nn))
                                         {
@@ -276,7 +278,8 @@ namespace RuRo.BLL
             try
             {
                 nlr = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strNode);
-                if (!string.IsNullOrEmpty(nlr.Cardno) && Common.MatchDic.NeedRecordDic.Keys.Contains(nlr.CardId))//这里需要改
+                //if (!string.IsNullOrEmpty(nlr.Cardno) && Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nlr.CardId))//这里需要改
+                if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nlr.CardId))//这里需要改
                 {
                     nlr.id = id;
                     id++;
@@ -357,13 +360,50 @@ namespace RuRo.BLL
             //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
             return queryRecoder.GetModelList(strWhere.ToString());
         }
+        #region 查询完WebService之后更新记录表
+        /// <summary>
+        /// 查询完WebService之后更新记录表
+        /// </summary>
+        /// <param name="cq">记录表对象</param>
+        /// <param name="msg">查询之后的消息</param>
+        private void ChangeQueryRecordStatu(BLL.Request.Request cq, string msg)
+        {
+            Model.QueryRecoder queryRecoder = cq.QueryRecoderModel;
+            int queryDateInterval = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["QueryDateInterval"].Trim());
+            if (queryRecoder != null)
+            {
+                try
+                {
+                    if ((DateTime.Now - queryRecoder.AddDate).Days > queryDateInterval)
+                    {
+                        //超时数据
+                        queryRecoder.LastQueryDate = DateTime.Now;
+                        queryRecoder.IsDel = true;
+                    }
+                    else
+                    {
+                        //不超时数据
+                        queryRecoder.LastQueryDate = DateTime.Now;
+                    }
+                    queryRecoder.QueryResult = ("&nbsp" + DateTime.Now.ToLocalTime() + " " + msg + queryRecoder.QueryResult);
+                    QueryRecoder q = new QueryRecoder();
+                    q.Update(queryRecoder);
+                }
+                catch (Exception ex)
+                {
+                    Common.LogHelper.WriteError(ex);
+                }
+
+            }
+        }
+        #endregion
 
         #region 获取数据
         private string GetWebServiceData(string request)
         {
             try
             {
-                return TestAnd(new Model.DTO.PatientDiagnoseResuest("", "")).Replace("\r\n", "").Replace(" ", "");
+                return TestAnd(new Model.DTO.PatientDiagnoseResuest("", "2015-01-01")).Replace("\r\n", "").Replace(" ", "");
                 //return string.IsNullOrEmpty(request.Request) ? "" : clinicalData.GetPatientDiagnose(request.Request);
             }
             catch (Exception ex)
