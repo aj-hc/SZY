@@ -6,6 +6,7 @@ using System.Text;
 using System.Data;
 using System.Xml;
 using System.Web.Configuration;
+using System.Web.Script.Serialization;
 
 namespace RuRo.BLL
 {
@@ -38,7 +39,8 @@ namespace RuRo.BLL
                 string xmlStr = GetWebServiceData(cq.RequestStr);
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
-                List<Model.PatientDiagnose> nnn = this.GetList(xmlStr, out Msg);
+                List<Model.PatientDiagnose> nnn = this.GetList(xmlStr, out Msg, model.Code, queryBycode);
+                //nnn.Add(model.Code);
                 if (nnn != null && nnn.Count > 0)
                 {
                     //有数据
@@ -66,7 +68,8 @@ namespace RuRo.BLL
                 string xmlStr = GetData(request);
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
-                List<Model.PatientDiagnose> nnn = this.GetList(xmlStr, out Msg);
+                List<Model.PatientDiagnose> nnn = new List<Model.PatientDiagnose>();
+                //List<Model.PatientDiagnose> nnn = this.GetList(xmlStr, out Msg);
 
                 if (nnn != null && nnn.Count > 0)
                 {
@@ -84,7 +87,7 @@ namespace RuRo.BLL
         }
 
 
-        public string PostData(string formData, string code, string codeType)
+        public string PostData(string formData, string code, string codeType, string username)
         {
             Dictionary<string, string> dic = GetBaseInfoDic(formData);
             Dictionary<string, string> newDic = new Dictionary<string, string>();
@@ -118,6 +121,8 @@ namespace RuRo.BLL
                 //Model.PatientDiagnose e = JsonConvert.DeserializeObject<Model.PatientDiagnose>(JsonConvert.SerializeObject(dic));
                 PatientDiagnose eee = new PatientDiagnose();
                 bool i = eee.Add(e);
+                BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
+                bll_Q.UpdataQueryRecoderIsDel_BLL(username, 0, code, "PatientDiagnose");//修改QueryRecoder表为true
             }
             return result;
         }
@@ -206,7 +211,7 @@ namespace RuRo.BLL
         /// <param name="xmlStr"></param>
         /// <param name="Msg">消息</param>
         /// <returns></returns>
-        private List<Model.PatientDiagnose> GetList(string xmlStr, out string Msg)
+        private List<Model.PatientDiagnose> GetList(string xmlStr, out string Msg, string code, bool queryBycode)
         {
             List<Model.PatientDiagnose> list = new List<Model.PatientDiagnose>();
             XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
@@ -226,22 +231,31 @@ namespace RuRo.BLL
                         {
                             //有数据
                             XmlNodeList xnl = xd.SelectNodes("//reocrd");
+                            XmlNodeList xnll = xd.SelectNodes("//DiagnoseInfo");
                             if (xnl.Count > 0)
                             {
                                 foreach (XmlNode item in xnl)
                                 {
                                     Model.PatientDiagnose nn = this.XmlTomModel(item);
-                                    if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.CardId))//这里需要改
-                                    //if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.Cardno))//这里需要改
+                                    nn.Cardno = code;
+                                    if (!Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.CardId))//这里需要改
                                     {
-                                        if (!this.CheckData(nn))
+                                        if (queryBycode)
                                         {
                                             list.Add(nn);
+                                        }
+                                        else
+                                        {
+                                            if (!this.CheckData(nn))
+                                            {
+                                                list.Add(nn);
+                                            }
                                         }
                                     }
                                 }
                                 if (list.Count > 0)
                                 {
+                                    
                                     Msg = "";
                                 }
                             }
@@ -274,27 +288,29 @@ namespace RuRo.BLL
         {
             int id = 0;
             string strNode = JsonConvert.SerializeXmlNode(xd, Newtonsoft.Json.Formatting.None, true);
+            Dictionary<string, object> dic = new Dictionary<string, object>();
             Model.PatientDiagnose nlr;
             try
             {
-                nlr = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strNode);
+                dic = JsonToDictionary(strNode);
+                if (dic.ContainsKey("DiagnoseInfo"))
+                {
+                    string strdic = JsonConvert.SerializeObject(dic["DiagnoseInfo"]);//获取节点为DiagnoseInfo的JSON
+                    Dictionary<string, string> dicc = new Dictionary<string, string>();
+                    dicc = JsonConvert.DeserializeObject<Dictionary<string, string>>(strdic);//获取后转换为另外一个DIC
+                    foreach (KeyValuePair<string, string> item in dicc) //添加到原有的DIC中
+                    {
+                        dic.Add(item.Key, item.Value); 
+                    }
+                    dic.Remove("DiagnoseInfo");
+                }
+                string strdnc = JsonConvert.SerializeObject(dic);
+                nlr = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strdnc);
                 //if (!string.IsNullOrEmpty(nlr.Cardno) && Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nlr.CardId))//这里需要改
                 if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nlr.CardId))//这里需要改
                 {
                     nlr.id = id;
-                    id++;
-                    //switch (nlr.ref_flag)
-                    //{
-                    //    case "1":
-                    //        nlr.ref_flag = "高";
-                    //        break;
-                    //    case "2":
-                    //        nlr.ref_flag = "低";
-                    //        break;
-                    //    case "3":
-                    //        nlr.ref_flag = "阳性";
-                    //        break;
-                    //}
+                    //id++;
                 }
             }
             catch (Exception ex)
@@ -303,6 +319,26 @@ namespace RuRo.BLL
                 Common.LogHelper.WriteError(ex);
             }
             return nlr;
+        }
+
+        /// <summary>
+        /// 将json数据反序列化为Dictionary
+        /// </summary>
+        /// <param name="jsonData">json数据</param>
+        /// <returns></returns>
+        private Dictionary<string, object> JsonToDictionary(string jsonData)
+        {
+            //实例化JavaScriptSerializer类的新实例
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            try
+            {
+                //将指定的 JSON 字符串转换为 Dictionary<string, object> 类型的对象
+                return jss.Deserialize<Dictionary<string, object>>(jsonData);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         #endregion
 

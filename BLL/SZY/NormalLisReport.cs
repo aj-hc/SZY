@@ -109,7 +109,7 @@ namespace RuRo.BLL
             return jsonmodel;
         }
 
-        public string PostData(string code, string codeType, string dataStr)
+        public string PostData(string code, string codeType, string dataStr, string username)
         {
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
             List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList, codeType);
@@ -138,14 +138,8 @@ namespace RuRo.BLL
                     NormalLisReport n = new NormalLisReport();
                     n.Add(model);
                 }
-                //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
-                //List<Model.QueryRecoder> list= bll_Q.GetReciprocalFirstData_BLL();
-                //if (list!=null||list.Count>0)
-                //{
-                //    Model.QueryRecoder = list[0];
-                //}
-                // bll_Q.UpdataQueryRecoderIsDel_BLL("user");
-                //修改QueryRecoder表为true
+                BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
+                bll_Q.UpdataQueryRecoderIsDel_BLL(username, 0, code, "NormalLisReport");//修改QueryRecoder表为true
             }
             return mes;
         }

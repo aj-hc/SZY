@@ -137,15 +137,12 @@ function GetPatientDiagnoseInfo() {
             },
             success: function (data) {
                 var obj = $.parseJSON(data);
-                if (obj.data==null||obj.data=="") { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+                if (obj.Statu=="ok") {
+                    $('#PatientDiagnoseForm').form("load", obj.Data[0]);
+                   
+                }
                 else {
-                    if (obj.Statu == "err") {
-                        $.messager.alert('提示', obj.msg, 'error')
-                        return;
-                    }
-                    else {
-                        $('#PatientDiagnoseForm').form("load", obj.Data);
-                    }
+                    $.messager.alert('提示', obj.msg, 'error');
                 }
             }
         });

@@ -56,8 +56,9 @@ namespace RuRo
             string code = context.Request.Params["code"];
             string codeType = context.Request.Params["codeType"];
             string strRecoder = context.Request.Params["Recoder"];
+            string username = Common.CookieHelper.GetCookieValue("username");
             BLL.SZY.QueryRecoder bll = new BLL.SZY.QueryRecoder();
-            string result = bll.PostData(strRecoder);
+            string result = bll.PostData(strRecoder, username);
             context.Response.Write(result);
 
             
@@ -227,7 +228,7 @@ namespace RuRo
             string username = Common.CookieHelper.GetCookieValue("username");
             string pageNum = context.Request.Params["pageNum"].ToString();
             string pageSize = context.Request.Params["pageSize"].ToString();
-            string strwhere = "IsDel=0 and AddDate!='" + adddate + "' and Uname='" + username + "'";
+            string strwhere = "IsDel=0 and AddDate='" + adddate + "' and Uname='" + username + "'";
             string strorder = "AddDate ASC";
             int startIndex =Convert.ToInt32(pageNum);
             int endIndex = Convert.ToInt32(pageSize);
@@ -240,7 +241,7 @@ namespace RuRo
             //List<Model.QueryRecoder> list = bll.GetModelList("IsDel=0 and AddDate!='" + adddate + "' and Uname='" + username + "' order by AddDate DESC");
             string kk = FreezerProUtility.Fp_Common.FpJsonHelper.ObjectToJsonStr(list);
             dic.Add("Qdata",kk);//添加到DIC
-            int count = bll_QueryRecoder.GetRecordCount("IsDel=0 and AddDate!='" + adddate + "' and Uname='" + username + "'");//获取表的总记录数
+            int count = bll_QueryRecoder.GetRecordCount("IsDel=0 and AddDate='" + adddate + "' and Uname='" + username + "'");//获取表的总记录数
             dic.Add("total", count.ToString());//添加到DIC
             string mes = FreezerProUtility.Fp_Common.FpJsonHelper.ObjectToJsonStr(dic);
             context.Response.Write(mes);

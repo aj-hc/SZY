@@ -118,11 +118,12 @@
                 {
                     ajaxLoadEnd();
                     if (data.success) {
-                        alert("OK" + data.message);
+                        $.messager.alert('提示', data.message);
                     }
                     else {
-                        $.messager.alert('提示', obj.message, 'error');
+                        $.messager.alert('提示', data.message);
                     }
+                    
                 }
             });
 

@@ -47,8 +47,9 @@ namespace RuRo.Web.Sever
             string empiInfo = context.Request.Params["formData"];
             string code = context.Request.Params["code"];
             string codeType = context.Request.Params["codeType"];
+            string strusername = Common.CookieHelper.GetCookieValue("username");
             BLL.PatientDiagnose bll = new BLL.PatientDiagnose();
-            string result = bll.PostData(empiInfo, code, codeType);
+            string result = bll.PostData(empiInfo, code, codeType, strusername);
             context.Response.Write(result);
         }
 
