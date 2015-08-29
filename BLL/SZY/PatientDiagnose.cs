@@ -231,7 +231,8 @@ namespace RuRo.BLL
                                 foreach (XmlNode item in xnl)
                                 {
                                     Model.PatientDiagnose nn = this.XmlTomModel(item);
-                                    if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.Cardno))//这里需要改
+                                    if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.CardId))//这里需要改
+                                    //if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.Cardno))//这里需要改
                                     {
                                         if (!this.CheckData(nn))
                                         {
@@ -277,7 +278,8 @@ namespace RuRo.BLL
             try
             {
                 nlr = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strNode);
-                if (!string.IsNullOrEmpty(nlr.Cardno) && Common.MatchDic.NeedRecordDic.Keys.Contains(nlr.CardId))//这里需要改
+                //if (!string.IsNullOrEmpty(nlr.Cardno) && Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nlr.CardId))//这里需要改
+                if (Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nlr.CardId))//这里需要改
                 {
                     nlr.id = id;
                     id++;

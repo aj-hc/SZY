@@ -136,9 +136,9 @@ function GetPatientDiagnoseInfo() {
                 "dateNow": dateNow
             },
             success: function (data) {
-                if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+                var obj = $.parseJSON(data);
+                if (obj.data==null||obj.data=="") { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
                 else {
-                    var obj = $.parseJSON(data);
                     if (obj.Statu == "err") {
                         $.messager.alert('提示', obj.msg, 'error')
                         return;
