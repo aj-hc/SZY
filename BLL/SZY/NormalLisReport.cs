@@ -51,7 +51,8 @@ namespace RuRo.BLL
         public string GetData(Model.QueryRecoder model, bool queryBycode)
         {
             BLL.Request.NormalLisReportRequest cq = new Request.NormalLisReportRequest(model);
-            cq.CreatRequest(true);
+            cq.CreatRequest(queryBycode);
+            Model.QueryRecoder queryRecoderModel = cq.QueryRecoderModel;
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
 
             //保存记录（查询记录数据,更新或添加）
