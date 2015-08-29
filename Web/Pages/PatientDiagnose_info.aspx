@@ -19,19 +19,15 @@
     <form id="PatientDiagnoseForm" method="post">
         <div id="hidden" style="display: none">
             <input class="easyui-textbox" name="Id" id="Id"/>
-            <input class="easyui-textbox" name="Patientname"  id="Patientname"/>
+            <input class="easyui-textbox" name="PatientName"  id="PatientName"/>
             <input class="easyui-textbox" name="Sex" id="Sex" />
             <input class="easyui-textbox" id="Brithday" name="Brithday"/>
             <input class="easyui-textbox" id="Tel" name="Tel" />
-            <input class="easyui-textbox" id="Cardid" name="Cardid" />
-            <input class="easyui-textbox" id="Registerno" name="Registerno" />
+            <input class="easyui-textbox" id="CardId" name="CardId" />
+            <input class="easyui-textbox" id="RegisterNo" name="RegisterNo" />
+            <input class="easyui-textbox" id="Cardno" name="Cardno" />
         </div>
         <table>
-            <tr>
-                <td>¿¨ºÅ£º</td>
-                <td>
-                    <input class="easyui-textbox" name="CardId" id="CardId" /></td>
-            </tr>
             <tr>
                 <td>ICDÂë£º</td>
                 <td>
