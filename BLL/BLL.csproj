@@ -111,6 +111,7 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -147,6 +148,7 @@
     <Compile Include="SZY\NormalLisReport.cs" />
     <Compile Include="SZY\PatientDiagnose.cs" />
     <Compile Include="SZY\QueryRecoder.cs" />
+    <Compile Include="SZY\QueryRecoderPartial.cs" />
     <Compile Include="SZY\Request\EmpiInfoRequest.cs" />
     <Compile Include="SZY\Request\NormalLisReportRequest.cs" />
     <Compile Include="SZY\Request\PatientDiagnoseResuest.cs" />

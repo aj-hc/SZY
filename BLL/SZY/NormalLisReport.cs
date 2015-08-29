@@ -14,44 +14,48 @@ namespace RuRo.BLL
         //创建获取数据对象
         ClinicalData.PacsLisReportServices clinicalData = new ClinicalData.PacsLisReportServices();
         Model.DTO.NormalLisReportRequest request;
+        #region 废除方法
         /// <summary>
         /// 前台调用方法
         /// </summary>
         /// <returns></returns>
-        public string GetData(Model.DTO.NormalLisReportRequest request, string codeType)
-        {
-            Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
-            this.request = request;
-            //保存记录（查询记录数据,更新或添加）
-            bool b = SaveQueryRecord(ref request, "", codeType);
-            if (b)
-            {
-                //调用接口获取数据
-                string xmlStr = GetWebServiceData(request);
-                string Msg = "";
-                //将xml数据转换成list集合会查询本地数据库去除重复项
-                List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
+        //public string GetData(Model.DTO.NormalLisReportRequest request, string codeType)
+        //{
+        //    Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
+        //    this.request = request;
+        //    //保存记录（查询记录数据,更新或添加）
+        //    bool b = SaveQueryRecord(ref request, "", codeType);
+        //    if (b)
+        //    {
+        //        //调用接口获取数据
+        //        string xmlStr = GetWebServiceData(request);
+        //        string Msg = "";
+        //        //将xml数据转换成list集合会查询本地数据库去除重复项
+        //        List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
 
-                if (nnn != null && nnn.Count > 0)
-                {
-                    //有数据
-                    jsonmodel = CreatJsonMode("ok", Msg, nnn);
-                }
-                else
-                {
-                    //无数据
-                    jsonmodel = CreatJsonMode("err", Msg, nnn);
-                    bool bb = SaveQueryRecord(ref request, Msg, codeType);
-                }
+        //        if (nnn != null && nnn.Count > 0)
+        //        {
+        //            //有数据
+        //            jsonmodel = CreatJsonMode("ok", Msg, nnn);
+        //        }
+        //        else
+        //        {
+        //            //无数据
+        //            jsonmodel = CreatJsonMode("err", Msg, nnn);
+        //            bool bb = SaveQueryRecord(ref request, Msg, codeType);
+        //        }
 
-            }
-            return JsonConvert.SerializeObject(jsonmodel);
-        }
+        //    }
+        //    return JsonConvert.SerializeObject(jsonmodel);
+        //}
+
+        #endregion
 
         public string GetData(Model.QueryRecoder model, bool queryBycode)
         {
             BLL.Request.NormalLisReportRequest cq = new Request.NormalLisReportRequest(model);
-            cq.CreatRequest(true);
+            cq.CreatRequest(queryBycode);
+            Model.QueryRecoder queryRecoderModel = cq.QueryRecoderModel;
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
 
             //保存记录（查询记录数据,更新或添加）
@@ -62,16 +66,17 @@ namespace RuRo.BLL
                 string Msg = "";
                 //将xml数据转换成list集合会查询本地数据库去除重复项
                 List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
-
                 if (nnn != null && nnn.Count > 0)
                 {
                     //有数据
                     jsonmodel = CreatJsonMode("ok", Msg, nnn);
+                    ChangeQueryRecordStatu(cq, Msg);
                 }
                 else
                 {
                     //无数据
                     jsonmodel = CreatJsonMode("err", Msg, nnn);
+                    ChangeQueryRecordStatu(cq, Msg);
                 }
 
             }
@@ -156,7 +161,6 @@ namespace RuRo.BLL
             Model.NormalLisReport normalLisReport = JsonConvert.DeserializeObject<Model.NormalLisReport>(str);
             return normalLisReport;
         }
-
 
         private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList, string codeType)
         {
@@ -2081,76 +2085,76 @@ namespace RuRo.BLL
         #endregion
 
         #region 将数据转换成对象 + private Model.DTO.JsonModel StrTObject(string xmlStr)
-        /// <summary>
-        /// 将数据转换成对象
-        /// </summary>
-        /// <param name="xmlStr">要转换成对象的数据</param>
-        /// <returns></returns>
-        private Model.DTO.JsonModel StrTObject(string xmlStr)
-        {
-            XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
-            Model.DTO.JsonModel jsonData = new Model.DTO.JsonModel() { Statu = "err", Data = "", Msg = "无数据" };
-            if (xd == null)
-            {
+        ///// <summary>
+        ///// 将数据转换成对象
+        ///// </summary>
+        ///// <param name="xmlStr">要转换成对象的数据</param>
+        ///// <returns></returns>
+        //private Model.DTO.JsonModel StrTObject(string xmlStr)
+        //{
+        //    XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
+        //    Model.DTO.JsonModel jsonData = new Model.DTO.JsonModel() { Statu = "err", Data = "", Msg = "无数据" };
+        //    if (xd == null)
+        //    {
 
-            }
-            else
-            {
-                if (xd.HasChildNodes)
-                {
-                    XmlNode xn = xd.SelectSingleNode("//ResultCode");
-                    if (xn != null)
-                    {
-                        if (xn.InnerText == "0")
-                        {
-                            List<Model.NormalLisReport> list = new List<Model.NormalLisReport>();
-                            //有数据
-                            XmlNodeList xnl = xd.SelectNodes("//reocrd");
-                            if (xnl.Count > 0)
-                            {
-                                foreach (XmlNode item in xnl)
-                                {
-                                    Model.NormalLisReport nn = this.XmlTomModel(item);
-                                    if (Common.MatchDic.NeedRecordDic.Keys.Contains(nn.chinese))
-                                    {
-                                        if (!this.CheckData(nn))
-                                        {
-                                            list.Add(nn);
-                                        }
-                                    }
-                                }
-                            }
-                            if (list.Count > 0)
-                            {
-                                jsonData.Data = list.OrderBy(a => a.chinese);
-                                jsonData.Statu = "ok";
-                                jsonData.Msg = "查询成功";
-                            }
-                            else
-                            {
-                                jsonData.Statu = "err";
-                                jsonData.Msg = "无数据";
-                            }
-                        }
-                        else
-                        {
-                            //查询数据出错，联接无问题
-                            jsonData.Msg = xd.SelectSingleNode("//ErrorMsg").InnerText;
-                            jsonData.Statu = "err";
-                            //保存查询记录
-                        }
-                    }
-                    else
-                    {
-                        //查询数据出错，联接无问题
-                        jsonData.Msg = xd.InnerText;
-                        jsonData.Statu = "err";
-                        //保存查询记录
-                    }
-                }
-            }
-            return jsonData;
-        }
+        //    }
+        //    else
+        //    {
+        //        if (xd.HasChildNodes)
+        //        {
+        //            XmlNode xn = xd.SelectSingleNode("//ResultCode");
+        //            if (xn != null)
+        //            {
+        //                if (xn.InnerText == "0")
+        //                {
+        //                    List<Model.NormalLisReport> list = new List<Model.NormalLisReport>();
+        //                    //有数据
+        //                    XmlNodeList xnl = xd.SelectNodes("//reocrd");
+        //                    if (xnl.Count > 0)
+        //                    {
+        //                        foreach (XmlNode item in xnl)
+        //                        {
+        //                            Model.NormalLisReport nn = this.XmlTomModel(item);
+        //                            if (Common.MatchDic.NeedRecordDic.Keys.Contains(nn.chinese))
+        //                            {
+        //                                if (!this.CheckData(nn))
+        //                                {
+        //                                    list.Add(nn);
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                    if (list.Count > 0)
+        //                    {
+        //                        jsonData.Data = list.OrderBy(a => a.chinese);
+        //                        jsonData.Statu = "ok";
+        //                        jsonData.Msg = "查询成功";
+        //                    }
+        //                    else
+        //                    {
+        //                        jsonData.Statu = "err";
+        //                        jsonData.Msg = "无数据";
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    //查询数据出错，联接无问题
+        //                    jsonData.Msg = xd.SelectSingleNode("//ErrorMsg").InnerText;
+        //                    jsonData.Statu = "err";
+        //                    //保存查询记录
+        //                }
+        //            }
+        //            else
+        //            {
+        //                //查询数据出错，联接无问题
+        //                jsonData.Msg = xd.InnerText;
+        //                jsonData.Statu = "err";
+        //                //保存查询记录
+        //            }
+        //        }
+        //    }
+        //    return jsonData;
+        //}
         #endregion
 
         #region xmlNode转换成obj + Model.NormalLisReport XmlTomModel(XmlNode xd)
@@ -2463,5 +2467,43 @@ namespace RuRo.BLL
             }
             return jsonModel;
         }
+
+        #region 查询完WebService之后更新记录表
+        /// <summary>
+        /// 查询完WebService之后更新记录表
+        /// </summary>
+        /// <param name="cq">记录表对象</param>
+        /// <param name="msg">查询之后的消息</param>
+        private void ChangeQueryRecordStatu(BLL.Request.Request cq, string msg)
+        {
+            Model.QueryRecoder queryRecoder = cq.QueryRecoderModel;
+            int queryDateInterval = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["QueryDateInterval"].Trim());
+            if (queryRecoder != null)
+            {
+                try
+                {
+                    if ((DateTime.Now - queryRecoder.AddDate).Days > queryDateInterval)
+                    {
+                        //超时数据
+                        queryRecoder.LastQueryDate = DateTime.Now;
+                        queryRecoder.IsDel = true;
+                    }
+                    else
+                    {
+                        //不超时数据
+                        queryRecoder.LastQueryDate = DateTime.Now;
+                    }
+                    queryRecoder.QueryResult = ("&nbsp" + DateTime.Now.ToLocalTime() + " " + msg + queryRecoder.QueryResult);
+                    QueryRecoder q = new QueryRecoder();
+                    q.Update(queryRecoder);
+                }
+                catch (Exception ex)
+                {
+                    Common.LogHelper.WriteError(ex);
+                }
+
+            }
+        } 
+        #endregion
     }
 }

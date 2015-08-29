@@ -72,6 +72,7 @@ namespace RuRo.BLL.SZY
                 string date = dicList[i]["LastQueryDate"];
                 //判断传入类型
                 if (model.QueryType == "NormalLisReport")
+                if (item.QueryType == "NormalLisReport")
                 {
                     BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(model);
                     BLL.NormalLisReport nr = new NormalLisReport();
@@ -86,6 +87,7 @@ namespace RuRo.BLL.SZY
                     {
                         mes = mes + "," + jsonModel_N.Msg;
                     }
+                    nr.GetData(item, false);
                 }
                 else if (model.QueryType == "PatientDiagnose")
                 {
@@ -118,6 +120,15 @@ namespace RuRo.BLL.SZY
             //        {
                         
             //        }
+            for (int i = 0; i < dicList.Count; i++)
+            {
+                string code = dicList[i]["Code"];
+                string codeType = dicList[i]["CodeType"];
+                string date = dicList[i]["LastQueryDate"];
+                Model.QueryRecoder model = new Model.QueryRecoder();
+                model = DicToQueryRecoderModel(dicList[i]);
+                BLL.NormalLisReport bll_N = new NormalLisReport();
+                string result = bll_N.GetData(model, false);
 
             //    }
             //    else if (item.QueryType == "PatientDiagnose")
@@ -128,6 +139,28 @@ namespace RuRo.BLL.SZY
             //        //nr.GetData(item, false);
             //    }
             //}
+                Model.DTO.NormalLisReportRequest mo = new Model.DTO.NormalLisReportRequest(code, date);
+                Model.DTO.JsonModel jsonModel_N = bll_N.GetData(mo, codeType, "");
+                if (jsonModel_N.Statu == "ok")
+                {
+                    mes = bll_N.PostData(code, codeType, JsonConvert.SerializeObject(jsonModel_N.Data));//导入到临床检验数据
+                }
+                else
+                {
+                    mes = mes + "," + jsonModel_N.Msg;
+                }
+                Model.DTO.PatientDiagnoseResuest po = new Model.DTO.PatientDiagnoseResuest(code, date);
+                BLL.PatientDiagnose bll_P = new PatientDiagnose();
+                Model.DTO.JsonModel jsonModel_P = bll_P.GetData(po, codeType, "");
+                if (jsonModel_P.Statu == "ok")
+                {
+                    mes = bll_N.PostData(code, codeType, JsonConvert.SerializeObject(jsonModel_P.Data));//导入到患者信息
+                }
+                else
+                {
+                    mes = mes + "," + jsonModel_P.Msg;
+                }
+            }
             return mes;
         }
 
@@ -169,6 +202,12 @@ namespace RuRo.BLL.SZY
                     dic["AddDate"] = item.AddDate.ToString("yyyy-MM-dd");
                 }
                 //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
+                ClinicalInfoDgDicList.Add(dic);
+                Dictionary<string, string> dic = FormToDic.ConvertModelToDic(item);
+                if (dic.Keys.Contains("AddDate"))
+                {
+                    dic["AddDate"] = item.AddDate.ToString("yyyy-MM-dd");
+                }
                 ClinicalInfoDgDicList.Add(dic);
             }
             return ClinicalInfoDgDicList;
