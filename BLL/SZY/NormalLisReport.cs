@@ -2431,7 +2431,6 @@ namespace RuRo.BLL
                     result = true;
                 }
                 else { result = false; }
-
             }
             return result;
         }
