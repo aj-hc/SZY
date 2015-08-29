@@ -72,7 +72,6 @@ namespace RuRo.BLL.SZY
                 string date = dicList[i]["LastQueryDate"];
                 //判断传入类型
                 if (model.QueryType == "NormalLisReport")
-                if (item.QueryType == "NormalLisReport")
                 {
                     BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(model);
                     BLL.NormalLisReport nr = new NormalLisReport();
@@ -87,7 +86,6 @@ namespace RuRo.BLL.SZY
                     {
                         mes = mes + "," + jsonModel_N.Msg;
                     }
-                    nr.GetData(item, false);
                 }
                 else if (model.QueryType == "PatientDiagnose")
                 {
@@ -203,7 +201,6 @@ namespace RuRo.BLL.SZY
                 }
                 //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
                 ClinicalInfoDgDicList.Add(dic);
-                Dictionary<string, string> dic = FormToDic.ConvertModelToDic(item);
                 if (dic.Keys.Contains("AddDate"))
                 {
                     dic["AddDate"] = item.AddDate.ToString("yyyy-MM-dd");

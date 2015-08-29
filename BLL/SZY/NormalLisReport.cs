@@ -57,9 +57,8 @@ namespace RuRo.BLL
             cq.CreatRequest(queryBycode);
             Model.QueryRecoder queryRecoderModel = cq.QueryRecoderModel;
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
-
-            //保存记录（查询记录数据,更新或添加）
-            if (string.IsNullOrEmpty(cq.RequestStr))
+            //保存记录（查询记录数据,更新或添加）  string.IsNullOrEmpty(cq.RequestStr)存在值 修改修！string.IsNullOrEmpty(cq.RequestStr) kaka
+            if (!string.IsNullOrEmpty(cq.RequestStr)) 
             {
                 //调用接口获取数据
                 string xmlStr = GetWebServiceData(cq.RequestStr);
@@ -237,7 +236,7 @@ namespace RuRo.BLL
         {
             try
             {
-                return Test(new Model.DTO.NormalLisReportRequest("", ""));
+                return Test(new Model.DTO.NormalLisReportRequest("", "2015-01-01","2015-01-01"));
                 // return string.IsNullOrEmpty(request) ? "" : clinicalData.GetNormalLisItems(request);
             }
             catch (Exception ex)
