@@ -228,7 +228,8 @@ namespace RuRo
             string username = Common.CookieHelper.GetCookieValue("username");
             string pageNum = context.Request.Params["pageNum"].ToString();
             string pageSize = context.Request.Params["pageSize"].ToString();
-            string strwhere = "IsDel=0 and AddDate='" + adddate + "' and Uname='" + username + "'";
+            //AddDate='" + adddate + "' and
+            string strwhere = "IsDel=0 and  Uname='" + username + "'";
             string strorder = "AddDate ASC";
             int startIndex =Convert.ToInt32(pageNum);
             int endIndex = Convert.ToInt32(pageSize);
