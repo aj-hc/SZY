@@ -32,7 +32,6 @@
                 <td>ICDÂë£º</td>
                 <td>
                     <input class="easyui-textbox" name="Icd" id="Icd" data-options="required:false" /></td>
-
                 <td>Õï¶ÏÃû³Æ£º</td>
                 <td>
                     <input class="easyui-textbox" name="Diagnose" id="Diagnose" data-options="required:false" /></td>
