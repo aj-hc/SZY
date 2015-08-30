@@ -29,8 +29,10 @@ namespace RuRo.BLL.Request
                 //检查数据是否有记录
                 //根据code、username、type、isdel 查询数据记录
                 Model.QueryRecoder newModel = this.QueryRecoderModel;
+                this.Code = newModel.Code;
+                this.CodeType = newModel.CodeType;
+                
                 BLL.QueryRecoder queryRecoder = new QueryRecoder();
-
                 List<Model.QueryRecoder> list = queryRecoder.CheckQueryRecord(newModel);
                 if (list != null && list.Count > 0)
                 {
@@ -258,7 +260,7 @@ namespace RuRo.BLL.Request
             DateTime datekjsrq00 = new DateTime();
             if (DateTime.TryParse(ksrq00, out dateksrq00) && DateTime.TryParse(jsrq00, out datekjsrq00))
             {
-                return string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", this.Code, dateksrq00.ToString("yyyy-MM-dd"), dateksrq00.ToString("yyyy-MM-dd"));
+                return string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", this.Code, dateksrq00.ToString("yyyy-MM-dd"), datekjsrq00.ToString("yyyy-MM-dd"));
             }
             else
             {
