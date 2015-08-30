@@ -147,10 +147,9 @@ namespace RuRo.BLL
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             Model.PatientDiagnose data = new Model.PatientDiagnose();
-
+            List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
             if (!string.IsNullOrEmpty(formStr) && formStr != "[]")
             {
-                List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
                 dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(formStr);
                 data = FormToDic.GetFromInfo<Model.PatientDiagnose>(dicList);
                 dic = FormToDic.ConvertModelToDic(data);

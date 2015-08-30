@@ -73,9 +73,9 @@ namespace RuRo.BLL.SZY
                 //判断传入类型
                 if (model.QueryType == "NormalLisReport")
                 {
-                    BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(model);
+                    //BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(model);
                     BLL.NormalLisReport nr = new NormalLisReport();
-                    nrr.CreatRequest(false);
+                    //nrr.CreatRequest(false);
                     string result = nr.GetData(model, false);
                     Model.DTO.JsonModel jsonModel_N = JsonConvert.DeserializeObject<Model.DTO.JsonModel>(result);
                     if (jsonModel_N.Statu == "ok")

@@ -115,13 +115,14 @@ namespace RuRo.BLL
             List<Dictionary<string, string>> newDicList = new List<Dictionary<string, string>>();
             if (isP)
             {
-                
+                dicList = GetClinicalInfoDgDicList_Q(dataStr);
             }
             else
             {
                 dicList = GetClinicalInfoDgDicList(dataStr);
-                newDicList = MatchClinicalDic(dicList, codeType);
+               
             }
+            newDicList = MatchClinicalDic(dicList, codeType);
             for (int i = 0; i < newDicList.Count; i++)
             {
                 newDicList[i].Add("Sample Source", code);
@@ -206,6 +207,24 @@ namespace RuRo.BLL
 
             foreach (Model.NormalLisReport item in pageClinicalInfoList)
             {
+                //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
+                ClinicalInfoDgDicList.Add(FormToDic.ConvertModelToDic(item));
+            }
+            return ClinicalInfoDgDicList;
+        }
+        private List<Dictionary<string, string>> GetClinicalInfoDgDicList_Q(string dataStr)
+        {
+            List<Model.NormalLisReport> pageClinicalInfoList = new List<Model.NormalLisReport>();
+            Model.NormalLisReport cl = new Model.NormalLisReport();
+            List<Dictionary<string, string>> ClinicalInfoDgDicList = new List<Dictionary<string, string>>();
+            if (!string.IsNullOrEmpty(dataStr) && dataStr != "[]")
+            {
+                //转换页面上的clinicalInfoDg为对象集合
+                pageClinicalInfoList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Model.NormalLisReport>>(dataStr);//转换ok
+            }
+            foreach (Model.NormalLisReport item in pageClinicalInfoList)
+            {
+                
                 //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
                 ClinicalInfoDgDicList.Add(FormToDic.ConvertModelToDic(item));
             }

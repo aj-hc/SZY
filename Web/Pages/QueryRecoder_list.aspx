@@ -29,7 +29,7 @@
                 <th field="LastQueryDate" width="100" sortable="true">最后一次查询日期</th>
                 <th field="Code" width="100" sortable="true">查询的条码号</th>
                 <th field="CodeType" width="100" sortable="true" hidden="true">条码号类型</th>
-                <th field="QueryType" width="100" sortable="true" hidden="true">查询的数据类型</th>
+                <th field="QueryType" width="100" sortable="true">查询的数据类型</th>
                 <th field="QueryResult" width="100" sortable="true">查询结果</th>
                 <th field="IsDel" width="100" sortable="true" hidden="true">isdel</th>
             </tr>
