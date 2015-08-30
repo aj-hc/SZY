@@ -60,8 +60,6 @@ namespace RuRo
             BLL.SZY.QueryRecoder bll = new BLL.SZY.QueryRecoder();
             string result = bll.PostData(strRecoder, username);
             context.Response.Write(result);
-
-            
         }
 
         /// <summary>
