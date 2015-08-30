@@ -82,6 +82,7 @@ namespace RuRo.BLL.Request
                     string lastQueryDateStr = Convert.ToDateTime(oldModel.LastQueryDate).ToString("yyyy-MM-dd");
                     //更新最后一次查询时间
                     oldModel.LastQueryDate = DateTime.Now;
+                    resultModel = oldModel;
                     try
                     {
                         bool updateResult = queryRecoder.Update(resultModel);
@@ -96,7 +97,6 @@ namespace RuRo.BLL.Request
                     {
                         Common.LogHelper.WriteError(ex);
                     }
-                    resultModel = oldModel;
                 }
                 else
                 {
@@ -109,6 +109,7 @@ namespace RuRo.BLL.Request
                     else if (oldModel.AddDate == oldModel.LastQueryDate && oldModel.AddDate < DateTime.Now)
                     {
                         oldModel.LastQueryDate = DateTime.Now;
+                        resultModel = oldModel;
                         try
                         {
                             bool updateResult = queryRecoder.Update(resultModel);
@@ -123,8 +124,6 @@ namespace RuRo.BLL.Request
                         {
                             Common.LogHelper.WriteError(ex);
                         }
-
-                        resultModel = oldModel;
                     }
                 }
                 #endregion
