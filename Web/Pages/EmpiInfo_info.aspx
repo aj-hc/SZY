@@ -76,8 +76,6 @@
                             //调用方法查询数据
                             postPatientDiagnose_info();
                             PostNormalLisReport_list();
-                            $.messager.alert('提示', '样品源导入成功', 'error');
-                            //alert(res.success);
                         }
                     }
                     else { $.messager.alert('提示', '查询不到样品源', 'error'); }
