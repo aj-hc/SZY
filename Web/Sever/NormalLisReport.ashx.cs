@@ -51,7 +51,7 @@ namespace RuRo.Web.Sever
             string strNormalLis = context.Request.Params["NormalLis"];
             string strusername = Common.CookieHelper.GetCookieValue("username");
             BLL.NormalLisReport bll = new BLL.NormalLisReport();
-            string result = bll.PostData(code, codeType, strNormalLis, strusername);
+            string result = bll.PostData(code, codeType, strNormalLis, strusername,false);
             context.Response.Write(result);
         }
 

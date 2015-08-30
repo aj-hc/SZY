@@ -109,10 +109,19 @@ namespace RuRo.BLL
             return jsonmodel;
         }
 
-        public string PostData(string code, string codeType, string dataStr, string username)
+        public string PostData(string code, string codeType, string dataStr, string username,bool isP)
         {
-            List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
-            List<Dictionary<string, string>> newDicList = MatchClinicalDic(dicList, codeType);
+            List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
+            List<Dictionary<string, string>> newDicList = new List<Dictionary<string, string>>();
+            if (isP)
+            {
+                
+            }
+            else
+            {
+                dicList = GetClinicalInfoDgDicList(dataStr);
+                newDicList = MatchClinicalDic(dicList, codeType);
+            }
             for (int i = 0; i < newDicList.Count; i++)
             {
                 newDicList[i].Add("Sample Source", code);
@@ -143,6 +152,8 @@ namespace RuRo.BLL
             }
             return mes;
         }
+
+
 
         /// <summary>
         /// 字典转化为model

@@ -81,8 +81,7 @@ namespace RuRo.BLL.SZY
                     if (jsonModel_N.Statu == "ok")
                     {
                         string strdata= JsonConvert.SerializeObject(jsonModel_N.Data);
-                        //这里需要转换 详细看文档
-                        mes = mes + nr.PostData(code, codeType, result, username);//导入到临床检验数据
+                        mes = mes + nr.PostData(code, codeType, strdata, username,true);//导入到临床检验数据
                     }
                     else
                     {
@@ -100,9 +99,7 @@ namespace RuRo.BLL.SZY
                     if (jsonModel_N.Statu == "ok")
                     {
                         string strdata = JsonConvert.SerializeObject(jsonModel_N.Data);
-                       //
-
-                        mes = mes + nr.PostData(strdata,code,codeType,username);//导入到患者信息
+                        mes = mes + nr.PostData(strdata, code, codeType, username,true);//导入到患者信息
                     }
                     else
                     {

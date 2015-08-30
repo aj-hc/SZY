@@ -86,12 +86,27 @@ namespace RuRo.BLL
             return jsonmodel;
         }
 
-
-        public string PostData(string formData, string code, string codeType, string username)
+        /// <summary>
+        /// 上传
+        /// </summary>
+        /// <param name="formData">数据</param>
+        /// <param name="code">条码</param>
+        /// <param name="codeType">条码类型</param>
+        /// <param name="username">登陆用户</param>
+        /// <param name="isP">是否批量导入</param>
+        /// <returns></returns>
+        public string PostData(string formData, string code, string codeType, string username,bool isP)
         {
-            Dictionary<string, string> dic = GetBaseInfoDic(formData);
+            Dictionary<string, string> dic = new Dictionary<string, string>();
             Dictionary<string, string> newDic = new Dictionary<string, string>();
-            
+            if (isP)
+            {
+                dic = GetBaseInfoDic_Q(formData);
+            }
+            else 
+            {
+                dic = GetBaseInfoDic(formData);
+            }
             newDic.Add("Name", code);
             newDic.Add("Sample Source", code);
             foreach (KeyValuePair<string, string> item in dic)
@@ -118,7 +133,6 @@ namespace RuRo.BLL
                 e.Flag = dic["Flag"];
                 e.DiagnoseDate = dic["DiagnoseDate"];
                 e.IsDel = true;
-                //Model.PatientDiagnose e = JsonConvert.DeserializeObject<Model.PatientDiagnose>(JsonConvert.SerializeObject(dic));
                 PatientDiagnose eee = new PatientDiagnose();
                 bool i = eee.Add(e);
                 BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
@@ -139,6 +153,24 @@ namespace RuRo.BLL
                 List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
                 dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(formStr);
                 data = FormToDic.GetFromInfo<Model.PatientDiagnose>(dicList);
+                dic = FormToDic.ConvertModelToDic(data);
+            }
+            return dic;
+        }
+        //获取基本信息字典（样本源）
+        private Dictionary<string, string> GetBaseInfoDic_Q(string formStr)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Model.PatientDiagnose data = new Model.PatientDiagnose();
+            Dictionary<string, string> dicc = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(formStr) && formStr != "[]")
+            {
+                List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
+                dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(formStr);
+                dicc = dicList[0];
+                string aa = JsonConvert.SerializeObject(dicc);
+                data = JsonConvert.DeserializeObject<Model.PatientDiagnose>(aa);
+                //data = FormToDic.GetFromInfo<Model.PatientDiagnose>(dicList);
                 dic = FormToDic.ConvertModelToDic(data);
             }
             return dic;

@@ -49,7 +49,7 @@ namespace RuRo.Web.Sever
             string codeType = context.Request.Params["codeType"];
             string strusername = Common.CookieHelper.GetCookieValue("username");
             BLL.PatientDiagnose bll = new BLL.PatientDiagnose();
-            string result = bll.PostData(empiInfo, code, codeType, strusername);
+            string result = bll.PostData(empiInfo, code, codeType, strusername,false);
             context.Response.Write(result);
         }
 
