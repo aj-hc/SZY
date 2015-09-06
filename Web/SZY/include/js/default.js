@@ -19,7 +19,6 @@ $.fn.datebox.defaults.parser = function (s) {
     } else {
         return new Date();
     }
-
 };
 //全局操作
 (function ($) {
@@ -101,8 +100,8 @@ function login() {
     $('#frmLogin').form({
         url: "Login.ashx",
         onSubmit: function () {
-            // 做某些检查 
-            // 返回 false 来阻止提交 
+            // 做某些检查
+            // 返回 false 来阻止提交
         },
         success: function (data) {
             $.messager.alert('提示', data, 'info');
@@ -460,7 +459,6 @@ function changeState(result) {
 }
 //面板关闭事件（此处调用方法给HIS相应）
 function his() {
-
 }
 
 //测试数据

@@ -1,12 +1,9 @@
 ﻿using FreezerProUtility.Fp_Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FreezerProUtility.Fp_BLL
 {
-
     public class Boxes
     {
         //判断指定名称的盒子是否存在
@@ -30,6 +27,7 @@ namespace FreezerProUtility.Fp_BLL
                 }
             }
         }
+
         public static List<Box> GetAll(Fp_Common.UnameAndPwd up, string id)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();

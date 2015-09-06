@@ -1,16 +1,15 @@
-﻿using FreezerProUtility.Fp_Common;
-using FreezerProUtility.Fp_DAL;
-using System;
+﻿using FreezerProUtility.Fp_DAL;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 namespace FreezerProUtility.Fp_BLL
 {
     public class Token
     {
         public string UserName { get; set; }
         public string PassWord { get; set; }
+
         #region 构造函数
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -21,12 +20,14 @@ namespace FreezerProUtility.Fp_BLL
             UserName = up.UserName;
             PassWord = up.PassWord;
         }
-        #endregion
+
+        #endregion 构造函数
+
         private string Get_Auth_Token()
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("username",UserName);
-            dic.Add("password",PassWord);
+            dic.Add("username", UserName);
+            dic.Add("password", PassWord);
             dic.Add("method", Fp_Common.FpMethod.gen_token.ToString());
             Fp_DAL.CallApi call = new CallApi(dic);
             string result = call.GetData();

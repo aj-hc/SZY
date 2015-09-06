@@ -1,17 +1,17 @@
 ﻿using RuRo.Common;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
 using System.Linq;
-using System.Data;
+using System.Xml;
+
 namespace RuRo.BLL
 {
     public class GetDataFromHospital
     {
-
         #region 1.0 获取基本数据
+
         #region 1.0.1 UI层调用--根据条码获取数据
+
         /// <summary>
         /// 使用条码获取数据，可能返回OPListForSpecimen单个字符串、正常数据、“”；
         /// </summary>
@@ -47,9 +47,11 @@ namespace RuRo.BLL
             }
             return result;
         }
-        #endregion
+
+        #endregion 1.0.1 UI层调用--根据条码获取数据
 
         #region 1.0.2 获取基本数据 +  private Dictionary<string, string> GetBasicDataAndToDic(string Mzhzyh, string Mzzybz)
+
         /// <summary>
         /// 获取基本数据
         /// </summary>
@@ -116,13 +118,16 @@ namespace RuRo.BLL
             }
             catch (Exception ex)
             {
+                Common.LogHelper.WriteError(ex);
                 hospitalDic.Clear();
             }
             return hospitalDic;
         }
-        #endregion
+
+        #endregion 1.0.2 获取基本数据 +  private Dictionary<string, string> GetBasicDataAndToDic(string Mzhzyh, string Mzzybz)
 
         #region 1.0.2.1 将基本数据转换成字典
+
         /// <summary>
         /// 将基本数据转换成字典
         /// </summary>
@@ -161,9 +166,11 @@ namespace RuRo.BLL
             }
             return BasicDataDic;
         }
-        #endregion
+
+        #endregion 1.0.2.1 将基本数据转换成字典
 
         #region 1.0.3 将基本数据转换成前台页面需要的字符串
+
         /// <summary>
         /// 将基本数据转换成前台页面需要的字符串
         /// </summary>
@@ -187,6 +194,7 @@ namespace RuRo.BLL
                                 BasicDataDicResult.Add("patientId", item.Value);
                             }
                             break;
+
                         case "MzhNo":
                             if (!string.IsNullOrEmpty(item.Value))
                             {
@@ -194,13 +202,16 @@ namespace RuRo.BLL
                                 BasicDataDicResult.Add("patientId", item.Value);
                             }
                             break;
+
                         case "PatientName"://患者姓名——对应的是样本源类型和样本源描述
                             BasicDataDicResult.Add("sampleSourceDescription", item.Value == "" ? "" : item.Value);
                             BasicDataDicResult.Add("patientName", item.Value);
                             break;
+
                         case "Sex":
                             BasicDataDicResult.Add("patientSex", item.Value);
                             break;
+
                         default:
                             break;
                     }
@@ -219,12 +230,15 @@ namespace RuRo.BLL
             //return oPListForSpecimenDicResultJsonStr;
             return "";
         }
-        #endregion
-        #endregion
+
+        #endregion 1.0.3 将基本数据转换成前台页面需要的字符串
+
+        #endregion 1.0 获取基本数据
 
         #region 2.0 获取临床数据检验
 
         #region 将xml转换成对象
+
         /// <summary>
         /// 将xml转换成对象
         /// </summary>
@@ -240,57 +254,74 @@ namespace RuRo.BLL
                     case "chinese":
                         r.chinese = item.InnerText;
                         break;
+
                     case "age":
                         r.age = item.InnerText;
                         break;
+
                     case "age_month":
                         r.age_month = item.InnerText;
                         break;
+
                     case "check_by_name":
                         r.check_by_name = item.InnerText;
                         break;
+
                     case "check_date":
                         r.check_date = item.InnerText;
                         break;
+
                     case "ext_mthd":
                         r.ext_mthd = item.InnerText;
                         break;
+
                     case "highvalue":
                         r.highvalue = item.InnerText;
                         break;
+
                     case "hospnum":
                         r.hospnum = item.InnerText;
                         break;
+
                     case "lowvalue":
                         r.lowvalue = item.InnerText;
                         break;
+
                     case "patname":
                         r.patname = item.InnerText;
                         break;
+
                     case "print_ref":
                         r.print_ref = item.InnerText;
                         break;
+
                     case "ref_flag":
                         r.ref_flag = item.InnerText;
                         break;
+
                     case "result":
                         r.result = item.InnerText;
                         break;
+
                     case "sex":
                         r.sex = item.InnerText;
                         break;
+
                     case "units":
                         r.units = item.InnerText;
                         break;
+
                     default:
                         break;
                 }
             }
             return r;
         }
-        #endregion
+
+        #endregion 将xml转换成对象
 
         #region 从配置文件中获取需要的检测项目指标字典
+
         /// <summary>
         /// 从配置文件中获取需要的检测项目指标字典
         /// </summary>
@@ -301,9 +332,11 @@ namespace RuRo.BLL
             Dictionary<string, string> xMDic = GetMatchFieldsXmlToDic("SZY\\configXML\\MatchFieldsWithClinicalData.xml", "/Matchings/*");
             return xMDic;
         }
-        #endregion
+
+        #endregion 从配置文件中获取需要的检测项目指标字典
 
         #region 获取临床数据并转换成list
+
         /// <summary>
         /// 获取临床数据并转换成list
         /// </summary>
@@ -322,7 +355,6 @@ namespace RuRo.BLL
             //}
             //catch (Exception ex)
             //{
-
             //}
             //XmlDocument xd = new XmlDocument();
             //xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(normalLisReportStrs);
@@ -348,9 +380,11 @@ namespace RuRo.BLL
             }
             return recordList;
         }
-        #endregion
+
+        #endregion 获取临床数据并转换成list
 
         #region 获取指定配置文件中的匹配字典
+
         /// <summary>
         /// 获取指定配置文件中的匹配字典（临床数据字典和基本数据字典）
         /// </summary>
@@ -381,9 +415,10 @@ namespace RuRo.BLL
                 }
                 return MatchFieldDic;
             }
-            catch (Exception ex) { return MatchFieldDic; }
+            catch (Exception ex) { Common.LogHelper.WriteError(ex); return MatchFieldDic; }
         }
-        #endregion
+
+        #endregion 获取指定配置文件中的匹配字典
 
         //将从医院获取的检验数据转换成对象之后将对象转换成字段
         //recodeDic 最终需要生成的字典
@@ -412,6 +447,7 @@ namespace RuRo.BLL
         }
 
         #region 获取临床检测指标数据
+
         /// <summary>
         /// 获取临床检验数据字典
         /// </summary>
@@ -442,11 +478,15 @@ namespace RuRo.BLL
             List<Record> re = GetClinicalDataToList(request);//将xml数据转换成记录对象
             return re;
         }
-        #endregion
-        #endregion
+
+        #endregion 获取临床检测指标数据
+
+        #endregion 2.0 获取临床数据检验
 
         #region 3.0 获取临床诊断数据
+
         #region 调用webservice查询临床诊断数据
+
         /// <summary>
         /// 调用webservice查询临床诊断数据
         /// </summary>
@@ -460,10 +500,12 @@ namespace RuRo.BLL
             BLL.ClinicalData.PacsLisReportServices patientDiagnose = new ClinicalData.PacsLisReportServices();
             result = patientDiagnose.GetPatientDiagnose(request);
             return result;
-        } 
-        #endregion
+        }
+
+        #endregion 调用webservice查询临床诊断数据
 
         #region 根据日期查询前后5天的数据
+
         /// <summary>
         /// 根据日期查询前后5天的数据
         /// 此处的日期可以将数据保存至数据库，避免每次都要重复查询（保存字段为id、查询类型、日期）
@@ -533,9 +575,9 @@ namespace RuRo.BLL
             }
             return result;
         }
-        #endregion
 
+        #endregion 根据日期查询前后5天的数据
 
-        #endregion
+        #endregion 3.0 获取临床诊断数据
     }
 }

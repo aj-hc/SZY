@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,7 +9,7 @@
  */
 /**
  * droppable - jQuery EasyUI
- * 
+ *
  */
 (function($){
 	function init(target){
@@ -27,12 +27,12 @@
 			$.data(target, 'droppable').options.onDrop.apply(target, [e, source]);
 		});
 	}
-	
+
 	$.fn.droppable = function(options, param){
 		if (typeof options == 'string'){
 			return $.fn.droppable.methods[options](this, param);
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'droppable');
@@ -46,7 +46,7 @@
 			}
 		});
 	};
-	
+
 	$.fn.droppable.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'droppable').options;
@@ -62,14 +62,14 @@
 			});
 		}
 	};
-	
+
 	$.fn.droppable.parseOptions = function(target){
 		var t = $(target);
 		return $.extend({},	$.parser.parseOptions(target, ['accept']), {
 			disabled: (t.attr('disabled') ? true : undefined)
 		});
 	};
-	
+
 	$.fn.droppable.defaults = {
 		accept:null,
 		disabled:false,

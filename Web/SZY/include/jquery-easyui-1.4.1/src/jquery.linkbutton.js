@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,7 +9,7 @@
  */
 /**
  * linkbutton - jQuery EasyUI
- * 
+ *
  */
 (function($){
 	function setSize(target, param){
@@ -46,11 +46,11 @@
 			}
 		}
 	}
-	
+
 	function createButton(target) {
 		var opts = $.data(target, 'linkbutton').options;
 		var t = $(target).empty();
-		
+
 		t.addClass('l-btn').removeClass('l-btn-plain l-btn-selected l-btn-plain-selected');
 		t.removeClass('l-btn-small l-btn-medium l-btn-large').addClass('l-btn-'+opts.size);
 		if (opts.plain){t.addClass('l-btn-plain')}
@@ -59,7 +59,7 @@
 		}
 		t.attr('group', opts.group || '');
 		t.attr('id', opts.id || '');
-		
+
 		var inner = $('<span class="l-btn-left"></span>').appendTo(t);
 		if (opts.text){
 			$('<span class="l-btn-text"></span>').html(opts.text).appendTo(inner);
@@ -70,7 +70,7 @@
 			$('<span class="l-btn-icon">&nbsp;</span>').addClass(opts.iconCls).appendTo(inner);
 			inner.addClass('l-btn-icon-'+opts.iconAlign);
 		}
-		
+
 		t.unbind('.linkbutton').bind('focus.linkbutton',function(){
 			if (!opts.disabled){
 				$(this).addClass('l-btn-focus');
@@ -99,11 +99,11 @@
 //				}
 //			});
 //		}
-		
+
 		setSelected(target, opts.selected)
 		setDisabled(target, opts.disabled);
 	}
-	
+
 	function setSelected(target, selected){
 		var opts = $.data(target, 'linkbutton').options;
 		if (selected){
@@ -125,7 +125,7 @@
 			}
 		}
 	}
-	
+
 	function setDisabled(target, disabled){
 		var state = $.data(target, 'linkbutton');
 		var opts = state.options;
@@ -152,12 +152,12 @@
 			}
 		}
 	}
-	
+
 	$.fn.linkbutton = function(options, param){
 		if (typeof options == 'string'){
 			return $.fn.linkbutton.methods[options](this, param);
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'linkbutton');
@@ -175,12 +175,12 @@
 					return false;
 				});
 			}
-			
+
 			createButton(this);
 			setSize(this);
 		});
 	};
-	
+
 	$.fn.linkbutton.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'linkbutton').options;
@@ -211,10 +211,10 @@
 			});
 		}
 	};
-	
+
 	$.fn.linkbutton.parseOptions = function(target){
 		var t = $(target);
-		return $.extend({}, $.parser.parseOptions(target, 
+		return $.extend({}, $.parser.parseOptions(target,
 			['id','iconCls','iconAlign','group','size',{plain:'boolean',toggle:'boolean',selected:'boolean'}]
 		), {
 			disabled: (t.attr('disabled') ? true : undefined),
@@ -222,7 +222,7 @@
 			iconCls: (t.attr('icon') || t.attr('iconCls'))
 		});
 	};
-	
+
 	$.fn.linkbutton.defaults = {
 		id: null,
 		disabled: false,
@@ -236,5 +236,4 @@
 		size: 'small',	// small,large
 		onClick: function(){}
 	};
-	
 })(jQuery);

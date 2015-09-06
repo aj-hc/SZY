@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RuRo.Common;
-using RuRo.DAL;
-
-namespace RuRo.BLL
+﻿namespace RuRo.BLL
 {
     public class UserFields
     {
@@ -47,6 +41,5 @@ namespace RuRo.BLL
         //    return list_UserFields;
         //}
         //#endregion
-
     }
 }

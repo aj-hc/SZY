@@ -1,4 +1,3 @@
-
 using System;
 
 namespace RuRo
@@ -7,7 +6,7 @@ namespace RuRo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Common.js.SetNoCache(); 
+            //Common.js.SetNoCache();
         }
     }
 }

@@ -244,6 +244,7 @@ namespace RuRo.Common
             return XmlString;
         }
         #endregion
+
         #region 获取一个字符串xml文档中的ds
         /// <summary>
         /// 获取一个字符串xml文档中的ds
@@ -697,9 +698,6 @@ namespace RuRo.Common
 
         #endregion
 
-
-
-        #region 私有方法
         /// <summary>
         /// 加载XML文件
         /// </summary>
@@ -717,6 +715,29 @@ namespace RuRo.Common
             { }
             return xmldoc;
         }
+        public static XmlDocument XMLLoad(string XmlNodeStr, XmlType xmlType)
+        {
+            XmlDocument xd = new XmlDocument();
+            StringBuilder str = new StringBuilder();
+            if (xmlType== XmlType.String)
+            {
+                str.Append("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+                str.Append(XmlNodeStr);
+                try
+                {
+                    xd.LoadXml(str.ToString());
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteError(ex);
+                    xd = null;
+                }
+            }
+            return xd;
+        }
+
+
+        #region 私有方法
         /// <summary>
         /// 返回完整路径
         /// </summary>

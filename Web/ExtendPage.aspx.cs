@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using RuRo.BLL;
-using RuRo.Model;
 
 namespace RuRo.Web
 {
@@ -19,7 +12,7 @@ namespace RuRo.Web
                 //页面第一次加载
                 if (!login.CheckLoginByCookie())
                 {
-                  //  Response.Redirect("Login.aspx");
+                    //  Response.Redirect("Login.aspx");
                 }
                 string username = Common.CookieHelper.GetCookieValue("username");
                 //string keshi = Common.CookieHelper.GetCookieValue(username + "department");
@@ -36,11 +29,11 @@ namespace RuRo.Web
                 //{
                 //    lakeshi.Text = username;
                 //}
-                //else 
+                //else
                 //{
                 //    lakeshi.Text = keshi + "/" + username;
                 //}
-               // lakeshi.Text = username;
+                // lakeshi.Text = username;
             }
         }
     }

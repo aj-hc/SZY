@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,10 +9,10 @@
  */
 /**
  * propertygrid - jQuery EasyUI
- * 
+ *
  * Dependencies:
  * 	 datagrid
- * 
+ *
  */
 (function($){
 	var currTarget;
@@ -22,7 +22,7 @@
 		stopEditing(currTarget);
 		currTarget = undefined;
 	});
-	
+
 	function buildGrid(target){
 		var state = $.data(target, 'propertygrid');
 		var opts = $.data(target, 'propertygrid').options;
@@ -63,7 +63,7 @@
 			}
 		}));
 	}
-	
+
 	function stopEditing(target){
 		var t = $(target);
 		if (!t.length){return}
@@ -77,7 +77,7 @@
 			}
 		});
 	}
-	
+
 	$.fn.propertygrid = function(options, param){
 		if (typeof options == 'string'){
 			var method = $.fn.propertygrid.methods[options];
@@ -87,7 +87,7 @@
 				return this.datagrid(options, param);
 			}
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'propertygrid');
@@ -104,17 +104,17 @@
 			buildGrid(this);
 		});
 	}
-	
+
 	$.fn.propertygrid.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'propertygrid').options;
 		}
 	};
-	
+
 	$.fn.propertygrid.parseOptions = function(target){
 		return $.extend({}, $.fn.datagrid.parseOptions(target), $.parser.parseOptions(target,[{showGroup:'boolean'}]));
 	};
-	
+
 	// the group view definition
 	var groupview = $.extend({}, $.fn.datagrid.defaults.view, {
 		render: function(target, container, frozen){
@@ -125,12 +125,12 @@
 			}
 			$(container).html(table.join(''));
 		},
-		
+
 		renderGroup: function(target, groupIndex, group, frozen){
 			var state = $.data(target, 'datagrid');
 			var opts = state.options;
 			var fields = $(target).datagrid('getColumnFields', frozen);
-			
+
 			var table = [];
 			table.push('<div class="datagrid-group" group-index=' + groupIndex + '>');
 			table.push('<table cellspacing="0" cellpadding="0" border="0" style="height:100%"><tbody>');
@@ -149,7 +149,7 @@
 			table.push('</tr>');
 			table.push('</tbody></table>');
 			table.push('</div>');
-			
+
 			table.push('<table class="datagrid-btable" cellspacing="0" cellpadding="0" border="0"><tbody>');
 			var index = group.startIndex;
 			for(var j=0; j<group.rows.length; j++) {
@@ -162,7 +162,7 @@
 					classValue = css['class'] || '';
 					styleValue = css['style'] || '';
 				}
-				
+
 				var cls = 'class="datagrid-row ' + (index % 2 && opts.striped ? 'datagrid-row-alt ' : ' ') + classValue + '"';
 				var style = styleValue ? 'style="' + styleValue + '"' : '';
 				var rowId = state.rowIdPrefix + '-' + (frozen?1:2) + '-' + index;
@@ -174,7 +174,7 @@
 			table.push('</tbody></table>');
 			return table.join('');
 		},
-		
+
 		bindEvents: function(target){
 			var state = $.data(target, 'datagrid');
 			var dc = state.dc;
@@ -196,13 +196,13 @@
 				e.stopPropagation();
 			});
 		},
-		
+
 		onBeforeRender: function(target, rows){
 			var state = $.data(target, 'datagrid');
 			var opts = state.options;
-			
+
 			initCss();
-			
+
 			var groups = [];
 			for(var i=0; i<rows.length; i++){
 				var row = rows[i];
@@ -217,7 +217,7 @@
 					group.rows.push(row);
 				}
 			}
-			
+
 			var index = 0;
 			var newRows = [];
 			for(var i=0; i<groups.length; i++){
@@ -226,15 +226,15 @@
 				index += group.rows.length;
 				newRows = newRows.concat(group.rows);
 			}
-			
+
 			state.data.rows = newRows;
 			this.groups = groups;
-			
+
 			var that = this;
 			setTimeout(function(){
 				that.bindEvents(target);
 			},0);
-			
+
 			function getGroup(value){
 				for(var i=0; i<groups.length; i++){
 					var group = groups[i];
@@ -292,14 +292,14 @@
 			var span = dc.body2.children('div.datagrid-group[group-index=' + groupIndex + ']').find('span.datagrid-group-title');
 			span.html(opts.groupFormatter.call(target, group.value, group.rows));
 		},
-		
+
 		insertRow: function(target, index, row){
 			var state = $.data(target, 'datagrid');
 			var opts = state.options;
 			var dc = state.dc;
 			var group = null;
 			var groupIndex;
-			
+
 			for(var i=0; i<this.groups.length; i++){
 				if (this.groups[i].value == row[opts.groupField]){
 					group = this.groups[i];
@@ -317,7 +317,7 @@
 					index = group.startIndex + group.rows.length;
 				}
 				$.fn.datagrid.defaults.view.insertRow.call(this, target, index, row);
-				
+
 				if (index >= group.startIndex + group.rows.length){
 					_moveTr(index, true);
 					_moveTr(index, false);
@@ -335,9 +335,9 @@
 				this.groups.push(group);
 				state.data.rows.push(row);
 			}
-			
+
 			this.refreshGroupTitle(target, groupIndex);
-			
+
 			function _moveTr(index,frozen){
 				var serno = frozen?1:2;
 				var prevTr = opts.finder.getTr(target, index-1, 'body', serno);
@@ -345,7 +345,7 @@
 				tr.insertAfter(prevTr);
 			}
 		},
-		
+
 		updateRow: function(target, index, row){
 			var opts = $.data(target, 'datagrid').options;
 			$.fn.datagrid.defaults.view.updateRow.call(this, target, index, row);
@@ -353,18 +353,18 @@
 			var groupIndex = parseInt(tb.prev().attr('group-index'));
 			this.refreshGroupTitle(target, groupIndex);
 		},
-		
+
 		deleteRow: function(target, index){
 			var state = $.data(target, 'datagrid');
 			var opts = state.options;
 			var dc = state.dc;
 			var body = dc.body1.add(dc.body2);
-			
+
 			var tb = opts.finder.getTr(target, index, 'body', 2).closest('table.datagrid-btable');
 			var groupIndex = parseInt(tb.prev().attr('group-index'));
-			
+
 			$.fn.datagrid.defaults.view.deleteRow.call(this, target, index);
-			
+
 			var group = this.groups[groupIndex];
 			if (group.rows.length > 1){
 				group.rows.splice(index-group.startIndex, 1);
@@ -376,7 +376,7 @@
 				}
 				this.groups.splice(groupIndex, 1);
 			}
-			
+
 			var index = 0;
 			for(var i=0; i<this.groups.length; i++){
 				var group = this.groups[i];
@@ -387,7 +387,7 @@
 	});
 
 	// end of group view definition
-	
+
 	$.fn.propertygrid.defaults = $.extend({}, $.fn.datagrid.defaults, {
 		singleSelect:true,
 		remoteSort:false,
@@ -400,7 +400,7 @@
 		    {field:'name',title:'Name',width:100,sortable:true},
 		    {field:'value',title:'Value',width:100,resizable:false}
 		]],
-		
+
 		showGroup:false,
 		groupView:groupview,
 		groupField:'group',

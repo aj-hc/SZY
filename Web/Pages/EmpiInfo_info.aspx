@@ -64,7 +64,7 @@
                 data: {
                     "mode": "post",
                     "empiInfo": Tem,
-                    "code":code,
+                    "code": code,
                     "codeType": codeType
                 },
                 success: function (response) {
@@ -73,16 +73,17 @@
                         var res = JSON.parse(response);
                         //alert(response);
                         if (res.success || res.message.indexOf('should be unique.') > -1) {
+                            ShowMsg("患者信息：" + "导入成功" +res.message);
                             //调用方法查询数据
-                            postPatientDiagnose_info();
+                            PostPatientDiagnose_list();
                             PostNormalLisReport_list();
                         }
                     }
                     else { $.messager.alert('提示', '查询不到样品源', 'error'); }
                 }
             });
+            ajaxLoadEnd();
         }
-
     </script>
 </body>
 </html>

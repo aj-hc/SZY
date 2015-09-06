@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,7 +9,7 @@
  */
 /**
  * resizable - jQuery EasyUI
- * 
+ *
  */
 (function($){
 //	var isResizing = false;
@@ -17,7 +17,7 @@
 		if (typeof options == 'string'){
 			return $.fn.resizable.methods[options](this, param);
 		}
-		
+
 		function resize(e){
 			var resizeData = e.data;
 			var options = $.data(resizeData.target, 'resizable').options;
@@ -45,7 +45,7 @@
 						);
 				resizeData.width = width;
 				resizeData.left = resizeData.startLeft + resizeData.startWidth - resizeData.width;
-				
+
 //				resizeData.width = resizeData.startWidth - e.pageX + resizeData.startX;
 //				if (resizeData.width >= options.minWidth && resizeData.width <= options.maxWidth) {
 //					resizeData.left = resizeData.startLeft + e.pageX - resizeData.startX;
@@ -59,14 +59,14 @@
 						);
 				resizeData.height = height;
 				resizeData.top = resizeData.startTop + resizeData.startHeight - resizeData.height;
-				
+
 //				resizeData.height = resizeData.startHeight - e.pageY + resizeData.startY;
 //				if (resizeData.height >= options.minHeight && resizeData.height <= options.maxHeight) {
 //					resizeData.top = resizeData.startTop + e.pageY - resizeData.startY;
 //				}
 			}
 		}
-		
+
 		function applySize(e){
 			var resizeData = e.data;
 			var t = $(resizeData.target);
@@ -78,14 +78,14 @@
 			if (t.outerHeight() != resizeData.height){t._outerHeight(resizeData.height)}
 //			t._outerWidth(resizeData.width)._outerHeight(resizeData.height);
 		}
-		
+
 		function doDown(e){
 //			isResizing = true;
 			$.fn.resizable.isResizing = true;
 			$.data(e.data.target, 'resizable').options.onStartResize.call(e.data.target, e);
 			return false;
 		}
-		
+
 		function doMove(e){
 			resize(e);
 			if ($.data(e.data.target, 'resizable').options.onResize.call(e.data.target, e) != false){
@@ -93,7 +93,7 @@
 			}
 			return false;
 		}
-		
+
 		function doUp(e){
 //			isResizing = false;
 			$.fn.resizable.isResizing = false;
@@ -105,7 +105,7 @@
 //			$('body').css('cursor','auto');
 			return false;
 		}
-		
+
 		return this.each(function(){
 			var opts = null;
 			var state = $.data(this, 'resizable');
@@ -118,11 +118,11 @@
 					options:opts
 				});
 			}
-			
+
 			if (opts.disabled == true) {
 				return;
 			}
-			
+
 			// bind mouse event using namespace resizable
 			$(this).bind('mousemove.resizable', {target:this}, function(e){
 //				if (isResizing) return;
@@ -138,7 +138,7 @@
 			}).bind('mousedown.resizable', {target:this}, function(e){
 				var dir = getDirection(e);
 				if (dir == '') return;
-				
+
 				function getCssValue(css) {
 					var val = parseInt($(e.data.target).css(css));
 					if (isNaN(val)) {
@@ -147,7 +147,7 @@
 						return val;
 					}
 				}
-				
+
 				var data = {
 					target: e.data.target,
 					dir: dir,
@@ -169,7 +169,7 @@
 				$(document).bind('mouseup.resizable', data, doUp);
 				$('body').css('cursor', dir+'-resize');
 			});
-			
+
 			// get the resize direction
 			function getDirection(e) {
 				var tt = $(e.data.target);
@@ -188,7 +188,7 @@
 				} else if (e.pageX < offset.left + width && e.pageX > offset.left + width - edge) {
 					dir += 'e';
 				}
-				
+
 				var handles = opts.handles.split(',');
 				for(var i=0; i<handles.length; i++) {
 					var handle = handles[i].replace(/(^\s*)|(\s*$)/g, '');
@@ -198,11 +198,9 @@
 				}
 				return '';
 			}
-			
-			
 		});
 	};
-	
+
 	$.fn.resizable.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'resizable').options;
@@ -218,7 +216,7 @@
 			});
 		}
 	};
-	
+
 	$.fn.resizable.parseOptions = function(target){
 		var t = $(target);
 		return $.extend({},
@@ -228,7 +226,7 @@
 			disabled: (t.attr('disabled') ? true : undefined)
 		})
 	};
-	
+
 	$.fn.resizable.defaults = {
 		disabled:false,
 		handles:'n, e, s, w, ne, se, sw, nw, all',
@@ -241,7 +239,6 @@
 		onResize: function(e){},
 		onStopResize: function(e){}
 	};
-	
+
 	$.fn.resizable.isResizing = false;
-	
 })(jQuery);

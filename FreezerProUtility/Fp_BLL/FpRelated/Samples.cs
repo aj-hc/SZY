@@ -3,13 +3,11 @@ using FreezerProUtility.Fp_Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FreezerProUtility.Fp_BLL
 {
     public class Samples
     {
-
         //导入样品方式1
         //指定sample_type，box_path(","分割)，jsondata
 
@@ -57,7 +55,6 @@ namespace FreezerProUtility.Fp_BLL
             return result;
         }
 
-
         public static string Import_Sample(Fp_Common.UnameAndPwd up, string department, List<Dictionary<string, string>> dataDicList)
         {
             string username = Fp_Common.CookieHelper.GetCookieValue("username");
@@ -84,6 +81,7 @@ namespace FreezerProUtility.Fp_BLL
             }
             return result;
         }
+
         //创建盒子保存样本
         private static string ImportSamplesToFp(Fp_Common.UnameAndPwd up, string sample_type, string count, Box_Path box_path, Dictionary<string, string> dataDic)
         {
@@ -94,7 +92,9 @@ namespace FreezerProUtility.Fp_BLL
             int kk = 1;
             Random rand = new Random();
             int ALIQUOT = rand.Next(1, 1000);
+
             #region 创建样本信息字符串&json=
+
             if (int.TryParse(count, out kk))
             {
                 if (!dataDic.ContainsKey("ALIQUOT"))
@@ -153,7 +153,9 @@ namespace FreezerProUtility.Fp_BLL
                     }
                 }
             }
-            #endregion
+
+            #endregion 创建样本信息字符串&json=
+
             Dictionary<string, string> jsonDic = new Dictionary<string, string>();
             jsonDic.Add("create_storage", create_storage);
             jsonDic.Add("box_type", box_type);
@@ -163,6 +165,7 @@ namespace FreezerProUtility.Fp_BLL
         }
 
         #region 获取样品类型集合 +  public List<SampleTypes>  GetAllSample_Types(string url)
+
         public static List<SampleTypes> GetAll(Fp_Common.UnameAndPwd up)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -173,9 +176,11 @@ namespace FreezerProUtility.Fp_BLL
             List<Fp_Model.SampleTypes> List = call.getdata<Fp_Model.SampleTypes>("SampleTypes");
             return List;
         }
-        #endregion
+
+        #endregion 获取样品类型集合 +  public List<SampleTypes>  GetAllSample_Types(string url)
 
         #region 获取所有样品类型名称和id字典
+
         /// <summary>
         /// 获取所有样品类型名称和id字典
         /// </summary>
@@ -194,9 +199,11 @@ namespace FreezerProUtility.Fp_BLL
             }
             return dic;
         }
-        #endregion
+
+        #endregion 获取所有样品类型名称和id字典
 
         #region 获取样品类型根据名称 + public static SampleTypes GetSample_TypeByTypeName(string url, string name)
+
         public static SampleTypes GetBy(Fp_Common.UnameAndPwd up, string name)
         {
             List<SampleTypes> list = GetAll(up);
@@ -207,7 +214,8 @@ namespace FreezerProUtility.Fp_BLL
             }
             return sample;
         }
-        #endregion
+
+        #endregion 获取样品类型根据名称 + public static SampleTypes GetSample_TypeByTypeName(string url, string name)
 
         private string ImportSamples(string url, string sample_type)
         {
@@ -322,6 +330,7 @@ namespace FreezerProUtility.Fp_BLL
         }
 
         #region 提交数据到fp +private static string ImportSampleToFp(Fp_Common.UnameAndPwd up, Dictionary<string, string> jsonDic)
+
         private static string ImportSampleToFp(Fp_Common.UnameAndPwd up, Dictionary<string, string> jsonDic)
         {
             string result = string.Empty;
@@ -340,7 +349,8 @@ namespace FreezerProUtility.Fp_BLL
             result = call.PostData();
             return result;
         }
-        #endregion
+
+        #endregion 提交数据到fp +private static string ImportSampleToFp(Fp_Common.UnameAndPwd up, Dictionary<string, string> jsonDic)
 
         private static string CheckImportRes(string jsonResStr)
         {
@@ -359,12 +369,9 @@ namespace FreezerProUtility.Fp_BLL
             }
         }
 
-
-
         //提交数据新方法，一个dg一次提交
         public static string ImportSamplesToFp(Fp_Common.UnameAndPwd up, Box_Path box_path, List<Dictionary<string, string>> dataDicList)
         {
-
             string jsonsampledata = string.Empty;
             List<Dictionary<string, string>> jsonDicList = new List<Dictionary<string, string>>();
             string box_type = "bag"; //默认放入袋子中

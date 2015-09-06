@@ -9,13 +9,10 @@
 
 namespace FreezerProUtility.Fp_Model
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class AuditRec
     {
         public string id { get; set; }
-        public  string  obj_id { get; set; }
+        public string obj_id { get; set; }
         public string obj_name { get; set; }
         public string user_name { get; set; }
         public string created_at { get; set; }

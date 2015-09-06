@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace RuRo.Web.Test
 {
@@ -11,7 +7,6 @@ namespace RuRo.Web.Test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Unnamed_Click(object sender, EventArgs e)
@@ -24,6 +19,7 @@ namespace RuRo.Web.Test
             BLL.Test test = new BLL.Test();
             r.InnerText = test.PostTestData(up, "临床检验数据", da);
         }
+
         private string GetData()
         {
             string da;
@@ -44,16 +40,16 @@ namespace RuRo.Web.Test
             }
             else if (da == "3")
             {
-                bool statu = false;
-
+                //bool statu = false;
             }
             return da;
         }
+
         private bool GetBool(ref string str)
         {
             //判断字符串长度>5，并返回字符串+长度  111   111+3
-            str+="+"+str.Length;
-            
+            str += "+" + str.Length;
+
             return str.Length > 5;
         }
     }

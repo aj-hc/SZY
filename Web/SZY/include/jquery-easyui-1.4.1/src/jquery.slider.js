@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,10 +9,10 @@
  */
 /**
  * slider - jQuery EasyUI
- * 
+ *
  * Dependencies:
  *  draggable
- * 
+ *
  */
 (function($){
 	function init(target){
@@ -41,7 +41,7 @@
 		});
 		return slider;
 	}
-	
+
 	/**
 	 * set the slider size, for vertical slider, the height property is required
 	 */
@@ -49,7 +49,7 @@
 		var state = $.data(target, 'slider');
 		var opts = state.options;
 		var slider = state.slider;
-		
+
 		if (param){
 			if (param.width) opts.width = param.width;
 			if (param.height) opts.height = param.height;
@@ -65,7 +65,7 @@
 		}
 		initValue(target);
 	}
-	
+
 	/**
 	 * show slider rule if needed
 	 */
@@ -73,13 +73,13 @@
 		var state = $.data(target, 'slider');
 		var opts = state.options;
 		var slider = state.slider;
-		
+
 		var aa = opts.mode == 'h' ? opts.rule : opts.rule.slice(0).reverse();
 		if (opts.reversed){
 			aa = aa.slice(0).reverse();
 		}
 		_build(aa);
-		
+
 		function _build(aa){
 			var rule = slider.find('div.slider-rule');
 			var label = slider.find('div.slider-rulelabel');
@@ -89,7 +89,7 @@
 				var distance = i*100/(aa.length-1)+'%';
 				var span = $('<span></span>').appendTo(rule);
 				span.css((opts.mode=='h'?'left':'top'), distance);
-				
+
 				// show the labels
 				if (aa[i] != '|'){
 					span = $('<span></span>').appendTo(label);
@@ -109,7 +109,7 @@
 			}
 		}
 	}
-	
+
 	/**
 	 * build the slider and set some properties
 	 */
@@ -117,11 +117,11 @@
 		var state = $.data(target, 'slider');
 		var opts = state.options;
 		var slider = state.slider;
-		
+
 		slider.removeClass('slider-h slider-v slider-disabled');
 		slider.addClass(opts.mode == 'h' ? 'slider-h' : 'slider-v');
 		slider.addClass(opts.disabled ? 'slider-disabled' : '');
-		
+
 		slider.find('a.slider-handle').draggable({
 			axis:opts.mode,
 			cursor:'pointer',
@@ -162,7 +162,7 @@
 			adjustValue(value);
 			opts.onComplete.call(target, opts.value);
 		});
-		
+
 		function adjustValue(value){
 			var s = Math.abs(value % opts.step);
 			if (s < opts.step/2){
@@ -173,7 +173,7 @@
 			setValue(target, value);
 		}
 	}
-	
+
 	/**
 	 * set a specified value to slider
 	 */
@@ -184,11 +184,11 @@
 		var oldValue = opts.value;
 		if (value < opts.min) value = opts.min;
 		if (value > opts.max) value = opts.max;
-		
+
 		opts.value = value;
 		$(target).val(value);
 		slider.find('input.slider-value').val(value);
-		
+
 		var pos = value2pos(target, value);
 		var tip = slider.find('.slider-tip');
 		if (opts.showTip){
@@ -197,7 +197,7 @@
 		} else {
 			tip.hide();
 		}
-		
+
 		if (opts.mode == 'h'){
 			var style = 'left:'+pos+'px;';
 			slider.find('.slider-handle').attr('style', style);
@@ -207,12 +207,12 @@
 			slider.find('.slider-handle').attr('style', style);
 			tip.attr('style', style + 'margin-left:' + (-Math.round(tip.outerWidth())) + 'px');
 		}
-		
+
 		if (oldValue != value){
 			opts.onChange.call(target, value, oldValue);
 		}
 	}
-	
+
 	function initValue(target){
 		var opts = $.data(target, 'slider').options;
 		var fn = opts.onChange;
@@ -220,7 +220,7 @@
 		setValue(target, opts.value);
 		opts.onChange = fn;
 	}
-	
+
 	/**
 	 * translate value to slider position
 	 */
@@ -255,7 +255,7 @@
 		}
 		return pos.toFixed(0);
 	}
-	
+
 	/**
 	 * translate slider position to value
 	 */
@@ -280,12 +280,12 @@
 //		var value = opts.converter.toValue.call(target, opts.mode=='h'?pos:(size-pos), size);
 //		return opts.reversed ? opts.max - value.toFixed(0) : value.toFixed(0);
 	}
-	
+
 	$.fn.slider = function(options, param){
 		if (typeof options == 'string'){
 			return $.fn.slider.methods[options](this, param);
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'slider');
@@ -298,20 +298,20 @@
 				});
 				$(this).removeAttr('disabled');
 			}
-			
+
 			var opts = state.options;
 			opts.min = parseFloat(opts.min);
 			opts.max = parseFloat(opts.max);
 			opts.value = parseFloat(opts.value);
 			opts.step = parseFloat(opts.step);
 			opts.originalValue = opts.value;
-			
+
 			buildSlider(this);
 			showRule(this);
 			setSize(this);
 		});
 	};
-	
+
 	$.fn.slider.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'slider').options;
@@ -360,7 +360,7 @@
 			});
 		}
 	};
-	
+
 	$.fn.slider.parseOptions = function(target){
 		var t = $(target);
 		return $.extend({}, $.parser.parseOptions(target, [
@@ -371,7 +371,7 @@
 			rule: (t.attr('rule') ? eval(t.attr('rule')) : undefined)
 		});
 	};
-	
+
 	$.fn.slider.defaults = {
 		width: 'auto',
 		height: 'auto',

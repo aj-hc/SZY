@@ -16,7 +16,7 @@
             <asp:TextBox runat="server" ID="u"></asp:TextBox>
             <label for="p">密码</label>
             <asp:TextBox runat="server" ID="p"></asp:TextBox>
-            <asp:Button  runat="server" OnClick="Unnamed_Click" Text="提交"/>
+            <asp:Button runat="server" OnClick="Unnamed_Click" Text="提交" />
             <br />
             <label for="d">数据</label>
             <br />
@@ -24,8 +24,7 @@
             <br />
             <label for="r">结果</label>
             <br />
-            <label id="r" runat="server" ></label>
-
+            <label id="r" runat="server"></label>
         </div>
     </form>
 </body>

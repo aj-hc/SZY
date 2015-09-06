@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.IO.Compression;
-using System.Security.Cryptography.X509Certificates;
+using System.Net;
 using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FreezerProUtility.Fp_DAL
 {
@@ -16,15 +15,20 @@ namespace FreezerProUtility.Fp_DAL
     internal class HttpHelper
     {
         #region 棰勫畾涔夋柟鍙橀噺
+
         //榛樿鐨勭紪鐮?
         private Encoding encoding = Encoding.Default;
+
         //Post鏁版嵁缂栫爜
         private Encoding postencoding = Encoding.Default;
+
         //HttpWebRequest瀵硅薄鐢ㄦ潵鍙戣捣璇锋眰
         private HttpWebRequest request = null;
+
         //鑾峰彇褰卞搷娴佺殑鏁版嵁瀵硅薄
         private HttpWebResponse response = null;
-        #endregion
+
+        #endregion 棰勫畾涔夋柟鍙橀噺
 
         #region Public
 
@@ -80,7 +84,8 @@ namespace FreezerProUtility.Fp_DAL
             if (item.IsToLower) result.Html = result.Html.ToLower();
             return result;
         }
-        #endregion
+
+        #endregion Public
 
         #region GetData
 
@@ -92,6 +97,7 @@ namespace FreezerProUtility.Fp_DAL
         private void GetData(HttpItem item, HttpResult result)
         {
             #region base
+
             //鑾峰彇StatusCode
             result.StatusCode = response.StatusCode;
             //鑾峰彇StatusDescription
@@ -102,14 +108,18 @@ namespace FreezerProUtility.Fp_DAL
             if (response.Cookies != null) result.CookieCollection = response.Cookies;
             //鑾峰彇set-cookie
             if (response.Headers["set-cookie"] != null) result.Cookie = response.Headers["set-cookie"];
-            #endregion
+
+            #endregion base
 
             #region byte
+
             //澶勭悊缃戦〉Byte
             byte[] ResponseByte = GetByte();
-            #endregion
+
+            #endregion byte
 
             #region Html
+
             if (ResponseByte != null & ResponseByte.Length > 0)
             {
                 //璁剧疆缂栫爜
@@ -122,8 +132,10 @@ namespace FreezerProUtility.Fp_DAL
                 //娌℃湁杩斿洖浠讳綍Html浠ｇ爜
                 result.Html = string.Empty;
             }
-            #endregion
+
+            #endregion Html
         }
+
         /// <summary>
         /// 璁剧疆缂栫爜
         /// </summary>
@@ -174,6 +186,7 @@ namespace FreezerProUtility.Fp_DAL
                 }
             }
         }
+
         /// <summary>
         /// 鎻愬彇缃戦〉Byte
         /// </summary>
@@ -217,7 +230,8 @@ namespace FreezerProUtility.Fp_DAL
             }
             return _stream;
         }
-        #endregion
+
+        #endregion GetData
 
         #region SetRequest
 
@@ -269,6 +283,7 @@ namespace FreezerProUtility.Fp_DAL
             //璁剧疆鏈€澶ц繛鎺?
             if (item.Connectionlimit > 0) request.ServicePoint.ConnectionLimit = item.Connectionlimit;
         }
+
         /// <summary>
         /// 璁剧疆璇佷功
         /// </summary>
@@ -292,6 +307,7 @@ namespace FreezerProUtility.Fp_DAL
                 SetCerList(item);
             }
         }
+
         /// <summary>
         /// 璁剧疆澶氫釜璇佷功
         /// </summary>
@@ -306,6 +322,7 @@ namespace FreezerProUtility.Fp_DAL
                 }
             }
         }
+
         /// <summary>
         /// 璁剧疆Cookie
         /// </summary>
@@ -321,6 +338,7 @@ namespace FreezerProUtility.Fp_DAL
                     request.CookieContainer.Add(item.CookieCollection);
             }
         }
+
         /// <summary>
         /// 璁剧疆Post鏁版嵁
         /// </summary>
@@ -358,6 +376,7 @@ namespace FreezerProUtility.Fp_DAL
                 }
             }
         }
+
         /// <summary>
         /// 璁剧疆浠ｇ悊
         /// </summary>
@@ -399,9 +418,11 @@ namespace FreezerProUtility.Fp_DAL
                 request.Proxy = item.WebProxy;
             }
         }
-        #endregion
+
+        #endregion SetRequest
 
         #region private main
+
         /// <summary>
         /// 鍥炶皟楠岃瘉璇佷功闂
         /// </summary>
@@ -411,14 +432,17 @@ namespace FreezerProUtility.Fp_DAL
         /// <param name="errors">SslPolicyErrors</param>
         /// <returns>bool</returns>
         private bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors) { return true; }
-        #endregion
+
+        #endregion private main
     }
+
     /// <summary>
     /// Http璇锋眰鍙傝€冪被
     /// </summary>
     internal class HttpItem
     {
-        string _URL = string.Empty;
+        private string _URL = string.Empty;
+
         /// <summary>
         /// 璇锋眰URL蹇呴』濉啓
         /// </summary>
@@ -427,7 +451,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _URL; }
             set { _URL = value; }
         }
-        string _Method = "GET";
+
+        private string _Method = "GET";
+
         /// <summary>
         /// 璇锋眰鏂瑰紡榛樿涓篏ET鏂瑰紡,褰撲负POST鏂瑰紡鏃跺繀椤昏缃甈ostdata鐨勫€?
         /// </summary>
@@ -436,7 +462,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Method; }
             set { _Method = value; }
         }
-        int _Timeout = 100000;
+
+        private int _Timeout = 100000;
+
         /// <summary>
         /// 榛樿璇锋眰瓒呮椂鏃堕棿
         /// </summary>
@@ -445,7 +473,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Timeout; }
             set { _Timeout = value; }
         }
-        int _ReadWriteTimeout = 30000;
+
+        private int _ReadWriteTimeout = 30000;
+
         /// <summary>
         /// 榛樿鍐欏叆Post鏁版嵁瓒呮椂闂?
         /// </summary>
@@ -454,7 +484,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _ReadWriteTimeout; }
             set { _ReadWriteTimeout = value; }
         }
-        Boolean _KeepAlive = true;
+
+        private Boolean _KeepAlive = true;
+
         /// <summary>
         ///  鑾峰彇鎴栬缃竴涓€硷紝璇ュ€兼寚绀烘槸鍚︿笌 Internet 璧勬簮寤虹珛鎸佷箙鎬ц繛鎺ラ粯璁や负true銆?
         /// </summary>
@@ -463,7 +495,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _KeepAlive; }
             set { _KeepAlive = value; }
         }
-        string _Accept = "text/html, application/xhtml+xml, */*";
+
+        private string _Accept = "text/html, application/xhtml+xml, */*";
+
         /// <summary>
         /// 璇锋眰鏍囧ご鍊?榛樿涓簍ext/html, application/xhtml+xml, */*
         /// </summary>
@@ -472,7 +506,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Accept; }
             set { _Accept = value; }
         }
-        string _ContentType = "text/html";
+
+        private string _ContentType = "text/html";
+
         /// <summary>
         /// 璇锋眰杩斿洖绫诲瀷榛樿 text/html
         /// </summary>
@@ -481,7 +517,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _ContentType; }
             set { _ContentType = value; }
         }
-        string _UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)";
+
+        private string _UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)";
+
         /// <summary>
         /// 瀹㈡埛绔闂俊鎭粯璁ozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
         /// </summary>
@@ -490,7 +528,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _UserAgent; }
             set { _UserAgent = value; }
         }
-        Encoding _Encoding = null;
+
+        private Encoding _Encoding = null;
+
         /// <summary>
         /// 杩斿洖鏁版嵁缂栫爜榛樿涓篘Ull,鍙互鑷姩璇嗗埆,涓€鑸负utf-8,gbk,gb2312
         /// </summary>
@@ -499,7 +539,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Encoding; }
             set { _Encoding = value; }
         }
+
         private PostDataType _PostDataType = PostDataType.String;
+
         /// <summary>
         /// Post鐨勬暟鎹被鍨?
         /// </summary>
@@ -508,7 +550,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _PostDataType; }
             set { _PostDataType = value; }
         }
-        string _Postdata = string.Empty;
+
+        private string _Postdata = string.Empty;
+
         /// <summary>
         /// Post璇锋眰鏃惰鍙戦€佺殑瀛楃涓睵ost鏁版嵁
         /// </summary>
@@ -517,7 +561,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Postdata; }
             set { _Postdata = value; }
         }
+
         private byte[] _PostdataByte = null;
+
         /// <summary>
         /// Post璇锋眰鏃惰鍙戦€佺殑Byte绫诲瀷鐨凱ost鏁版嵁
         /// </summary>
@@ -526,7 +572,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _PostdataByte; }
             set { _PostdataByte = value; }
         }
+
         private WebProxy _WebProxy;
+
         /// <summary>
         /// 璁剧疆浠ｇ悊瀵硅薄锛屼笉鎯充娇鐢↖E榛樿閰嶇疆灏辫缃负Null锛岃€屼笖涓嶈璁剧疆ProxyIp
         /// </summary>
@@ -536,7 +584,8 @@ namespace FreezerProUtility.Fp_DAL
             set { _WebProxy = value; }
         }
 
-        CookieCollection cookiecollection = null;
+        private CookieCollection cookiecollection = null;
+
         /// <summary>
         /// Cookie瀵硅薄闆嗗悎
         /// </summary>
@@ -545,7 +594,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return cookiecollection; }
             set { cookiecollection = value; }
         }
-        string _Cookie = string.Empty;
+
+        private string _Cookie = string.Empty;
+
         /// <summary>
         /// 璇锋眰鏃剁殑Cookie
         /// </summary>
@@ -554,7 +605,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Cookie; }
             set { _Cookie = value; }
         }
-        string _Referer = string.Empty;
+
+        private string _Referer = string.Empty;
+
         /// <summary>
         /// 鏉ユ簮鍦板潃锛屼笂娆¤闂湴鍧€
         /// </summary>
@@ -563,7 +616,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Referer; }
             set { _Referer = value; }
         }
-        string _CerPath = string.Empty;
+
+        private string _CerPath = string.Empty;
+
         /// <summary>
         /// 璇佷功缁濆璺緞
         /// </summary>
@@ -572,7 +627,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _CerPath; }
             set { _CerPath = value; }
         }
+
         private Boolean isToLower = false;
+
         /// <summary>
         /// 鏄惁璁剧疆涓哄叏鏂囧皬鍐欙紝榛樿涓轰笉杞寲
         /// </summary>
@@ -581,7 +638,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return isToLower; }
             set { isToLower = value; }
         }
+
         private Boolean allowautoredirect = false;
+
         /// <summary>
         /// 鏀寔璺宠浆椤甸潰锛屾煡璇㈢粨鏋滃皢鏄烦杞悗鐨勯〉闈紝榛樿鏄笉璺宠浆
         /// </summary>
@@ -590,7 +649,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return allowautoredirect; }
             set { allowautoredirect = value; }
         }
+
         private int connectionlimit = 1024;
+
         /// <summary>
         /// 鏈€澶ц繛鎺ユ暟
         /// </summary>
@@ -599,7 +660,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return connectionlimit; }
             set { connectionlimit = value; }
         }
+
         private string proxyusername = string.Empty;
+
         /// <summary>
         /// 浠ｇ悊Proxy 鏈嶅姟鍣ㄧ敤鎴峰悕
         /// </summary>
@@ -608,7 +671,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return proxyusername; }
             set { proxyusername = value; }
         }
+
         private string proxypwd = string.Empty;
+
         /// <summary>
         /// 浠ｇ悊 鏈嶅姟鍣ㄥ瘑鐮?
         /// </summary>
@@ -617,7 +682,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return proxypwd; }
             set { proxypwd = value; }
         }
+
         private string proxyip = string.Empty;
+
         /// <summary>
         /// 浠ｇ悊 鏈嶅姟IP ,濡傛灉瑕佷娇鐢↖E浠ｇ悊灏辫缃负ieproxy
         /// </summary>
@@ -626,6 +693,7 @@ namespace FreezerProUtility.Fp_DAL
             get { return proxyip; }
             set { proxyip = value; }
         }
+
         private ResultType resulttype = ResultType.String;
 
         /// <summary>
@@ -636,7 +704,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return resulttype; }
             set { resulttype = value; }
         }
+
         private WebHeaderCollection header = new WebHeaderCollection();
+
         /// <summary>
         /// header瀵硅薄
         /// </summary>
@@ -656,7 +726,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _ProtocolVersion; }
             set { _ProtocolVersion = value; }
         }
+
         private Boolean _expect100continue = true;
+
         /// <summary>
         ///  鑾峰彇鎴栬缃竴涓?System.Boolean 鍊硷紝璇ュ€肩‘瀹氭槸鍚︿娇鐢?100-Continue 琛屼负銆傚鏋?POST 璇锋眰闇€瑕?100-Continue 鍝嶅簲锛屽垯涓?true锛涘惁鍒欎负 false銆傞粯璁ゅ€间负 true銆?
         /// </summary>
@@ -665,7 +737,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _expect100continue; }
             set { _expect100continue = value; }
         }
+
         private X509CertificateCollection _ClentCertificates;
+
         /// <summary>
         /// 璁剧疆509璇佷功闆嗗悎
         /// </summary>
@@ -674,7 +748,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _ClentCertificates; }
             set { _ClentCertificates = value; }
         }
+
         private Encoding _PostEncoding;
+
         /// <summary>
         /// 璁剧疆鎴栬幏鍙朠ost鍙傛暟缂栫爜,榛樿鐨勪负Default缂栫爜
         /// </summary>
@@ -683,7 +759,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _PostEncoding; }
             set { _PostEncoding = value; }
         }
+
         private ResultCookieType _ResultCookieType = ResultCookieType.String;
+
         /// <summary>
         /// Cookie杩斿洖绫诲瀷,榛樿鐨勬槸鍙繑鍥炲瓧绗︿覆绫诲瀷
         /// </summary>
@@ -694,6 +772,7 @@ namespace FreezerProUtility.Fp_DAL
         }
 
         private ICredentials _ICredentials = CredentialCache.DefaultCredentials;
+
         /// <summary>
         /// 鑾峰彇鎴栬缃姹傜殑韬唤楠岃瘉淇℃伅銆?
         /// </summary>
@@ -702,6 +781,7 @@ namespace FreezerProUtility.Fp_DAL
             get { return _ICredentials; }
             set { _ICredentials = value; }
         }
+
         /// <summary>
         /// 璁剧疆璇锋眰灏嗚窡闅忕殑閲嶅畾鍚戠殑鏈€澶ф暟鐩?
         /// </summary>
@@ -714,6 +794,7 @@ namespace FreezerProUtility.Fp_DAL
         }
 
         private DateTime? _IfModifiedSince = null;
+
         /// <summary>
         /// 鑾峰彇鍜岃缃甀fModifiedSince锛岄粯璁や负褰撳墠鏃ユ湡鍜屾椂闂?
         /// </summary>
@@ -722,14 +803,15 @@ namespace FreezerProUtility.Fp_DAL
             get { return _IfModifiedSince; }
             set { _IfModifiedSince = value; }
         }
-
     }
+
     /// <summary>
     /// Http杩斿洖鍙傛暟绫?
     /// </summary>
     internal class HttpResult
     {
         private string _Cookie;
+
         /// <summary>
         /// Http璇锋眰杩斿洖鐨凜ookie
         /// </summary>
@@ -740,6 +822,7 @@ namespace FreezerProUtility.Fp_DAL
         }
 
         private CookieCollection _CookieCollection;
+
         /// <summary>
         /// Cookie瀵硅薄闆嗗悎
         /// </summary>
@@ -748,7 +831,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _CookieCollection; }
             set { _CookieCollection = value; }
         }
+
         private string _html = string.Empty;
+
         /// <summary>
         /// 杩斿洖鐨凷tring绫诲瀷鏁版嵁 鍙湁ResultType.String鏃舵墠杩斿洖鏁版嵁锛屽叾瀹冩儏鍐典负绌?
         /// </summary>
@@ -757,7 +842,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _html; }
             set { _html = value; }
         }
+
         private byte[] _ResultByte;
+
         /// <summary>
         /// 杩斿洖鐨凚yte鏁扮粍 鍙湁ResultType.Byte鏃舵墠杩斿洖鏁版嵁锛屽叾瀹冩儏鍐典负绌?
         /// </summary>
@@ -766,7 +853,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _ResultByte; }
             set { _ResultByte = value; }
         }
+
         private WebHeaderCollection _Header;
+
         /// <summary>
         /// header瀵硅薄
         /// </summary>
@@ -775,7 +864,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _Header; }
             set { _Header = value; }
         }
+
         private string _StatusDescription;
+
         /// <summary>
         /// 杩斿洖鐘舵€佽鏄?
         /// </summary>
@@ -784,7 +875,9 @@ namespace FreezerProUtility.Fp_DAL
             get { return _StatusDescription; }
             set { _StatusDescription = value; }
         }
+
         private HttpStatusCode _StatusCode;
+
         /// <summary>
         /// 杩斿洖鐘舵€佺爜,榛樿涓篛K
         /// </summary>
@@ -794,6 +887,7 @@ namespace FreezerProUtility.Fp_DAL
             set { _StatusCode = value; }
         }
     }
+
     /// <summary>
     /// 杩斿洖绫诲瀷
     /// </summary>
@@ -803,11 +897,13 @@ namespace FreezerProUtility.Fp_DAL
         /// 琛ㄧず鍙繑鍥炲瓧绗︿覆 鍙湁Html鏈夋暟鎹?
         /// </summary>
         String,
+
         /// <summary>
         /// 琛ㄧず杩斿洖瀛楃涓插拰瀛楄妭娴?ResultByte鍜孒tml閮芥湁鏁版嵁杩斿洖
         /// </summary>
         Byte
     }
+
     /// <summary>
     /// Post鐨勬暟鎹牸寮忛粯璁や负string
     /// </summary>
@@ -817,15 +913,18 @@ namespace FreezerProUtility.Fp_DAL
         /// 瀛楃涓茬被鍨嬶紝杩欐椂缂栫爜Encoding鍙笉璁剧疆
         /// </summary>
         String,
+
         /// <summary>
         /// Byte绫诲瀷锛岄渶瑕佽缃甈ostdataByte鍙傛暟鐨勫€肩紪鐮丒ncoding鍙缃负绌?
         /// </summary>
         Byte,
+
         /// <summary>
         /// 浼犳枃浠讹紝Postdata蹇呴』璁剧疆涓烘枃浠剁殑缁濆璺緞锛屽繀椤昏缃瓻ncoding鐨勫€?
         /// </summary>
         FilePath
     }
+
     /// <summary>
     /// Cookie杩斿洖绫诲瀷
     /// </summary>
@@ -835,6 +934,7 @@ namespace FreezerProUtility.Fp_DAL
         /// 鍙繑鍥炲瓧绗︿覆绫诲瀷鐨凜ookie
         /// </summary>
         String,
+
         /// <summary>
         /// CookieCollection鏍煎紡鐨凜ookie闆嗗悎鍚屾椂涔熻繑鍥濻tring绫诲瀷鐨刢ookie
         /// </summary>

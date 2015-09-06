@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,7 +9,7 @@
  */
 /**
  * form - jQuery EasyUI
- * 
+ *
  */
 (function($){
 	/**
@@ -18,11 +18,11 @@
 	function ajaxSubmit(target, options){
 		var opts = $.data(target, 'form').options;
 		$.extend(opts, options||{});
-		
+
 		var param = $.extend({}, opts.queryParams);
 		if (opts.onSubmit.call(target, param) == false){return;}
 		$(target).find('.textbox-text:focus').blur();
-		
+
 		var frameId = 'easyui_frame_' + (new Date().getTime());
 		var frame = $('<iframe id='+frameId+' name='+frameId+'></iframe>').appendTo('body')
 		frame.attr('src', window.ActiveXObject ? 'javascript:false' : 'about:blank');
@@ -32,9 +32,9 @@
 			left:-1000
 		});
 		frame.bind('load', cb);
-		
+
 		submit(param);
-		
+
 		function submit(param){
 			var form = $(target);
 			if (opts.url){
@@ -56,7 +56,7 @@
 				paramFields.remove();
 			}
 		}
-		
+
 		function checkState(){
 			var f = $('#'+frameId);
 			if (!f.length){return}
@@ -69,7 +69,7 @@
 				cb();
 			}
 		}
-		
+
 		var checkCount = 10;
 		function cb(){
 			var f = $('#'+frameId);
@@ -103,19 +103,19 @@
 			}, 100);
 		}
 	}
-	
+
 	/**
 	 * load form data
-	 * if data is a URL string type load from remote site, 
-	 * otherwise load from local data object. 
+	 * if data is a URL string type load from remote site,
+	 * otherwise load from local data object.
 	 */
 	function load(target, data){
 		var opts = $.data(target, 'form').options;
-		
+
 		if (typeof data == 'string'){
 			var param = {};
 			if (opts.onBeforeLoad.call(target, param) == false) return;
-			
+
 			$.ajax({
 				url: data,
 				data: param,
@@ -130,7 +130,7 @@
 		} else {
 			_load(data);
 		}
-		
+
 		function _load(data){
 			var form = $(target);
 			for(var name in data){
@@ -149,7 +149,7 @@
 			opts.onLoadSuccess.call(target, data);
 			validate(target);
 		}
-		
+
 		/**
 		 * check the checkbox and radio fields
 		 */
@@ -164,7 +164,7 @@
 			});
 			return rr;
 		}
-		
+
 		function _loadOther(name, val){
 			var count = 0;
 			var pp = ['textbox','numberbox','slider'];
@@ -178,7 +178,7 @@
 			}
 			return count;
 		}
-		
+
 		function _loadCombo(name, val){
 			var form = $(target);
 			var cc = ['combobox','combotree','combogrid','datetimebox','datebox','combo'];
@@ -198,7 +198,7 @@
 			}
 		}
 	}
-	
+
 	/**
 	 * clear the form fields
 	 */
@@ -224,9 +224,8 @@
 			} else if (tag == 'select'){
 				this.selectedIndex = -1;
 			}
-			
 		});
-		
+
 		var t = $(target);
 		var plugins = ['textbox','combo','combobox','combotree','combogrid','slider'];
 		for(var i=0; i<plugins.length; i++){
@@ -238,11 +237,11 @@
 		}
 		validate(target);
 	}
-	
+
 	function reset(target){
 		target.reset();
 		var t = $(target);
-		
+
 		var plugins = ['textbox','combo','combobox','combotree','combogrid','datebox','datetimebox','spinner','timespinner','numberbox','numberspinner','slider'];
 		for(var i=0; i<plugins.length; i++){
 			var plugin = plugins[i];
@@ -253,7 +252,7 @@
 		}
 		validate(target);
 	}
-	
+
 	/**
 	 * set the form to make it can submit with ajax.
 	 */
@@ -270,7 +269,7 @@
 		}
 		setValidation(target, options.novalidate);
 	}
-	
+
 	function initForm(target, options){
 		options = options || {};
 		var state = $.data(target, 'form');
@@ -282,7 +281,7 @@
 			});
 		}
 	}
-	
+
 	function validate(target){
 		if ($.fn.validatebox){
 			var t = $(target);
@@ -293,13 +292,13 @@
 		}
 		return true;
 	}
-	
+
 	function setValidation(target, novalidate){
 		var opts = $.data(target, 'form').options;
 		opts.novalidate = novalidate;
 		$(target).find('.validatebox-text:not(:disabled)').validatebox(novalidate ? 'disableValidation' : 'enableValidation');
 	}
-	
+
 	$.fn.form = function(options, param){
 		if (typeof options == 'string'){
 			this.each(function(){
@@ -307,13 +306,13 @@
 			});
 			return $.fn.form.methods[options](this, param);
 		}
-		
+
 		return this.each(function(){
 			initForm(this, options);
 			setForm(this);
 		});
 	};
-	
+
 	$.fn.form.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'form').options;
@@ -352,14 +351,14 @@
 			});
 		}
 	};
-	
+
 	$.fn.form.parseOptions = function(target){
 		var t = $(target);
 		return $.extend({}, $.parser.parseOptions(target, [{ajax:'boolean'}]), {
 			url: (t.attr('action') ? t.attr('action') : undefined)
 		});
 	};
-	
+
 	$.fn.form.defaults = {
 		novalidate: false,
 		ajax: true,

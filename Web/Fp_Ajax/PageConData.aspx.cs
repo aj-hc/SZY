@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace RuRo.Web
 {
@@ -66,34 +60,40 @@ namespace RuRo.Web
             string json = FreezerProUtility.Fp_Common.FpJsonHelper.DictionaryListToJsonString(list);
             return json;
         }
+
         //初始化唯一选择框
         private string ReturnIn_CodeType()
         {
             string res = "[{\"value\": \"0\",\"text\": \"卡号\" },{\"value\": \"1\", \"text\": \"住院号\"}]";
             return res;
         }
+
         //初始化性别
         private string ReturnGender()
         {
             string res = "[{\"value\": \"0\",\"text\": \"未知\" },{\"value\": \"1\", \"text\": \"男\"}, { \"value\": \"2\", \"text\": \"女\"} ]";
             return res;
         }
+
         //初始化血型
         private string ReturnBloodTypeFlag()
         {
             string res = "[{\"BloodTypeFlag\": \"1\",\"text\": \"A\" },{\"BloodTypeFlag\": \"2\", \"text\": \"B\"}, { \"BloodTypeFlag\": \"3\", \"text\": \"AB\"},{\"BloodTypeFlag\": \"4\",\"text\": \"O\" },{\"BloodTypeFlag\": \"5\", \"text\": \"其它\"}, { \"BloodTypeFlag\": \"6\", \"text\": \"未查\"} ]";
             return res;
         }
+
         private string ReturnSamplingMethodData()
         {
             string res = "[{ \"samplingMethod\": \"手术前\", \"text\": \"手术前\" }, { \"samplingMethod\": \"手术时\", \"text\": \"手术时\" },{ \"samplingMethod\": \"手术一周后\", \"text\": \"手术一周后\" }, { \"samplingMethod\": \"化疗前\", \"text\": \"化疗前\" },{ \"samplingMethod\": \"化疗两周期结束后，第三周化疗期前\", \"text\": \"化疗两周期结束后，第三周化疗期前\" },{ \"samplingMethod\": \"第五周期化疗前\", \"text\": \"第五周期化疗前\" },{ \"samplingMethod\": \"第六周期化疗技术后\", \"text\": \"第六周期化疗技术后\" },{ \"samplingMethod\": \"靶向治疗前\", \"text\": \"靶向治疗前\" },{ \"samplingMethod\": \"疾病出现进展时\", \"text\": \"疾病出现进展时\" },{ \"samplingMethod\": \"更换治疗方案前\", \"text\": \"更换治疗方案前\" },{ \"samplingMethod\": \"其他\", \"text\": \"其他\" } ]";
             return res;
         }
+
         private string ReturnDiagnoseTypeFlag()
         {
             string res = "[{\"DiagnoseTypeFlag\": \"0\",\"text\": \"门诊诊断\" },{\"DiagnoseTypeFlag\": \"1\", \"text\": \"入院诊断\"}, { \"DiagnoseTypeFlag\": \"2\", \"text\": \"出院主要诊断\"} , { \"DiagnoseTypeFlag\": \"3\", \"text\": \"出院次要诊\"} ]";
             return res;
         }
+
         public static Dictionary<string, string> DiagnoseTypeFlagDic()
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -153,6 +153,7 @@ namespace RuRo.Web
             string json = FreezerProUtility.Fp_Common.FpJsonHelper.DictionaryListToJsonString(list);
             return json;
         }
+
         private string ReturnDepartments()
         {
             string res = "[{ \"value\": \"0\", \"text\": \"肺癌所\" }, { \"value\": \"1\", \"text\": \"心研所\" }]";

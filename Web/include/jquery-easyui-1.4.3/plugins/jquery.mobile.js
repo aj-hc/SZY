@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -134,4 +134,3 @@ $.extend($.fn[_1a].defaults,{height:32,iconWidth:56});
 });
 $.extend($.fn.menu.defaults,{itemHeight:30,noline:true});
 })(jQuery);
-

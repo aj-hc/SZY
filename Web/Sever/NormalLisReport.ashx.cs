@@ -1,9 +1,6 @@
-﻿using RuRo.Common;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System;
 using System.Web;
+
 namespace RuRo.Web.Sever
 {
     /// <summary>
@@ -11,7 +8,6 @@ namespace RuRo.Web.Sever
     /// </summary>
     public class NormalLisReport : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -23,18 +19,23 @@ namespace RuRo.Web.Sever
                     case "inf":/*查询实体类*/
                         InfoData(context);
                         break;
+
                     case "ins":/*新增*/
                         SaveData(context);
                         break;
+
                     case "upd":/*修改*/
                         SaveData(context);
                         break;
+
                     case "del":/*删除*/
                         DeleteData(context);
                         break;
+
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
+
                     case "post":/*上传*/
                         PostData(context);
                         break;
@@ -46,12 +47,12 @@ namespace RuRo.Web.Sever
 
         private void PostData(HttpContext context)
         {
-            string code = context.Request.Params["code"];
-            string codeType = context.Request.Params["codeType"];
+            string code = context.Request.Params["code"].Trim();
+            string codeType = context.Request.Params["codeType"].Trim();
             string strNormalLis = context.Request.Params["NormalLis"];
-            string strusername = Common.CookieHelper.GetCookieValue("username");
+            string strusername = Common.CookieHelper.GetCookieValue("username").Trim();
             BLL.NormalLisReport bll = new BLL.NormalLisReport();
-            string result = bll.PostData(code, codeType, strNormalLis, strusername,false);
+            string result = bll.PostData(code, codeType, strNormalLis, strusername, false);
             context.Response.Write(result);
         }
 
@@ -67,34 +68,27 @@ namespace RuRo.Web.Sever
                 string code = context.Request.Params["code"];//住院号或门诊号
                 string codeType = context.Request.Params["codeType"];
                 string dateNow = context.Request.Params["dateNow"];
-                Model.DTO.NormalLisReportRequest request = new Model.DTO.NormalLisReportRequest(code,dateNow);
-                BLL.NormalLisReport normalLisReport = new BLL.NormalLisReport();
-                //bool success;
-                //object obj = n.GetData(code, ksrq00, jsrq00, out success);
-                //ReturnData resd = new ReturnData(obj, success);
-                //string jsonStrResult = resd.Res();
 
-                //string result = normalLisReport.GetData(request, codeType);
-                //context.Response.Write(result);
                 Model.QueryRecoder qqq = new Model.QueryRecoder();
-                qqq.Code= code;
+                qqq.Code = code;
                 qqq.CodeType = codeType;
                 qqq.QueryType = "NormalLisReport";
-                qqq.Uname =Common.CookieHelper.GetCookieValue("username");
+                qqq.Uname = Common.CookieHelper.GetCookieValue("username");
                 qqq.AddDate = DateTime.Parse(dateNow);
                 qqq.IsDel = false;
-                BLL.Request.NormalLisReportRequest nnnnn = new BLL.Request.NormalLisReportRequest(qqq);
+
+                BLL.Request.Request request = new BLL.Request.NormalLisReportRequest(qqq);
+
                 BLL.NormalLisReport NData = new BLL.NormalLisReport();
-                string result= NData.GetData(qqq, true);
+                string result = NData.GetData(qqq, true);
                 context.Response.Write(result);
-                //NData.GetData(BLL.Request.Request r);
             }
         }
 
         private void DeleteData(HttpContext context)
         {
             string pk = context.Request["pk"];
-            bool success = true;
+            //bool success = true;
             Object obj = pk;
             //string msg = "删除成功";
             //ReturnData resd = new ReturnData(obj, success,msg);
@@ -109,8 +103,8 @@ namespace RuRo.Web.Sever
 
         private static void InfoData(HttpContext context)
         {
-            
         }
+
         public bool IsReusable
         {
             get

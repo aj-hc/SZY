@@ -656,6 +656,7 @@
     <Content Include="Pages\EmpiInfo_info.aspx" />
     <Content Include="Pages\NormalLisReport_list.aspx" />
     <Content Include="Pages\PatientDiagnose_info.aspx" />
+    <Content Include="Pages\PatientDiagnose_list.aspx" />
     <Content Include="Pages\QueryRecoder_list.aspx" />
     <Content Include="Pages\SampleInfo.html" />
     <Content Include="SZY\configXML\MatchFieldsWithClinicalData.xml">
@@ -1031,8 +1032,10 @@
     <Content Include="SZY\TestData.aspx" />
     <Content Include="SZY\TestXmlData.aspx" />
     <Content Include="Test\PostTestData.aspx" />
-    <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CheckRight.ascx.cs">
@@ -1122,6 +1125,13 @@
     <Compile Include="Pages\PatientDiagnose_info.aspx.designer.cs">
       <DependentUpon>PatientDiagnose_info.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PatientDiagnose_list.aspx.cs">
+      <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\PatientDiagnose_list.aspx.designer.cs">
+      <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\QueryRecoder_list.aspx.cs">
       <DependentUpon>QueryRecoder_list.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1186,11 +1196,11 @@
     <Compile Include="ValidateCode.aspx.designer.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
+    <Compile Include="Test\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
+    <Compile Include="Test\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -1263,6 +1273,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sever\QueryRecoder_handler.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\FpExtend.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

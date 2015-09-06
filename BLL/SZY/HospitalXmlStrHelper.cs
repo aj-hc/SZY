@@ -1,7 +1,5 @@
 ﻿using RuRo.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using System.Xml;
@@ -11,6 +9,7 @@ namespace RuRo.BLL
     public class HospitalXmlStrHelper
     {
         #region 将根据条码获取数据的webservice获取到的数据转换成xml文档 +  public static XmlDocument HospitalXmlStrToXmlDoc(string xmlStr)
+
         /// <summary>
         /// 将xml数据转换成xml文档(webservice获取的数据需要添加一个xml头文件,有根节点的数据加上头也可以转换成xml文档)，转换失败是返回null
         /// </summary>
@@ -32,9 +31,11 @@ namespace RuRo.BLL
             }
             return xmlHospitalDt;
         }
-        #endregion
+
+        #endregion 将根据条码获取数据的webservice获取到的数据转换成xml文档 +  public static XmlDocument HospitalXmlStrToXmlDoc(string xmlStr)
 
         #region 加载本地的xml文件创建新的xml文件（此文件里面获取的）+  public static string HospitalXmlFileToXmlDoc()
+
         /// <summary>
         /// 加载本地的xml文件创建新的xml文件（此文件里面获取的）
         /// </summary>
@@ -53,6 +54,7 @@ namespace RuRo.BLL
 
             return xn;
         }
-        #endregion
+
+        #endregion 加载本地的xml文件创建新的xml文件（此文件里面获取的）+  public static string HospitalXmlFileToXmlDoc()
     }
 }

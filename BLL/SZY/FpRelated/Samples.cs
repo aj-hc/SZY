@@ -1,12 +1,4 @@
-﻿using RuRo.Common;
-using RuRo.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-namespace RuRo.BLL
+﻿namespace RuRo.BLL
 {
     public class Samples
     {
@@ -60,7 +52,6 @@ namespace RuRo.BLL
         ////根据日期查询样本samples_by_date  lists samples by date:# today, yesterday, week, month, 1/1/2008
         //public List<Model.Sample> GetSamples_By_Date(string date, string param)
         //{
-
         //    List<Model.Sample> sample_By_DateList = getdata<Model.Sample>(FpMethod.samples_by_date, string.Format("&date={0}&limit={1}", date, param), "Samples");
         //    return sample_By_DateList;
         //}
@@ -105,8 +96,6 @@ namespace RuRo.BLL
 
         //    }
 
-
-
         //    return sample_By_DateList;
         //}
 
@@ -133,12 +122,10 @@ namespace RuRo.BLL
         ////根据样本id获取样本的信息
         //public Model.Sample_Info GetSample_Info(string sample_id)
         //{
-
         //    Model.Sample_Info sample_info = new Model.Sample_Info();
         //    string strJson = dataWithFP.getDateFromFp(FpMethod.sample_info, string.Format("&id={0}", sample_id));
         //    sample_info = FpJsonHelper.JsonStrToObject<Model.Sample_Info>(strJson);
         //    return sample_info;
         //}
-
     }
 }

@@ -1,12 +1,11 @@
 ﻿namespace FreezerProUtility.Fp_Model
 {
     using System;
-    using System.Collections.Generic;
 
     public partial class ArcSample
     {
         public string id { get; set; }
-        public  string  obj_id { get; set; }
+        public string obj_id { get; set; }
         public string sample_source_name { get; set; }
         public string sample_type_name { get; set; }
         public string user_name { get; set; }

@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -59,4 +59,3 @@ $.fn.droppable.defaults={accept:null,disabled:false,onDragEnter:function(e,_b){
 },onDrop:function(e,_e){
 }};
 })(jQuery);
-

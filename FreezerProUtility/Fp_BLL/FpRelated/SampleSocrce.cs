@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FreezerProUtility.Fp_BLL
 {
@@ -22,7 +20,7 @@ namespace FreezerProUtility.Fp_BLL
         {
             List<Fp_Model.SampleSourceTypes> list = GetAll(up);
             Fp_Model.SampleSourceTypes resObj = new Fp_Model.SampleSourceTypes();
-            if (list!=null&&list.Count>0)
+            if (list != null && list.Count > 0)
             {
                 resObj = list.Where<Fp_Model.SampleSourceTypes>(a => a.name == name).FirstOrDefault();
             }
@@ -36,8 +34,8 @@ namespace FreezerProUtility.Fp_BLL
             dic.Add("username", up.UserName);
             dic.Add("password", up.PassWord);
             dic.Add("method", Fp_Common.FpMethod.import_sources.ToString());
-            dic.Add("sample_source_type",sampleSourceTypeName);
-            if (jsonDic!=null&&jsonDic.Count>0)
+            dic.Add("sample_source_type", sampleSourceTypeName);
+            if (jsonDic != null && jsonDic.Count > 0)
             {
                 dic.Add("json", Fp_Common.FpJsonHelper.DictionaryToJsonString(jsonDic));
             }
@@ -76,6 +74,5 @@ namespace FreezerProUtility.Fp_BLL
                 return "";
             }
         }
-
     }
 }

@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,11 +9,11 @@
  */
 /**
  * datebox - jQuery EasyUI
- * 
+ *
  * Dependencies:
  * 	 calendar
  *   combo
- * 
+ *
  */
 (function($){
 	/**
@@ -22,7 +22,7 @@
 	function createBox(target){
 		var state = $.data(target, 'datebox');
 		var opts = state.options;
-		
+
 		$(target).addClass('datebox-f').combo($.extend({}, opts, {
 			onShowPanel:function(){
 				bindEvents(this);
@@ -32,7 +32,7 @@
 				opts.onShowPanel.call(this);
 			}
 		}));
-		
+
 		/**
 		 * if the calendar isn't created, create it.
 		 */
@@ -74,7 +74,7 @@
 
 		$(target).combo('textbox').parent().addClass('datebox');
 		$(target).datebox('initValue', opts.value);
-		
+
 		function bindEvents(target){
 			var opts = $(target).datebox('options');
 			var panel = $(target).combo('panel');
@@ -114,14 +114,14 @@
 			state.calendar.calendar('resize');
 		}
 	}
-	
+
 	/**
 	 * called when user inputs some value in text box
 	 */
 	function doQuery(target, q){
 		setValue(target, q, true);
 	}
-	
+
 	/**
 	 * called when user press enter key
 	 */
@@ -134,7 +134,7 @@
 			$(target).combo('hidePanel');
 		}
 	}
-	
+
 	function setValue(target, value, remainText){
 		var state = $.data(target, 'datebox');
 		var opts = state.options;
@@ -150,7 +150,7 @@
 			}
 		}
 	}
-	
+
 	$.fn.datebox = function(options, param){
 		if (typeof options == 'string'){
 			var method = $.fn.datebox.methods[options];
@@ -160,7 +160,7 @@
 				return this.combo(options, param);
 			}
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'datebox');
@@ -174,7 +174,7 @@
 			createBox(this);
 		});
 	};
-	
+
 	$.fn.datebox.methods = {
 		options: function(jq){
 			var copts = jq.combo('options');
@@ -221,16 +221,16 @@
 			});
 		}
 	};
-	
+
 	$.fn.datebox.parseOptions = function(target){
 		return $.extend({}, $.fn.combo.parseOptions(target), $.parser.parseOptions(target, ['sharedCalendar']));
 	};
-	
+
 	$.fn.datebox.defaults = $.extend({}, $.fn.combo.defaults, {
 		panelWidth:180,
 		panelHeight:'auto',
 		sharedCalendar:null,
-		
+
 		keyHandler: {
 			up:function(e){},
 			down:function(e){},
@@ -239,11 +239,11 @@
 			enter:function(e){doEnter(this)},
 			query:function(q,e){doQuery(this, q)}
 		},
-		
+
 		currentText:'Today',
 		closeText:'Close',
 		okText:'Ok',
-		
+
 		buttons:[{
 			text: function(target){return $(target).datebox('options').currentText;},
 			handler: function(target){
@@ -260,7 +260,7 @@
 				$(this).closest('div.combo-panel').panel('close');
 			}
 		}],
-		
+
 		formatter:function(date){
 			var y = date.getFullYear();
 			var m = date.getMonth()+1;
@@ -279,7 +279,7 @@
 				return new Date();
 			}
 		},
-		
+
 		onSelect:function(date){}
 	});
 })(jQuery);

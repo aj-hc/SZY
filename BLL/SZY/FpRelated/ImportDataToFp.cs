@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using RuRo.Common;
-using System.IO;
-
-namespace RuRo.BLL
+﻿namespace RuRo.BLL
 {
     public class ImportDataToFp
     {
-        SampleSocrce sampleSouce = new SampleSocrce();
+        private SampleSocrce sampleSouce = new SampleSocrce();
 
         //#region 1.0 提交数据到FP并返回FP处理的结果
         ///// <summary>
@@ -179,6 +171,5 @@ namespace RuRo.BLL
         //    }
         //    return resultReason;
         //}
-
     }
 }

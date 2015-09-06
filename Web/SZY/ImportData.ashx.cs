@@ -1,8 +1,4 @@
-﻿using RuRo.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace RuRo.Web
 {
@@ -11,7 +7,6 @@ namespace RuRo.Web
     /// </summary>
     public class ImportData : IHttpHandler
     {
-
         /// <summary>
         /// 将数据提交到业务层处理
         /// </summary>
@@ -70,7 +65,7 @@ namespace RuRo.Web
             //        //        context.Response.Write("{\"success\":\"失败\",\"patientId\":" + "\"" + patientId + "\",\"Reason\":\"" + reason + "\"}");
             //        //        context.Response.End();
             //        //    }
-            //        //} 
+            //        //}
             //        #endregion
             //    }
             //    else
@@ -81,6 +76,7 @@ namespace RuRo.Web
             //    context.Response.End();
             //}
         }
+
         public bool IsReusable
         {
             get

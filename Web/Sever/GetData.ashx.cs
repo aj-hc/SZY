@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
+﻿using System.Web;
 
 namespace RuRo.Web
 {
@@ -11,7 +7,6 @@ namespace RuRo.Web
     /// </summary>
     public class Import : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -19,13 +14,12 @@ namespace RuRo.Web
             //根据条码获取数据
             if (context.Request["action"] == "gethisdata")
             {
-
                 string Mzzybz = context.Request["Mzzybz"];//0 门诊 1住院
                 string Mzhzyh = context.Request["Mzhzyh"];//住院号或门诊号
                 string jsonStrResult = "";
                 BLL.GetDataFromHospital hospitalDataByBarcode = new BLL.GetDataFromHospital();
                 jsonStrResult = hospitalDataByBarcode.GetDataByBarcode(Mzhzyh, Mzzybz);
-              
+
                 if (jsonStrResult == "")//直接无数据返回（可能是链接有问题）
                 {
                     string result = "{\"success\":false,\"result\":\"获取数据失败，请检查住院号或门诊号\"}";
@@ -34,7 +28,7 @@ namespace RuRo.Web
                 }
                 if (jsonStrResult.Contains("ErrorMsg"))
                 {
-                    string oPListForSpecimen =FreezerProUtility.Fp_Common.FpJsonHelper.GetStrFromJsonStr("ErrorMsg", jsonStrResult);
+                    string oPListForSpecimen = FreezerProUtility.Fp_Common.FpJsonHelper.GetStrFromJsonStr("ErrorMsg", jsonStrResult);
                     string result = "{\"success\":false,\"result\":" + oPListForSpecimen + "}";
                     context.Response.Write(result);
                     context.Response.End();
@@ -60,9 +54,10 @@ namespace RuRo.Web
                 context.Response.Write(GetSampleSourceFromFp());
                 context.Response.End();
             }
-
         }
+
         #region 从FP系统中获取样本源信息 +  private string GetSampleSourceFromFp()
+
         /// <summary>
         /// 从FP系统中获取样本源信息
         /// </summary>
@@ -94,7 +89,7 @@ namespace RuRo.Web
             //        //}
             //        //调用JsonNet序列化临时字典
             //        //sampleSourceTypeNameAndDecStr.Append(Common.FpJsonHelper.DictionaryToJsonString(sampleSourceTypeNameAndDecDicTemp));
-            //        //sampleSourceTypeNameAndDecStr.Append(","); 
+            //        //sampleSourceTypeNameAndDecStr.Append(",");
             //        #endregion
             //    }
             //    result = sampleSourceTypeNameAndDecStr.ToString().TrimEnd(',') + "]";
@@ -108,7 +103,8 @@ namespace RuRo.Web
             return "";
         }
 
-        #endregion
+        #endregion 从FP系统中获取样本源信息 +  private string GetSampleSourceFromFp()
+
         public bool IsReusable
         {
             get

@@ -1,19 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Xml;
-using System.Reflection;
 
 namespace RuRo.BLL
 {
     public partial class EmpiInfo
     {
-
         //创建获取数据对象
-        BasicData.EmpiService empiService = new BasicData.EmpiService();
+        private BasicData.EmpiService empiService = new BasicData.EmpiService();
 
         /// <summary>
         /// 前台调用方法
@@ -25,6 +21,7 @@ namespace RuRo.BLL
             Model.DTO.JsonModel jsonmodel = StrTObject(xmlStr);
             return JsonConvert.SerializeObject(jsonmodel);
         }
+
         public string PostData(string formData, string code, string codeType)
         {
             Dictionary<string, string> dic = GetBaseInfoDic(formData);
@@ -35,9 +32,11 @@ namespace RuRo.BLL
                 case "1":
                     newDic.Add("住院号", code);
                     break;
+
                 case "0":
                     newDic.Add("卡号", code);
                     break;
+
                 default:
                     break;
             }
@@ -67,7 +66,9 @@ namespace RuRo.BLL
             }
             return result;
         }
+
         #region 获取基本信息字典（样本源） +  private Dictionary<string, string> GetBaseInfoDic()
+
         //获取基本信息字典（样本源）
         private Dictionary<string, string> GetBaseInfoDic(string formStr)
         {
@@ -85,7 +86,8 @@ namespace RuRo.BLL
             }
             return dic;
         }
-        #endregion
+
+        #endregion 获取基本信息字典（样本源） +  private Dictionary<string, string> GetBaseInfoDic()
 
         private string PostData(Dictionary<string, string> dic)
         {
@@ -95,6 +97,7 @@ namespace RuRo.BLL
         }
 
         #region 获取数据
+
         /// <summary>
         /// 获取数据
         /// </summary>
@@ -104,8 +107,8 @@ namespace RuRo.BLL
         {
             try
             {
-                return Test(request);
-                //  return string.IsNullOrEmpty(request.Request) ? "" : empiService.GetEmpiInfo(request.Request);
+              // return Test(request);
+               return string.IsNullOrEmpty(request.Request) ? "" : empiService.GetEmpiInfo(request.Request);
             }
             catch (Exception ex)
             {
@@ -113,8 +116,11 @@ namespace RuRo.BLL
                 return ex.Message + "--" + DateTime.Now.ToLongTimeString();
             }
         }
-        #endregion
+
+        #endregion 获取数据
+
         #region 生成临时数据
+
         /// <summary>
         /// 生成临时数据
         /// </summary>
@@ -127,9 +133,11 @@ namespace RuRo.BLL
             string getDataFromHospitalStr = string.Format("<Response><InterfaceCode>GetEmpiInfo</InterfaceCode><ResultCode>{0}</ResultCode><ErrorMsg>出错了</ErrorMsg><EmpiInfo><EmpiId>{1}</EmpiId><PatientName>{2}</PatientName><Sex>{3}</Sex><Birthday>{4}</Birthday><CardId>{5}</CardId><Tel>{6}</Tel><Address>{7}</Address></EmpiInfo></Response>", "0", r.CreatNum(), r.CreatName(), r.CreatSex(), r.CreatBirthday().ToShortDateString(), "110", "100000000", "广州");
             return getDataFromHospitalStr;
         }
-        #endregion
+
+        #endregion 生成临时数据
 
         #region 将数据转换成对象
+
         /// <summary>
         /// 将数据转换成对象
         /// </summary>
@@ -153,6 +161,14 @@ namespace RuRo.BLL
                         {
                             string strNode = JsonConvert.SerializeXmlNode(xd.SelectSingleNode("//EmpiInfo"), Newtonsoft.Json.Formatting.None, true);
                             Model.EmpiInfo emp = JsonConvert.DeserializeObject<Model.EmpiInfo>(strNode);
+                            if (!string.IsNullOrEmpty(emp.Birthday))
+                            {
+                                if (!emp.Birthday.Contains("-") && emp.Birthday.Length == 8)
+                                {
+                                    emp.Birthday = emp.Birthday.Insert(4, "-").Insert(7, "-");
+                                }
+                            }
+
                             if (emp == null || emp.PatientName == "")
                             {
                             }
@@ -169,7 +185,6 @@ namespace RuRo.BLL
                             jsonData.Msg = xd.SelectSingleNode("//ErrorMsg").InnerText;
                             jsonData.Statu = "err";
                         }
-
                     }
                     else
                     {
@@ -181,7 +196,9 @@ namespace RuRo.BLL
             }
             return jsonData;
         }
-        #endregion
+
+        #endregion 将数据转换成对象
+
         //获取数据
         //解析数据
         //返回数据对象

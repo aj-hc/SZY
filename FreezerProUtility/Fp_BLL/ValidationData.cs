@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FreezerProUtility.Fp_BLL
 {
@@ -17,7 +14,7 @@ namespace FreezerProUtility.Fp_BLL
         /// </summary>
         /// <param name="Json">传入FP返回的字符串</param>
         /// <returns>检查结果如果存在就返回true</returns>
-        public static  bool checkTotal(string Json)
+        public static bool checkTotal(string Json)
         {
             bool result = false;
             try
@@ -37,10 +34,12 @@ namespace FreezerProUtility.Fp_BLL
                 return false;
             }
             return result;
-        } 
-	#endregion
+        }
+
+        #endregion 检查数据中是否存在Total + public static  bool checkTotal(string Json)
 
         #region 检查Json字符串中是否包含auth_token + static bool checkAuth_Token(string Json)
+
         /// <summary>
         /// 检查Json字符串中是否包含auth_token
         /// </summary>
@@ -49,7 +48,8 @@ namespace FreezerProUtility.Fp_BLL
         public static bool checkAuth_Token(string Json)
         {
             return Json.Contains("auth_token");
-        } 
-        #endregion
+        }
+
+        #endregion 检查Json字符串中是否包含auth_token + static bool checkAuth_Token(string Json)
     }
 }

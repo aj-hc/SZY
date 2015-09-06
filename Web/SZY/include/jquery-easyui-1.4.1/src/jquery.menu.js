@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,17 +9,16 @@
  */
 /**
  * menu - jQuery EasyUI
- * 
+ *
  */
 (function($){
-	
 	/**
 	 * initialize the target menu, the function can be invoked only once
 	 */
 	function init(target){
 		$(target).appendTo('body');
 		$(target).addClass('menu-top');	// the top menu
-		
+
 		$(document).unbind('.menu').bind('mousedown.menu', function(e){
 //			var allMenu = $('body>div.menu:visible');
 //			var m = $(e.target).closest('div.menu', allMenu);
@@ -27,12 +26,12 @@
 			if (m.length){return}
 			$('body>div.menu-top:visible').menu('hide');
 		});
-		
+
 		var menus = splitMenu($(target));
 		for(var i=0; i<menus.length; i++){
 			createMenu(menus[i]);
 		}
-		
+
 		function splitMenu(menu){
 			var menus = [];
 			menu.addClass('menu');
@@ -50,7 +49,7 @@
 			}
 			return menus;
 		}
-		
+
 		function createMenu(menu){
 			var wh = $.parser.parseOptions(menu[0], ['width','height']);
 			menu[0].originalHeight = wh.height || 0;
@@ -69,7 +68,7 @@
 					if (!item.hasClass('menu-sep')){
 						item[0].itemName = itemOpts.name || '';
 						item[0].itemHref = itemOpts.href || '';
-						
+
 						var text = item.addClass('menu-item').html();
 						item.empty().append($('<div class="menu-text"></div>').html(text));
 						if (itemOpts.iconCls){
@@ -81,7 +80,7 @@
 						if (item[0].submenu){
 							$('<div class="menu-rightarrow"></div>').appendTo(item);	// has sub menu
 						}
-						
+
 						bindMenuItemEvent(target, item);
 					}
 				});
@@ -89,11 +88,11 @@
 			}
 			setMenuSize(target, menu);
 			menu.hide();
-			
+
 			bindMenuEvent(target, menu);
 		}
 	}
-	
+
 	function setMenuSize(target, menu){
 		var opts = $.data(target, 'menu').options;
 		var style = menu.attr('style') || '';
@@ -103,7 +102,7 @@
 			height: 'auto',
 			overflow: 'hidden'
 		});
-		
+
 		var el = menu[0];
 		var width = el.originalWidth || 0;
 		if (!width){
@@ -116,13 +115,13 @@
 			});
 			width += 40;
 		}
-		
+
 		width = Math.max(width, opts.minWidth);
 //		var height = el.originalHeight || menu.outerHeight();
 		var height = el.originalHeight || 0;
 		if (!height){
 			height = menu.outerHeight();
-			
+
 			if (menu.hasClass('menu-top') && opts.alignTo){
 				var at = $(opts.alignTo);
 				var h1 = at.offset().top - $(document).scrollTop();
@@ -134,7 +133,7 @@
 			} else {
 				style += ';overflow:hidden';
 			}
-			
+
 //			if (height > $(window).height()-5){
 //				height = $(window).height()-5;
 //				style += ';overflow:auto';
@@ -145,12 +144,12 @@
 		var lineHeight = Math.max(el.originalHeight, menu.outerHeight()) - 2;
 		menu._outerWidth(width)._outerHeight(height);
 		menu.children('div.menu-line')._outerHeight(lineHeight);
-		
+
 		style += ';width:' + el.style.width + ';height:' + el.style.height;
-		
+
 		menu.attr('style', style);
 	}
-	
+
 	/**
 	 * bind menu event
 	 */
@@ -169,7 +168,7 @@
 			}
 		});
 	}
-	
+
 	/**
 	 * bind menu item event
 	 */
@@ -200,12 +199,12 @@
 			});
 			// show this menu
 			item.addClass('menu-active');
-			
+
 			if ($(this).hasClass('menu-item-disabled')){
 				item.addClass('menu-active-disabled');
 				return;
 			}
-			
+
 			var submenu = item[0].submenu;
 			if (submenu){
 				$(target).menu('show', {
@@ -222,13 +221,12 @@
 				} else {
 					hideMenu(submenu);
 				}
-				
 			} else {
 				item.removeClass('menu-active');
 			}
 		});
 	}
-	
+
 	/**
 	 * hide top menu and it's all sub menus
 	 */
@@ -242,7 +240,7 @@
 		}
 		return false;
 	}
-	
+
 	/**
 	 * show the menu, the 'param' object has one or more properties:
 	 * left: the left position to display
@@ -282,7 +280,7 @@
 			}
 			top = _fixTop(parent.offset().top - 3);
 		}
-		
+
 		function _fixTop(top, alignTo){
 			if (top + menu.outerHeight() > $(window)._outerHeight() + $(document).scrollTop()){
 				if (alignTo){
@@ -294,7 +292,7 @@
 			if (top < 0){top = 0;}
 			return top;
 		}
-		
+
 		menu.css({left:left,top:top});
 		menu.show(0, function(){
 			if (!menu[0].shadow){
@@ -314,10 +312,10 @@
 			}
 		});
 	}
-	
+
 	function hideMenu(menu){
 		if (!menu) return;
-		
+
 		hideit(menu);
 		menu.find('div.menu-item').each(function(){
 			if (this.submenu){
@@ -325,7 +323,7 @@
 			}
 			$(this).removeClass('menu-active');
 		});
-		
+
 		function hideit(m){
 			m.stop(true,true);
 			if (m[0].shadow){
@@ -334,7 +332,7 @@
 			m.hide();
 		}
 	}
-	
+
 	function findItem(target, text){
 		var result = null;
 		var tmp = $('<div></div>');
@@ -353,11 +351,11 @@
 		tmp.remove();
 		return result;
 	}
-	
+
 	function setDisabled(target, itemEl, disabled){
 		var t = $(itemEl);
 		if (!t.hasClass('menu-item')){return}
-		
+
 		if (disabled){
 			t.addClass('menu-item-disabled');
 			if (itemEl.onclick){
@@ -372,7 +370,7 @@
 			}
 		}
 	}
-	
+
 	function appendItem(target, param){
 		var menu = $(target);
 		if (param.parent){
@@ -403,12 +401,12 @@
 		}
 		if (param.handler){item[0].onclick = eval(param.handler)}
 		if (param.disabled){setDisabled(target, item[0], true)}
-		
+
 		bindMenuItemEvent(target, item);
 		bindMenuEvent(target, menu);
 		setMenuSize(target, menu);
 	}
-	
+
 	function removeItem(target, itemEl){
 		function removeit(el){
 			if (el.submenu){
@@ -425,7 +423,7 @@
 		removeit(itemEl);
 		setMenuSize(target, menu);
 	}
-	
+
 	function setVisible(target, itemEl, visible){
 		var menu = $(itemEl).parent();
 		if (visible){
@@ -435,7 +433,7 @@
 		}
 		setMenuSize(target, menu);
 	}
-	
+
 	function destroyMenu(target){
 		$(target).children('div.menu-item').each(function(){
 			removeItem(target, this);
@@ -443,12 +441,12 @@
 		if (target.shadow) target.shadow.remove();
 		$(target).remove();
 	}
-	
+
 	$.fn.menu = function(options, param){
 		if (typeof options == 'string'){
 			return $.fn.menu.methods[options](this, param);
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'menu');
@@ -466,7 +464,7 @@
 			});
 		});
 	};
-	
+
 	$.fn.menu.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'menu').options;
@@ -594,11 +592,11 @@
 			});
 		}
 	};
-	
+
 	$.fn.menu.parseOptions = function(target){
 		return $.extend({}, $.parser.parseOptions(target, [{minWidth:'number',duration:'number',hideOnUnhover:'boolean'}]));
 	};
-	
+
 	$.fn.menu.defaults = {
 		zIndex:110000,
 		left: 0,

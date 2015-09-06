@@ -1,12 +1,11 @@
 ﻿namespace FreezerProUtility.Fp_Model
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class SampleTypes
     {
         public string id { get; set; }
-        public  string  obj_id { get; set; }
+        public string obj_id { get; set; }
         public string icon { get; set; }
         public string name { get; set; }
         public string descr { get; set; }

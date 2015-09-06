@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace RuRo.Web.Sever
 {
@@ -20,6 +17,7 @@ namespace RuRo.Web.Sever
                 case "gethisdata":
                     GetData(context);
                     break;
+
                 default:
                     break;
             }

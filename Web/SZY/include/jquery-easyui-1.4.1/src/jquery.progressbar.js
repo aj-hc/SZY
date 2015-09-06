@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,10 +9,10 @@
  */
 /**
  * progressbar - jQuery EasyUI
- * 
+ *
  * Dependencies:
  * 	 none
- * 
+ *
  */
 (function($){
 	function init(target){
@@ -26,20 +26,20 @@
 		});
 		return $(target);
 	}
-	
+
 	function setSize(target,width){
 		var opts = $.data(target, 'progressbar').options;
 		var bar = $.data(target, 'progressbar').bar;
 		if (width) opts.width = width;
 		bar._size(opts);
-		
+
 		bar.find('div.progressbar-text').css('width', bar.width());
 		bar.find('div.progressbar-text,div.progressbar-value').css({
 			height: bar.height()+'px',
 			lineHeight: bar.height()+'px'
 		});
 	}
-	
+
 	$.fn.progressbar = function(options, param){
 		if (typeof options == 'string'){
 			var method = $.fn.progressbar.methods[options];
@@ -47,7 +47,7 @@
 				return method(this, param);
 			}
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'progressbar');
@@ -63,7 +63,7 @@
 			setSize(this);
 		});
 	};
-	
+
 	$.fn.progressbar.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'progressbar').options;
@@ -92,11 +92,11 @@
 			});
 		}
 	};
-	
+
 	$.fn.progressbar.parseOptions = function(target){
 		return $.extend({}, $.parser.parseOptions(target, ['width','height','text',{value:'number'}]));
 	};
-	
+
 	$.fn.progressbar.defaults = {
 		width: 'auto',
 		height: 22,

@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,11 +9,11 @@
  */
 /**
  * tabs - jQuery EasyUI
- * 
+ *
  * Dependencies:
  * 	 panel
  *   linkbutton
- * 
+ *
  */
 (function($){
 	function getContentWidth(c){
@@ -30,23 +30,23 @@
 	function setScrollers(container) {
 		var opts = $.data(container, 'tabs').options;
 		if (opts.tabPosition == 'left' || opts.tabPosition == 'right' || !opts.showHeader){return}
-		
+
 		var header = $(container).children('div.tabs-header');
 		var tool = header.children('div.tabs-tool:not(.tabs-tool-hidden)');
 		var sLeft = header.children('div.tabs-scroller-left');
 		var sRight = header.children('div.tabs-scroller-right');
 		var wrap = header.children('div.tabs-wrap');
-		
+
 		// set the tool height
 		var tHeight = header.outerHeight();
 		if (opts.plain){
 			tHeight -= tHeight - header.height();
 		}
 		tool._outerHeight(tHeight);
-		
+
 		var tabsWidth = getContentWidth(header.find('ul.tabs'));
 		var cWidth = header.width() - tool._outerWidth();
-		
+
 		if (tabsWidth > cWidth) {
 			sLeft.add(sRight).show()._outerHeight(tHeight);
 			if (opts.toolPosition == 'left'){
@@ -95,7 +95,7 @@
 			}
 		}
 	}
-	
+
 	function addTools(container){
 		var opts = $.data(container, 'tabs').options;
 		var header = $(container).children('div.tabs-header');
@@ -120,12 +120,12 @@
 			header.children('div.tabs-tool').remove();
 		}
 	}
-	
+
 	function setSize(container, param) {
 		var state = $.data(container, 'tabs');
 		var opts = state.options;
 		var cc = $(container);
-		
+
 		if (!opts.doSize){return}
 		if (param){
 			$.extend(opts, {
@@ -142,7 +142,7 @@
 		ul.children('li').removeClass('tabs-first tabs-last');
 		ul.children('li:first').addClass('tabs-first');
 		ul.children('li:last').addClass('tabs-last');
-		
+
 		if (opts.tabPosition == 'left' || opts.tabPosition == 'right'){
 			header._outerWidth(opts.showHeader ? opts.headerWidth : 0);
 			panels._outerWidth(cc.width() - header.outerWidth());
@@ -162,7 +162,7 @@
 			}
 			ul._outerHeight(opts.tabHeight).css('width','');
 			ul._outerHeight(ul.outerHeight()-ul.height()-1+opts.tabHeight).css('width','');
-			
+
 			panels._size('height', isNaN(opts.height) ? '' : (opts.height-header.outerHeight()));
 			panels._size('width', isNaN(opts.width) ? '' : opts.width);
 		}
@@ -173,7 +173,7 @@
 			var d2 = li.outerWidth(true) - li.width();
 			var hwidth = header.width() - header.children('.tabs-tool:not(.tabs-tool-hidden)')._outerWidth();
 			var justifiedWidth = Math.floor((hwidth-d1-d2*state.tabs.length)/state.tabs.length);
-			
+
 			$.map(state.tabs, function(p){
 				setTabSize(p, (opts.justified && $.inArray(opts.tabPosition,['top','bottom'])>=0) ? justifiedWidth : undefined);
 			});
@@ -198,7 +198,7 @@
 			p_t.find('.easyui-fluid:visible').triggerHandler('_resize');
 		}
 	}
-	
+
 	/**
 	 * set selected tab panel size
 	 */
@@ -215,7 +215,7 @@
 			});
 		}
 	}
-	
+
 	/**
 	 * wrap the tabs header and body
 	 */
@@ -234,14 +234,14 @@
 				+ '<ul class="tabs"></ul>'
 				+ '</div>'
 				+ '</div>').prependTo(container);
-		
+
 		cc.children('div.tabs-panels').children('div').each(function(i){
 			var opts = $.extend({}, $.parser.parseOptions(this), {
 				selected: ($(this).attr('selected') ? true : undefined)
 			});
 			createTab(container, opts, $(this));
 		});
-		
+
 		cc.children('div.tabs-header').find('.tabs-scroller-left, .tabs-scroller-right').hover(
 				function(){$(this).addClass('tabs-scroller-over');},
 				function(){$(this).removeClass('tabs-scroller-over');}
@@ -254,7 +254,7 @@
 			return false;
 		});
 	}
-	
+
 	function bindEvents(container){
 		var state = $.data(container, 'tabs')
 		var opts = state.options;
@@ -288,7 +288,7 @@
 				opts.onContextMenu.call(container, e, li.find('span.tabs-title').html(), getLiIndex(li));
 			}
 		});
-		
+
 		function getLiIndex(li){
 			var index = 0;
 			li.parent().children('li').each(function(i){
@@ -300,12 +300,12 @@
 			return index;
 		}
 	}
-	
+
 	function setProperties(container){
 		var opts = $.data(container, 'tabs').options;
 		var header = $(container).children('div.tabs-header');
 		var panels = $(container).children('div.tabs-panels');
-		
+
 		header.removeClass('tabs-header-top tabs-header-bottom tabs-header-left tabs-header-right');
 		panels.removeClass('tabs-panels-top tabs-panels-bottom tabs-panels-left tabs-panels-right');
 		if (opts.tabPosition == 'top'){
@@ -321,7 +321,7 @@
 			header.addClass('tabs-header-right');
 			panels.addClass('tabs-panels-left');
 		}
-		
+
 		if (opts.plain == true) {
 			header.addClass('tabs-header-plain');
 		} else {
@@ -341,14 +341,14 @@
 		}
 		opts.doSize = true;
 	}
-	
+
 	function createTab(container, options, pp) {
 		options = options || {};
 		var state = $.data(container, 'tabs');
 		var tabs = state.tabs;
 		if (options.index == undefined || options.index > tabs.length){options.index = tabs.length}
 		if (options.index < 0){options.index = 0}
-		
+
 		var ul = $(container).children('div.tabs-header').find('ul.tabs');
 		var panels = $(container).children('div.tabs-panels');
 		var tab = $(
@@ -368,7 +368,7 @@
 			pp.insertBefore(panels.children('div.panel:eq('+options.index+')'));
 			tabs.splice(options.index, 0, pp);
 		}
-		
+
 		// create panel
 		pp.panel($.extend({}, options, {
 			tab: tab,
@@ -400,7 +400,7 @@
 						return false;
 					}
 				}
-				
+
 				var popts = $(this).panel('options');
 				popts.tab.addClass('tabs-selected');
 				// scroll the tab to center position if required.
@@ -413,7 +413,7 @@
 				} else {
 					$(container).tabs('scrollBy', 0);
 				}
-				
+
 				var panel = $(this).panel('panel');
 				panel.css('display','block');
 				setSelectedSize(container);
@@ -441,7 +441,7 @@
 				state.options.onUnselect.call(container, popts.title, getTabIndex(container, this));
 			}
 		}));
-		
+
 		// only update the tab header
 		$(container).tabs('update', {
 			tab: pp,
@@ -449,19 +449,19 @@
 			type: 'header'
 		});
 	}
-	
+
 	function addTab(container, options) {
 		var state = $.data(container, 'tabs');
 		var opts = state.options;
 		if (options.selected == undefined) options.selected = true;
-		
+
 		createTab(container, options);
 		opts.onAdd.call(container, options.title, options.index);
 		if (options.selected){
 			selectTab(container, options.index);	// select the added tab panel
 		}
 	}
-	
+
 	/**
 	 * update tab panel, param has following properties:
 	 * tab: the tab panel to be updated
@@ -483,7 +483,7 @@
 		}
 		if (param.type == 'all' || param.type == 'header'){
 			var tab = opts.tab;
-			
+
 			if (opts.header){
 				tab.find('.tabs-inner').html($(opts.header));
 			} else {
@@ -491,7 +491,7 @@
 				var s_icon = tab.find('span.tabs-icon');
 				s_title.html(opts.title);
 				s_icon.attr('class', 'tabs-icon');
-				
+
 				tab.find('a.tabs-close').remove();
 				if (opts.closable){
 					s_title.addClass('tabs-closable');
@@ -546,12 +546,12 @@
 				}
 			}
 		}
-		
+
 		setSize(container);
-		
+
 		$.data(container, 'tabs').options.onUpdate.call(container, opts.title, getTabIndex(container, pp));
 	}
-	
+
 	/**
 	 * close a tab with specified index or title
 	 */
@@ -559,24 +559,24 @@
 		var opts = $.data(container, 'tabs').options;
 		var tabs = $.data(container, 'tabs').tabs;
 		var selectHis = $.data(container, 'tabs').selectHis;
-		
+
 		if (!exists(container, which)) return;
-		
+
 		var tab = getTab(container, which);
 		var title = tab.panel('options').title;
 		var index = getTabIndex(container, tab);
-		
+
 		if (opts.onBeforeClose.call(container, title, index) == false) return;
-		
+
 		var tab = getTab(container, which, true);
 		tab.panel('options').tab.remove();
 		tab.panel('destroy');
-		
+
 		opts.onClose.call(container, title, index);
-		
+
 //		setScrollers(container);
 		setSize(container);
-		
+
 		// remove the select history item
 		for(var i=0; i<selectHis.length; i++){
 			if (selectHis[i] == title){
@@ -584,7 +584,7 @@
 				i --;
 			}
 		}
-		
+
 		// select the nearest tab panel
 		var hisTitle = selectHis.pop();
 		if (hisTitle){
@@ -593,7 +593,7 @@
 			selectTab(container, 0);
 		}
 	}
-	
+
 	/**
 	 * get the specified tab panel
 	 */
@@ -621,7 +621,7 @@
 		}
 		return null;
 	}
-	
+
 	function getTabIndex(container, tab){
 		var tabs = $.data(container, 'tabs').tabs;
 		for(var i=0; i<tabs.length; i++){
@@ -631,7 +631,7 @@
 		}
 		return -1;
 	}
-	
+
 	function getSelectedTab(container){
 		var tabs = $.data(container, 'tabs').tabs;
 		for(var i=0; i<tabs.length; i++){
@@ -642,7 +642,7 @@
 		}
 		return null;
 	}
-	
+
 	/**
 	 * do first select action, if no tab is setted the first tab will be selected.
 	 */
@@ -660,7 +660,7 @@
 //		}
 		selectTab(container, state.options.selected);
 	}
-	
+
 	function selectTab(container, which){
 		var p = getTab(container, which);
 		if (p && !p.is(':visible')){
@@ -668,7 +668,7 @@
 			p.panel('open');
 		}
 	}
-	
+
 	function unselectTab(container, which){
 		var p = getTab(container, which);
 		if (p && p.is(':visible')){
@@ -682,17 +682,17 @@
 			$(this).stop(true, true);
 		});
 	}
-	
+
 	function exists(container, which){
 		return getTab(container, which) != null;
 	}
-	
+
 	function showHeader(container, visible){
 		var opts = $.data(container, 'tabs').options;
 		opts.showHeader = visible;
 		$(container).tabs('resize');
 	}
-	
+
 	function showTool(container, visible){
 		var tool = $(container).find('>.tabs-header>.tabs-tool');
 		if (visible){
@@ -702,13 +702,12 @@
 		}
 		$(container).tabs('resize').tabs('scrollBy', 0);
 	}
-	
-	
+
 	$.fn.tabs = function(options, param){
 		if (typeof options == 'string') {
 			return $.fn.tabs.methods[options](this, param);
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'tabs');
@@ -722,16 +721,16 @@
 				});
 				wrapTabs(this);
 			}
-			
+
 			addTools(this);
 			setProperties(this);
 			setSize(this);
 			bindEvents(this);
-			
+
 			doFirstSelect(this);
 		});
 	};
-	
+
 	$.fn.tabs.methods = {
 		options: function(jq){
 			var cc = jq[0];
@@ -822,7 +821,7 @@
 				var wrap = $(this).find('>div.tabs-header>div.tabs-wrap');
 				var pos = Math.min(wrap._scrollLeft() + deltaX, getMaxScrollWidth());
 				wrap.animate({scrollLeft: pos}, opts.scrollDuration);
-				
+
 				function getMaxScrollWidth(){
 					var w = 0;
 					var ul = wrap.children('ul');
@@ -834,7 +833,7 @@
 			});
 		}
 	};
-	
+
 	$.fn.tabs.parseOptions = function(target){
 		return $.extend({}, $.parser.parseOptions(target, [
 			'tools','toolPosition','tabPosition',
@@ -843,11 +842,11 @@
 			{showHeader:'boolean',justified:'boolean',narrow:'boolean',pill:'boolean'}
 		]));
 	};
-	
+
 	$.fn.tabs.defaults = {
 		width: 'auto',
 		height: 'auto',
-		headerWidth: 150,	// the tab header width, it is valid only when tabPosition set to 'left' or 'right' 
+		headerWidth: 150,	// the tab header width, it is valid only when tabPosition set to 'left' or 'right'
 		tabWidth: 'auto',	// the tab width
 		tabHeight: 27,		// the tab height
 		selected: 0,		// the initialized selected tab index

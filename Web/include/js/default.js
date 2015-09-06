@@ -95,7 +95,7 @@ function isEmptyStr(str) {
     }
 }
 
-function CloseWebPage(){
+function CloseWebPage() {
     if (navigator.userAgent.indexOf("MSIE") > 0) {
         if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
             window.opener = null;

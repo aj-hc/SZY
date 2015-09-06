@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FreezerProUtility.Fp_BLL
 {
@@ -17,6 +15,7 @@ namespace FreezerProUtility.Fp_BLL
             List<Fp_Model.Sample_Group> List = call.getdata<Fp_Model.Sample_Group>("SampleGroups");
             return List;
         }
+
         //public static List<Fp_Model.Sample_Group> GetAll(string url)
         //{
         //    List<Fp_Model.Sample_Group> List = Fp_DAL.DataWithFP.getdata<Fp_Model.Sample_Group>(url, Fp_Common.FpMethod.sample_groups, "", "SampleGroups");
@@ -26,12 +25,13 @@ namespace FreezerProUtility.Fp_BLL
         {
             List<Fp_Model.Sample_Group> List = GetAll(up);
             Fp_Model.Sample_Group sample_Group = new Fp_Model.Sample_Group();
-            if (List!=null&&List.Count>0)
+            if (List != null && List.Count > 0)
             {
                 sample_Group = List.Where<Fp_Model.Sample_Group>(a => a.name == name).FirstOrDefault();
             }
             return sample_Group;
         }
+
         public static Dictionary<string, string> GetAllIdAndNameDic(Fp_Common.UnameAndPwd up)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();

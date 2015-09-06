@@ -120,7 +120,7 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\Web\bin\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\Lib\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Web.Services">
       <Name>System.Web.Services</Name>
@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmpiInfo.cs" />
+    <Compile Include="NormalLisItems.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,14 +1,5 @@
-﻿using RuRo.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-
-namespace RuRo.BLL
+﻿namespace RuRo.BLL
 {
-
     public class TestData
     {
         public string ImportTestData(string test_data_type, string jsonData)

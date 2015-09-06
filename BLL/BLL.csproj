@@ -106,7 +106,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>G:\02.study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="EmpiInfo.cs" />
     <Compile Include="FormToDic.cs" />
+    <Compile Include="NormalLisItems.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
@@ -146,11 +147,13 @@
     <Compile Include="SZY\FpRelated\UserFields.cs" />
     <Compile Include="SZY\GetDataFromHospital.cs" />
     <Compile Include="SZY\HospitalXmlStrHelper.cs" />
+    <Compile Include="SZY\NormalLisItems.cs" />
     <Compile Include="SZY\NormalLisReport.cs" />
     <Compile Include="SZY\PatientDiagnose.cs" />
     <Compile Include="SZY\QueryRecoder.cs" />
     <Compile Include="SZY\QueryRecoderPartial.cs" />
     <Compile Include="SZY\Request\EmpiInfoRequest.cs" />
+    <Compile Include="SZY\Request\NormalLisItemsRequest.cs" />
     <Compile Include="SZY\Request\NormalLisReportRequest.cs" />
     <Compile Include="SZY\Request\PatientDiagnoseResuest.cs" />
     <Compile Include="SZY\Request\Request.cs" />

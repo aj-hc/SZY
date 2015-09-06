@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.1
- * 
+ *
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,14 +9,13 @@
  */
 /**
  * tabs - jQuery EasyUI
- * 
+ *
  * Dependencies:
  * 	 panel
  *   linkbutton
- * 
+ *
  */
 (function($){
-	
 	/**
 	 * set the tabs scrollers to show or not,
 	 * dependent on the tabs count and width
@@ -24,26 +23,26 @@
 	function setScrollers(container) {
 		var opts = $.data(container, 'tabs').options;
 		if (opts.tabPosition == 'left' || opts.tabPosition == 'right' || !opts.showHeader){return}
-		
+
 		var header = $(container).children('div.tabs-header');
 		var tool = header.children('div.tabs-tool');
 		var sLeft = header.children('div.tabs-scroller-left');
 		var sRight = header.children('div.tabs-scroller-right');
 		var wrap = header.children('div.tabs-wrap');
-		
+
 		// set the tool height
 		var tHeight = header.outerHeight();
 		if (opts.plain){
 			tHeight -= tHeight - header.height();
 		}
 		tool._outerHeight(tHeight);
-		
+
 		var tabsWidth = 0;
 		$('ul.tabs li', header).each(function(){
 			tabsWidth += $(this).outerWidth(true);
 		});
 		var cWidth = header.width() - tool._outerWidth();
-		
+
 		if (tabsWidth > cWidth) {
 			sLeft.add(sRight).show()._outerHeight(tHeight);
 			if (opts.toolPosition == 'left'){
@@ -92,7 +91,7 @@
 			}
 		}
 	}
-	
+
 	function addTools(container){
 		var opts = $.data(container, 'tabs').options;
 		var header = $(container).children('div.tabs-header');
@@ -117,12 +116,12 @@
 			header.children('div.tabs-tool').remove();
 		}
 	}
-	
+
 	function setSize(container, param) {
 		var state = $.data(container, 'tabs');
 		var opts = state.options;
 		var cc = $(container);
-		
+
 		if (param){
 			$.extend(opts, {
 				width: param.width,
@@ -130,12 +129,12 @@
 			});
 		}
 		cc._size(opts);
-		
+
 		var header = cc.children('div.tabs-header');
 		var panels = cc.children('div.tabs-panels');
 		var wrap = header.find('div.tabs-wrap');
 		var ul = wrap.find('.tabs');
-		
+
 		for(var i=0; i<state.tabs.length; i++){
 			var p_opts = state.tabs[i].panel('options');
 			var p_t = p_opts.tab.find('a.tabs-inner');
@@ -169,14 +168,14 @@
 				lrt.hide();
 			}
 			ul._outerHeight(opts.tabHeight).css('width','');
-			
+
 			setScrollers(container);
-			
+
 			panels._size('height', isNaN(opts.height) ? '' : (opts.height-header.outerHeight()));
 			panels._size('width', isNaN(opts.width) ? '' : opts.width);
 		}
 	}
-	
+
 	/**
 	 * set selected tab panel size
 	 */
@@ -193,7 +192,7 @@
 			});
 		}
 	}
-	
+
 	/**
 	 * wrap the tabs header and body
 	 */
@@ -214,7 +213,7 @@
 				+ '<ul class="tabs"></ul>'
 				+ '</div>'
 				+ '</div>').prependTo(container);
-		
+
 		cc.children('div.tabs-panels').children('div').each(function(i){
 			var opts = $.extend({}, $.parser.parseOptions(this), {
 				selected: ($(this).attr('selected') ? true : undefined)
@@ -223,7 +222,7 @@
 			tabs.push(pp);
 			createTab(container, pp, opts);
 		});
-		
+
 		cc.children('div.tabs-header').find('.tabs-scroller-left, .tabs-scroller-right').hover(
 				function(){$(this).addClass('tabs-scroller-over');},
 				function(){$(this).removeClass('tabs-scroller-over');}
@@ -236,7 +235,7 @@
 			return false;
 		});
 	}
-	
+
 	function bindEvents(container){
 		var state = $.data(container, 'tabs')
 		var opts = state.options;
@@ -269,7 +268,7 @@
 				opts.onContextMenu.call(container, e, li.find('span.tabs-title').html(), getLiIndex(li));
 			}
 		});
-		
+
 		function getLiIndex(li){
 			var index = 0;
 			li.parent().children('li').each(function(i){
@@ -281,12 +280,12 @@
 			return index;
 		}
 	}
-	
+
 	function setProperties(container){
 		var opts = $.data(container, 'tabs').options;
 		var header = $(container).children('div.tabs-header');
 		var panels = $(container).children('div.tabs-panels');
-		
+
 		header.removeClass('tabs-header-top tabs-header-bottom tabs-header-left tabs-header-right');
 		panels.removeClass('tabs-panels-top tabs-panels-bottom tabs-panels-left tabs-panels-right');
 		if (opts.tabPosition == 'top'){
@@ -302,7 +301,7 @@
 			header.addClass('tabs-header-right');
 			panels.addClass('tabs-panels-left');
 		}
-		
+
 		if (opts.plain == true) {
 			header.addClass('tabs-header-plain');
 		} else {
@@ -316,11 +315,11 @@
 			panels.addClass('tabs-panels-noborder');
 		}
 	}
-	
+
 	function createTab(container, pp, options) {
 		var state = $.data(container, 'tabs');
 		options = options || {};
-		
+
 		// create panel
 		pp.panel($.extend({}, options, {
 			border: false,
@@ -335,10 +334,10 @@
 				state.options.onLoad.call(container, $(this));
 			}
 		}));
-		
+
 		var opts = pp.panel('options');
 		var tabs = $(container).children('div.tabs-header').find('ul.tabs');
-		
+
 		opts.tab = $('<li></li>').appendTo(tabs);	// set the tab object in panel options
 		opts.tab.append(
 				'<a href="javascript:void(0)" class="tabs-inner">' +
@@ -346,7 +345,7 @@
 				'<span class="tabs-icon"></span>' +
 				'</a>'
 		);
-		
+
 		// only update the tab header
 		$(container).tabs('update', {
 			tab: pp,
@@ -354,25 +353,25 @@
 			type: 'header'
 		});
 	}
-	
+
 	function addTab(container, options) {
 		var state = $.data(container, 'tabs');
 		var opts = state.options;
 		var tabs = state.tabs;
 		if (options.selected == undefined) options.selected = true;
-		
+
 		var pp = $('<div></div>').appendTo($(container).children('div.tabs-panels'));
 		tabs.push(pp);
 		createTab(container, pp, options);
-		
+
 		opts.onAdd.call(container, options.title, tabs.length-1);
-		
+
 		setSize(container);
 		if (options.selected){
 			selectTab(container, tabs.length-1);	// select the added tab panel
 		}
 	}
-	
+
 	/**
 	 * update tab panel, param has following properties:
 	 * tab: the tab panel to be updated
@@ -384,7 +383,7 @@
 		var selectHis = $.data(container, 'tabs').selectHis;
 		var pp = param.tab;	// the tab panel
 		var oldTitle = pp.panel('options').title;
-		
+
 		if (param.type == 'all' || param == 'body'){
 			pp.panel($.extend({}, param.options, {
 				iconCls: (param.options.icon ? param.options.icon : undefined)
@@ -393,12 +392,12 @@
 		if (param.type == 'all' || param.type == 'header'){
 			var opts = pp.panel('options');	// get the tab panel options
 			var tab = opts.tab;
-			
+
 			var s_title = tab.find('span.tabs-title');
 			var s_icon = tab.find('span.tabs-icon');
 			s_title.html(opts.title);
 			s_icon.attr('class', 'tabs-icon');
-			
+
 			tab.find('a.tabs-close').remove();
 			if (opts.closable){
 				s_title.addClass('tabs-closable');
@@ -412,7 +411,7 @@
 			} else {
 				s_title.removeClass('tabs-with-icon');
 			}
-			
+
 			if (oldTitle != opts.title){
 				for(var i=0; i<selectHis.length; i++){
 					if (selectHis[i] == oldTitle){
@@ -420,7 +419,7 @@
 					}
 				}
 			}
-			
+
 			tab.find('span.tabs-p-tool').remove();
 			if (opts.tools){
 				var p_tool = $('<span class="tabs-p-tool"></span>').insertAfter(tab.find('a.tabs-inner'));
@@ -448,12 +447,12 @@
 				s_title.css('padding-right', pr+'px');
 			}
 		}
-		
+
 		setSize(container);
-		
+
 		$.data(container, 'tabs').options.onUpdate.call(container, opts.title, getTabIndex(container, pp));
 	}
-	
+
 	/**
 	 * close a tab with specified index or title
 	 */
@@ -461,24 +460,24 @@
 		var opts = $.data(container, 'tabs').options;
 		var tabs = $.data(container, 'tabs').tabs;
 		var selectHis = $.data(container, 'tabs').selectHis;
-		
+
 		if (!exists(container, which)) return;
-		
+
 		var tab = getTab(container, which);
 		var title = tab.panel('options').title;
 		var index = getTabIndex(container, tab);
-		
+
 		if (opts.onBeforeClose.call(container, title, index) == false) return;
-		
+
 		var tab = getTab(container, which, true);
 		tab.panel('options').tab.remove();
 		tab.panel('destroy');
-		
+
 		opts.onClose.call(container, title, index);
-		
+
 //		setScrollers(container);
 		setSize(container);
-		
+
 		// remove the select history item
 		for(var i=0; i<selectHis.length; i++){
 			if (selectHis[i] == title){
@@ -486,7 +485,7 @@
 				i --;
 			}
 		}
-		
+
 		// select the nearest tab panel
 		var hisTitle = selectHis.pop();
 		if (hisTitle){
@@ -495,7 +494,7 @@
 			selectTab(container, 0);
 		}
 	}
-	
+
 	/**
 	 * get the specified tab panel
 	 */
@@ -523,7 +522,7 @@
 		}
 		return null;
 	}
-	
+
 	function getTabIndex(container, tab){
 		var tabs = $.data(container, 'tabs').tabs;
 		for(var i=0; i<tabs.length; i++){
@@ -533,7 +532,7 @@
 		}
 		return -1;
 	}
-	
+
 	function getSelectedTab(container){
 		var tabs = $.data(container, 'tabs').tabs;
 		for(var i=0; i<tabs.length; i++){
@@ -544,7 +543,7 @@
 		}
 		return null;
 	}
-	
+
 	/**
 	 * do first select action, if no tab is setted the first tab will be selected.
 	 */
@@ -562,18 +561,18 @@
 //		}
 		selectTab(container, state.options.selected);
 	}
-	
+
 	function selectTab(container, which){
 		var state = $.data(container, 'tabs');
 		var opts = state.options;
 		var tabs = state.tabs;
 		var selectHis = state.selectHis;
-		
+
 		if (tabs.length == 0) {return;}
-		
+
 		var panel = getTab(container, which); // get the panel to be activated
 		if (!panel){return}
-		
+
 		var selected = getSelectedTab(container);
 		if (selected){
 			if (panel[0] == selected[0]){
@@ -583,14 +582,14 @@
 			unselectTab(container, getTabIndex(container, selected));
 			if (!selected.panel('options').closed){return}
 		}
-		
+
 		panel.panel('open');
 		var title = panel.panel('options').title;	// the panel title
 		selectHis.push(title);	// push select history
-		
+
 		var tab = panel.panel('options').tab;	// get the tab object
 		tab.addClass('tabs-selected');
-		
+
 		// scroll the tab to center position if required.
 		var wrap = $(container).find('>div.tabs-header>div.tabs-wrap');
 		var left = tab.position().left;
@@ -601,12 +600,12 @@
 		} else {
 			$(container).tabs('scrollBy', 0);
 		}
-		
+
 		setSelectedSize(container);
-		
+
 		opts.onSelect.call(container, title, getTabIndex(container, panel));
 	}
-	
+
 	function unselectTab(container, which){
 		var state = $.data(container, 'tabs');
 		var p = getTab(container, which);
@@ -621,23 +620,22 @@
 			}
 		}
 	}
-	
+
 	function exists(container, which){
 		return getTab(container, which) != null;
 	}
-	
+
 	function showHeader(container, visible){
 		var opts = $.data(container, 'tabs').options;
 		opts.showHeader = visible;
 		$(container).tabs('resize');
 	}
-	
-	
+
 	$.fn.tabs = function(options, param){
 		if (typeof options == 'string') {
 			return $.fn.tabs.methods[options](this, param);
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'tabs');
@@ -651,16 +649,16 @@
 				});
 				wrapTabs(this);
 			}
-			
+
 			addTools(this);
 			setProperties(this);
 			setSize(this);
 			bindEvents(this);
-			
+
 			doFirstSelect(this);
 		});
 	};
-	
+
 	$.fn.tabs.methods = {
 		options: function(jq){
 			var cc = jq[0];
@@ -741,7 +739,7 @@
 				var wrap = $(this).find('>div.tabs-header>div.tabs-wrap');
 				var pos = Math.min(wrap._scrollLeft() + deltaX, getMaxScrollWidth());
 				wrap.animate({scrollLeft: pos}, opts.scrollDuration);
-				
+
 				function getMaxScrollWidth(){
 					var w = 0;
 					var ul = wrap.children('ul');
@@ -753,18 +751,18 @@
 			});
 		}
 	};
-	
+
 	$.fn.tabs.parseOptions = function(target){
 		return $.extend({}, $.parser.parseOptions(target, [
 			'tools','toolPosition','tabPosition',
 			{fit:'boolean',border:'boolean',plain:'boolean',headerWidth:'number',tabWidth:'number',tabHeight:'number',selected:'number',showHeader:'boolean'}
 		]));
 	};
-	
+
 	$.fn.tabs.defaults = {
 		width: 'auto',
 		height: 'auto',
-		headerWidth: 150,	// the tab header width, it is valid only when tabPosition set to 'left' or 'right' 
+		headerWidth: 150,	// the tab header width, it is valid only when tabPosition set to 'left' or 'right'
 		tabWidth: 'auto',	// the tab width
 		tabHeight: 27,		// the tab height
 		selected: 0,		// the initialized selected tab index

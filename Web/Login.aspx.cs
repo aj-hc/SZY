@@ -1,9 +1,6 @@
-﻿
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using System.Web;
-using System.Web.UI.WebControls;
+
 namespace RuRo.Web
 {
     /// <summary>
@@ -13,7 +10,6 @@ namespace RuRo.Web
     {
         protected void Page_Load(object sender, System.EventArgs e)
         {
-
             //if (!IsPostBack)
             //{
             //    SetDepartment();
@@ -31,8 +27,8 @@ namespace RuRo.Web
             //跳转扩展页面
         }
 
-
         #region Web 窗体设计器生成的代码
+
         override protected void OnInit(EventArgs e)
         {
             //
@@ -49,11 +45,10 @@ namespace RuRo.Web
         private void InitializeComponent()
         {
             this.btnLogin.Click += new System.Web.UI.ImageClickEventHandler(this.btnLogin_Click);
-
         }
-        #endregion
 
-        
+        #endregion Web 窗体设计器生成的代码
+
         private void SetDepartment()
         {
             //department.Width = 136;
@@ -66,12 +61,13 @@ namespace RuRo.Web
             //department.DataSource = arrValue;
 
             //department.DataBind();
-            
         }
+
         private void btnLogin_Click(object sender, System.Web.UI.ImageClickEventArgs e)
         {
             #region 检查登陆
-            string userName =txtUsername.Text.ToString().Trim();
+
+            string userName = txtUsername.Text.ToString().Trim();
             string passWord = RuRo.Common.PageValidate.InputText(txtPass.Value.Trim(), 30);
             //获取当前科室存入cookie
             //string depar = department.SelectedValue;
@@ -83,15 +79,16 @@ namespace RuRo.Web
                 LoginOut();
                 //重写cookie
                 WriteCookie(userName, passWord);
-               // Response.Redirect("ExtendPage.aspx");
+                // Response.Redirect("ExtendPage.aspx");
                 Response.Redirect("index.aspx");
             }
             else
             {
                 lblMsg.Text = "请检查账号密码";
-               // Response.Redirect("Login.aspx");
+                // Response.Redirect("Login.aspx");
             }
-            #endregion
+
+            #endregion 检查登陆
         }
 
         public bool CheckLoginByCookie()
@@ -116,11 +113,13 @@ namespace RuRo.Web
                 return false;
             }
         }
-        void LoginOut()
+
+        private void LoginOut()
         {
             Common.CookieHelper.ClearCookie("username");
             Common.CookieHelper.ClearCookie("password");
         }
+
         private bool checkToken(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -134,6 +133,7 @@ namespace RuRo.Web
                 return token.checkAuth_Token();
             }
         }
+
         //写入cookie
         private void WriteCookie(string username, string password)
         {
@@ -144,10 +144,11 @@ namespace RuRo.Web
             Common.CookieHelper.SetCookie("username", username);
             //Common.CookieHelper.SetCookie("password", DEnPassword);
         }
+
         protected void txtUsername_TextChanged(object sender, EventArgs e)
         {
             ////自动回发当前的用户名。
-            //string username = txtUsername.Text.ToString().Trim(); 
+            //string username = txtUsername.Text.ToString().Trim();
             ////给科室下拉框赋值
 
             //string cookDepartment = Common.CookieHelper.GetCookieValue(username+"department");

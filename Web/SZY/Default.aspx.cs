@@ -1,16 +1,11 @@
-﻿using RuRo.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System;
 
 namespace RuRo.Web
 {
     public partial class _in : System.Web.UI.Page
     {
         public string url = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -19,13 +14,12 @@ namespace RuRo.Web
             }
             else
             {
-
             }
         }
-        private void AddUrlToiframe()
+
+        protected void AddUrlToiframe()
         {
             url = System.Configuration.ConfigurationManager.AppSettings["FpUrl"];
-            FreezerPro.Attributes.Add("src", url);
         }
     }
 }

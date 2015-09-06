@@ -47,7 +47,7 @@ if ($.fn.datetimebox && $.fn.datebox){
         closeText: $.fn.datebox.defaults.closeText,
         okText: $.fn.datebox.defaults.okText
     });
-    
+
     $.fn.datebox.defaults.formatter=function(date){
         var y=date.getFullYear();
         var m=date.getMonth()+1;

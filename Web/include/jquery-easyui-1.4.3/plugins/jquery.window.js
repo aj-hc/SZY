@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -254,4 +254,3 @@ return $.extend({},$.fn.panel.parseOptions(_25),$.parser.parseOptions(_25,[{drag
 };
 $.fn.window.defaults=$.extend({},$.fn.panel.defaults,{zIndex:9000,draggable:true,resizable:true,shadow:true,modal:false,inline:false,title:"New Window",collapsible:true,minimizable:true,maximizable:true,closable:true,closed:false});
 })(jQuery);
-

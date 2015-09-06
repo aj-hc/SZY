@@ -18,10 +18,10 @@
     <input value="" id="pk" type="text" style="display: none" runat="server" />
     <form id="PatientDiagnoseForm" method="post">
         <div id="hidden" style="display: none">
-            <input class="easyui-textbox" name="Id" id="Id"/>
-            <input class="easyui-textbox" name="PatientName"  id="PatientName"/>
+            <input class="easyui-textbox" name="Id" id="Id" />
+            <input class="easyui-textbox" name="PatientName" id="PatientName" />
             <input class="easyui-textbox" name="Sex" id="Sex" />
-            <input class="easyui-textbox" id="Brithday" name="Brithday"/>
+            <input class="easyui-textbox" id="Brithday" name="Brithday" />
             <input class="easyui-textbox" id="Tel" name="Tel" />
             <input class="easyui-textbox" id="CardId" name="CardId" />
             <input class="easyui-textbox" id="RegisterNo" name="RegisterNo" />
@@ -38,7 +38,7 @@
 
                 <td>诊断类型：</td>
                 <td>
-                    <select id="Type" class="easyui-combobox" name="Type" style="width: 200px;" panelHeight="auto">
+                    <select id="Type" class="easyui-combobox" name="Type" style="width: 200px;" panelheight="auto">
                         <option value="1">中医疾病</option>
                         <option value="2">中医症候</option>
                         <option value="3">西医主诊断</option>
@@ -47,9 +47,9 @@
                 </td>
             </tr>
             <tr>
-                <td >诊断类别：</td>
+                <td>诊断类别：</td>
                 <td>
-                    <select id="Flag" class="easyui-combobox" name="Flag" style="width: 200px;" panelHeight="auto">
+                    <select id="Flag" class="easyui-combobox" name="Flag" style="width: 200px;" panelheight="auto">
                         <option value="1">西医诊断</option>
                         <option value="2">中医诊断</option>
                     </select>
@@ -84,17 +84,13 @@
                     ajaxLoadEnd();
                     var obj = $.parseJSON(response);
                     if (obj.success) {
-
                     } else {
                         $.messager.alert('提示', obj.message, 'error'); return;
                     }
-
                 }
             });
+            ajaxLoadEnd();
         }
-
-
     </script>
-
 </body>
 </html>

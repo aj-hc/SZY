@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -188,4 +188,3 @@ return $.extend({},$.fn.combo.parseOptions(_31),$.fn.tree.parseOptions(_31));
 };
 $.fn.combotree.defaults=$.extend({},$.fn.combo.defaults,$.fn.tree.defaults,{editable:false});
 })(jQuery);
-

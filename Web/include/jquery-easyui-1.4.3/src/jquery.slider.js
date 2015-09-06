@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,10 +9,10 @@
  */
 /**
  * slider - jQuery EasyUI
- * 
+ *
  * Dependencies:
  *  draggable
- * 
+ *
  */
 (function($){
 	function init(target){
@@ -41,7 +41,7 @@
 		});
 		return slider;
 	}
-	
+
 	/**
 	 * set the slider size, for vertical slider, the height property is required
 	 */
@@ -49,7 +49,7 @@
 		var state = $.data(target, 'slider');
 		var opts = state.options;
 		var slider = state.slider;
-		
+
 		if (param){
 			if (param.width) opts.width = param.width;
 			if (param.height) opts.height = param.height;
@@ -65,7 +65,7 @@
 		}
 		initValue(target);
 	}
-	
+
 	/**
 	 * show slider rule if needed
 	 */
@@ -73,13 +73,13 @@
 		var state = $.data(target, 'slider');
 		var opts = state.options;
 		var slider = state.slider;
-		
+
 		var aa = opts.mode == 'h' ? opts.rule : opts.rule.slice(0).reverse();
 		if (opts.reversed){
 			aa = aa.slice(0).reverse();
 		}
 		_build(aa);
-		
+
 		function _build(aa){
 			var rule = slider.find('div.slider-rule');
 			var label = slider.find('div.slider-rulelabel');
@@ -89,7 +89,7 @@
 				var distance = i*100/(aa.length-1)+'%';
 				var span = $('<span></span>').appendTo(rule);
 				span.css((opts.mode=='h'?'left':'top'), distance);
-				
+
 				// show the labels
 				if (aa[i] != '|'){
 					span = $('<span></span>').appendTo(label);
@@ -109,7 +109,7 @@
 			}
 		}
 	}
-	
+
 	/**
 	 * build the slider and set some properties
 	 */
@@ -117,11 +117,11 @@
 		var state = $.data(target, 'slider');
 		var opts = state.options;
 		var slider = state.slider;
-		
+
 		slider.removeClass('slider-h slider-v slider-disabled');
 		slider.addClass(opts.mode == 'h' ? 'slider-h' : 'slider-v');
 		slider.addClass(opts.disabled ? 'slider-disabled' : '');
-		
+
 		var inner = slider.find('.slider-inner');
 		inner.html(
 			'<a href="javascript:void(0)" class="slider-handle"></a>' +
@@ -133,7 +133,7 @@
 				'<span class="slider-tip"></span>'
 			);
 		}
-		
+
 		slider.find('a.slider-handle').draggable({
 			axis:opts.mode,
 			cursor:'pointer',
@@ -169,7 +169,7 @@
 			setPos(opts.mode=='h'?(e.pageX-pos.left):(e.pageY-pos.top));
 			opts.onComplete.call(target, opts.value);
 		});
-		
+
 		function setPos(pos, handle){
 			var value = pos2value(target, pos);
 			var s = Math.abs(value % opts.step);
@@ -196,7 +196,7 @@
 						v2 = value;
 					} else {
 						value < m ? v1 = value : v2 = value;
-					}					
+					}
 				}
 				$(target).slider('setValues', [v1,v2]);
 			} else {
@@ -204,7 +204,7 @@
 			}
 		}
 	}
-	
+
 	/**
 	 * set a specified value to slider
 	 */
@@ -214,25 +214,25 @@
 		var slider = state.slider;
 		var oldValues = $.isArray(opts.value) ? opts.value : [opts.value];
 		var newValues = [];
-		
+
 		if (!$.isArray(values)){
 			values = $.map(String(values).split(opts.separator), function(v){
 				return parseFloat(v);
 			});
 		}
-		
+
 		slider.find('.slider-value').remove();
 		var name = $(target).attr('sliderName') || '';
 		for(var i=0; i<values.length; i++){
 			var value = values[i];
 			if (value < opts.min) value = opts.min;
 			if (value > opts.max) value = opts.max;
-			
+
 			var input = $('<input type="hidden" class="slider-value">').appendTo(slider);
 			input.attr('name', name);
 			input.val(value);
 			newValues.push(value);
-			
+
 			var handle = slider.find('.slider-handle:eq('+i+')');
 			var tip = handle.next();
 			var pos = value2pos(target, value);
@@ -242,7 +242,7 @@
 			} else {
 				tip.hide();
 			}
-			
+
 			if (opts.mode == 'h'){
 				var style = 'left:'+pos+'px;';
 				handle.attr('style', style);
@@ -255,12 +255,12 @@
 		}
 		opts.value = opts.range ? newValues : newValues[0];
 		$(target).val(opts.range ? newValues.join(opts.separator) : newValues[0]);
-		
+
 		if (oldValues.join(',') != newValues.join(',')){
 			opts.onChange.call(target, opts.value, (opts.range?oldValues:oldValues[0]));
 		}
 	}
-	
+
 	function initValue(target){
 		var opts = $.data(target, 'slider').options;
 		var fn = opts.onChange;
@@ -268,7 +268,7 @@
 		setValues(target, opts.value);
 		opts.onChange = fn;
 	}
-	
+
 	/**
 	 * translate value to slider position
 	 */
@@ -286,7 +286,7 @@
 		}
 		return pos.toFixed(0);
 	}
-	
+
 	/**
 	 * translate slider position to value
 	 */
@@ -299,12 +299,12 @@
 		var value = opts.converter.toValue.call(target, pos, size);
 		return value.toFixed(0);
 	}
-	
+
 	$.fn.slider = function(options, param){
 		if (typeof options == 'string'){
 			return $.fn.slider.methods[options](this, param);
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'slider');
@@ -317,7 +317,7 @@
 				});
 				$(this).removeAttr('disabled');
 			}
-			
+
 			var opts = state.options;
 			opts.min = parseFloat(opts.min);
 			opts.max = parseFloat(opts.max);
@@ -335,13 +335,13 @@
 			}
 			opts.step = parseFloat(opts.step);
 			opts.originalValue = opts.value;
-			
+
 			buildSlider(this);
 			showRule(this);
 			setSize(this);
 		});
 	};
-	
+
 	$.fn.slider.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'slider').options;
@@ -398,7 +398,7 @@
 			});
 		}
 	};
-	
+
 	$.fn.slider.parseOptions = function(target){
 		var t = $(target);
 		return $.extend({}, $.parser.parseOptions(target, [
@@ -409,7 +409,7 @@
 			rule: (t.attr('rule') ? eval(t.attr('rule')) : undefined)
 		});
 	};
-	
+
 	$.fn.slider.defaults = {
 		width: 'auto',
 		height: 'auto',

@@ -43,7 +43,7 @@ function querybycode() {
                     //测试代码
                     var obj = $.parseJSON(data);
                     if (obj.Statu == "err") {
-                        $.messager.alert('提示', obj.Msg, 'error')
+                        ShowMsg(obj.Msg);
                         return;
                     }
                     else {
@@ -58,14 +58,15 @@ function querybycode() {
                 }
             }
         });
+        ajaxLoadEnd();
     }
 }
-//增加月 
+//增加月
 function AddMonths(d, value) {
     d.setMonth(d.getMonth() + value);
     return d;
 }
-//增加天 
+//增加天
 function AddDays(d, value) {
     d.setDate(d.getDate() + value);
     return d;
@@ -94,27 +95,26 @@ function GetNormalLisReportInfo() {
             data: {
                 "mode": "qry",
                 "code": code,
-                "codeType":codeType,
+                "codeType": codeType,
                 "dateNow": dateNow
             },
             success: function (data) {
-                $('#NormalLisReportDg').datagrid("loading");
                 if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
                 else {
                     var obj = $.parseJSON(data);
                     if (obj.Statu == "err") {
-                        $.messager.alert('提示', obj.Msg, 'error')
+                        ShowMsg("临床监测数据：" + obj.Msg);
                         return;
                     }
-                    else {
+                    else if (obj.Statu == "ok") {
                         $('#NormalLisReportDg').datagrid("loadData", obj.Data);
-                        var row = $('#NormalLisReportDg').datagrid('getRows');
+                        // var row = $('#NormalLisReportDg').datagrid('getRows');
                     }
                 }
-                $('#NormalLisReportDg').datagrid("loaded");
             }
         });
     }
+    ajaxLoadEnd();
 }
 //查询PatientDiagnose数据
 function GetPatientDiagnoseInfo() {
@@ -136,24 +136,28 @@ function GetPatientDiagnoseInfo() {
                 "dateNow": dateNow
             },
             success: function (data) {
+            if (!data) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+            else {
                 var obj = $.parseJSON(data);
-                if (obj.Statu=="ok") {
-                    $('#PatientDiagnoseForm').form("load", obj.Data[0]);
-                   
+                if (obj.Statu == "err") {
+                    ShowMsg("诊断数据：" + obj.Msg);
+                    return;
                 }
-                else {
-                    $.messager.alert('提示', obj.msg, 'error');
+                else if (obj.Statu == "ok") {
+                    $('#PatientDiagnoseDg').datagrid("loadData", obj.Data);
+                    // var row = $('#NormalLisReportDg').datagrid('getRows');
                 }
             }
+        }
         });
     }
+    ajaxLoadEnd();
 }
 //清除控件值
 function clearForm() {
     $('#BaseInfoForm').form('clear');
     $('#NormalLisReportDg').datagrid('loadData', { total: 0, rows: [] });
-    $('#NormalLisReportForm').form('clear');
-    $('#NormalLisReportForm').form('clear');
+    $('#PatientDiagnoseDg').datagrid('loadData', { total: 0, rows: [] });
 }
 //条码框按钮回车事件
 $(function () {
@@ -218,7 +222,7 @@ function submitFormClinicalInfoDg() {
         $('#w').window('close');
     }
 }
-function clearsetClinicalInfoDg() {$('#setClinicalInfoDg').form('clear');}
+function clearsetClinicalInfoDg() { $('#setClinicalInfoDg').form('clear'); }
 //添加样本信息到Dg
 function AddSampleInfoToDg() {
     var isValid = $('#sampleInfoFormToDg').form('validate');
@@ -232,11 +236,10 @@ function AddSampleInfoToDg() {
                 Scount: from[2].value
             }
         });
-
     }
 }
-function clearSampleInfoAddForm() { $('#sampleInfoFormToDg').form('clear');}
-//采用jquery easyui loading css效果 
+function clearSampleInfoAddForm() { $('#sampleInfoFormToDg').form('clear'); }
+//采用jquery easyui loading css效果
 function ajaxLoading() {
     $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");
     $("<div class=\"datagrid-mask-msg\"></div>").html("正在处理，请稍候。。。").appendTo("body").css({ display: "block", left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
@@ -244,4 +247,13 @@ function ajaxLoading() {
 function ajaxLoadEnd() {
     $(".datagrid-mask").remove();
     $(".datagrid-mask-msg").remove();
+}
+
+function ShowMsg(msg) {
+    $.messager.show({
+        title: "提示",
+        msg: msg,
+        timeout: 2000,
+        showType: 'fade'
+    });
 }

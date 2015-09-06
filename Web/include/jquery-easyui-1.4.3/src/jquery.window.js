@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,12 +9,12 @@
  */
 /**
  * window - jQuery EasyUI
- * 
+ *
  * Dependencies:
  * 	 panel
  *   draggable
  *   resizable
- * 
+ *
  */
 (function($){
 	function moveWindow(target, param){
@@ -31,7 +31,7 @@
 			});
 		}
 	}
-	
+
 	/**
 	 *  center the window only horizontally
 	 */
@@ -47,7 +47,7 @@
 		}
 		if (tomove){moveWindow(target);}
 	}
-	
+
 	/**
 	 * center the window only vertically
 	 */
@@ -63,7 +63,7 @@
 		}
 		if (tomove){moveWindow(target);}
 	}
-	
+
 	function create(target){
 		var state = $.data(target, 'window');
 		var opts = state.options;
@@ -74,7 +74,7 @@
 			cls: 'window',
 			headerCls: 'window-header',
 			bodyCls: 'window-body ' + (opts.noheader ? 'window-body-noheader' : ''),
-			
+
 			onBeforeDestroy: function(){
 				if (opts.onBeforeDestroy.call(target) == false){return false;}
 				if (state.shadow){state.shadow.remove();}
@@ -103,7 +103,7 @@
 					});
 				}
 				state.window.css('z-index', $.fn.window.defaults.zIndex++);
-				
+
 				opts.onOpen.call(target);
 			},
 			onResize: function(width, height){
@@ -138,38 +138,37 @@
 				opts.onExpand.call(target);
 			}
 		}));
-		
+
 		state.window = win.panel('panel');
-		
+
 		// create mask
 		if (state.mask){state.mask.remove();}
 		if (opts.modal == true){
 			state.mask = $('<div class="window-mask" style="display:none"></div>').insertAfter(state.window);
 		}
-		
+
 		// create shadow
 		if (state.shadow){state.shadow.remove();}
 		if (opts.shadow == true){
 			state.shadow = $('<div class="window-shadow" style="display:none"></div>').insertAfter(state.window);
 		}
-		
+
 		// if require center the window
 		if (opts.left == null){hcenter(target);}
 		if (opts.top == null){vcenter(target);}
 		moveWindow(target);
-		
+
 		if (!opts.closed){
 			win.window('open');	// open the window
 		}
 	}
-	
-	
+
 	/**
 	 * set window drag and resize property
 	 */
 	function setProperties(target){
 		var state = $.data(target, 'window');
-		
+
 		state.window.draggable({
 			handle: '>div.panel-header>div.panel-title',
 			disabled: state.options.draggable == false,
@@ -177,7 +176,7 @@
 				if (state.mask) state.mask.css('z-index', $.fn.window.defaults.zIndex++);
 				if (state.shadow) state.shadow.css('z-index', $.fn.window.defaults.zIndex++);
 				state.window.css('z-index', $.fn.window.defaults.zIndex++);
-				
+
 				if (!state.proxy){
 					state.proxy = $('<div class="window-proxy"></div>').insertAfter(state.window);
 				}
@@ -209,7 +208,7 @@
 				state.proxy = null;
 			}
 		});
-		
+
 		state.window.resizable({
 			disabled: state.options.resizable == false,
 			onStartResize:function(e){
@@ -249,7 +248,7 @@
 			}
 		});
 	}
-	
+
 	// function getPageArea() {
 	// 	if (document.compatMode == 'BackCompat') {
 	// 		return {
@@ -263,7 +262,7 @@
 	// 		}
 	// 	}
 	// }
-	
+
 	// when window resize, reset the width and height of the window's mask
 	$(window).resize(function(){
 		$('body>div.window-mask').css({
@@ -274,7 +273,7 @@
 			$('body>div.window-mask').css($.fn.window.getMaskSize());
 		}, 50);
 	});
-	
+
 	$.fn.window = function(options, param){
 		if (typeof options == 'string'){
 			var method = $.fn.window.methods[options];
@@ -284,7 +283,7 @@
 				return this.panel(options, param);
 			}
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'window');
@@ -302,7 +301,7 @@
 			setProperties(this);
 		});
 	};
-	
+
 	$.fn.window.methods = {
 		options: function(jq){
 			var popts = jq.panel('options');
@@ -349,13 +348,13 @@
 			height: (inline ? '100%' : $(document).height())
 		};
 	};
-	
+
 	$.fn.window.parseOptions = function(target){
 		return $.extend({}, $.fn.panel.parseOptions(target), $.parser.parseOptions(target, [
 			{draggable:'boolean',resizable:'boolean',shadow:'boolean',modal:'boolean',inline:'boolean'}
 		]));
 	};
-	
+
 	// Inherited from $.fn.panel.defaults
 	$.fn.window.defaults = $.extend({}, $.fn.panel.defaults, {
 		zIndex: 9000,
@@ -364,7 +363,7 @@
 		shadow: true,
 		modal: false,
 		inline: false,	// true to stay inside its parent, false to go on top of all elements
-		
+
 		// window's property which difference from panel
 		title: 'New Window',
 		collapsible: true,

@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -9,14 +9,14 @@
  */
 /**
  * combobox - jQuery EasyUI
- * 
+ *
  * Dependencies:
  *   combo
- * 
+ *
  */
 (function($){
 	var COMBOBOX_SERNO = 0;
-	
+
 	function getRowIndex(target, value){
 		var state = $.data(target, 'combobox');
 		var opts = state.options;
@@ -28,7 +28,7 @@
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * scroll panel to display the specified item
 	 */
@@ -46,7 +46,7 @@
 			}
 		}
 	}
-	
+
 	function nav(target, dir){
 		var opts = $.data(target, 'combobox').options;
 		var panel = $(target).combobox('panel');
@@ -88,7 +88,7 @@
 			}
 		}
 	}
-	
+
 	/**
 	 * select the specified value
 	 */
@@ -105,7 +105,7 @@
 			opts.onSelect.call(target, opts.finder.getRow(target, value));
 		}
 	}
-	
+
 	/**
 	 * unselect the specified value
 	 */
@@ -119,14 +119,14 @@
 			opts.onUnselect.call(target, opts.finder.getRow(target, value));
 		}
 	}
-	
+
 	/**
 	 * set values
 	 */
 	function setValues(target, values, remainText){
 		var opts = $.data(target, 'combobox').options;
 		var panel = $(target).combo('panel');
-		
+
 		if (!$.isArray(values)){values = values.split(opts.separator)}
 		panel.find('div.combobox-item-selected').removeClass('combobox-item-selected');
 		var vv = [], ss = [];
@@ -141,13 +141,13 @@
 			vv.push(v);
 			ss.push(s);
 		}
-		
+
 		if (!remainText){
 			$(target).combo('setText', ss.join(opts.separator));
 		}
 		$(target).combo('setValues', vv);
 	}
-	
+
 	/**
 	 * load data, the old list items will be removed.
 	 */
@@ -157,7 +157,7 @@
 		state.data = opts.loadFilter.call(target, data);
 		state.groups = [];
 		data = state.data;
-		
+
 		var selected = $(target).combobox('getValues');
 		var dd = [];
 		var group = undefined;
@@ -166,7 +166,7 @@
 			var v = row[opts.valueField]+'';
 			var s = row[opts.textField];
 			var g = row[opts.groupField];
-			
+
 			if (g){
 				if (group != g){
 					group = g;
@@ -178,12 +178,12 @@
 			} else {
 				group = undefined;
 			}
-			
+
 			var cls = 'combobox-item' + (row.disabled ? ' combobox-item-disabled' : '') + (g ? ' combobox-gitem' : '');
 			dd.push('<div id="' + (state.itemIdPrefix+'_'+i) + '" class="' + cls + '">');
 			dd.push(opts.formatter ? opts.formatter.call(target, row) : s);
 			dd.push('</div>');
-			
+
 //			if (item['selected']){
 //				(function(){
 //					for(var i=0; i<selected.length; i++){
@@ -197,16 +197,16 @@
 			}
 		}
 		$(target).combo('panel').html(dd.join(''));
-		
+
 		if (opts.multiple){
 			setValues(target, selected, remainText);
 		} else {
 			setValues(target, selected.length ? [selected[selected.length-1]] : [], remainText);
 		}
-		
+
 		opts.onLoadSuccess.call(target, data);
 	}
-	
+
 	/**
 	 * request remote data if the url property is setted.
 	 */
@@ -217,7 +217,7 @@
 		}
 		param = $.extend({}, opts.queryParams, param||{});
 //		param = param || {};
-		
+
 		if (opts.onBeforeLoad.call(target, param) == false) return;
 
 		opts.loader.call(target, param, function(data){
@@ -226,14 +226,14 @@
 			opts.onLoadError.apply(this, arguments);
 		});
 	}
-	
+
 	/**
 	 * do the query action
 	 */
 	function doQuery(target, q){
 		var state = $.data(target, 'combobox');
 		var opts = state.options;
-		
+
 		var qq = opts.multiple ? q.split(opts.separator) : [q];
 		if (opts.mode == 'remote'){
 			_setValues(qq);
@@ -274,7 +274,7 @@
 			setValues(target, opts.multiple ? (q?vv:[]) : vv, true);
 		}
 	}
-	
+
 	function doEnter(target){
 		var t = $(target);
 		var opts = t.combobox('options');
@@ -304,18 +304,18 @@
 			t.combobox('hidePanel');
 		}
 	}
-	
+
 	/**
 	 * create the component
 	 */
 	function create(target){
 		var state = $.data(target, 'combobox');
 		var opts = state.options;
-		
+
 		COMBOBOX_SERNO++;
 		state.itemIdPrefix = '_easyui_combobox_i' + COMBOBOX_SERNO;
 		state.groupIdPrefix = '_easyui_combobox_g' + COMBOBOX_SERNO;
-		
+
 		$(target).addClass('combobox-f');
 		$(target).combo($.extend({}, opts, {
 			onShowPanel: function(){
@@ -324,7 +324,7 @@
 				opts.onShowPanel.call(target);
 			}
 		}));
-		
+
 		$(target).combo('panel').unbind().bind('mouseover', function(e){
 			$(this).children('div.combobox-item-hover').removeClass('combobox-item-hover');
 			var item = $(e.target).closest('div.combobox-item');
@@ -354,7 +354,7 @@
 			e.stopPropagation();
 		});
 	}
-	
+
 	$.fn.combobox = function(options, param){
 		if (typeof options == 'string'){
 			var method = $.fn.combobox.methods[options];
@@ -364,7 +364,7 @@
 				return this.combo(options, param);
 			}
 		}
-		
+
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'combobox');
@@ -388,8 +388,7 @@
 			request(this);
 		});
 	};
-	
-	
+
 	$.fn.combobox.methods = {
 		options: function(jq){
 			var copts = jq.combo('options');
@@ -460,14 +459,14 @@
 			});
 		}
 	};
-	
+
 	$.fn.combobox.parseOptions = function(target){
 		var t = $(target);
 		return $.extend({}, $.fn.combo.parseOptions(target), $.parser.parseOptions(target,[
 			'valueField','textField','groupField','mode','method','url'
 		]));
 	};
-	
+
 	$.fn.combobox.parseData = function(target){
 		var data = [];
 		var opts = $(target).combobox('options');
@@ -482,7 +481,7 @@
 			}
 		});
 		return data;
-		
+
 		function _parseItem(el, group){
 			var t = $(el);
 			var row = {};
@@ -497,7 +496,7 @@
 			data.push(row);
 		}
 	};
-	
+
 	$.fn.combobox.defaults = $.extend({}, $.fn.combo.defaults, {
 		valueField: 'value',
 		textField: 'text',
@@ -508,7 +507,7 @@
 		url: null,
 		data: null,
 		queryParams: {},
-		
+
 		keyHandler: {
 			up: function(e){nav(this,'prev');e.preventDefault()},
 			down: function(e){nav(this,'next');e.preventDefault()},
@@ -556,7 +555,7 @@
 				return state.data[parseInt(index)];
 			}
 		},
-		
+
 		onBeforeLoad: function(param){},
 		onLoadSuccess: function(){},
 		onLoadError: function(){},

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Xml;
-
-namespace RuRo.BLL
+﻿namespace RuRo.BLL
 {
     public class Bll_ClinicalData
     {
@@ -54,7 +47,7 @@ namespace RuRo.BLL
         //                    {
         //                        string sampleSourceName = sampleSocrce.Get_Sample_Source_Info(Convert.ToInt32(sample_Clinical_Data.sample_source_id)).name;
         //                        List<Common.Record> recordList = GetNeedRecord(DateTime.Parse(sample_Clinical_Data.created_at), sampleSourceName);//根据样本创建时间前后五天以及样本对应的患者姓名查询临床数据
-        //                        //判断该指标数据库中是否存在--根据日期指标名结果判断 
+        //                        //判断该指标数据库中是否存在--根据日期指标名结果判断
         //                        if (recordList!=null)
         //                        {
         //                            if (recordList.Count>0)
@@ -70,7 +63,7 @@ namespace RuRo.BLL
         //                                }
         //                            }
         //                        }
-                                
+
         //                    }
 
         //                    BLL.ClinicalData.PacsLisReportServices c = new BLL.ClinicalData.PacsLisReportServices();
@@ -119,7 +112,7 @@ namespace RuRo.BLL
         //    //    //02.2 指标存在就将此条样本数据保存至本地数据库并且修改状态为Y--已添加
         //    //    //02.3 如果指标不存在就忽略
         //    //    //03.调用本地数据库中需要更新的数据更新临床数据
-        //    //} 
+        //    //}
         //    #endregion
         //}
 
@@ -165,7 +158,6 @@ namespace RuRo.BLL
         //    return new Model.NormalLisReport();
         //}
 
-
         //private int AddSampleInfo(Model.Sample_Info sample_info)
         //{
         //    List<Model.Sample_Clinical_Data> list = ClinicalData.GetSample_Clinical_DataListBy(a => a.sample_id.ToString() == sample_info.id);
@@ -192,8 +184,6 @@ namespace RuRo.BLL
         //    sample_Clinical_Data.created_at = sample_Info.created_at;
         //    return sample_Clinical_Data;
         //}
-
-
 
         ///// <summary>
         ///// 根据当前用户名获取最后一次回发的时间
@@ -260,10 +250,8 @@ namespace RuRo.BLL
         //    return jsonStr;
         //}
 
-
         ////03.更改状态
 
         ////将传入的对象转换成json字符串
-
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace RuRo.Model.DTO
+﻿namespace RuRo.Model.DTO
 {   /// <summary>
     /// Json 数据实体
     /// </summary>

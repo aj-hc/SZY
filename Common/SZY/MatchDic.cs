@@ -23,7 +23,7 @@ namespace RuRo.Common
             { "chinese", "项目名称" },
             { "result", "结果" },
             { "units", "单位" },
-            { "ef_flag", "高低" },
+            { "ref_flag", "高低" },
             { "lowvalue", "正常低值" },
             { "highvalue", "正常高值" },
             { "print_ref", "正常范围" },
