@@ -17,7 +17,6 @@ namespace RuRo.BLL
         //private Model.QueryRecoder queryRecoderModel = null;
         //private List<string> requestStrList = null;
 
-
         ///// <summary>
         ///// 前台调用方法
         ///// </summary>
@@ -315,6 +314,7 @@ namespace RuRo.BLL
                             case "2":
                                 item["诊断类别"] = "中医诊断";
                                 break;
+
                             default:
                                 break;
                         }
@@ -348,10 +348,10 @@ namespace RuRo.BLL
                         }
                     }
                 }
-
             }
             return mes;
         }
+
         private List<Dictionary<string, string>> MatchClinicalDic(List<Dictionary<string, string>> clinicalDicList, string codeType)
         {
             Dictionary<string, string> dic = Common.MatchDic.PatientDiagnoseDic;
@@ -374,6 +374,7 @@ namespace RuRo.BLL
             }
             return resDicList;
         }
+
         private List<Dictionary<string, string>> GetClinicalInfoDgDicList(string dataStr)
         {
             List<Model.NormalLisReport> pageClinicalInfoList = new List<Model.NormalLisReport>();
@@ -390,6 +391,7 @@ namespace RuRo.BLL
             }
             return ClinicalInfoDgDicList;
         }
+
         #region 获取基本信息字典（样本源） +  private Dictionary<string, string> GetBaseInfoDic()
 
         //获取基本信息字典（样本源）
@@ -538,7 +540,6 @@ namespace RuRo.BLL
         //                        //}
         //                        string strRecord = JsonConvert.SerializeXmlNode(xnlReocrd[0], Newtonsoft.Json.Formatting.None);
 
-
         //                        if (list.Count > 0)
         //                        {
         //                            Msg = "";
@@ -631,6 +632,7 @@ namespace RuRo.BLL
         #endregion xmlNode转换成obj + Model.NormalLisReport XmlTomModel(XmlNode xd)
 
         #region 检查数据对象在本地数据库是否存在 CheckData(Model.PatientDiagnose data)
+
         /// <summary>
         /// 检查数据对象在本地数据库是否存在 ,true--存在
         /// </summary>
@@ -794,6 +796,7 @@ namespace RuRo.BLL
                                                 ";
             return getDataFromHospitalStr;
         }
+
         private string TestAnd(Model.DTO.PatientDiagnoseResuest request)
         {
             string getDataFromHospitalStr = @"<Response>
@@ -858,7 +861,6 @@ namespace RuRo.BLL
                             patientDiagnoseData.Csrq00 = request.cxrq00;
                             if (patientDiagnoseData == null || patientDiagnoseData.PatientName == "")
                             {
-
                             }
                             else
                             {
@@ -887,7 +889,6 @@ namespace RuRo.BLL
 
         #endregion 将数据转换成对象
 
-
         private Model.PatientDiagnose StrTObject(string xmlStr, out string msg)
         {
             XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
@@ -895,7 +896,6 @@ namespace RuRo.BLL
             msg = "";
             if (xd == null)
             {
-
             }
             else
             {
@@ -941,12 +941,14 @@ namespace RuRo.BLL
             Model.PatientDiagnose patientDiagnose = JsonConvert.DeserializeObject<Model.PatientDiagnose>(str);
             return patientDiagnose;
         }
+
         private string PostData(string str)
         {
             UnameAndPwd up = new UnameAndPwd();
             string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), "诊断信息", str);
             return result;
         }
+
         //获取数据
         //解析数据
         //返回数据对象

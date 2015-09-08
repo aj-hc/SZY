@@ -9,10 +9,12 @@ namespace RuRo.BLL.Request
         /// 查询卡号
         /// </summary>
         public string Code { get; set; }
+
         /// <summary>
         /// 条码类型
         /// </summary>
         public string CodeType { get; set; }
+
         /// <summary>
         /// 查询日期
         /// </summary>

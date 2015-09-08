@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace RuRo.BLL
 {
@@ -13,7 +9,8 @@ namespace RuRo.BLL
             string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), test_data_type, dataDicList);
             return result;
         }
-        public string PostTestData(BLL.UnameAndPwd up,string test_data_type, string dataDicListStr)
+
+        public string PostTestData(BLL.UnameAndPwd up, string test_data_type, string dataDicListStr)
         {
             string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), test_data_type, dataDicListStr);
             return result;

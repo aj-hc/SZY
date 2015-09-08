@@ -107,8 +107,8 @@ namespace RuRo.BLL
         {
             try
             {
-              // return Test(request);
-               return string.IsNullOrEmpty(request.Request) ? "" : empiService.GetEmpiInfo(request.Request);
+                // return Test(request);
+                return string.IsNullOrEmpty(request.Request) ? "" : empiService.GetEmpiInfo(request.Request);
             }
             catch (Exception ex)
             {

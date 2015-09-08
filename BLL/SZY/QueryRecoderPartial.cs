@@ -77,7 +77,7 @@ namespace RuRo.BLL
             //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
             List<Model.QueryRecoder> list = new List<Model.QueryRecoder>();
             list = qr.GetModelList(strWhere.ToString());
-            if (list !=null&&list.Count>0)
+            if (list != null && list.Count > 0)
             {
                 return true;
             }

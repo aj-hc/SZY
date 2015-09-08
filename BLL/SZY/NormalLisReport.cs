@@ -132,6 +132,7 @@ namespace RuRo.BLL
 
                             case "F": item["性别"] = "女";
                                 break;
+
                             default: item.Remove("性别");
                                 break;
                         }
@@ -157,7 +158,6 @@ namespace RuRo.BLL
                         NormalLisReport n = new NormalLisReport();
                         try
                         {
-
                             n.Add(item);
                         }
                         catch (Exception ex)
@@ -2223,6 +2223,7 @@ namespace RuRo.BLL
                         case "2":
                             nlr.ref_flag = "低";
                             break;
+
                         case "3":
                             nlr.ref_flag = "#";
                             break;
@@ -2342,7 +2343,6 @@ namespace RuRo.BLL
                                         Common.LogHelper.WriteError(ex);
                                         continue;
                                     }
-                                    
                                 }
                                 if (list.Count > 0)
                                 {
@@ -2589,7 +2589,7 @@ namespace RuRo.BLL
                     XmlDocument xd = Common.XmlHelper.XMLLoad(item, Common.XmlHelper.XmlType.String);
                     try
                     {
-                        string str = JsonConvert.SerializeXmlNode(xd.SelectNodes("//Request")[0], Newtonsoft.Json.Formatting.None ,true);
+                        string str = JsonConvert.SerializeXmlNode(xd.SelectNodes("//Request")[0], Newtonsoft.Json.Formatting.None, true);
                         normalLisItemsRequestModel = JsonConvert.DeserializeObject<Model.DTO.NormalLisItemsRequest>(str);
                     }
                     catch (Exception ex)

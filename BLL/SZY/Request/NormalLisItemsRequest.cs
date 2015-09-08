@@ -4,9 +4,12 @@ using System.Linq;
 
 namespace RuRo.BLL.Request
 {
-    public class PatientDiagnoseResuest : Request
+    internal class NormalLisItemsRequest : Request
     {
-        public PatientDiagnoseResuest(Model.QueryRecoder queryRecoder)
+        /// <summary>
+        /// datagrid查询数据
+        /// </summary>
+        public NormalLisItemsRequest(Model.QueryRecoder queryRecoder)
         {
             this.QueryRecoderModel = queryRecoder;
         }
@@ -21,6 +24,9 @@ namespace RuRo.BLL.Request
                 //检查数据是否有记录
                 //根据code、username、type、isdel 查询数据记录
                 Model.QueryRecoder newModel = this.QueryRecoderModel;
+                this.Code = newModel.Code;
+                this.CodeType = newModel.CodeType;
+
                 BLL.QueryRecoder queryRecoder = new QueryRecoder();
                 List<Model.QueryRecoder> list = queryRecoder.CheckQueryRecord(newModel);
                 if (list != null && list.Count > 0)
@@ -51,7 +57,7 @@ namespace RuRo.BLL.Request
             Model.QueryRecoder model = new Model.QueryRecoder();
             model.Code = this.Code;
             model.CodeType = this.CodeType;
-            model.QueryType = "PatientDiagnose";
+            model.QueryType = "NormalLisItems";
             model.Uname = Common.CookieHelper.GetCookieValue("username");
             model.IsDel = false;
             return model;
@@ -71,75 +77,40 @@ namespace RuRo.BLL.Request
 
                 #region datagrid里面的数据
 
-                int nowAndAddDate = (DateTime.Now - oldModel.AddDate).Days;
-                if (nowAndAddDate > queryDateInterval)
+                if ((DateTime.Now - oldModel.AddDate).Days > queryDateInterval)
                 {
                     //最后一次查询时间
                     string lastQueryDateStr = Convert.ToDateTime(oldModel.LastQueryDate).ToString("yyyy-MM-dd");
-                    DateTime lastDate = new DateTime();
-                    try
-                    {
-                        lastDate = Convert.ToDateTime(lastQueryDateStr);
-                    }
-                    catch (Exception ex)
-                    {
-                        Common.LogHelper.WriteError(ex);
-                    }
-                    int lastDateAndAddDate = (lastDate - oldModel.AddDate).Days;
                     //更新最后一次查询时间
                     oldModel.LastQueryDate = DateTime.Now;
+                    resultModel = oldModel;
                     try
                     {
                         bool updateResult = queryRecoder.Update(resultModel);
-                        if (updateResult && lastDate != null)
+                        if (updateResult)
                         {
-                            if (lastDateAndAddDate >= 0)
-                            {
-                                //正常情况
-                                for (int i = 0; i < (queryDateInterval - lastDateAndAddDate); i++)
-                                {
-                                    string temStr = this.CreatRequestStr(oldModel.Code, lastDate.AddDays(i));
-                                    this.RequestStr.Add(temStr);
-                                }
-                            }
-                            else
-                            {
-                                //没有最后查询时间
-                                for (int i = 0; i < (queryDateInterval - 0); i++)
-                                {
-                                    string temStr = this.CreatRequestStr(oldModel.Code, oldModel.AddDate.AddDays(i));
-                                    this.RequestStr.Add(temStr);
-                                }
-                            }
+                            //更新数据成功
+                            // this.RequestStr = 最后一次查询时间到adddate+5
+                            this.RequestStr.Add(CreatRequestStr(lastQueryDateStr, oldModel.AddDate.AddDays(queryDateInterval).ToString("yyyy-MM-dd")));
                         }
                     }
                     catch (Exception ex)
                     {
                         Common.LogHelper.WriteError(ex);
                     }
-                    resultModel = oldModel;
                 }
                 else
                 {
                     //5天范围内添加的数据
                     string lastQueryDateStr = Convert.ToDateTime(oldModel.LastQueryDate).ToString("yyyy-MM-dd");
-                    DateTime lastDate = new DateTime();
-                    try
-                    {
-                        lastDate = Convert.ToDateTime(lastQueryDateStr);
-                    }
-                    catch (Exception ex)
-                    {
-                        Common.LogHelper.WriteError(ex);
-                    }
-
-                    if ((oldModel.AddDate == oldModel.LastQueryDate && oldModel.AddDate == DateTime.Now) || (oldModel.LastQueryDate < oldModel.AddDate && oldModel.AddDate == DateTime.Now))
+                    if (oldModel.AddDate == oldModel.LastQueryDate && oldModel.AddDate == DateTime.Now)
                     {
                         //当天的数据
                     }
-                    else if ((oldModel.AddDate == oldModel.LastQueryDate && oldModel.AddDate < DateTime.Now) || (oldModel.LastQueryDate < oldModel.AddDate && oldModel.AddDate < DateTime.Now))
+                    else if (oldModel.AddDate == oldModel.LastQueryDate && oldModel.AddDate < DateTime.Now)
                     {
                         oldModel.LastQueryDate = DateTime.Now;
+                        resultModel = oldModel;
                         try
                         {
                             bool updateResult = queryRecoder.Update(resultModel);
@@ -147,19 +118,13 @@ namespace RuRo.BLL.Request
                             {
                                 //更新数据成功
                                 // this.RequestStr = 最后一次查询时间到adddate+5
-                                for (int i = 0; i < nowAndAddDate; i++)
-                                {
-                                    string temStr = CreatRequestStr(oldModel.Code, oldModel.AddDate.AddDays(i));
-                                    this.RequestStr.Add(temStr);
-                                }
+                                this.RequestStr.Add(CreatRequestStr(lastQueryDateStr, oldModel.AddDate.AddDays(queryDateInterval).ToString("yyyy-MM-dd")));
                             }
                         }
                         catch (Exception ex)
                         {
                             Common.LogHelper.WriteError(ex);
                         }
-
-                        resultModel = oldModel;
                     }
                 }
 
@@ -181,13 +146,9 @@ namespace RuRo.BLL.Request
                         if (res > 0)
                         {
                             resultModel = queryRecoder.CheckQueryRecord(newModel).OrderByDescending(a => a.AddDate).FirstOrDefault();
-                            for (int i = 0; i < queryDateInterval; i++)
-                            {
-                                string temStr1 = this.CreatRequestStr(newModel.Code, newModel.AddDate.AddDays(-i).AddDays(-1));
-                                string temStr2 = this.CreatRequestStr(newModel.Code, newModel.AddDate.AddDays(i));
-                                this.RequestStr.Add(temStr1);
-                                this.RequestStr.Add(temStr2);
-                            }
+                            string k = newModel.AddDate.AddDays(-queryDateInterval).ToString("yyyy-MM-dd");
+                            string j = newModel.AddDate.AddDays(queryDateInterval).ToString("yyyy-MM-dd");
+                            this.RequestStr.Add(CreatRequestStr(k, j));
                         }
                     }
                     catch (Exception ex)
@@ -205,18 +166,10 @@ namespace RuRo.BLL.Request
                         if (res > 0)
                         {
                             resultModel = queryRecoder.CheckQueryRecord(newModel).OrderByDescending(a => a.AddDate).FirstOrDefault();
-                            string k = newModel.Code;
+                            string k = newModel.AddDate.AddDays(-queryDateInterval).ToString("yyyy-MM-dd");
                             string j = DateTime.Now.ToString("yyyy-MM-dd");
-                            for (int i = 0; i < queryDateInterval; i++)
-                            {
-                                string temStr = this.CreatRequestStr(newModel.Code, newModel.AddDate.AddDays(-i).AddDays(-1));
-                                this.RequestStr.Add(temStr);
-                            }
-                            for (int i = 0; i < (DateTime.Now - newModel.AddDate).Days; i++)
-                            {
-                                string temStr = this.CreatRequestStr(newModel.Code, newModel.AddDate.AddDays(i));
-                                this.RequestStr.Add(temStr);
-                            }
+                            //查询字符串的范围是当前日期的前几天，到当前日期
+                            this.RequestStr.Add(CreatRequestStr(k, j));
                         }
                     }
                     catch (Exception ex)
@@ -232,6 +185,7 @@ namespace RuRo.BLL.Request
                 //当前时间和最后的查询时间的查值
                 int dateDifWithOldLastDateAndDateNow = (DateTime.Now - Convert.ToDateTime(oldModel.LastQueryDate)).Days;
                 int dateDifWithOldAddDateAndDateNow = (DateTime.Now - oldModel.AddDate).Days;
+                int dateDifWithLastAndAddDate = (Convert.ToDateTime(oldModel.LastQueryDate) - oldModel.AddDate).Days;
                 //本地数据库有数据，并且是用code添加信息
                 //01.判断lastquery 和当前日期
                 if (oldModel.LastQueryDate == newModel.LastQueryDate && oldModel.LastQueryDate == DateTime.Now)
@@ -240,7 +194,7 @@ namespace RuRo.BLL.Request
                 }
                 else if (dateDifWithOldAddDateAndDateNow >= 2 * queryDateInterval)
                 {
-                    string Code = oldModel.Code;
+                    string lastQueryDateStr = Convert.ToDateTime(oldModel.LastQueryDate).ToString("yyyy-MM-dd");
                     //超时 并且是2倍时间间隔之前的数据——新建一条数据
                     Model.QueryRecoder newRecord = new Model.QueryRecoder()
                     {
@@ -252,16 +206,6 @@ namespace RuRo.BLL.Request
                         QueryType = newModel.QueryType,
                         Uname = newModel.Uname
                     };
-                    DateTime lastDate = new DateTime();
-                    try
-                    {
-                        lastDate = Convert.ToDateTime(oldModel.LastQueryDate);
-                    }
-                    catch (Exception ex)
-                    {
-                        Common.LogHelper.WriteError(ex);
-                    }
-                    int lastDateAndAddDate = (lastDate - oldModel.AddDate).Days;
                     oldModel.LastQueryDate = oldModel.AddDate.AddDays(queryDateInterval);
                     try
                     {
@@ -278,60 +222,21 @@ namespace RuRo.BLL.Request
                     }
                     resultModel = oldModel;
                     //最后查询时间到老model的添加时间加上时间间隔
-                    if (lastDateAndAddDate >= 0)
+                    if (dateDifWithLastAndAddDate >= queryDateInterval)
                     {
-                        //正常情况
-                        for (int i = 0; i < (queryDateInterval - lastDateAndAddDate); i++)
-                        {
-                            string temStr = this.CreatRequestStr(oldModel.Code, lastDate.AddDays(i));
-                            this.RequestStr.Add(temStr);
-                        }
+                        this.RequestStr.Add(CreatRequestStr(oldModel.AddDate.ToString("yyyy-MM-dd"), oldModel.AddDate.AddDays(queryDateInterval).ToString("yyyy-MM-dd")));
                     }
                     else
                     {
-                        //没有最后查询时间
-                        for (int i = 0; i < (queryDateInterval - 0); i++)
-                        {
-                            string temStr = this.CreatRequestStr(oldModel.Code, oldModel.AddDate.AddDays(i));
-                            this.RequestStr.Add(temStr);
-                        }
+                        this.RequestStr.Add(CreatRequestStr(lastQueryDateStr, oldModel.AddDate.AddDays(queryDateInterval).ToString("yyyy-MM-dd")));
                     }
                 }
                 else if (dateDifWithOldAddDateAndDateNow >= queryDateInterval && dateDifWithOldAddDateAndDateNow < 2 * queryDateInterval)
                 {
                     //查询时间有重合
-                    // string lastQueryDateStr = Convert.ToDateTime(oldModel.LastQueryDate).ToString("yyyy-MM-dd");
-                    DateTime lastDate = new DateTime();
-                    try
-                    {
-                        lastDate = Convert.ToDateTime(oldModel.LastQueryDate);
-                    }
-                    catch (Exception ex)
-                    {
-                        Common.LogHelper.WriteError(ex);
-                    }
-                    int lastDateAndAddDate = (lastDate - oldModel.AddDate).Days;
-                    //最后查询时间到老model的添加时间加上时间间隔
-                    if (lastDateAndAddDate >= 0)
-                    {
-                        //正常情况
-                        for (int i = 0; i < (queryDateInterval - lastDateAndAddDate); i++)
-                        {
-                            string temStr = this.CreatRequestStr(oldModel.Code, lastDate.AddDays(i));
-                            this.RequestStr.Add(temStr);
-                        }
-                    }
-                    else
-                    {
-                        //没有最后查询时间
-                        for (int i = 0; i < (queryDateInterval - 0); i++)
-                        {
-                            string temStr = this.CreatRequestStr(oldModel.Code, oldModel.AddDate.AddDays(i));
-                            this.RequestStr.Add(temStr);
-                        }
-                    }
-                    // this.RequestStr.Add(CreatRequestStr(lastQueryDateStr, oldModel.AddDate.AddDays(queryDateInterval).ToString("yyyy-MM-dd")));
-                    //超时 并且是时间间隔之前的数据——新建一条数据
+                    string lastQueryDateStr = Convert.ToDateTime(oldModel.LastQueryDate).ToString("yyyy-MM-dd");
+                    this.RequestStr.Add(CreatRequestStr(lastQueryDateStr, oldModel.AddDate.AddDays(queryDateInterval).ToString("yyyy-MM-dd")));
+                    //超时 并且是2倍时间间隔之前的数据——新建一条数据
                     Model.QueryRecoder newRecord = new Model.QueryRecoder()
                     {
                         AddDate = oldModel.AddDate.AddDays(queryDateInterval),
@@ -361,32 +266,10 @@ namespace RuRo.BLL.Request
                 }
                 else
                 {
-                    string strCode = oldModel.Code;
+                    string lastQueryDateStr = Convert.ToDateTime(oldModel.LastQueryDate).ToString("yyyy-MM-dd");
                     //没超时，还在时间范围内的
-                    DateTime lastDate = new DateTime();
-                    try
-                    {
-                        lastDate = Convert.ToDateTime(oldModel.LastQueryDate);
-                    }
-                    catch (Exception ex)
-                    {
-                        Common.LogHelper.WriteError(ex);
-                    }
-                    //最后查询时间和当天时间对比
-                    int nowAndLastDate = (DateTime.Now - lastDate).Days;
-                    //最后查询时间到老model的添加时间加上时间间隔
-                    if (nowAndLastDate <= queryDateInterval)
-                    {
-                        //正常情况
-                        for (int i = 0; i < (nowAndLastDate); i++)
-                        {
-                            string temStr = this.CreatRequestStr(oldModel.Code, lastDate.AddDays(i));
-                            this.RequestStr.Add(temStr);
-                        }
-                    }
-
-                    // this.RequestStr.Add(CreatRequestStr(strCode, DateTime.Now.ToString("yyyy-MM-dd")));
                     oldModel.LastQueryDate = DateTime.Now;
+                    this.RequestStr.Add(CreatRequestStr(lastQueryDateStr, DateTime.Now.ToString("yyyy-MM-dd")));
                     resultModel = oldModel;
                 }
             }
@@ -401,39 +284,22 @@ namespace RuRo.BLL.Request
                     }
                 }
             }
-
             this.RequestStr = temResquestStrList;
             return resultModel;
         }
 
-        private string CreatRequestStr(string cardno, string cxrq00)
+        private string CreatRequestStr(string ksrq00, string jsrq00)
         {
-            //DateTime datecxrq00 = new DateTime();
-            //if (DateTime.TryParse(cxrq00, out datecxrq00))
-            //{
-            //    //return string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", this.Code, dateksrq00.ToString("yyyy-MM-dd"), dateksrq00.ToString("yyyy-MM-dd"));
-            //    return string.Format("<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00></Request>", cardno, cxrq00);
-            //}
-            //else
-            //{
-            //    return "";
-            //}
-
-            DateTime datecxrq00 = new DateTime();
-            if (DateTime.TryParse(cxrq00, out datecxrq00))
+            DateTime dateksrq00 = new DateTime();
+            DateTime datejsrq00 = new DateTime();
+            if (DateTime.TryParse(ksrq00, out dateksrq00) && DateTime.TryParse(jsrq00, out datejsrq00))
             {
-                //return string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", this.Code, dateksrq00.ToString("yyyy-MM-dd"), dateksrq00.ToString("yyyy-MM-dd"));
-                return string.Format("<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00></Request>", cardno, datecxrq00.ToString("yyyy-MM-dd"));
+                return string.Format("<Request><hospnum>{0}</hospnum><ksrq00>{1}</ksrq00><jsrq00>{2}</jsrq00></Request>", this.Code, dateksrq00.ToString("yyyy-MM-dd"), datejsrq00.ToString("yyyy-MM-dd"));
             }
             else
             {
                 return "";
             }
-        }
-
-        private string CreatRequestStr(string cardno, DateTime cxrq00)
-        {
-            return string.Format("<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00></Request>", cardno, cxrq00.ToString("yyyy-MM-dd"));
         }
     }
 }

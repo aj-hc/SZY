@@ -63,7 +63,7 @@ namespace RuRo.BLL.SZY
             List<Dictionary<string, string>> dicList = GetClinicalInfoDgDicList(dataStr);
             string mes = "";
             //读取code和codeType
-            if (dicList!=null&&dicList.Count>0)
+            if (dicList != null && dicList.Count > 0)
             {
                 for (int i = 0; i < dicList.Count; i++)
                 {
@@ -76,7 +76,7 @@ namespace RuRo.BLL.SZY
                     //判断传入类型
                     if (model.QueryType == "NormalLisReport")
                     {
-                       // BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(model);
+                        // BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(model);
                         BLL.NormalLisReport nr = new NormalLisReport();
                         //nrr.CreatRequest(false);
                         string result = nr.GetData(model, false);

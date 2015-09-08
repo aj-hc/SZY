@@ -5,37 +5,21 @@ using System.Data;
 namespace RuRo.BLL
 {
     /// <summary>
-    /// NormalLisReport
+    /// NormalLisItems
     /// </summary>
-    public partial class NormalLisReport
+    public partial class NormalLisItems
     {
-        private readonly RuRo.DAL.NormalLisReport dal = new RuRo.DAL.NormalLisReport();
+        private readonly RuRo.DAL.NormalLisItems dal = new RuRo.DAL.NormalLisItems();
 
-        public NormalLisReport()
+        public NormalLisItems()
         { }
 
         #region BasicMethod
 
         /// <summary>
-        /// 得到最大ID
-        /// </summary>
-        public int GetMaxId()
-        {
-            return dal.GetMaxId();
-        }
-
-        /// <summary>
-        /// 是否存在该记录
-        /// </summary>
-        public bool Exists(int Id)
-        {
-            return dal.Exists(Id);
-        }
-
-        /// <summary>
         /// 增加一条数据
         /// </summary>
-        public int Add(RuRo.Model.NormalLisReport model)
+        public int Add(RuRo.Model.NormalLisItems model)
         {
             return dal.Add(model);
         }
@@ -43,7 +27,7 @@ namespace RuRo.BLL
         /// <summary>
         /// 更新一条数据
         /// </summary>
-        public bool Update(RuRo.Model.NormalLisReport model)
+        public bool Update(RuRo.Model.NormalLisItems model)
         {
             return dal.Update(model);
         }
@@ -67,7 +51,7 @@ namespace RuRo.BLL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public RuRo.Model.NormalLisReport GetModel(int Id)
+        public RuRo.Model.NormalLisItems GetModel(int Id)
         {
             return dal.GetModel(Id);
         }
@@ -75,9 +59,9 @@ namespace RuRo.BLL
         /// <summary>
         /// 得到一个对象实体，从缓存中
         /// </summary>
-        public RuRo.Model.NormalLisReport GetModelByCache(int Id)
+        public RuRo.Model.NormalLisItems GetModelByCache(int Id)
         {
-            string CacheKey = "NormalLisReportModel-" + Id;
+            string CacheKey = "NormalLisItemsModel-" + Id;
             object objModel = RuRo.Common.DataCache.GetCache(CacheKey);
             if (objModel == null)
             {
@@ -92,7 +76,7 @@ namespace RuRo.BLL
                 }
                 catch { }
             }
-            return (RuRo.Model.NormalLisReport)objModel;
+            return (RuRo.Model.NormalLisItems)objModel;
         }
 
         /// <summary>
@@ -114,7 +98,7 @@ namespace RuRo.BLL
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<RuRo.Model.NormalLisReport> GetModelList(string strWhere)
+        public List<RuRo.Model.NormalLisItems> GetModelList(string strWhere)
         {
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
@@ -123,13 +107,13 @@ namespace RuRo.BLL
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<RuRo.Model.NormalLisReport> DataTableToList(DataTable dt)
+        public List<RuRo.Model.NormalLisItems> DataTableToList(DataTable dt)
         {
-            List<RuRo.Model.NormalLisReport> modelList = new List<RuRo.Model.NormalLisReport>();
+            List<RuRo.Model.NormalLisItems> modelList = new List<RuRo.Model.NormalLisItems>();
             int rowsCount = dt.Rows.Count;
             if (rowsCount > 0)
             {
-                RuRo.Model.NormalLisReport model;
+                RuRo.Model.NormalLisItems model;
                 for (int n = 0; n < rowsCount; n++)
                 {
                     model = dal.DataRowToModel(dt.Rows[n]);
