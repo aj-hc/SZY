@@ -10,7 +10,7 @@ namespace RuRo.BLL
     public partial class NormalLisReport
     { //创建获取数据对象
         private ClinicalData.PacsLisReportServices clinicalData = new ClinicalData.PacsLisReportServices();
-        private Model.DTO.NormalLisReportRequest request = null;
+        //private Model.DTO.NormalLisReportRequest request = null;
         private Model.QueryRecoder queryRecoderModel = null;
         private List<string> requestStrList = null;
 
