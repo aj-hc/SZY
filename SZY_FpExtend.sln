@@ -1,9 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{5B535162-10C2-4238-BC56-193B968E1834}"
-EndProject
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBUtility", "DBUtility\DBUtility.csproj", "{0988C62E-247F-471F-A183-DB509C7A3839}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{E3D8759A-C5EB-402D-9F10-F5C6029A8D1A}"
@@ -16,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{53995DBB-9836-4647-AD22-865884FDEB9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{5B535162-10C2-4238-BC56-193B968E1834}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -26,16 +24,6 @@ Global
 		Release|Mixed Platforms = Release|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Release|.NET.ActiveCfg = Release|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0988C62E-247F-471F-A183-DB509C7A3839}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{0988C62E-247F-471F-A183-DB509C7A3839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0988C62E-247F-471F-A183-DB509C7A3839}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -96,6 +84,16 @@ Global
 		{53995DBB-9836-4647-AD22-865884FDEB9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53995DBB-9836-4647-AD22-865884FDEB9E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{53995DBB-9836-4647-AD22-865884FDEB9E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Release|.NET.ActiveCfg = Release|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5B535162-10C2-4238-BC56-193B968E1834}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
