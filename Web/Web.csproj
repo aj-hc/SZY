@@ -86,6 +86,7 @@
     <Content Include="Config\PatientDiagnose.xml" />
     <Content Include="Controls\checkright.ascx" />
     <Content Include="Controls\copyright.ascx" />
+    <Content Include="Pages\EmpiInfo_info_F.aspx" />
     <Content Include="ExtendPage.aspx" />
     <Content Include="Fp_Ajax\Fp_Ajax.txt" />
     <Content Include="Fp_Ajax\getjson.aspx" />
@@ -636,7 +637,6 @@
     <Content Include="Global.asax" />
     <Content Include="js\calendar1.js" />
     <Content Include="js\CheckBox.js" />
-    <Content Include="Pages\EmpiInfo_info_D.aspx" />
     <Content Include="Pages\EmpiInfo_info.aspx" />
     <Content Include="Pages\NormalLisReport_list.aspx" />
     <Content Include="Pages\NormalLisReport_list_D.aspx" />
@@ -672,6 +672,12 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EmpiInfo_info_F.aspx.cs">
+      <DependentUpon>EmpiInfo_info_F.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EmpiInfo_info_F.aspx.designer.cs">
+      <DependentUpon>EmpiInfo_info_F.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExtendPage.aspx.cs">
       <DependentUpon>ExtendPage.aspx</DependentUpon>
@@ -717,13 +723,6 @@
     </Compile>
     <Compile Include="MasterPage.master.designer.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo_info_D.aspx.cs">
-      <DependentUpon>EmpiInfo_info_D.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo_info_D.aspx.designer.cs">
-      <DependentUpon>EmpiInfo_info_D.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\EmpiInfo_info.aspx.cs">
       <DependentUpon>EmpiInfo_info.aspx</DependentUpon>
