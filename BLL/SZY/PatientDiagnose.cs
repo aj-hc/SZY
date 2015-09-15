@@ -88,7 +88,6 @@ namespace RuRo.BLL
         {
             Dictionary<string, string> dic = GetBaseInfoDic(formData);
             Dictionary<string, string> newDic = new Dictionary<string, string>();
-            
             newDic.Add("Name", code);
             newDic.Add("Sample Source", code);
             foreach (KeyValuePair<string, string> item in dic)
@@ -153,8 +152,6 @@ namespace RuRo.BLL
             QueryRecoder queryRecoder = new QueryRecoder();
             //根据传入的查询字符串创建的当此查询的记录model
             Model.QueryRecoder model = new Model.QueryRecoder();
-
-            //model.AddDate = DateTime.Now;
             model.Code = resquet.cardno;
             model.CodeType = codeType;
             model.QueryType = "PatientDiagnose";
@@ -347,7 +344,6 @@ namespace RuRo.BLL
 
         private List<Model.QueryRecoder> CheckQueryRecord(Model.QueryRecoder model)
         {
-
             QueryRecoder queryRecoder = new QueryRecoder();
             //查询本地数据库有没有数据
             StringBuilder strWhere = new StringBuilder();
@@ -356,7 +352,6 @@ namespace RuRo.BLL
             strWhere.AppendFormat("CodeType = {0} and ", "'" + model.CodeType + "'");
             strWhere.AppendFormat("IsDel = {0} and ", "'" + model.IsDel + "'");
             strWhere.AppendFormat("QueryType = {0}", "'" + model.QueryType + "'");
-
             //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
             return queryRecoder.GetModelList(strWhere.ToString());
         }

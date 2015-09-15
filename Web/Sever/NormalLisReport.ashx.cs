@@ -68,13 +68,6 @@ namespace RuRo.Web.Sever
                 string dateNow = context.Request.Params["dateNow"];
                 Model.DTO.NormalLisReportRequest request = new Model.DTO.NormalLisReportRequest(code,dateNow);
                 BLL.NormalLisReport normalLisReport = new BLL.NormalLisReport();
-                //bool success;
-                //object obj = n.GetData(code, ksrq00, jsrq00, out success);
-                //ReturnData resd = new ReturnData(obj, success);
-                //string jsonStrResult = resd.Res();
-
-                //string result = normalLisReport.GetData(request, codeType);
-                //context.Response.Write(result);
                 Model.QueryRecoder qqq = new Model.QueryRecoder();
                 qqq.Code= code;
                 qqq.CodeType = codeType;
@@ -86,7 +79,6 @@ namespace RuRo.Web.Sever
                 BLL.NormalLisReport NData = new BLL.NormalLisReport();
                 string result= NData.GetData(qqq, true);
                 context.Response.Write(result);
-                //NData.GetData(BLL.Request.Request r);
             }
         }
 
@@ -95,10 +87,6 @@ namespace RuRo.Web.Sever
             string pk = context.Request["pk"];
             bool success = true;
             Object obj = pk;
-            //string msg = "删除成功";
-            //ReturnData resd = new ReturnData(obj, success,msg);
-            //string jsonStrResult = resd.Res();
-            //context.Response.Write(jsonStrResult);
         }
 
         private void SaveData(HttpContext context)

@@ -145,10 +145,10 @@
                 "pageSize":10
             },
             success: function (data) {
-                var obj = $.parseJSON(data);
-                if (obj.Qdata == "") { $.messager.alert('错误', '查询不到数据','error'); }
+                if (data == "") { $.messager.alert('错误', '查询不到数据','error'); }
                 else
                 {
+                    var obj = $.parseJSON(data);
                     var Qdata = $.parseJSON(obj.Qdata);
                     var total = Number(obj.total);
                     for (var i = 0; i < Qdata.length; i++) {

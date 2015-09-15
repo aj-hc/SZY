@@ -14,43 +14,6 @@ namespace RuRo.BLL
         //创建获取数据对象
         ClinicalData.PacsLisReportServices clinicalData = new ClinicalData.PacsLisReportServices();
         Model.DTO.NormalLisReportRequest request;
-        #region 废除方法
-        /// <summary>
-        /// 前台调用方法
-        /// </summary>
-        /// <returns></returns>
-        //public string GetData(Model.DTO.NormalLisReportRequest request, string codeType)
-        //{
-        //    Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
-        //    this.request = request;
-        //    //保存记录（查询记录数据,更新或添加）
-        //    bool b = SaveQueryRecord(ref request, "", codeType);
-        //    if (b)
-        //    {
-        //        //调用接口获取数据
-        //        string xmlStr = GetWebServiceData(request);
-        //        string Msg = "";
-        //        //将xml数据转换成list集合会查询本地数据库去除重复项
-        //        List<Model.NormalLisReport> nnn = this.GetList(xmlStr, out Msg);
-
-        //        if (nnn != null && nnn.Count > 0)
-        //        {
-        //            //有数据
-        //            jsonmodel = CreatJsonMode("ok", Msg, nnn);
-        //        }
-        //        else
-        //        {
-        //            //无数据
-        //            jsonmodel = CreatJsonMode("err", Msg, nnn);
-        //            bool bb = SaveQueryRecord(ref request, Msg, codeType);
-        //        }
-
-        //    }
-        //    return JsonConvert.SerializeObject(jsonmodel);
-        //}
-
-        #endregion
-
         public string GetData(Model.QueryRecoder model, bool queryBycode)
         {
             BLL.Request.NormalLisReportRequest cq = new Request.NormalLisReportRequest(model);
@@ -138,14 +101,6 @@ namespace RuRo.BLL
                     NormalLisReport n = new NormalLisReport();
                     n.Add(model);
                 }
-                //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
-                //List<Model.QueryRecoder> list= bll_Q.GetReciprocalFirstData_BLL();
-                //if (list!=null||list.Count>0)
-                //{
-                //    Model.QueryRecoder = list[0];
-                //}
-                // bll_Q.UpdataQueryRecoderIsDel_BLL("user");
-                //修改QueryRecoder表为true
             }
             return mes;
         }

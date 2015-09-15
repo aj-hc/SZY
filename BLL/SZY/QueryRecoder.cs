@@ -104,61 +104,6 @@ namespace RuRo.BLL.SZY
                     }
                 }
             }
-            //string listStr = JsonConvert.SerializeObject(dicList);
-            //List<Model.QueryRecoder> queryRecoderList = JsonConvert.DeserializeObject<List<Model.QueryRecoder>>(listStr);
-            //foreach (Model.QueryRecoder item in queryRecoderList)
-            //{
-            //    if (item.QueryType=="NormalLisReport")
-            //    {
-            //        BLL.Request.NormalLisReportRequest nrr = new Request.NormalLisReportRequest(item);
-            //        BLL.NormalLisReport nr = new NormalLisReport();
-            //        nrr.CreatRequest(false);
-            //        string result=nr.GetData(item,false);
-            //        if (result.Contains("Statu=ok"))
-            //        {
-                        
-            //        }
-            for (int i = 0; i < dicList.Count; i++)
-            {
-                string code = dicList[i]["Code"];
-                string codeType = dicList[i]["CodeType"];
-                string date = dicList[i]["LastQueryDate"];
-                Model.QueryRecoder model = new Model.QueryRecoder();
-                model = DicToQueryRecoderModel(dicList[i]);
-                BLL.NormalLisReport bll_N = new NormalLisReport();
-                string result = bll_N.GetData(model, false);
-
-            //    }
-            //    else if (item.QueryType == "PatientDiagnose")
-            //    {
-            //        BLL.Request.PatientDiagnoseResuest nrr = new Request.PatientDiagnoseResuest(item);
-            //        //BLL.PatientDiagnoseResuest nr = new PatientDiagnoseResuest();
-            //        //nrr.CreatRequest(false);
-            //        //nr.GetData(item, false);
-            //    }
-            //}
-                Model.DTO.NormalLisReportRequest mo = new Model.DTO.NormalLisReportRequest(code, date);
-                Model.DTO.JsonModel jsonModel_N = bll_N.GetData(mo, codeType, "");
-                if (jsonModel_N.Statu == "ok")
-                {
-                    mes = bll_N.PostData(code, codeType, JsonConvert.SerializeObject(jsonModel_N.Data));//导入到临床检验数据
-                }
-                else
-                {
-                    mes = mes + "," + jsonModel_N.Msg;
-                }
-                Model.DTO.PatientDiagnoseResuest po = new Model.DTO.PatientDiagnoseResuest(code, date);
-                BLL.PatientDiagnose bll_P = new PatientDiagnose();
-                Model.DTO.JsonModel jsonModel_P = bll_P.GetData(po, codeType, "");
-                if (jsonModel_P.Statu == "ok")
-                {
-                    mes = bll_N.PostData(code, codeType, JsonConvert.SerializeObject(jsonModel_P.Data));//导入到患者信息
-                }
-                else
-                {
-                    mes = mes + "," + jsonModel_P.Msg;
-                }
-            }
             return mes;
         }
 
