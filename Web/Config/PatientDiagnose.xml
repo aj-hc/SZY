@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<match>
+  <fields>
+    <key>PatientName</key>
+    <value>姓名</value>
+  </fields>
+  <fields>
+    <key>Sex</key>
+    <value>性别</value>
+  </fields>
+  <fields>
+    <key>Brithday</key>
+    <value>出生日期</value>
+  </fields>
+  <fields>
+    <key>CardId</key>
+    <value>身份证号</value>
+  </fields>
+  <fields>
+    <key>Icd</key>
+    <value>ICD码</value>
+  </fields>
+  <fields>
+    <key>Diagnose</key>
+    <value>诊断名称</value>
+  </fields>
+  <fields>
+    <key>Type</key>
+    <value>诊断类型</value>
+  </fields>
+  <fields>
+    <key>Flag</key>
+    <value>诊断类别</value>
+  </fields>
+  <fields>
+    <key>DiagnoseDate</key>
+    <value>诊断日期</value>
+  </fields>
+</match>

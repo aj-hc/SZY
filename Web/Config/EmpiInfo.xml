@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<match>
+  <fields>
+    <key>PatientName</key>
+    <value>姓名</value>
+  </fields>
+  <fields>
+    <key>Sex</key>
+    <value>性别</value>
+  </fields>
+  <fields>
+    <key>Birthday</key>
+    <value>出生日期</value>
+  </fields>
+  <fields>
+    <key>Sex</key>
+    <value>性别</value>
+  </fields>
+  <fields>
+    <key>CardId</key>
+    <value>身份证号</value>
+  </fields>
+</match>
