@@ -45,24 +45,25 @@ namespace RuRo.BLL
                     if (request != null)
                     {
                         Model.PatientDiagnose patientDiagnose = StrTObject(xmlStr, out _Msg, request);
-                    }
-                    //nnn.Add(model.Code);
-                    if (patientDiagnose != null)
-                    {
-                        if (!patientDiagnoseList.Contains(patientDiagnose))
+                        if (patientDiagnose != null)
                         {
-                            bool check = CheckData(patientDiagnose);
-                            if (!check)
+                            if (!patientDiagnoseList.Contains(patientDiagnose))
                             {
-                                patientDiagnoseList.Add(patientDiagnose);
+                                bool check = CheckData(patientDiagnose);
+                                if (!check)
+                                {
+                                    patientDiagnoseList.Add(patientDiagnose);
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(_Msg))
+                            {
+                                msg.Replace(_Msg, "");
+                                msg.Append(" &nbsp " + _Msg);
                             }
                         }
-                        if (!string.IsNullOrEmpty(_Msg))
-                        {
-                            msg.Replace(_Msg, "");
-                            msg.Append(" &nbsp " + _Msg);
-                        }
                     }
+                    //nnn.Add(model.Code);
+                   
                     else
                     {
                         if (!string.IsNullOrEmpty(_Msg))
