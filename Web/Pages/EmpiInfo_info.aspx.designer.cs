@@ -10,7 +10,7 @@
 namespace RuRo {
     
     
-    public partial class EmpiInfo_info{
+    public partial class EmpiInfo_info_D {
         
         /// <summary>
         /// mode ¿Ø¼þ¡£
