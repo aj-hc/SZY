@@ -22,21 +22,21 @@
         <thead>
             <tr>
                 <th field="ck" checkbox="true"></th>
-                <th field="id" width="100" sortable="true" hidden="true">id</th>
-                <th field="cardno" width="100" sortable="false">卡号</th>
-                <th field="csrq00" width="100" sortable="true">查询日期</th>
-                <th field="patientname" width="100" sortable="false">姓名</th>
-                <th field="sex" width="100" sortable="false" hidden="true">性别</th>
-                <th field="brithday" width="100" sortable="false" hidden="true">出生日期</th>
-                <th field="cardid" width="100" sortable="false" hidden="true">身份证号</th>
-                <th field="tel" width="100" sortable="false" hidden="true">tel</th>
-                <th field="registerno" width="100" sortable="true" hidden="true">registerno</th>
-                <th field="icd" width="100" sortable="true">ICD码</th>
-                <th field="diagnose" width="100" sortable="true">诊断名称</th>
-                <th field="type" width="100" sortable="true">诊断类型</th>
-                <th field="flag" width="100" sortable="true">诊断类别</th>
-                <th field="diagnosedate" width="100" sortable="true">诊断日期</th>
-                <th field="isdel" width="100" sortable="true" hidden="true">isdel</th>
+                <th field="Id" width="100" sortable="true" hidden="true">id</th>
+                <th field="Cardno" width="100" sortable="false">卡号</th>
+                <th field="Csrq00" width="100" sortable="true">查询日期</th>
+                <th field="Patientname" width="100" sortable="false">姓名</th>
+                <th field="Sex" width="100" sortable="false" hidden="true">性别</th>
+                <th field="Brithday" width="100" sortable="false" hidden="true">出生日期</th>
+                <th field="Cardid" width="100" sortable="false" hidden="true">身份证号</th>
+                <th field="Tel" width="100" sortable="false" hidden="true">tel</th>
+                <th field="Registerno" width="100" sortable="true" hidden="true">registerno</th>
+                <th field="Icd" width="100" sortable="true">ICD码</th>
+                <th field="Diagnose" width="100" sortable="true">诊断名称</th>
+                <th field="Type" width="100" sortable="true">诊断类型</th>
+                <th field="Flag" width="100" sortable="true">诊断类别</th>
+                <th field="Diagnosedate" width="100" sortable="true">诊断日期</th>
+                <th field="Isdel" width="100" sortable="true" hidden="true">isdel</th>
             </tr>
         </thead>
     </table>
