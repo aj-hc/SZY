@@ -39,14 +39,22 @@
             <!--  导航内容 -->
             <div title="插件管理" data-options="iconCls:'icon-sys'" style="overflow: auto; padding: 0px;">
                 <ul>
-                    <li>
-                        <div><a target="mainFrame" rel="Pages/ExtendPage.aspx"><span></span>导入信息</a></div>
-                    </li>
+                   <%-- <li>
+                        <div><a target="mainFrame" rel="ExtendPage.aspx"><span></span>导入信息</a></div>
+                    </li>--%>
                     <li>
                         <%--<div><a target="mainFrame" rel="Pages/QueryRecoder_list.aspx"><span></span>批量导入</a></div>--%>
                     </li>
                     <%--<li><div><a target="mainFrame" rel="Pages/EmpiInfo_info_D.aspx"><span></span>导入样品源</a></div></li>--%>
-                    <li><div><a target="mainFrame" rel="Pages/EmpiInfo_info_F.aspx"><span></span>导入样品源</a></div></li>
+                    <li>
+                        <div><a target="mainFrame" rel="Pages/EmpiInfo_info_F.aspx"><span></span>对接基本信息</a></div>
+                    </li>
+                    <li>
+                        <div><a target="mainFrame" rel="Pages/PatientDiagnose_list_F.aspx"><span></span>对接诊断信息</a></div>
+                    </li>
+                    <li>
+                        <div><a target="mainFrame" rel="Pages/NormalLisReport_list_F.aspx"><span></span>对接临床检测信息</a></div>
+                    </li>
                 </ul>
             </div>
         </div>

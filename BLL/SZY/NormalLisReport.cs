@@ -11,8 +11,8 @@ namespace RuRo.BLL
     { //创建获取数据对象
         private ClinicalData.PacsLisReportServices clinicalData = new ClinicalData.PacsLisReportServices();
         //private Model.DTO.NormalLisReportRequest request = null;
-        private Model.QueryRecoder queryRecoderModel = null;
-        private List<string> requestStrList = null;
+        private Model.QueryRecoder queryRecoderModel = new Model.QueryRecoder();
+        private List<string> requestStrList = new List<string>();
 
         public string GetData(Model.QueryRecoder model, bool queryBycode)
         {

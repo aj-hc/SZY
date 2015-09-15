@@ -35,7 +35,9 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
-
+                    case "qry2":/*查询*/
+                        QueryData(context);
+                        break;
                     case "post":/*上传*/
                         PostData(context);
                         break;
@@ -43,6 +45,19 @@ namespace RuRo.Web.Sever
             }
             else
                 QueryData(context, true);
+        }
+
+        private void QueryData(HttpContext context)
+        {
+            string code = context.Request.Params["code"].Trim();
+            string codeType = context.Request.Params["codeType"].Trim();
+            string ksrq00 = context.Request.Params["ksrq00"];
+            string jsrq00 = context.Request.Params["jsrq00"];
+            string username = Common.CookieHelper.GetCookieValue("username").Trim();
+            Model.DTO.NormalLisReport_list_F model = new Model.DTO.NormalLisReport_list_F() { code = code, codeType = codeType, ksrq00 = ksrq00, jsrq00 = jsrq00 };
+            BLL.SZY.NormalLisReport_list_F bll = new BLL.SZY.NormalLisReport_list_F();
+            string result = bll.GetData(model);
+            context.Response.Write(result);
         }
 
         private void PostData(HttpContext context)

@@ -13,6 +13,7 @@
     <script src="../include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         function GetData() {
+            $('#PatientDiagnoseDg').datagrid('loadData', { total: 0, rows: [] });
             var codeType = $('#codeType').combobox('getValue');
             var code = $('#code').textbox('getValue');//获取数据源
             if (/.*[\u4e00-\u9fa5]+.*$/.test(code)) { $.messager.alert('错误', '不能输入中文', 'error'); $('#In_Code').textbox('clear'); return; }
@@ -30,10 +31,21 @@
                     "ksrq00": ksrq00,
                     "jsrq00": jsrq00,
                 },
-                dataType: "json",
                 success: function (response) {
                     $('#oldCodeType').datebox('setValue', codeType);
                     $('#oldCode').datebox('setValue', code);
+                    if (!response) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+                    else {
+                        var obj = $.parseJSON(response);
+                        if (obj.Statu == "err") {
+                            ShowMsg("诊断数据：" + obj.Msg);
+                            return;
+                        }
+                        else if (obj.Statu == "ok") {
+                            $('#PatientDiagnoseDg').datagrid("loadData", obj.Data);
+                            // var row = $('#NormalLisReportDg').datagrid('getRows');
+                        }
+                    }
                 }
             });
         }

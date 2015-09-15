@@ -54,6 +54,10 @@ namespace RuRo.Web.Sever
             string ksrq00 = context.Request.Params["ksrq00"];
             string jsrq00 = context.Request.Params["jsrq00"];
             string username = Common.CookieHelper.GetCookieValue("username").Trim();
+            Model.DTO.PatientDiagnose_list_F model = new Model.DTO.PatientDiagnose_list_F() { code = code, codeType = codeType, ksrq00 = ksrq00, jsrq00 = jsrq00 };
+            BLL.SZY.PatientDiagnose_list_F bll = new BLL.SZY.PatientDiagnose_list_F();
+            string result = bll.GetData(model);
+            context.Response.Write(result);
         }
 
         #region form提交过来的数据
@@ -123,15 +127,6 @@ namespace RuRo.Web.Sever
                 string code = context.Request.Params["code"];//住院号或门诊号
                 string codeType = context.Request.Params["codeType"];
                 string dateNow = context.Request.Params["dateNow"];
-                //  Model.DTO.NormalLisReportRequest request = new Model.DTO.NormalLisReportRequest(code, dateNow);
-                // BLL.NormalLisReport normalLisReport = new BLL.NormalLisReport();
-                //bool success;
-                //object obj = n.GetData(code, ksrq00, jsrq00, out success);
-                //ReturnData resd = new ReturnData(obj, success);
-                //string jsonStrResult = resd.Res();
-
-                //string result = normalLisReport.GetData(request, codeType);
-                //context.Response.Write(result);
                 Model.QueryRecoder qqq = new Model.QueryRecoder();
                 qqq.Code = code;
                 qqq.CodeType = codeType;

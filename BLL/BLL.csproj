@@ -140,8 +140,11 @@
     <Compile Include="SZY\EmpiInfo.cs" />
     <Compile Include="SZY\HospitalXmlStrHelper.cs" />
     <Compile Include="SZY\NormalLisItems.cs" />
+    <Compile Include="SZY\NormalLisItems_F.cs" />
     <Compile Include="SZY\NormalLisReport.cs" />
+    <Compile Include="SZY\NormalLisReport_list_F.cs" />
     <Compile Include="SZY\PatientDiagnose.cs" />
+    <Compile Include="SZY\PatientDiagnose_list_F.cs" />
     <Compile Include="SZY\QueryRecoder.cs" />
     <Compile Include="SZY\QueryRecoderPartial.cs" />
     <Compile Include="SZY\Request\EmpiInfoRequest.cs" />

@@ -16,9 +16,6 @@ namespace RuRo.BLL
         //private Model.DTO.PatientDiagnoseResuest request = new Model.DTO.PatientDiagnoseResuest();
         //private Model.QueryRecoder queryRecoderModel = null;
         //private List<string> requestStrList = null;
-
-
-
         public string GetData(Model.QueryRecoder model, bool queryBycode)
         {
             BLL.Request.PatientDiagnoseResuest cq = new Request.PatientDiagnoseResuest(model);
@@ -176,16 +173,6 @@ namespace RuRo.BLL
                 mes = PostData(strList);
                 if (mes.Contains("{\"success\":true,"))
                 {
-                    //for (int i = 0; i < dicList.Count; i++)
-                    //{
-                    //    //把数据添加到数据库
-                    //    Model.PatientDiagnose model = new Model.PatientDiagnose();
-                    //    model = DicToNormalLisReportModel(dicList[i]);
-                    //    PatientDiagnose n = new PatientDiagnose();
-                    //    n.Add(model);
-                    //}
-                    //BLL.SZY.QueryRecoder bll_Q = new SZY.QueryRecoder();
-                    //bll_Q.UpdataQueryRecoderIsDel_BLL(username, 0, code, "NormalLisReport");//修改QueryRecoder表为true
                     foreach (var item in list)
                     {
                         PatientDiagnose n = new PatientDiagnose();
@@ -386,7 +373,6 @@ namespace RuRo.BLL
             }
             return jsonModel;
         }
-
 
         #region 查询完WebService之后更新记录表
 
@@ -635,10 +621,6 @@ namespace RuRo.BLL
             string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), "诊断信息", str);
             return result;
         }
-
-        //获取数据
-        //解析数据
-        //返回数据对象
         private Model.DTO.PatientDiagnoseResuest XmlStrToPatientDiagnoseResuest(string xml)
         {
             Model.DTO.PatientDiagnoseResuest pdr = new Model.DTO.PatientDiagnoseResuest();
