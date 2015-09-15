@@ -639,8 +639,10 @@
     <Content Include="Pages\EmpiInfo_info_D.aspx" />
     <Content Include="Pages\EmpiInfo_info.aspx" />
     <Content Include="Pages\NormalLisReport_list.aspx" />
+    <Content Include="Pages\NormalLisReport_list_D.aspx" />
     <Content Include="Pages\PatientDiagnose_info.aspx" />
     <Content Include="Pages\PatientDiagnose_list.aspx" />
+    <Content Include="Pages\PatientDiagnose_list_D.aspx" />
     <Content Include="Pages\QueryRecoder_list.aspx" />
     <Content Include="Pages\SampleInfo.html" />
     <Content Include="Test\PostTestData.aspx" />
@@ -737,6 +739,12 @@
     <Compile Include="Pages\NormalLisReport_list.aspx.designer.cs">
       <DependentUpon>NormalLisReport_list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NormalLisReport_list_D.aspx.cs">
+      <DependentUpon>NormalLisReport_list_D.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NormalLisReport_list_D.aspx.designer.cs">
+      <DependentUpon>NormalLisReport_list_D.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PatientDiagnose_info.aspx.cs">
       <DependentUpon>PatientDiagnose_info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -750,6 +758,12 @@
     </Compile>
     <Compile Include="Pages\PatientDiagnose_list.aspx.designer.cs">
       <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PatientDiagnose_list_D.aspx.cs">
+      <DependentUpon>PatientDiagnose_list_D.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PatientDiagnose_list_D.aspx.designer.cs">
+      <DependentUpon>PatientDiagnose_list_D.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\QueryRecoder_list.aspx.cs">
       <DependentUpon>QueryRecoder_list.aspx</DependentUpon>
