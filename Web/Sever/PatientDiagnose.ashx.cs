@@ -35,7 +35,9 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
-
+                    case "qry2":/*查询*/
+                        QueryData(context);
+                        break;
                     case "post":/*提交*/
                         PostData(context);
                         break;
@@ -43,6 +45,15 @@ namespace RuRo.Web.Sever
             }
             else
                 QueryData(context, true);
+        }
+
+        private void QueryData(HttpContext context)
+        {
+            string code = context.Request.Params["code"].Trim();
+            string codeType = context.Request.Params["codeType"].Trim();
+            string ksrq00 = context.Request.Params["ksrq00"];
+            string jsrq00 = context.Request.Params["jsrq00"];
+            string username = Common.CookieHelper.GetCookieValue("username").Trim();
         }
 
         #region form提交过来的数据
