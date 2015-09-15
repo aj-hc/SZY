@@ -42,6 +42,7 @@
     <!--编辑数据-->
     <!--编辑容器，按钮固定在底部-->
     <div class="easyui-layout" data-options="fit:true">
+        <div></div>
         <form id="BaseInfoForm">
             <div style="display: none">
                 <input id="SourceType" name="SourceType" />
