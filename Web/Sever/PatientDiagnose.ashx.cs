@@ -35,9 +35,6 @@ namespace RuRo.Web.Sever
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
-                    case "qry2":/*提交*/
-                        QueryData(context);
-                        break;
 
                     case "post":/*提交*/
                         PostData(context);
@@ -46,16 +43,6 @@ namespace RuRo.Web.Sever
             }
             else
                 QueryData(context, true);
-        }
-
-        private void QueryData(HttpContext context)
-        {
-            //查询数据
-            string code = context.Request.Params["code"];//住院号或门诊号
-            string codeType = context.Request.Params["codeType"];
-            string ksrq00 = context.Request.Params["ksrq00"];
-            string jsrq00 = context.Request.Params["jsrq00"];
-
         }
 
         #region form提交过来的数据

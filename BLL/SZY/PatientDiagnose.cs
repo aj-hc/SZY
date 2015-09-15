@@ -45,34 +45,32 @@ namespace RuRo.BLL
                     if (request != null)
                     {
                         Model.PatientDiagnose patientDiagnose = StrTObject(xmlStr, out _Msg, request);
-
-                        if (patientDiagnose != null)
-                        {
-                            if (!patientDiagnoseList.Contains(patientDiagnose))
-                            {
-                                bool check = CheckData(patientDiagnose);
-                                if (!check)
-                                {
-                                    patientDiagnoseList.Add(patientDiagnose);
-                                }
-                            }
-                            if (!string.IsNullOrEmpty(_Msg))
-                            {
-                                msg.Replace(_Msg, "");
-                                msg.Append(" &nbsp " + _Msg);
-                            }
-                        }
-                        else
-                        {
-                            if (!string.IsNullOrEmpty(_Msg))
-                            {
-                                msg.Replace(_Msg, "");
-                                msg.Append(" &nbsp " + _Msg);
-                            }
-                        }
                     }
                     //nnn.Add(model.Code);
-
+                    if (patientDiagnose != null)
+                    {
+                        if (!patientDiagnoseList.Contains(patientDiagnose))
+                        {
+                            bool check = CheckData(patientDiagnose);
+                            if (!check)
+                            {
+                                patientDiagnoseList.Add(patientDiagnose);
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(_Msg))
+                        {
+                            msg.Replace(_Msg, "");
+                            msg.Append(" &nbsp " + _Msg);
+                        }
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(_Msg))
+                        {
+                            msg.Replace(_Msg, "");
+                            msg.Append(" &nbsp " + _Msg);
+                        }
+                    }
                 }
                 if (patientDiagnoseList != null && patientDiagnoseList.Count > 0)
                 {

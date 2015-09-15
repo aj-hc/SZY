@@ -636,14 +636,13 @@
     <Content Include="Global.asax" />
     <Content Include="js\calendar1.js" />
     <Content Include="js\CheckBox.js" />
-    <Content Include="Pages\NormalLisReport_list_D.aspx" />
+    <Content Include="Pages\EmpiInfo_info_D.aspx" />
     <Content Include="Pages\EmpiInfo_info.aspx" />
     <Content Include="Pages\NormalLisReport_list.aspx" />
     <Content Include="Pages\PatientDiagnose_info.aspx" />
     <Content Include="Pages\PatientDiagnose_list.aspx" />
     <Content Include="Pages\QueryRecoder_list.aspx" />
     <Content Include="Pages\SampleInfo.html" />
-    <Content Include="Pages\PatientDiagnose_list_D.aspx" />
     <Content Include="Test\PostTestData.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -717,12 +716,12 @@
     <Compile Include="MasterPage.master.designer.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
     </Compile>
-    <Compile Include="Pages\NormalLisReport_list_D.aspx.cs">
-      <DependentUpon>NormalLisReport_list_D.aspx</DependentUpon>
+    <Compile Include="Pages\EmpiInfo_info_D.aspx.cs">
+      <DependentUpon>EmpiInfo_info_D.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\NormalLisReport_list_D.aspx.designer.cs">
-      <DependentUpon>NormalLisReport_list_D.aspx</DependentUpon>
+    <Compile Include="Pages\EmpiInfo_info_D.aspx.designer.cs">
+      <DependentUpon>EmpiInfo_info_D.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\EmpiInfo_info.aspx.cs">
       <DependentUpon>EmpiInfo_info.aspx</DependentUpon>
@@ -758,13 +757,6 @@
     </Compile>
     <Compile Include="Pages\QueryRecoder_list.aspx.designer.cs">
       <DependentUpon>QueryRecoder_list.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose_list_D.aspx.cs">
-      <DependentUpon>PatientDiagnose_list_D.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PatientDiagnose_list_D.aspx.designer.cs">
-      <DependentUpon>PatientDiagnose_list_D.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sever\EmpiInfo.ashx.cs">
