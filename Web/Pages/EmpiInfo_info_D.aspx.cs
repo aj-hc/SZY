@@ -10,6 +10,7 @@ namespace RuRo.Web
             {
                 Login login = new Login();
                 //页面第一次加载
+                //
                 if (!login.CheckLoginByCookie())
                 {
                 }
