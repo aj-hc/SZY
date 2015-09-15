@@ -13,21 +13,11 @@ namespace RuRo.BLL
         //创建获取数据对象
         private ClinicalData.PacsLisReportServices clinicalData = new ClinicalData.PacsLisReportServices();
 
-        private Model.DTO.PatientDiagnoseResuest request = null;
+        //private Model.DTO.PatientDiagnoseResuest request = new Model.DTO.PatientDiagnoseResuest();
         //private Model.QueryRecoder queryRecoderModel = null;
         //private List<string> requestStrList = null;
 
-        ///// <summary>
-        ///// 前台调用方法
-        ///// </summary>
-        ///// <returns></returns>
-        //public string GetData(Model.DTO.PatientDiagnoseResuest request)
-        //{
-        //    //string xmlStr = GetWebServiceData(request);
-        //    //Model.DTO.JsonModel jsonmodel = StrTObject(xmlStr, request);
-        //    //return JsonConvert.SerializeObject(jsonmodel);
-        //    return "";
-        //}
+
 
         public string GetData(Model.QueryRecoder model, bool queryBycode)
         {
@@ -51,7 +41,11 @@ namespace RuRo.BLL
                     {
                         xmlStr += "</Response>";
                     }
-                    Model.PatientDiagnose patientDiagnose = StrTObject(xmlStr, out _Msg);
+                    Model.DTO.PatientDiagnoseResuest request = XmlStrToPatientDiagnoseResuest(item);
+                    if (request != null)
+                    {
+                        Model.PatientDiagnose patientDiagnose = StrTObject(xmlStr, out _Msg, request);
+                    }
                     //nnn.Add(model.Code);
                     if (patientDiagnose != null)
                     {
@@ -252,21 +246,6 @@ namespace RuRo.BLL
         #region 获取基本信息字典（样本源） +  private Dictionary<string, string> GetBaseInfoDic()
 
         //获取基本信息字典（样本源）
-        //private Dictionary<string, string> GetBaseInfoDic_Q(string formStr)
-        //{
-        //    Dictionary<string, string> dic = new Dictionary<string, string>();
-        //    Model.PatientDiagnose data = new Model.PatientDiagnose();
-        //    List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();
-        //    if (!string.IsNullOrEmpty(formStr) && formStr != "[]")
-        //    {
-        //        dicList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Dictionary<string, string>>>(formStr);
-        //        data = FormToDic.GetFromInfo<Model.PatientDiagnose>(dicList);
-        //        dic = FormToDic.ConvertModelToDic(data);
-        //    }
-        //    return dic;
-        //}
-
-        //获取基本信息字典（样本源）
         private Dictionary<string, string> GetBaseInfoDic(string formStr)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -293,135 +272,6 @@ namespace RuRo.BLL
             string result = FreezerProUtility.Fp_BLL.TestData.ImportTestData(up.GetUp(), "诊断信息", dic);
             return result;
         }
-
-        //private bool SaveQueryRecord(ref Model.DTO.PatientDiagnoseResuest resquet, string Msg, string codeType)
-        //{
-        //    bool result;
-        //    QueryRecoder queryRecoder = new QueryRecoder();
-        //    //根据传入的查询字符串创建的当此查询的记录model
-        //    Model.QueryRecoder model = new Model.QueryRecoder();
-
-        //    //model.AddDate = DateTime.Now;
-        //    model.Code = resquet.cardno;
-        //    model.CodeType = codeType;
-        //    model.QueryType = "PatientDiagnose";
-        //    model.Uname = Common.CookieHelper.GetCookieValue("username");
-
-        //    List<Model.QueryRecoder> list = CheckQueryRecord(model);
-        //    if (list != null && list.Count > 0)
-        //    {
-        //        //判断查询出来的数据是否满足要求（时间差距lastdate<dateNow-5）
-        //        Model.QueryRecoder oldModel = list.OrderByDescending(a => a.LastQueryDate).FirstOrDefault();
-        //        model.AddDate = oldModel.AddDate;
-        //        model.Id = oldModel.Id;
-        //        DateTime dtAdd = Convert.ToDateTime(oldModel.AddDate);
-        //        DateTime dtLastQuery = Convert.ToDateTime(oldModel.LastQueryDate);
-        //        DateTime dt = DateTime.Now;//当前时间
-        //        int days = (dt - dtAdd).Days;//获取当前日期与添加日期时间差
-        //        int getDays = 0;
-        //        if (days > getDays)
-        //        {
-        //            model.IsDel = true;
-        //            model.LastQueryDate = dtAdd.AddDays(5);
-        //        }
-        //        else
-        //        {
-        //            //添加日期是距离当前日期是5天内的
-        //            //更改最后查询时间为今天
-        //            model.IsDel = false;
-        //            model.LastQueryDate = DateTime.Now;
-        //            resquet.cxrq00 = DateTime.Now.ToString("yyyy-MM-dd");
-        //            model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg + oldModel.QueryResult;
-        //        }
-        //        //本地数据库有数据
-        //        result = queryRecoder.Update(model);
-        //    }
-        //    else
-        //    {
-        //        model.QueryResult += "&nbsp" + DateTime.Now.ToLocalTime() + " " + Msg.Trim();
-        //        model.AddDate = DateTime.Now;
-        //        model.LastQueryDate = DateTime.Now;
-        //        result = queryRecoder.Add(model) > 0;
-        //    }
-        //    return result;
-        //}
-
-        //#region 解析xml获取数据并转换成list +private List<Model.NormalLisReport> GetList(string xmlStr, out string Msg)
-
-        ///// <summary>
-        ///// 解析xml获取数据并转换成list
-        ///// </summary>
-        ///// <param name="xmlStr"></param>
-        ///// <param name="Msg">消息</param>
-        ///// <returns></returns>
-        //private List<Model.PatientDiagnose> GetList(string xmlStr, out string Msg, string code, bool queryBycode)
-        //{
-        //    List<Model.PatientDiagnose> list = new List<Model.PatientDiagnose>();
-        //    XmlDocument xd = Common.XmlHelper.XMLLoad(xmlStr, Common.XmlHelper.XmlType.String);
-        //    Msg = "无数据";
-        //    if (xd == null)
-        //    {
-        //    }
-        //    else
-        //    {
-        //        if (xd.HasChildNodes)
-        //        {
-        //            XmlNode xn = xd.SelectSingleNode("//ResultCode");
-        //            if (xn != null)
-        //            {
-        //                if (xn.InnerText == "0")
-        //                {
-        //                    //有数据
-        //                    XmlNodeList xnlReocrd = xd.SelectNodes("//reocrd");
-        //                    XmlNodeList xnll = xd.SelectNodes("//DiagnoseInfo");
-        //                    if (xnlReocrd != null && xnlReocrd.Count > 0)
-        //                    {
-        //                        //foreach (XmlNode item in xnl)
-        //                        //{
-        //                        //    Model.PatientDiagnose nn = this.XmlTomModel(item);
-        //                        //    nn.Cardno = code;
-        //                        //    if (!Common.MatchDic.PatientDiagnoseDic.Keys.Contains(nn.CardId))//这里需要改
-        //                        //    {
-        //                        //        if (queryBycode)
-        //                        //        {
-        //                        //            list.Add(nn);
-        //                        //        }
-        //                        //        else
-        //                        //        {
-        //                        //            if (!this.CheckData(nn))
-        //                        //            {
-        //                        //                list.Add(nn);
-        //                        //            }
-        //                        //        }
-        //                        //    }
-        //                        //}
-        //                        string strRecord = JsonConvert.SerializeXmlNode(xnlReocrd[0], Newtonsoft.Json.Formatting.None);
-
-        //                        if (list.Count > 0)
-        //                        {
-        //                            Msg = "";
-        //                        }
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    //查询数据出错，联接无问题
-        //                    Msg = xd.SelectSingleNode("//ErrorMsg").InnerText;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                //查询数据出错，联接无问题
-        //                Msg = xd.InnerText;
-        //                //保存查询记录
-        //            }
-        //        }
-        //    }
-        //    return list;
-        //}
-
-        //#endregion 解析xml获取数据并转换成list +private List<Model.NormalLisReport> GetList(string xmlStr, out string Msg)
-
         #region xmlNode转换成obj + Model.NormalLisReport XmlTomModel(XmlNode xd)
 
         ///// <summary>
@@ -536,20 +386,6 @@ namespace RuRo.BLL
             return jsonModel;
         }
 
-        //private List<Model.QueryRecoder> CheckQueryRecord(Model.QueryRecoder model)
-        //{
-        //    QueryRecoder queryRecoder = new QueryRecoder();
-        //    //查询本地数据库有没有数据
-        //    StringBuilder strWhere = new StringBuilder();
-        //    strWhere.AppendFormat("Uname = {0} and ", "'" + model.Uname + "'");
-        //    strWhere.AppendFormat("Code = {0} and ", "'" + model.Code + "'");
-        //    strWhere.AppendFormat("CodeType = {0} and ", "'" + model.CodeType + "'");
-        //    strWhere.AppendFormat("IsDel = {0} and ", "'" + model.IsDel + "'");
-        //    strWhere.AppendFormat("QueryType = {0}", "'" + model.QueryType + "'");
-
-        //    //查询条件是，当前用户添加的卡号为X的卡号类型为Y的没有标记删除的并且临床数据类型为Z的数据
-        //    return queryRecoder.GetModelList(strWhere.ToString());
-        //}
 
         #region 查询完WebService之后更新记录表
 
@@ -605,21 +441,6 @@ namespace RuRo.BLL
                 return ex.Message + "--" + DateTime.Now.ToLongTimeString();
             }
         }
-
-        //private string GetWebServiceData(Model.DTO.PatientDiagnoseResuest request)
-        //{
-        //    try
-        //    {
-        //        // return TestAnd(new Model.DTO.PatientDiagnoseResuest("", "2015-01-01")).Replace("\r\n", "").Replace(" ", "");
-        //        return string.IsNullOrEmpty(request.RequestStr) ? "" : clinicalData.GetPatientDiagnose(request.RequestStr);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Common.LogHelper.WriteError(ex);
-        //        return ex.Message + "--" + DateTime.Now.ToLongTimeString();
-        //    }
-        //}
-
         #endregion 获取数据
 
         #region 生成临时数据
@@ -746,7 +567,7 @@ namespace RuRo.BLL
 
         #endregion 将数据转换成对象
 
-        private Model.PatientDiagnose StrTObject(string xmlStr, out string msg)
+        private Model.PatientDiagnose StrTObject(string xmlStr, out string msg, Model.DTO.PatientDiagnoseResuest request)
         {
             XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
             Model.PatientDiagnose patientDiagnoseModel = null;
@@ -763,18 +584,26 @@ namespace RuRo.BLL
                     {
                         if (xn.InnerText == "0")
                         {
-                            string strNode = JsonConvert.SerializeXmlNode(xd.SelectSingleNode("//reocrd"), Newtonsoft.Json.Formatting.None, true);
-                            patientDiagnoseModel = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strNode);
-                            string diagnoseInfoNode = JsonConvert.SerializeXmlNode(xd.SelectSingleNode("//DiagnoseInfo"), Newtonsoft.Json.Formatting.None, true);
-                            Model.DTO.DiagnoseInfoModel dg = JsonConvert.DeserializeObject<Model.DTO.DiagnoseInfoModel>(diagnoseInfoNode);
-                            patientDiagnoseModel.RegisterNo = dg.RegisterNo;
-                            patientDiagnoseModel.Type = dg.Type;
-                            patientDiagnoseModel.Icd = dg.Icd;
-                            patientDiagnoseModel.Flag = dg.Flag;
-                            patientDiagnoseModel.DiagnoseDate = dg.DiagnoseDate;
-                            patientDiagnoseModel.Diagnose = dg.Diagnose;
-                            patientDiagnoseModel.Cardno = this.request.cardno;
-                            patientDiagnoseModel.Csrq00 = this.request.cxrq00;
+                            try
+                            {
+                                string strNode = JsonConvert.SerializeXmlNode(xd.SelectSingleNode("//reocrd"), Newtonsoft.Json.Formatting.None, true);
+                                patientDiagnoseModel = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strNode);
+                                string diagnoseInfoNode = JsonConvert.SerializeXmlNode(xd.SelectSingleNode("//DiagnoseInfo"), Newtonsoft.Json.Formatting.None, true);
+                                Model.DTO.DiagnoseInfoModel dg = JsonConvert.DeserializeObject<Model.DTO.DiagnoseInfoModel>(diagnoseInfoNode);
+                                patientDiagnoseModel.RegisterNo = dg.RegisterNo;
+                                patientDiagnoseModel.Type = dg.Type;
+                                patientDiagnoseModel.Icd = dg.Icd;
+                                patientDiagnoseModel.Flag = dg.Flag;
+                                patientDiagnoseModel.DiagnoseDate = dg.DiagnoseDate;
+                                patientDiagnoseModel.Diagnose = dg.Diagnose;
+                                patientDiagnoseModel.Cardno = request.cardno;
+                                patientDiagnoseModel.Csrq00 = request.cxrq00;
+                            }
+                            catch (Exception ex)
+                            {
+                                Common.LogHelper.WriteError(ex);
+                            }
+
                         }
                         else
                         {
@@ -809,5 +638,25 @@ namespace RuRo.BLL
         //获取数据
         //解析数据
         //返回数据对象
+        private Model.DTO.PatientDiagnoseResuest XmlStrToPatientDiagnoseResuest(string xml)
+        {
+            Model.DTO.PatientDiagnoseResuest pdr = new Model.DTO.PatientDiagnoseResuest();
+            XmlDocument xd = Common.XmlHelper.XMLLoad(xml, Common.XmlHelper.XmlType.String);
+            //<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00></Request>
+            try
+            {
+                XmlNode xn = xd.SelectSingleNode("//Request");
+                if (xn != null)
+                {
+                    string str = JsonConvert.SerializeXmlNode(xn, Newtonsoft.Json.Formatting.None, true);
+                    pdr = JsonConvert.DeserializeObject<Model.DTO.PatientDiagnoseResuest>(str);
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.LogHelper.WriteError(ex);
+            }
+            return pdr;
+        }
     }
 }
