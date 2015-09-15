@@ -11,9 +11,5 @@
         /// 查询日期
         /// </summary>
         public string cxrq00 { get; set; }
-
-        /// <summary>
-        /// 查询字符串
-        /// </summary>
     }
 }
