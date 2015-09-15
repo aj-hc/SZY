@@ -19,10 +19,11 @@
     <script src="../include/js/page.js"></script>
 </head>
 <body>
-    <div class="easyui-panel" style="height: 80px;">
-        <div id="cca"><b style="font-size: 20px;">查找患者</b></div>
+    <div class="easyui-panel" style="height:95px;">
+        <div >&nbsp;</div>
+        <div id="cca"style="margin-left:20px"><b style="font-size: 20px;">查找患者</b></div>
         <br />
-        <form id="querybycodeform">
+        <form id="querybycodeform" style="margin-left:20px">
             <div runat="server">
                 查找方式：
                 <input id="codeType" class="easyui-combobox" name="codeType" style="width: 200px;" data-options="prompt:'请选择条码类型',required:true" />
@@ -42,11 +43,11 @@
     <!--编辑数据-->
     <!--编辑容器，按钮固定在底部-->
     <div class="easyui-layout" data-options="fit:true">
-        <form id="BaseInfoForm">
+        <form id="BaseInfoForm" style="margin-left:100px;">
             <div style="display: none">
                 <input id="SourceType" name="SourceType" />
             </div>
-            <ul>
+<%--            <ul>
                 <li style="list-style-type: none;">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input class="easyui-textbox" name="PatientName" id="PatientName" data-options="required:true" /></li>
                 <br />
                 <li style="list-style-type: none;">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：<input class="easyui-textbox" name="Sex" id="Sex" data-options="required:false" /></li>
@@ -56,28 +57,33 @@
                 <li style="list-style-type: none;">身份证号：<input class="easyui-textbox" name="CardId" id="CardId" data-options="required:false" /></li>
                 <BR />
                 <li style="list-style-type: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="javascript:void(0)" class="easyui-linkbutton" id="submit" style="width: auto;height:50px;" plain="false" onclick="postEmpiInfo();">导入信息</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="javascript:void(0)" class="easyui-linkbutton" id="cancleSubmit" style="width: auto;height:50px;" plain="false" onclick="clearPage();">取消导入</a>
+                   
                 </li>
-            </ul>
-            <%--<table>
-                <tr>
+            </ul>--%>
+            <table  id="ik" style="text-align:center;padding:20px">
+                <tr style="line-height:30px;">
                     <td>姓名：</td>
-                    <td>
-                        <input class="easyui-textbox" name="PatientName" id="PatientName" data-options="required:true" /></td>
+                    <td><input class="easyui-textbox" name="PatientName" id="PatientName" data-options="required:true" /></td>
+                </tr>
+                <tr style="line-height:30px;">
                     <td class="name">性别：</td>
-                    <td>
-                        <input class="easyui-textbox" name="Sex" id="Sex" data-options="required:false" /></td>
+                    <td><input class="easyui-textbox" name="Sex" id="Sex" data-options="required:false" /></td>
+                </tr>
+                <tr style="line-height:30px;">
                     <td class="name">出生日期：</td>
-                    <td>
-                        <input class="easyui-datebox" name="Birthday" id="Birthday" data-options="required:false" /></td>
+                    <td><input class="easyui-datebox" name="Birthday" id="Birthday" data-options="required:false" /></td>
                 </tr>
-                <tr>
+                 <tr style="line-height:30px;">
                     <td>身份证号：</td>
-                    <td>
-                        <input class="easyui-textbox" name="CardId" id="CardId" data-options="required:false" /></td>
+                    <td><input class="easyui-textbox" name="CardId" id="CardId" data-options="required:false" /></td>
                 </tr>
-            </table>--%>
+                 <tr style="line-height:35px;">
+                    <td></td>
+                    <td> <a href="javascript:void(0)" class="easyui-linkbutton" id="submit" style="width: auto;height:30px;" plain="false" onclick="postEmpiInfo();">导入信息</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <a href="javascript:void(0)" class="easyui-linkbutton" id="cancleSubmit" style="width: auto;height:30px;" plain="false" onclick="clearPage();">取消导入</a></td>
+                </tr>
+            </table>
         </form>
         <div id="footer" style="padding: 5px; margin: 5px" data-options="region:'south'">
             
