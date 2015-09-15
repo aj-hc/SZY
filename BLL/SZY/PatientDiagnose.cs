@@ -89,7 +89,6 @@ namespace RuRo.BLL
             }
             return JsonConvert.SerializeObject(jsonmodel);
         }
-
         public string PostData(string code, string codeType, string dataStr, string username, bool isP)
         {
             List<Dictionary<string, string>> dicList = new List<Dictionary<string, string>>();

@@ -1,15 +1,15 @@
-Ôªøusing System;
+using System;
 
 namespace RuRo.Web
 {
-    public partial class ExtendPage : System.Web.UI.Page
+    public partial class EmpiInfo_info_D : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 Login login = new Login();
-                //È°µÈù¢Á¨¨‰∏ÄÊ¨°Âä†ËΩΩ
+                //“≥√Êµ⁄“ª¥Œº”‘ÿ
                 if (!login.CheckLoginByCookie())
                 {
                 }
