@@ -5,7 +5,11 @@ using System.Text;
 
 namespace RuRo.Model.DTO
 {
-    class PatientDiagnose_list_F
+    public class PatientDiagnose_list_F
     {
+        public string ksrq00 { get; set; }
+        public string jsrq00 { get; set; }
+        public string code { get; set; }
+        public string codeType { get; set; }
     }
 }
