@@ -45,7 +45,8 @@
                     <li>
                         <%--<div><a target="mainFrame" rel="Pages/QueryRecoder_list.aspx"><span></span>批量导入</a></div>--%>
                     </li>
-                    <li><div><a target="mainFrame" rel="Pages/EmpiInfo_info_D.aspx"><span></span>导入样品源</a></div></li>
+                    <%--<li><div><a target="mainFrame" rel="Pages/EmpiInfo_info_D.aspx"><span></span>导入样品源</a></div></li>--%>
+                    <li><div><a target="mainFrame" rel="EmpiInfo_info_F.aspx"><span></span>导入样品源</a></div></li>
                 </ul>
             </div>
         </div>
