@@ -724,13 +724,6 @@
     <Compile Include="NormalLisReport.aspx.designer.cs">
       <DependentUpon>NormalLisReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EmpiInfo_info_D.aspx.cs">
-      <DependentUpon>EmpiInfo_info_D.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\EmpiInfo_info_D.aspx.designer.cs">
-      <DependentUpon>EmpiInfo_info_D.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\EmpiInfo_info.aspx.cs">
       <DependentUpon>EmpiInfo_info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
