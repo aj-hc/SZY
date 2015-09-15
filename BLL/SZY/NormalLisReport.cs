@@ -273,8 +273,8 @@ namespace RuRo.BLL
         {
             try
             {
-                //  return Test(new Model.DTO.NormalLisReportRequest("", "2015-01-01","2015-01-01"));
-                return string.IsNullOrEmpty(request) ? "" : clinicalData.NormalLisReport(request);
+                //  return Test(new Model.DTO.NormalLisReportRequest());
+               return string.IsNullOrEmpty(request) ? "" : clinicalData.NormalLisReport(request);
             }
             catch (Exception ex)
             {

@@ -107,8 +107,8 @@ namespace RuRo.BLL
         {
             try
             {
-                // return Test(request);
-                return string.IsNullOrEmpty(request.Request) ? "" : empiService.GetEmpiInfo(request.Request);
+                 return Test(request);
+                // return string.IsNullOrEmpty(request.Request) ? "" : empiService.GetEmpiInfo(request.Request);
             }
             catch (Exception ex)
             {
@@ -130,7 +130,8 @@ namespace RuRo.BLL
         {
             Common.RandomTest r = new Common.RandomTest();
             string name = r.CreatName();
-            string getDataFromHospitalStr = string.Format("<Response><InterfaceCode>GetEmpiInfo</InterfaceCode><ResultCode>{0}</ResultCode><ErrorMsg>出错了</ErrorMsg><EmpiInfo><EmpiId>{1}</EmpiId><PatientName>{2}</PatientName><Sex>{3}</Sex><Birthday>{4}</Birthday><CardId>{5}</CardId><Tel>{6}</Tel><Address>{7}</Address></EmpiInfo></Response>", "0", r.CreatNum(), r.CreatName(), r.CreatSex(), r.CreatBirthday().ToShortDateString(), "110", "100000000", "广州");
+           // string getDataFromHospitalStr = string.Format("<Response><InterfaceCode>GetEmpiInfo</InterfaceCode><ResultCode>{0}</ResultCode><ErrorMsg>出错了</ErrorMsg><EmpiInfo><EmpiId>{1}</EmpiId><PatientName>{2}</PatientName><Sex>{3}</Sex><Birthday>{4}</Birthday><CardId>{5}</CardId><Tel>{6}</Tel><Address>{7}</Address></EmpiInfo></Response>", "0", r.CreatNum(), r.CreatName(), r.CreatSex(), r.CreatBirthday().ToShortDateString(), "110", "100000000", "广州");
+            string getDataFromHospitalStr = string.Format("<Response><InterfaceCode>GetEmpiInfo</InterfaceCode><ResultCode>{0}</ResultCode><ErrorMsg>出错了</ErrorMsg><EmpiInfo><EmpiId>{1}</EmpiId><PatientName>{2}</PatientName><Sex>{3}</Sex><Birthday>{4}</Birthday><CardId>{5}</CardId><Tel>{6}</Tel><Address>{7}</Address></EmpiInfo></Response>", "0", "0272099", "杨基", "M", r.CreatBirthday().ToShortDateString(), "0272099", "15603362496", "广州");
             return getDataFromHospitalStr;
         }
 

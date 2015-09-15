@@ -739,7 +739,7 @@ namespace RuRo.BLL
         {
             try
             {
-                //  return Test("");
+                // return Test("");
                 return string.IsNullOrEmpty(request) ? "" : clinicalData.GetPatientDiagnose(request);
             }
             catch (Exception ex)
@@ -778,10 +778,10 @@ namespace RuRo.BLL
                                                 <ResultCode>0</ ResultCode>
                                                 <ErrorMsg></ErrorMsg>
                                                 <reocrd>
-                                                  <PatientName>张三</PatientName>
+                                                  <PatientName>杨基</PatientName>
                                                   <Sex>男</Sex>
                                                   <Brithday>1999-01-01</Brithday>
-                                                  <CardId>123456789</CardId>
+                                                  <CardId>0272099</CardId>
                                                   <Tel>76</Tel>
                                                   <DiagnoseInfo>
                                                     <RegisterNo>11111111</RegisterNo>

@@ -79,6 +79,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\EmpiInfo.xml" />
+    <Content Include="Config\NeedNormalLisItems.xml" />
+    <Content Include="Config\NeedNormalLisReport.xml" />
+    <Content Include="Config\NormalLisReport.xml" />
+    <Content Include="Config\PatientDiagnose.xml" />
     <Content Include="Controls\checkright.ascx" />
     <Content Include="Controls\copyright.ascx" />
     <Content Include="ExtendPage.aspx" />

@@ -109,7 +109,7 @@ namespace RuRo.BLL
         {
             try
             {
-                // return Test("");
+                //   return Test("");
                 return string.IsNullOrEmpty(request) ? "" : clinicalData.GetNormalLisItems(request);
             }
             catch (Exception ex)
@@ -128,12 +128,12 @@ namespace RuRo.BLL
                             <ResultCode>0</ResultCode>
                             <ErrorMsg></ErrorMsg>
                             <reocrd>
-                              <hospnum>6445658</hospnum>
-                              <patname>林测试</patname>
+                              <hospnum>0272099</hospnum>
+                              <patname>杨基</patname>
                               <sex>M</sex>
                               <age_month>1</age_month>
                               <age>15</age>
-                              <ext_mthd>肝功6项</ext_mthd>
+                              <ext_mthd>急诊生化(急,干)</ext_mthd>
                               <test_date>2015-3-14 8:01:52</test_date>
                               <location></location>
                               <DOC_NAME0>何某某</DOC_NAME0>
@@ -141,12 +141,12 @@ namespace RuRo.BLL
                               <check_date></check_date>
                             </reocrd>
                             <reocrd>
-                              <hospnum>6445658</hospnum>
-                              <patname>林测试</patname>
+                              <hospnum>0272099</hospnum>
+                              <patname>杨基</patname>
                               <sex>M</sex>
                               <age_month>1</age_month>
                               <age>15</age>
-                              <ext_mthd>肝功6项</ext_mthd>
+                              <ext_mthd>全血分析(五分类)</ext_mthd>
                               <test_date>2015-3-14 8:01:52</test_date>
                               <location>东区七楼皮门</location>
                               <DOC_NAME0>何某某</DOC_NAME0>
