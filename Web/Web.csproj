@@ -639,10 +639,10 @@
     <Content Include="js\CheckBox.js" />
     <Content Include="Pages\EmpiInfo_info.aspx" />
     <Content Include="Pages\NormalLisReport_list.aspx" />
-    <Content Include="Pages\NormalLisReport_list_D.aspx" />
+    <Content Include="Pages\NormalLisReport_list_F.aspx" />
     <Content Include="Pages\PatientDiagnose_info.aspx" />
     <Content Include="Pages\PatientDiagnose_list.aspx" />
-    <Content Include="Pages\PatientDiagnose_list_D.aspx" />
+    <Content Include="Pages\PatientDiagnose_list_F.aspx" />
     <Content Include="Pages\QueryRecoder_list.aspx" />
     <Content Include="Pages\SampleInfo.html" />
     <Content Include="Test\PostTestData.aspx" />
@@ -675,6 +675,7 @@
     </Compile>
     <Compile Include="Pages\EmpiInfo_info_F.aspx.cs">
       <DependentUpon>EmpiInfo_info_F.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\EmpiInfo_info_F.aspx.designer.cs">
       <DependentUpon>EmpiInfo_info_F.aspx</DependentUpon>
@@ -738,11 +739,12 @@
     <Compile Include="Pages\NormalLisReport_list.aspx.designer.cs">
       <DependentUpon>NormalLisReport_list.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\NormalLisReport_list_D.aspx.cs">
-      <DependentUpon>NormalLisReport_list_D.aspx</DependentUpon>
+    <Compile Include="Pages\NormalLisReport_list_F.aspx.cs">
+      <DependentUpon>NormalLisReport_list_F.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\NormalLisReport_list_D.aspx.designer.cs">
-      <DependentUpon>NormalLisReport_list_D.aspx</DependentUpon>
+    <Compile Include="Pages\NormalLisReport_list_F.aspx.designer.cs">
+      <DependentUpon>NormalLisReport_list_F.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\PatientDiagnose_info.aspx.cs">
       <DependentUpon>PatientDiagnose_info.aspx</DependentUpon>
@@ -758,11 +760,12 @@
     <Compile Include="Pages\PatientDiagnose_list.aspx.designer.cs">
       <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PatientDiagnose_list_D.aspx.cs">
-      <DependentUpon>PatientDiagnose_list_D.aspx</DependentUpon>
+    <Compile Include="Pages\PatientDiagnose_list_F.aspx.cs">
+      <DependentUpon>PatientDiagnose_list_F.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\PatientDiagnose_list_D.aspx.designer.cs">
-      <DependentUpon>PatientDiagnose_list_D.aspx</DependentUpon>
+    <Compile Include="Pages\PatientDiagnose_list_F.aspx.designer.cs">
+      <DependentUpon>PatientDiagnose_list_F.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\QueryRecoder_list.aspx.cs">
       <DependentUpon>QueryRecoder_list.aspx</DependentUpon>
