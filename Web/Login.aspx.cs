@@ -147,23 +147,7 @@ namespace RuRo.Web
 
         protected void txtUsername_TextChanged(object sender, EventArgs e)
         {
-            ////自动回发当前的用户名。
-            //string username = txtUsername.Text.ToString().Trim();
-            ////给科室下拉框赋值
 
-            //string cookDepartment = Common.CookieHelper.GetCookieValue(username+"department");
-            //if (!string.IsNullOrEmpty(cookDepartment))
-            //{
-            //    try
-            //    {
-            //        department.SelectedValue = Common.DEncrypt.DESEncrypt.Decrypt(cookDepartment);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Common.LogHelper.WriteError(ex);
-            //    }
-            //}
-            //txtPass.Focus();
         }
     }
 }
