@@ -25,7 +25,6 @@ namespace RuRo.BLL.SZY
                 //  正常这里只会传入一个连接字符串
                 foreach (var item in requestStr)
                 {
-
                     string xmlStr = GetWebServiceData(item);
                     string Msg = "";
                     List<Model.NormalLisItems> tem = new List<Model.NormalLisItems>();
@@ -37,7 +36,6 @@ namespace RuRo.BLL.SZY
                     }
                 }
             }
-
             return normalLisItems;
         }
 
@@ -78,7 +76,6 @@ namespace RuRo.BLL.SZY
                 return ex.Message + "--" + DateTime.Now.ToLongTimeString();
             }
         }
-
         #endregion 获取数据 + private string GetData(Model.DTO.NormalLisItemsRequest request)
 
         private string Test(string s)

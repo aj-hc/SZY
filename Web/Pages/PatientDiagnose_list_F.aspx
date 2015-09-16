@@ -11,6 +11,7 @@
     <script src="../include/jquery-easyui-1.4.3/jquery.min.js"></script>
     <script src="../include/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
     <script src="../include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../include/js/default.js"></script>
     <script type="text/javascript">
         function GetData() {
             $('#PatientDiagnoseDg').datagrid('loadData', { total: 0, rows: [] });
@@ -21,7 +22,7 @@
             if (isEmptyStr(codeType) || isEmptyStr(code)) { $.messager.alert('提示', '请检查条码类型和条码号', 'error'); }
             var ksrq00 = $('#ksrq00').datebox('getValue');
             var jsrq00 = $('#jsrq00').datebox('getValue');
-
+            ajaxLoading("诊断数据查询中。。。");
             $.ajax({
                 type: "POST",
                 url: "/Sever/PatientDiagnose.ashx",
@@ -34,17 +35,14 @@
                 },
                 onLoadError: function () {
                     $("#PatientDiagnoseDg").datagrid("loaded");
-                    loading
-                },
-                onLoadError: function () {
-                    $("#PatientDiagnoseDg").datagrid("loaded");
                 },
                 onLoadSuccess: function () {
                     $("#PatientDiagnoseDg").datagrid("loaded");
                 },
                 success: function (response) {
-                    $('#oldCodeType').datebox('setValue', codeType);
-                    $('#oldCode').datebox('setValue', code);
+                    ajaxLoadEnd();
+                    $('#oldCodeType').textbox('setValue', codeType);
+                    $('#oldCode').textbox('setValue', code);
                     if (!response) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
                     else {
                         var obj = $.parseJSON(response);
@@ -59,6 +57,7 @@
                     }
                 }
             });
+            ajaxLoadEnd();
         }
     </script>
 </head>
@@ -72,13 +71,14 @@
         <form id="querybycodeform">
             <div id="Div1" runat="server">
                 <select id="codeType" class="easyui-combobox" name="codeType" style="width: 150px;" data-options="panelHeight: 'auto'">
-                    <option selected="selected">卡号</option>
-                    <option>住院号</option>
+                    <option selected="selected" value="0">卡号</option>
+                    <option value="1">住院号</option>
+                    <%--//0 门诊 1住院--%>
                 </select>
-                <input id="code" class="easyui-textbox" name="code" data-options="prompt:'请输入条码',required:true" />
-                开始日期：<input class="easyui-datebox" id="ksrq00" name="ksrq00" style="width: 100px" data-options="required:true"/>
+                <input class="easyui-textbox" id="code" name="code" data-options="prompt:'请输入条码',required:true" />
+                开始日期：<input class="easyui-datebox" id="ksrq00" name="ksrq00" style="width: 100px" data-options="required:true" />
                 结束日期：<input class="easyui-datebox" id="jsrq00" name="jsrq00" style="width: 100px" />
-                <a href="javascript:void(0)" class="easyui-linkbutton" id="btnGet" onclick="querybycode();">查询诊断信息</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" id="btnGet" onclick="GetData();">查询诊断信息</a>
             </div>
         </form>
         <div style="display: none">
@@ -97,7 +97,7 @@
         <thead>
             <tr>
                 <th field="ck" checkbox="true"></th>
-                <th field="Id" width="100" sortable="true" hidden="true">id</th>
+                <th field="id" width="100" sortable="true" hidden="true">id</th>
                 <th field="Cardno" width="100" sortable="false">卡号</th>
                 <th field="Csrq00" width="100" sortable="true">查询日期</th>
                 <th field="Patientname" width="100" sortable="false">姓名</th>
