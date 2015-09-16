@@ -21,6 +21,7 @@
             if (isEmptyStr(codeType) || isEmptyStr(code)) { $.messager.alert('提示', '请检查条码类型和条码号', 'error'); }
             var ksrq00 = $('#ksrq00').datebox('getValue');
             var jsrq00 = $('#jsrq00').datebox('getValue');
+
             $.ajax({
                 type: "POST",
                 url: "/Sever/PatientDiagnose.ashx",
@@ -30,6 +31,16 @@
                     "code": code,
                     "ksrq00": ksrq00,
                     "jsrq00": jsrq00,
+                },
+                onLoadError: function () {
+                    $("#PatientDiagnoseDg").datagrid("loaded");
+                    loading
+                },
+                onLoadError: function () {
+                    $("#PatientDiagnoseDg").datagrid("loaded");
+                },
+                onLoadSuccess: function () {
+                    $("#PatientDiagnoseDg").datagrid("loaded");
                 },
                 success: function (response) {
                     $('#oldCodeType').datebox('setValue', codeType);
@@ -60,7 +71,6 @@
         </div>--%>
         <form id="querybycodeform">
             <div id="Div1" runat="server">
-                查找方式：
                 <select id="codeType" class="easyui-combobox" name="codeType" style="width: 150px;" data-options="panelHeight: 'auto'">
                     <option selected="selected">卡号</option>
                     <option>住院号</option>

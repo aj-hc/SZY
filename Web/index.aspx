@@ -23,9 +23,9 @@
     </noscript>
     <!-- url(Images/IndexImg/layout-browser-hd-bg.gif)-->
     <div region="north" split="true" border="false" style="overflow: hidden; height: 60px; background: #fff repeat-x center 50%; color: #fff; font-family: Verdana, 微软雅黑,黑体">
-        <span style="padding-left: 0px;">
+        <%--<span style="padding-left: 0px;">
             <img src="Images/szy_Logo.jpg" width="460px" height="100%" align="absmiddle" />
-        </span>
+        </span>--%>
         <span style="float: right; padding-right: 20px;" class="head" index="100">
             <asp:Label ID="laName" Text="" runat="server"></asp:Label>&nbsp;
             <a href="#" id="loginOut">安全退出</a>

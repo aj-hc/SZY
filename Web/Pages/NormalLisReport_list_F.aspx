@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>临床检测信息</title>
     <link href="../include/jquery-easyui-1.4.3/themes/default/easyui.css" rel="stylesheet" />
@@ -23,6 +23,7 @@
             var ksrq00 = $('#ksrq00').datebox('getValue');
             var jsrq00 = $('#jsrq00').datebox('getValue');
             $.ajax({
+
                 type: "POST",
                 url: "/Sever/NormalLisReport.ashx",
                 data: {
@@ -31,6 +32,16 @@
                     "code": code,
                     "ksrq00": ksrq00,
                     "jsrq00": jsrq00,
+                },
+                onLoadError: function () {
+                    $("#NormalLisReportDg").datagrid("loaded");
+                    loading
+                },
+                onLoadError: function () {
+                    $("#NormalLisReportDg").datagrid("loaded");
+                },
+                onLoadSuccess: function () {
+                    $("#NormalLisReportDg").datagrid("loaded");
                 },
                 success: function (response) {
                     $('#oldCodeType').datebox('setValue', codeType);
@@ -59,13 +70,12 @@
         </div>--%>
         <form id="querybycodeform">
             <div id="Div1" runat="server">
-                查找方式：
                 <select id="codeType" class="easyui-combobox" name="codeType" style="width: 150px;" data-options="panelHeight: 'auto'">
                     <option selected="selected">卡号</option>
                     <option>住院号</option>
                 </select>
                 <input id="code" class="easyui-textbox" name="code" data-options="prompt:'请输入条码',required:true" />
-                开始日期：<input class="easyui-datebox" id="ksrq00" name="ksrq00" style="width: 100px" data-options="required:true"/>
+                开始日期：<input class="easyui-datebox" id="ksrq00" name="ksrq00" style="width: 100px" data-options="required:true" />
                 结束日期：<input class="easyui-datebox" id="jsrq00" name="jsrq00" style="width: 100px" />
                 <a href="javascript:void(0)" class="easyui-linkbutton" id="btnGet" onclick="querybycode();">查询诊断信息</a>
             </div>
@@ -75,8 +85,8 @@
             <input class="easyui-textbox" id="oldCodeType" name="oldCodeType" />
         </div>
     </div>
-     <!--datagrid栏-->
-    <table id="NormalLisReportDg" title="临床检测" class="easyui-datagrid" style="width: auto; height: 180px"
+    <!--datagrid栏-->
+    <table id="NormalLisReportDg" title="临床检测" class="easyui-datagrid" style="width: auto; height: 480px"
         fit='false'
         pagination="false" rownumbers="true"
         fitcolumns="true" singleselect="false" toolbar="#toolbarN"
