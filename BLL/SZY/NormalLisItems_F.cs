@@ -25,7 +25,6 @@ namespace RuRo.BLL.SZY
                 //  正常这里只会传入一个连接字符串
                 foreach (var item in requestStr)
                 {
-
                     string xmlStr = GetWebServiceData(item);
                     string Msg = "";
                     List<Model.NormalLisItems> tem = new List<Model.NormalLisItems>();
@@ -37,7 +36,6 @@ namespace RuRo.BLL.SZY
                     }
                 }
             }
-
             return normalLisItems;
         }
 
@@ -51,10 +49,12 @@ namespace RuRo.BLL.SZY
                 if (ksrq00 <= jsrq00)
                 {
                     string str = CreatRequestStr(model.code, ksrq00, jsrq00);
+                    list.Add(str);
                 }
                 if (ksrq00 > jsrq00)
                 {
                     string str = CreatRequestStr(model.code, jsrq00, ksrq00);
+                    list.Add(str);
                 }
             }
             return list;
@@ -69,7 +69,7 @@ namespace RuRo.BLL.SZY
         {
             try
             {
-                //   return Test("");
+                 //return Test("");
                 return string.IsNullOrEmpty(request) ? "" : clinicalData.GetNormalLisItems(request);
             }
             catch (Exception ex)
@@ -78,7 +78,6 @@ namespace RuRo.BLL.SZY
                 return ex.Message + "--" + DateTime.Now.ToLongTimeString();
             }
         }
-
         #endregion 获取数据 + private string GetData(Model.DTO.NormalLisItemsRequest request)
 
         private string Test(string s)
@@ -106,14 +105,14 @@ namespace RuRo.BLL.SZY
                               <sex>M</sex>
                               <age_month>1</age_month>
                               <age>15</age>
-                              <ext_mthd>全血分析(五分类)</ext_mthd>
+                              <ext_mthd>肝功6项</ext_mthd>
                               <test_date>2015-3-14 8:01:52</test_date>
                               <location>东区七楼皮门</location>
                               <DOC_NAME0>何某某</DOC_NAME0>
                               <check_by_name>何某某</check_by_name>
                               <check_date>2015-3-14 9:05:53</check_date>
                             </reocrd>
-                        <Response>";
+                        </Response>";
             return str;
         }
 
@@ -182,7 +181,8 @@ namespace RuRo.BLL.SZY
                                 foreach (XmlNode item in xnl)
                                 {
                                     Model.NormalLisItems nn = this.XmlTomModel(item);
-                                    if (nn.ext_mthd != null && Common.MatchDic.NeedRecordDic.Values.Contains(nn.ext_mthd))
+                                     //&& Common.MatchDic.NeedRecordDic.Values.Contains(nn.ext_mthd)
+                                    if (nn.ext_mthd != null)
                                     {
                                         if (!string.IsNullOrEmpty(nn.ext_mthd))
                                         {

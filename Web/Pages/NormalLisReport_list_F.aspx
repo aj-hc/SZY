@@ -12,6 +12,7 @@
     <script src="../include/jquery-easyui-1.4.3/jquery.min.js"></script>
     <script src="../include/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
     <script src="../include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../include/js/default.js"></script>
     <script type="text/javascript">
         function GetData() {
             $('#NormalLisReportDg').datagrid('loadData', { total: 0, rows: [] });
@@ -22,8 +23,8 @@
             if (isEmptyStr(codeType) || isEmptyStr(code)) { $.messager.alert('提示', '请检查条码类型和条码号', 'error'); }
             var ksrq00 = $('#ksrq00').datebox('getValue');
             var jsrq00 = $('#jsrq00').datebox('getValue');
+            ajaxLoading("临床数据查询中。。。");
             $.ajax({
-
                 type: "POST",
                 url: "/Sever/NormalLisReport.ashx",
                 data: {
@@ -35,29 +36,40 @@
                 },
                 onLoadError: function () {
                     $("#NormalLisReportDg").datagrid("loaded");
-                    loading
-                },
-                onLoadError: function () {
-                    $("#NormalLisReportDg").datagrid("loaded");
                 },
                 onLoadSuccess: function () {
                     $("#NormalLisReportDg").datagrid("loaded");
                 },
                 success: function (response) {
-                    $('#oldCodeType').datebox('setValue', codeType);
-                    $('#oldCode').datebox('setValue', code);
+                    ajaxLoadEnd();
+                    $('#oldCodeType').textbox('setValue', codeType);
+                    $('#oldCode').textbox('setValue', code);
                     if (!response) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
-                    var obj = $.parseJSON(data);
+                    var obj = $.parseJSON(response);
                     if (obj.Statu == "err") {
                         ShowMsg("临床监测数据：" + obj.Msg);
                         return;
                     }
                     else if (obj.Statu == "ok") {
-                        $('#NormalLisReportDg').datagrid("loadData", obj.Data);
+                        var Qdata = obj.Data;
+                        for (var i = 0; i < Qdata.length; i++)
+                        {
+                            if (Qdata[i].ref_flag == "1") {
+                                Qdata[i].ref_flag = "高";
+                            }
+                            else if (Qdata[i].ref_flag == "2") {
+                                Qdata[i].ref_flag = "低";
+                            }
+                            else if (Qdata[i].ref_flag == "3") {
+                                Qdata[i].ref_flag = "阳性";
+                            }
+                        }
+                        $('#NormalLisReportDg').datagrid("loadData", Qdata);
                         // var row = $('#NormalLisReportDg').datagrid('getRows');
                     }
                 }
             });
+            ajaxLoadEnd();
         }
     </script>
 </head>
@@ -71,13 +83,13 @@
         <form id="querybycodeform">
             <div id="Div1" runat="server">
                 <select id="codeType" class="easyui-combobox" name="codeType" style="width: 150px;" data-options="panelHeight: 'auto'">
-                    <option selected="selected">卡号</option>
-                    <option>住院号</option>
+                    <option selected="selected" value="0">卡号</option>
+                    <option value="1">住院号</option>
                 </select>
                 <input id="code" class="easyui-textbox" name="code" data-options="prompt:'请输入条码',required:true" />
                 开始日期：<input class="easyui-datebox" id="ksrq00" name="ksrq00" style="width: 100px" data-options="required:true" />
                 结束日期：<input class="easyui-datebox" id="jsrq00" name="jsrq00" style="width: 100px" />
-                <a href="javascript:void(0)" class="easyui-linkbutton" id="btnGet" onclick="querybycode();">查询诊断信息</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" id="btnGet" onclick="GetData();">查询诊断信息</a>
             </div>
         </form>
         <div style="display: none">
@@ -95,11 +107,11 @@
         <thead>
             <tr>
                 <th field="ck" checkbox="true"></th>
-                <th field="id" width="100" hidden="true">id</th>
+                <th field="Id" width="100" hidden="true">id</th>
                 <th field="hospnum" width="100">门诊或住院号</th>
                 <th field="patname" width="100">姓名</th>
-                <th field="sex" width="100" sortable="true" hidden="true">性别</th>
-                <th field="age" width="100" sortable="true" hidden="true">年龄</th>
+                <th field="Sex" width="100" sortable="true" hidden="true">性别</th>
+                <th field="Age" width="100" sortable="true" hidden="true">年龄</th>
                 <th field="age_month" width="100" sortable="true" hidden="true">月</th>
                 <th field="ext_mthd" width="100" sortable="true">项目总称</th>
                 <th field="chinese" width="100" sortable="true">项目名称</th>
@@ -112,7 +124,7 @@
                 <th field="check_date" width="100" sortable="true">批准时间</th>
                 <th field="check_by_name" width="100" sortable="true" hidden="true">批准人</th>
                 <th field="prnt_order" width="100" sortable="true" hidden="true">打印顺序序号</th>
-                <th field="isdel" width="100" sortable="true" hidden="true">isdel</th>
+                <th field="Isdel" width="100" sortable="true" hidden="true">isdel</th>
             </tr>
         </thead>
     </table>

@@ -76,13 +76,13 @@ namespace RuRo.BLL.SZY
                 {
                     //有数据
                     jsonmodel = CreatJsonMode("ok", msg.ToString(), patientDiagnoseList);
-                   // ChangeQueryRecordStatu(cq, msg.ToString());
+                    // ChangeQueryRecordStatu(cq, msg.ToString());
                 }
                 else
                 {
                     //无数据
                     jsonmodel = CreatJsonMode("err", msg.ToString(), patientDiagnoseList);
-                   ///ChangeQueryRecordStatu(cq, msg.ToString());
+                    ///ChangeQueryRecordStatu(cq, msg.ToString());
                 }
             }
             return JsonConvert.SerializeObject(jsonmodel);
@@ -91,66 +91,27 @@ namespace RuRo.BLL.SZY
         private List<string> GetRequestStr(Model.DTO.PatientDiagnose_list_F model)
         {
             List<string> list = new List<string>();
-            if (string.IsNullOrEmpty(model.jsrq00)||model.jsrq00==model.ksrq00)
+            DateTime ksrq00 = new DateTime();
+            DateTime jsrq00 = new DateTime();
+            if (DateTime.TryParse(model.ksrq00, out ksrq00) && DateTime.TryParse(model.jsrq00, out jsrq00))
             {
-                string str = CreatRequestStr(model.code, model.ksrq00);
-                if (!string.IsNullOrEmpty(str))
+                if (ksrq00 <= jsrq00)
                 {
+                    string str = CreatRequestStr(model.code, ksrq00, jsrq00);
                     list.Add(str);
                 }
-            }
-            else
-            {
-                DateTime ksrq00 = new DateTime();
-                DateTime jsrq00 = new DateTime();
-                if (DateTime.TryParse(model.ksrq00, out ksrq00) && DateTime.TryParse(model.jsrq00, out jsrq00))
+                if (ksrq00 > jsrq00)
                 {
-                    if (ksrq00<jsrq00)
-                    {
-                        while (ksrq00==jsrq00)
-                        {
-                          string str    =  CreatRequestStr(model.code, ksrq00);
-                          ksrq00.AddDays(1);
-                          if (!string.IsNullOrEmpty(str))
-                          {
-                              list.Add(str);
-                          }
-                        }
-                    }
-                    if (ksrq00 > jsrq00)
-                    {
-                        while (ksrq00 == jsrq00)
-                        {
-                            string str = CreatRequestStr(model.code, jsrq00);
-                            jsrq00.AddDays(1);
-                            if (!string.IsNullOrEmpty(str))
-                            {
-                                list.Add(str);
-                            }
-                        }
-                    }
+                    string str = CreatRequestStr(model.code, jsrq00, ksrq00);
+                    list.Add(str);
                 }
             }
             return list;
         }
-
-        private string CreatRequestStr(string cardno, string cxrq00)
+        private string CreatRequestStr(string code, DateTime ksrq00, DateTime jsrq00)
         {
-            DateTime datecxrq00 = new DateTime();
-            if (DateTime.TryParse(cxrq00, out datecxrq00))
-            {
-                return string.Format("<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00></Request>", cardno, datecxrq00.ToString("yyyy-MM-dd"));
-            }
-            else
-            {
-                return "";
-            }
+            return string.Format("<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00><jsrq00>{2}</jsrq00></Request>", code, ksrq00.ToString("yyyy-MM-dd"), jsrq00.ToString("yyyy-MM-dd"));
         }
-        private string CreatRequestStr(string cardno, DateTime cxrq00)
-        {
-            return string.Format("<Request><cardno>{0}</cardno><cxrq00>{1}</cxrq00></Request>", cardno, cxrq00.ToString("yyyy-MM-dd"));
-        }
-
         #region 检查数据对象在本地数据库是否存在 CheckData(Model.PatientDiagnose data)
 
         /// <summary>
@@ -210,7 +171,7 @@ namespace RuRo.BLL.SZY
         {
             try
             {
-                // return Test("");
+                 //return Test("");
                 return string.IsNullOrEmpty(request) ? "" : clinicalData.GetPatientDiagnose(request);
             }
             catch (Exception ex)
@@ -231,25 +192,24 @@ namespace RuRo.BLL.SZY
         private string Test(string request)
         {
             string getDataFromHospitalStr = @"<Response>
-                                                <ResultCode>0</ ResultCode>
+                                                <ResultCode>0</ResultCode>
                                                 <ErrorMsg></ErrorMsg>
                                                 <reocrd>
-                                                  <PatientName>杨基</PatientName>
+                                                  <PatientName>郭文宁</PatientName>
                                                   <Sex>男</Sex>
-                                                  <Brithday>1999-01-01</Brithday>
+                                                  <Brithday>1981-01-01</Brithday>
                                                   <CardId>0272099</CardId>
                                                   <Tel>76</Tel>
                                                   <DiagnoseInfo>
                                                     <RegisterNo>11111111</RegisterNo>
-                                                    <Icd>Icd123456</Icd>
-                                                    <Diagnose>诊断名称</Diagnose>
+                                                    <Icd>L40.900</Icd>
+                                                    <Diagnose>银屑病</Diagnose>
                                                     <Type>3</Type>
                                                     <Flag>1</Flag>
-                                                    <DiagnoseDate>2012-09-01</DiagnoseDate>
+                                                    <DiagnoseDate>2015-09-09</DiagnoseDate>
                                                     </DiagnoseInfo>
                                                  </reocrd>
-                                                </Response>
-                                                ";
+                                                </Response>";
             return getDataFromHospitalStr;
         }
         #endregion 生成临时数据
@@ -261,7 +221,7 @@ namespace RuRo.BLL.SZY
         private Model.PatientDiagnose StrTObject(string xmlStr, out string msg, Model.DTO.PatientDiagnoseResuest request)
         {
             XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
-            Model.PatientDiagnose patientDiagnoseModel = null;
+            Model.PatientDiagnose patientDiagnoseModel = new Model.PatientDiagnose();
             msg = "";
             if (xd == null)
             {
