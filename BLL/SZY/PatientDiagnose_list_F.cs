@@ -39,24 +39,28 @@ namespace RuRo.BLL.SZY
                     Model.DTO.PatientDiagnoseResuest request = XmlStrToPatientDiagnoseResuest(item);
                     if (request != null)
                     {
-                        Model.PatientDiagnose patientDiagnose = StrTObject(xmlStr, out _Msg, request);
-                        if (patientDiagnose != null)
+                        List<Model.PatientDiagnose> patientDiagnoses = StrTObject(xmlStr, out _Msg, request);
+                        if (patientDiagnoses != null)
                         {
-                            if (!patientDiagnoseList.Contains(patientDiagnose))
+                            foreach (Model.PatientDiagnose patientDiagnose in patientDiagnoses)
                             {
-                                bool check = CheckData(patientDiagnose);
-                                if (!check)
+                                if (!patientDiagnoseList.Contains(patientDiagnose))
                                 {
-                                    patientDiagnoseList.Add(patientDiagnose);
+                                    bool check = CheckData(patientDiagnose);
+                                    if (!check)
+                                    {
+                                        patientDiagnoseList.Add(patientDiagnose);
+                                    }
+                                }
+                                if (!string.IsNullOrEmpty(_Msg))
+                                {
+                                    msg.Replace(_Msg, "");
+                                    msg.Replace("&nbsp", "");
+                                    msg.Replace(" ", "");
+                                    msg.Append(" &nbsp " + _Msg);
                                 }
                             }
-                            if (!string.IsNullOrEmpty(_Msg))
-                            {
-                                msg.Replace(_Msg, "");
-                                msg.Replace("&nbsp", "");
-                                msg.Replace(" ", "");
-                                msg.Append(" &nbsp " + _Msg);
-                            }
+                           
                         }
                     }
                     //nnn.Add(model.Code);
@@ -98,10 +102,12 @@ namespace RuRo.BLL.SZY
                 if (ksrq00 <= jsrq00)
                 {
                     string str = CreatRequestStr(model.code, ksrq00, jsrq00);
+                    list.Add(str);
                 }
                 if (ksrq00 > jsrq00)
                 {
                     string str = CreatRequestStr(model.code, jsrq00, ksrq00);
+                    list.Add(str);
                 }
             }
             return list;
@@ -169,7 +175,7 @@ namespace RuRo.BLL.SZY
         {
             try
             {
-                // return Test("");
+                 //return Test("");
                 return string.IsNullOrEmpty(request) ? "" : clinicalData.GetPatientDiagnose(request);
             }
             catch (Exception ex)
@@ -190,25 +196,24 @@ namespace RuRo.BLL.SZY
         private string Test(string request)
         {
             string getDataFromHospitalStr = @"<Response>
-                                                <ResultCode>0</ ResultCode>
+                                                <ResultCode>0</ResultCode>
                                                 <ErrorMsg></ErrorMsg>
                                                 <reocrd>
-                                                  <PatientName>杨基</PatientName>
+                                                  <PatientName>郭文宁</PatientName>
                                                   <Sex>男</Sex>
-                                                  <Brithday>1999-01-01</Brithday>
+                                                  <Brithday>1981-01-01</Brithday>
                                                   <CardId>0272099</CardId>
                                                   <Tel>76</Tel>
                                                   <DiagnoseInfo>
                                                     <RegisterNo>11111111</RegisterNo>
-                                                    <Icd>Icd123456</Icd>
-                                                    <Diagnose>诊断名称</Diagnose>
+                                                    <Icd>L40.900</Icd>
+                                                    <Diagnose>银屑病</Diagnose>
                                                     <Type>3</Type>
                                                     <Flag>1</Flag>
-                                                    <DiagnoseDate>2012-09-01</DiagnoseDate>
+                                                    <DiagnoseDate>2015-09-09</DiagnoseDate>
                                                     </DiagnoseInfo>
                                                  </reocrd>
-                                                </Response>
-                                                ";
+                                                </Response>";
             return getDataFromHospitalStr;
         }
         #endregion 生成临时数据
@@ -217,10 +222,10 @@ namespace RuRo.BLL.SZY
 
         #endregion 将数据转换成对象
 
-        private Model.PatientDiagnose StrTObject(string xmlStr, out string msg, Model.DTO.PatientDiagnoseResuest request)
+        private List<Model.PatientDiagnose>  StrTObject(string xmlStr, out string msg, Model.DTO.PatientDiagnoseResuest request)
         {
             XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
-            Model.PatientDiagnose patientDiagnoseModel = null;
+            List<Model.PatientDiagnose> list = new List<Model.PatientDiagnose>();
             msg = "";
             if (xd == null)
             {
@@ -237,17 +242,24 @@ namespace RuRo.BLL.SZY
                             try
                             {
                                 string strNode = JsonConvert.SerializeXmlNode(xd.SelectSingleNode("//reocrd"), Newtonsoft.Json.Formatting.None, true);
-                                patientDiagnoseModel = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strNode);
-                                string diagnoseInfoNode = JsonConvert.SerializeXmlNode(xd.SelectSingleNode("//DiagnoseInfo"), Newtonsoft.Json.Formatting.None, true);
-                                Model.DTO.DiagnoseInfoModel dg = JsonConvert.DeserializeObject<Model.DTO.DiagnoseInfoModel>(diagnoseInfoNode);
-                                patientDiagnoseModel.RegisterNo = dg.RegisterNo;
-                                patientDiagnoseModel.Type = dg.Type;
-                                patientDiagnoseModel.Icd = dg.Icd;
-                                patientDiagnoseModel.Flag = dg.Flag;
-                                patientDiagnoseModel.DiagnoseDate = dg.DiagnoseDate;
-                                patientDiagnoseModel.Diagnose = dg.Diagnose;
-                                patientDiagnoseModel.Cardno = request.cardno;
-                                patientDiagnoseModel.Csrq00 = request.cxrq00;
+
+                                XmlNodeList xns = xd.SelectNodes("//DiagnoseInfo");
+                                foreach (XmlNode item in xns)
+                                {
+                                    Model.PatientDiagnose patientDiagnoseModel = new Model.PatientDiagnose();
+                                    patientDiagnoseModel = JsonConvert.DeserializeObject<Model.PatientDiagnose>(strNode);
+                                    string diagnoseInfoNode = JsonConvert.SerializeXmlNode(item, Newtonsoft.Json.Formatting.None, true);
+                                    Model.DTO.DiagnoseInfoModel dg = JsonConvert.DeserializeObject<Model.DTO.DiagnoseInfoModel>(diagnoseInfoNode);
+                                    patientDiagnoseModel.RegisterNo = dg.RegisterNo;
+                                    patientDiagnoseModel.Type = dg.Type;
+                                    patientDiagnoseModel.Icd = dg.Icd;
+                                    patientDiagnoseModel.Flag = dg.Flag;
+                                    patientDiagnoseModel.DiagnoseDate = dg.DiagnoseDate;
+                                    patientDiagnoseModel.Diagnose = dg.Diagnose;
+                                    patientDiagnoseModel.Cardno = request.cardno;
+                                    patientDiagnoseModel.Csrq00 = request.cxrq00;
+                                    list.Add(patientDiagnoseModel);
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -268,7 +280,7 @@ namespace RuRo.BLL.SZY
                     }
                 }
             }
-            return patientDiagnoseModel;
+            return list   ;
         }
 
         public Model.PatientDiagnose DicToNormalLisReportModel(Dictionary<string, string> dic)

@@ -78,7 +78,7 @@ namespace RuRo.BLL.SZY
         {
             try
             {
-                //  return Test(new Model.DTO.NormalLisReportRequest());
+                //return Test("");
                 return string.IsNullOrEmpty(request) ? "" : clinicalData.NormalLisReport(request);
             }
             catch (Exception ex)
@@ -166,8 +166,8 @@ namespace RuRo.BLL.SZY
                                     try
                                     {
                                         Model.NormalLisReport nn = this.XmlTomModel(item);
-
-                                        if (nn.chinese != null && Common.MatchDic.NeedRecordDic.Keys.Contains(nn.chinese))
+                                       // && Common.MatchDic.NeedRecordDic.Keys.Contains(nn.chinese)
+                                        if (nn.chinese != null )
                                         {
                                             if (!string.IsNullOrEmpty(nn.ref_flag))
                                             {
@@ -252,6 +252,33 @@ namespace RuRo.BLL.SZY
             }
 
             return temListStr;
+        }
+
+        private string Test(string s) 
+        {
+            string str = @"<Response>
+                <ResultCode>0</ResultCode>
+                <ErrorMsg></ErrorMsg>
+                <reocrd>
+                  <hospnum>64456507</hospnum>
+                  <patname>林成某</patname>
+                  <sex>M</sex>
+                  <age_month>1</age_month>
+                  <age>15</age>
+                  <ext_mthd>肝功6项</ext_mthd>
+                  <result>24</result>
+                  <ref_flag>1</ref_flag>
+                  <lowvalue>15</lowvalue>
+                  <highvalue>40</highvalue>
+                  <print_ref></print_ref>
+                  <check_date>2015-03-14</check_date>
+                  <check_by_name>李某某</check_by_name>
+                  <units>U/L</units>
+                  <prnt_order>5</prnt_order>
+                  <chinese>谷草转氨酶(AST)</chinese>
+                </reocrd>
+                </Response>";
+            return str;
         }
     }
 }

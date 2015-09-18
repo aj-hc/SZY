@@ -125,9 +125,11 @@ namespace RuRo.BLL
                 }
 
                 newDicList = MatchClinicalDic(dicList, codeType);
-                newDicList.Insert(0, new Dictionary<string, string>() { { "Sample Source", code } });
+               // new Dictionary<string, string>() { {"Sample Source", code  } }
+                //newDicList[0].Add("Sample Source", code);
                 foreach (var item in newDicList)
                 {
+                    item.Add("Sample Source", code);
                     if (item.Keys.Contains("诊断类型"))
                     {
                         switch (item["诊断类型"])
@@ -216,14 +218,14 @@ namespace RuRo.BLL
 
         private List<Dictionary<string, string>> GetClinicalInfoDgDicList(string dataStr)
         {
-            List<Model.NormalLisReport> pageClinicalInfoList = new List<Model.NormalLisReport>();
-            Model.NormalLisReport cl = new Model.NormalLisReport();
+            List<Model.PatientDiagnose> pageClinicalInfoList = new List<Model.PatientDiagnose>();
+            Model.PatientDiagnose cl = new Model.PatientDiagnose();
             List<Dictionary<string, string>> ClinicalInfoDgDicList = new List<Dictionary<string, string>>();
             if (!string.IsNullOrEmpty(dataStr) && dataStr != "[]")
             {
-                pageClinicalInfoList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Model.NormalLisReport>>(dataStr);//转换ok
+                pageClinicalInfoList = FreezerProUtility.Fp_Common.FpJsonHelper.JsonStrToObject<List<Model.PatientDiagnose>>(dataStr);//转换ok
             }
-            foreach (Model.NormalLisReport item in pageClinicalInfoList)
+            foreach (Model.PatientDiagnose item in pageClinicalInfoList)
             {
                 //给对象拼接--临床数据中需要添加基本信息中的RegisterID,InPatientID
                 ClinicalInfoDgDicList.Add(FormToDic.ConvertModelToDic(item));

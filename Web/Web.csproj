@@ -646,6 +646,7 @@
     <Content Include="Pages\QueryRecoder_list.aspx" />
     <Content Include="Pages\SampleInfo.html" />
     <Content Include="Test\PostTestData.aspx" />
+    <Content Include="Test\XMLFile1.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

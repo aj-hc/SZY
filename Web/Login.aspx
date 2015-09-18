@@ -95,7 +95,7 @@
                                 </td>
                             </tr>--%>
                             <tr>
-                                <img src="../Images/szy_Logo.jpg" style="width: 380px; height: 50px; z-index: 100; float: left; padding-left: 40px"></img>
+                                <img src="../Images/szy_Logo.jpg" style="width: 450px; height: 70px; z-index: 100; float: left; padding-left: 40px"></img>
                                 <td>
                                     <img src="Images/Images/a_te01.gif" width="570" height="3">
                                 </td>

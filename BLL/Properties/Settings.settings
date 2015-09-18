@@ -1,11 +1,17 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BLL.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RuRo.BLL.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="BLL_BasicData_EmpiService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://192.9.198.41:8016/EmpiService.asmx</Value>
     </Setting>
     <Setting Name="BLL_ClinicalData_PacsLisReportServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.9.198.41:8030/PacsLisReportServices.asmx</Value>
+    </Setting>
+    <Setting Name="RuRo_BLL_BasicData_EmpiService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.9.198.41:8016/EmpiService.asmx</Value>
+    </Setting>
+    <Setting Name="RuRo_BLL_ClinicalData_PacsLisReportServices" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://192.9.198.41:8030/PacsLisReportServices.asmx</Value>
     </Setting>
   </Settings>

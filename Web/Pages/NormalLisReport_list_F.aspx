@@ -51,7 +51,20 @@
                         return;
                     }
                     else if (obj.Statu == "ok") {
-                        $('#NormalLisReportDg').datagrid("loadData", obj.Data);
+                        var Qdata = obj.Data;
+                        for (var i = 0; i < Qdata.length; i++)
+                        {
+                            if (Qdata[i].ref_flag == "1") {
+                                Qdata[i].ref_flag = "高";
+                            }
+                            else if (Qdata[i].ref_flag == "2") {
+                                Qdata[i].ref_flag = "低";
+                            }
+                            else if (Qdata[i].ref_flag == "3") {
+                                Qdata[i].ref_flag = "阳性";
+                            }
+                        }
+                        $('#NormalLisReportDg').datagrid("loadData", Qdata);
                         // var row = $('#NormalLisReportDg').datagrid('getRows');
                     }
                 }

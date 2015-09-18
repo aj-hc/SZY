@@ -118,6 +118,7 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
@@ -153,10 +154,18 @@
     <Compile Include="SZY\Request\PatientDiagnoseResuest.cs" />
     <Compile Include="SZY\Request\Request.cs" />
     <Compile Include="SZY\ValidationData.cs" />
-    <Compile Include="SZY\Web References\BasicData\Reference.cs" />
-    <Compile Include="SZY\Web References\ClinicalData\Reference.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="UnameAndPwd.cs" />
+    <Compile Include="Web References\BasicData\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ClinicalData\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -204,22 +213,58 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SZY\Web References\BasicData\EmpiService.disco" />
-    <Content Include="SZY\Web References\ClinicalData\PacsLisReportServices.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SZY\Web References\BasicData\EmpiService.wsdl" />
-    <None Include="SZY\Web References\BasicData\Reference.map" />
-    <None Include="SZY\Web References\ClinicalData\PacsLisReportServices.wsdl" />
-    <None Include="SZY\Web References\ClinicalData\Reference.map" />
+    <None Include="Web References\BasicData\EmpiService.wsdl" />
+    <None Include="Web References\BasicData\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ClinicalData\PacsLisReportServices.wsdl" />
+    <None Include="Web References\ClinicalData\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SZY\Service References\" />
+    <WebReferenceUrl Include="http://192.9.198.41:8016/EmpiService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\BasicData\</RelPath>
+      <UpdateFromURL>http://192.9.198.41:8016/EmpiService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>RuRo_BLL_BasicData_EmpiService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.9.198.41:8030/PacsLisReportServices.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ClinicalData\</RelPath>
+      <UpdateFromURL>http://192.9.198.41:8030/PacsLisReportServices.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>RuRo_BLL_ClinicalData_PacsLisReportServices</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\BasicData\EmpiService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ClinicalData\PacsLisReportServices.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

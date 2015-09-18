@@ -22,7 +22,7 @@
         </div>
     </noscript>
     <!-- url(Images/IndexImg/layout-browser-hd-bg.gif)-->
-    <div region="north" split="true" border="false" style="overflow: hidden; height: 60px; background: #fff repeat-x center 50%; color: #fff; font-family: Verdana, 微软雅黑,黑体">
+    <div region="north" split="true" border="false" style="overflow: hidden; height: 30px; background: #fff repeat-x center 50%; color: #fff; font-family: Verdana, 微软雅黑,黑体">
         <%--<span style="padding-left: 0px;">
             <img src="Images/szy_Logo.jpg" width="460px" height="100%" align="absmiddle" />
         </span>--%>

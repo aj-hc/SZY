@@ -51,7 +51,33 @@
                             return;
                         }
                         else if (obj.Statu == "ok") {
-                            $('#PatientDiagnoseDg').datagrid("loadData", obj.Data);
+                            var Qdata = obj.Data;
+
+                            if (Qdata.length > 0)
+                            {
+                                for (var i = 0; i < Qdata.length; i++)
+                                {
+                                    if (Qdata[i].Type == "1")
+                                    {
+                                        Qdata[i].Type = "中医疾病";
+                                    }
+                                    else if (Qdata[i].Type == "2") {
+                                        Qdata[i].Type = "中医症候";
+                                    }
+                                    else if (Qdata[i].Type == "3") {
+                                        Qdata[i].Type = "西医主诊断";
+                                    }
+                                    else if (Qdata[i].Type == "4") {
+                                        Qdata[i].Type = "西医其他诊断";
+                                    }
+                                    if (Qdata[i].Flag == "1") {
+                                        Qdata[i].Flag = "西医诊断";
+                                    }
+                                    else if (Qdata[i].Flag == "0") {
+                                        Qdata[i].Flag = "中医诊断";
+                                    }
+                                }
+                            } $('#PatientDiagnoseDg').datagrid("loadData", Qdata);
                             // var row = $('#NormalLisReportDg').datagrid('getRows');
                         }
                     }
@@ -100,7 +126,7 @@
                 <th field="id" width="100" sortable="true" hidden="true">id</th>
                 <th field="Cardno" width="100" sortable="false">卡号</th>
                 <th field="Csrq00" width="100" sortable="true">查询日期</th>
-                <th field="Patientname" width="100" sortable="false">姓名</th>
+                <th field="PatientName" width="100" sortable="false">姓名</th>
                 <th field="Sex" width="100" sortable="false" hidden="true">性别</th>
                 <th field="Brithday" width="100" sortable="false" hidden="true">出生日期</th>
                 <th field="Cardid" width="100" sortable="false" hidden="true">身份证号</th>
@@ -110,7 +136,7 @@
                 <th field="Diagnose" width="100" sortable="true">诊断名称</th>
                 <th field="Type" width="100" sortable="true">诊断类型</th>
                 <th field="Flag" width="100" sortable="true">诊断类别</th>
-                <th field="Diagnosedate" width="100" sortable="true">诊断日期</th>
+                <th field="DiagnoseDate" width="100" sortable="true">诊断日期</th>
                 <th field="Isdel" width="100" sortable="true" hidden="true">isdel</th>
             </tr>
         </thead>
