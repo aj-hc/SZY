@@ -95,7 +95,7 @@ function isEmptyStr(str) {
     }
 }
 
-function CloseWebPage(){
+function CloseWebPage() {
     if (navigator.userAgent.indexOf("MSIE") > 0) {
         if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
             window.opener = null;
@@ -112,4 +112,12 @@ function CloseWebPage(){
         window.open('', '_self', '');
         window.close();
     }
+}
+function ajaxLoading(msg) {
+    $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");
+    $("<div class=\"datagrid-mask-msg\"></div>").html(msg).appendTo("body").css({ display: "block", left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
+}
+function ajaxLoadEnd() {
+    $(".datagrid-mask").remove();
+    $(".datagrid-mask-msg").remove();
 }

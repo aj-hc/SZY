@@ -124,10 +124,14 @@
     <Compile Include="DTO\DiagnoseInfoModel.cs" />
     <Compile Include="DTO\EmpiInfoRequest.cs" />
     <Compile Include="DTO\JsonModel.cs" />
+    <Compile Include="DTO\NormalLisItemsRequest.cs" />
     <Compile Include="DTO\NormalLisReportRequest.cs" />
+    <Compile Include="DTO\NormalLisReport_list_F.cs" />
     <Compile Include="DTO\PatientDiagnoseResuest.cs" />
+    <Compile Include="DTO\PatientDiagnose_list_F.cs" />
     <Compile Include="DTO\Request.cs" />
     <Compile Include="EmpiInfo.cs" />
+    <Compile Include="NormalLisItems.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PageAction.cs" />
     <Compile Include="PatientDiagnose.cs" />

@@ -133,4 +133,3 @@ function CloseWebPage() {
         window.close();
     }
 }
-

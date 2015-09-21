@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Data;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 namespace FreezerProUtility.Fp_Common
 {
     public class FpJsonHelper
     {
-
         #region 取API返回的数据中的文本对象,比如Total + public static string stringToobject(string str, string json)
+
         /// <summary>
         /// 取API返回的数据中的文本对象,比如Total
         /// </summary>
@@ -31,7 +30,9 @@ namespace FreezerProUtility.Fp_Common
             }
             return resultStr;
         }
-        #endregion
+
+        #endregion 取API返回的数据中的文本对象,比如Total + public static string stringToobject(string str, string json)
+
         public static string SerializationStr(string str)
         {
             return JsonConvert.SerializeObject(str);
@@ -42,8 +43,8 @@ namespace FreezerProUtility.Fp_Common
             return JsonConvert.DeserializeObject(str);
         }
 
-
         #region 将API返回的json格式的字符串中对象转换成list集合 + public static List<T> JObjectToList<T>(string str, string json)
+
         /// <summary>
         /// 将API返回的json格式的字符串中对象转换成list集合
         /// </summary>
@@ -71,9 +72,11 @@ namespace FreezerProUtility.Fp_Common
 
             return list;
         }
-        #endregion
+
+        #endregion 将API返回的json格式的字符串中对象转换成list集合 + public static List<T> JObjectToList<T>(string str, string json)
 
         #region 将键值对格式的字符串转换成Dictionary<T,K> + public static Dictionary<T, K> JsonToDictionary<T, K>(string json)
+
         /// <summary>
         /// 将键值对格式的字符串转换成Dictionary
         /// </summary>
@@ -83,7 +86,6 @@ namespace FreezerProUtility.Fp_Common
         /// <returns>返回Dictionary</returns>
         public static Dictionary<T, K> JsonStrToDictionary<T, K>(string json)
         {
-
             Dictionary<T, K> dictionary = new Dictionary<T, K>();
             try
             {
@@ -95,9 +97,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return dictionary;
         }
-        #endregion
+
+        #endregion 将键值对格式的字符串转换成Dictionary<T,K> + public static Dictionary<T, K> JsonToDictionary<T, K>(string json)
 
         #region 将Dictionary转换长JSON格式的字符串,便于将数据post到FP + public static string DictionaryToJsonString<T, K>(Dictionary<T, K> dic)
+
         /// <summary>
         /// 将Dictionary转换长JSON格式的字符串,便于将数据post到FP
         /// </summary>
@@ -118,9 +122,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return result;
         }
-        #endregion
+
+        #endregion 将Dictionary转换长JSON格式的字符串,便于将数据post到FP + public static string DictionaryToJsonString<T, K>(Dictionary<T, K> dic)
 
         #region 将Dictionary转换长JSON格式的字符串 + public static string DictionaryToJsonString(Dictionary<string, string> dic)
+
         /// <summary>
         /// 将Dictionary转换长JSON格式的字符串
         /// </summary>
@@ -130,7 +136,8 @@ namespace FreezerProUtility.Fp_Common
         {
             return JsonConvert.SerializeObject(dic);
         }
-        #endregion
+
+        #endregion 将Dictionary转换长JSON格式的字符串 + public static string DictionaryToJsonString(Dictionary<string, string> dic)
 
         public static string DictionaryListToJsonString(List<Dictionary<string, string>> listDic)
         {
@@ -149,13 +156,14 @@ namespace FreezerProUtility.Fp_Common
             //}
             return result.ToString();
         }
+
         /// <summary>
         /// 将返回的JSON格式的字符串对象转换成对象
         /// </summary>
         /// <typeparam name="T">待转换的对象类型</typeparam>
         /// <param name="jsonStr">字符串</param>
         /// <returns>对象</returns>
-        public static T JsonStrToObject<T>(string jsonStr) where T:class
+        public static T JsonStrToObject<T>(string jsonStr) where T : class
         {
             T obj = JsonConvert.DeserializeObject(jsonStr, typeof(T)) as T;
             return obj;
@@ -166,12 +174,13 @@ namespace FreezerProUtility.Fp_Common
             return JsonConvert.DeserializeObject(str, typeof(T)) as T;
         }
 
-        #region dataTable转换成Json格式 
-        ///<summary> 
-        /// dataTable转换成Json格式 
-        ///</summary> 
-        ///<param name="dt"></param> 
-        ///<returns></returns> 
+        #region dataTable转换成Json格式
+
+        ///<summary>
+        /// dataTable转换成Json格式
+        ///</summary>
+        ///<param name="dt"></param>
+        ///<returns></returns>
         public static string DataTableJson(System.Data.DataTable dt)
         {
             StringBuilder jsonBuilder = new StringBuilder();
@@ -185,7 +194,7 @@ namespace FreezerProUtility.Fp_Common
                     jsonBuilder.Append("\"");
                     jsonBuilder.Append(dt.Columns[j].ColumnName);
                     jsonBuilder.Append("\":\"");
-                    jsonBuilder.Append(dt.Rows[i][j].ToString().Replace("\"", "\\\"")); //对于特殊字符，还应该进行特别的处理。 
+                    jsonBuilder.Append(dt.Rows[i][j].ToString().Replace("\"", "\\\"")); //对于特殊字符，还应该进行特别的处理。
                     jsonBuilder.Append("\",");
                 }
                 jsonBuilder.Remove(jsonBuilder.Length - 1, 1);
@@ -195,15 +204,17 @@ namespace FreezerProUtility.Fp_Common
             jsonBuilder.Append("]");
             jsonBuilder.Append("}");
             return jsonBuilder.ToString();
-        } 
-        #endregion
+        }
+
+        #endregion dataTable转换成Json格式
 
         #region DataSet转换成Json格式
-        ///<summary> 
-        /// DataSet转换成Json格式 
-        ///</summary> 
-        ///<param name="ds">DataSet</param> 
-        ///<returns></returns> 
+
+        ///<summary>
+        /// DataSet转换成Json格式
+        ///</summary>
+        ///<param name="ds">DataSet</param>
+        ///<returns></returns>
         public static string DatasetJson(System.Data.DataSet ds)
         {
             StringBuilder json = new StringBuilder();
@@ -218,8 +229,9 @@ namespace FreezerProUtility.Fp_Common
             json.Append("]");
             json.Append("}");
             return json.ToString();
-        } 
-        #endregion
+        }
+
+        #endregion DataSet转换成Json格式
 
         /// <summary>
         /// 序列化对象成字符串
@@ -237,6 +249,5 @@ namespace FreezerProUtility.Fp_Common
         {
             return JsonConvert.SerializeObject(obj);
         }
-
     }
 }

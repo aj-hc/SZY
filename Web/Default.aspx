@@ -18,7 +18,7 @@
         //初始化win弹窗在显示器中央
         function doimport() {
             var width = 970;
-            var height = 600;
+            var height = 650;
             var l = Math.round((window.screen.width - width) / 2);
             var t = Math.round((window.screen.height - height) / 2);
             window.open('Login.aspx', 'newwindow', 'height=' + height + ', width=' + width + ', top=' + t + ',left=' + l + ',toolbar=no, menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
@@ -33,7 +33,7 @@
         });
     </script>
 </head>
-<body style="width: 100%; height: 100%">
+<body style="width: 100%; height: 100%" runat="server">
     <%--嵌套页--%>
     <div id="main" style="width: 100%; height: 100%">
         <%--<div id="logo" style="width: 20%; height: 40px; position: absolute; top: 2px; left: 50px;">--%>
@@ -46,7 +46,8 @@
                 <ul>
                     <li><a href="#" id="btnextend" onclick="doimport()">
                         <div class="sidebox">
-                            <img src="../Images/Images/ant.png" style="width: 21px; height: 15px" />&nbsp;打开扩展</div>
+                            <img src="../Images/Images/ant.png" style="width: 21px; height: 15px" />&nbsp;打开扩展
+                        </div>
                     </a></li>
                 </ul>
             </div>

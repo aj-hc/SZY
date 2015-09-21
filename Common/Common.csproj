@@ -112,8 +112,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Excel.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>G:\02.study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OpenSmtp, Version=1.11.0.34196, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -132,10 +133,6 @@
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
-    </Reference>
-    <Reference Include="System.Data.SQLite, Version=1.0.62.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -205,12 +202,12 @@
     <Compile Include="SZY\Record.cs" />
     <Compile Include="SZY\StateEnum.cs" />
     <Compile Include="SZY\UserHelper.cs" />
-    <Compile Include="XMl\XmlHelper.cs" />
-    <Compile Include="XMl\XMLProcess.cs" />
     <Compile Include="SZY\页面辅助类\CssHelper.cs" />
     <Compile Include="SZY\页面辅助类\HtmlGenericControl.cs" />
     <Compile Include="SZY\页面辅助类\HTMLHelper.cs" />
     <Compile Include="SZY\页面辅助类\PageHelper.cs" />
+    <Compile Include="XMl\XmlHelper.cs" />
+    <Compile Include="XMl\XMLProcess.cs" />
     <Compile Include="TimeParser.cs" />
     <Compile Include="UrlOper.cs" />
     <Compile Include="XMl\XmlUtil.cs" />

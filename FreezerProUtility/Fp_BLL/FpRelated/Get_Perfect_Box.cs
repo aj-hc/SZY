@@ -1,8 +1,4 @@
-﻿using FreezerProUtility.Fp_Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FreezerProUtility.Fp_BLL
 {
@@ -25,6 +21,7 @@ namespace FreezerProUtility.Fp_BLL
             //http://192.168.183.130/api?username=admin&password=123456&method=get_perfect_box&freezer_name=tem->admin->06&space=8
             //{"success":true,"box_id":1351,"location":"tem->admin->06->02->1"}
         }
+
         public static List<Fp_Model.Freezer> GetAll(Fp_Common.UnameAndPwd up)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -35,6 +32,5 @@ namespace FreezerProUtility.Fp_BLL
             List<Fp_Model.Freezer> freezersList = call.getdata<Fp_Model.Freezer>("Freezers");
             return freezersList;
         }
-
     }
 }

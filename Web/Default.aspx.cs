@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace RuRo.Web
 {
@@ -16,8 +11,8 @@ namespace RuRo.Web
                 FreezerProUrl();
                 //访问页面时做登陆检查
             }
-            
         }
+
         private void FreezerProUrl()
         {
             string s = System.Configuration.ConfigurationManager.AppSettings["FpUrl"];
@@ -26,7 +21,6 @@ namespace RuRo.Web
 
         protected void but_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

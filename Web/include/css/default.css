@@ -59,7 +59,6 @@ table tr td {
     padding: 1px;
 }
 
-
 table tr td {
     text-align: right;
     padding: 2px;
@@ -101,3 +100,6 @@ a,img{border:0;}
 .side ul li .sidetop{width:200px;height:15px;line-height:50px;display:inline-block;background:#000;opacity:0.8;filter:Alpha(opacity=80);transition:all 0.3s;}
 .side ul li .sidetop:hover{background:#192237;opacity:1;filter:Alpha(opacity=100);width:20px;}
 .side ul li img{float:left;}
+#ik  {
+     line-height:30px;
+}

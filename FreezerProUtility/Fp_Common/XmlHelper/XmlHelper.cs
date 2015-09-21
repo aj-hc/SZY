@@ -1,9 +1,9 @@
-﻿using System.Xml;
+﻿using System;
 using System.Data;
 using System.IO;
-using System.Xml.Serialization;
-using System;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace FreezerProUtility.Fp_Common
 {
@@ -27,7 +27,7 @@ namespace FreezerProUtility.Fp_Common
         /// <returns></returns>
         /// .net中调用方法：写入文件中,则：
         ///          document = XmlOperate.CreateXmlDocument("sex", "sexy");
-        ///          document.Save("c:/bookstore.xml");         
+        ///          document.Save("c:/bookstore.xml");
         public static XmlDocument CreateXmlDocument(string name, string type)
         {
             XmlDocument doc = null;
@@ -46,7 +46,6 @@ namespace FreezerProUtility.Fp_Common
             return doc;
         }
 
-
         /// <summary>
         /// 读取数据
         /// </summary>
@@ -59,6 +58,7 @@ namespace FreezerProUtility.Fp_Common
          * XmlHelper.Read(path, "/Node", "")
          * XmlHelper.Read(path, "/Node/Element[@Attribute='Name']", "Attribute")
          ************************************************/
+
         public static string Read(string path, string node, string attribute)
         {
             string value = "";
@@ -71,6 +71,7 @@ namespace FreezerProUtility.Fp_Common
             catch { }
             return value;
         }
+
         /// <summary>
         /// 读取xml文件中指定节点的数据
         /// </summary>
@@ -80,7 +81,7 @@ namespace FreezerProUtility.Fp_Common
         /// 使用示列:
         /// XMLProsess.Read("/Node", "")
         /// XMLProsess.Read("/Node/Element[@Attribute='Name']")
-        public static string Read( string XMLPath, string node)
+        public static string Read(string XMLPath, string node)
         {
             string value = "";
             try
@@ -108,6 +109,7 @@ namespace FreezerProUtility.Fp_Common
          * XmlHelper.Insert(path, "/Node", "Element", "Attribute", "Value")
          * XmlHelper.Insert(path, "/Node", "", "Attribute", "Value")
          ************************************************/
+
         public static void Insert(string path, string node, string element, string attribute, string value)
         {
             try
@@ -149,6 +151,7 @@ namespace FreezerProUtility.Fp_Common
          * XmlHelper.Insert(path, "/Node", "", "Value")
          * XmlHelper.Insert(path, "/Node", "Attribute", "Value")
          ************************************************/
+
         public static void Update(string path, string node, string attribute, string value)
         {
             try
@@ -178,6 +181,7 @@ namespace FreezerProUtility.Fp_Common
          * XmlHelper.Delete(path, "/Node", "")
          * XmlHelper.Delete(path, "/Node", "Attribute")
          ************************************************/
+
         public static void Delete(string path, string node, string attribute)
         {
             try
@@ -195,6 +199,7 @@ namespace FreezerProUtility.Fp_Common
         }
 
         #region 读取XML资源到DataSet中
+
         /// <summary>
         /// 读取XML资源到DataSet中
         /// </summary>
@@ -217,9 +222,10 @@ namespace FreezerProUtility.Fp_Common
             return ds;
         }
 
-        #endregion
+        #endregion 读取XML资源到DataSet中
 
         #region 操作xml文件中指定节点的数据
+
         /// <summary>
         /// 获得xml文件中指定节点的节点数据
         /// </summary>
@@ -237,8 +243,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return XmlString;
         }
-        #endregion
+
+        #endregion 操作xml文件中指定节点的数据
+
         #region 获取一个字符串xml文档中的ds
+
         /// <summary>
         /// 获取一个字符串xml文档中的ds
         /// </summary>
@@ -251,9 +260,11 @@ namespace FreezerProUtility.Fp_Common
             xnr.Close();
             int a = ds.Tables.Count;
         }
-        #endregion
+
+        #endregion 获取一个字符串xml文档中的ds
 
         #region 读取XML资源到DataTable中
+
         /// <summary>
         /// 读取XML资源到DataTable中
         /// </summary>
@@ -276,9 +287,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return ds.Tables[tableName];
         }
-        #endregion
+
+        #endregion 读取XML资源到DataTable中
 
         #region 读取XML资源中指定的DataTable的指定行指定列的值
+
         /// <summary>
         /// 读取XML资源中指定的DataTable的指定行指定列的值
         /// </summary>
@@ -303,9 +316,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return ds.Tables[tableName].Rows[rowIndex][colName];
         }
-        #endregion
+
+        #endregion 读取XML资源中指定的DataTable的指定行指定列的值
 
         #region 读取XML资源中指定的DataTable的指定行指定列的值
+
         /// <summary>
         /// 读取XML资源中指定的DataTable的指定行指定列的值
         /// </summary>
@@ -330,9 +345,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return ds.Tables[tableName].Rows[rowIndex][colIndex];
         }
-        #endregion
+
+        #endregion 读取XML资源中指定的DataTable的指定行指定列的值
 
         #region 将DataTable写入XML文件中
+
         /// <summary>
         /// 将DataTable写入XML文件中
         /// </summary>
@@ -344,9 +361,11 @@ namespace FreezerProUtility.Fp_Common
             ds.Tables.Add(dt.Copy());
             ds.WriteXml(filePath);
         }
-        #endregion
+
+        #endregion 将DataTable写入XML文件中
 
         #region 将DataTable以指定的根结点名称写入文件
+
         /// <summary>
         /// 将DataTable以指定的根结点名称写入文件
         /// </summary>
@@ -359,9 +378,11 @@ namespace FreezerProUtility.Fp_Common
             ds.Tables.Add(dt.Copy());
             ds.WriteXml(filePath);
         }
-        #endregion
+
+        #endregion 将DataTable以指定的根结点名称写入文件
 
         #region 使用DataSet方式更新XML文件节点
+
         /// <summary>
         /// 使用DataSet方式更新XML文件节点
         /// </summary>
@@ -390,9 +411,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return flag;
         }
-        #endregion
+
+        #endregion 使用DataSet方式更新XML文件节点
 
         #region 使用DataSet方式更新XML文件节点
+
         /// <summary>
         /// 使用DataSet方式更新XML文件节点
         /// </summary>
@@ -422,9 +445,11 @@ namespace FreezerProUtility.Fp_Common
             }
             return flag;
         }
-        #endregion
+
+        #endregion 使用DataSet方式更新XML文件节点
 
         #region 读取XML资源中的指定节点内容
+
         /// <summary>
         /// 读取XML资源中的指定节点内容
         /// </summary>
@@ -485,9 +510,11 @@ namespace FreezerProUtility.Fp_Common
                 }
             }
         }
-        #endregion
+
+        #endregion 读取XML资源中的指定节点内容
 
         #region 更新XML文件中的指定节点内容
+
         /// <summary>
         /// 更新XML文件中的指定节点内容
         /// </summary>
@@ -514,7 +541,8 @@ namespace FreezerProUtility.Fp_Common
             }
             return flag;
         }
-        #endregion
+
+        #endregion 更新XML文件中的指定节点内容
 
         /// <summary>
         /// 将对象写入XML文件
@@ -575,10 +603,11 @@ namespace FreezerProUtility.Fp_Common
         /// <returns></returns>
         public static string SerializeToXmlStr<T>(T obj, bool omitXmlDeclaration)
         {
-
             return XmlSerialize<T>(obj, omitXmlDeclaration);
         }
+
         #region XML序列化反序列化相关的静态方法
+
         /// <summary>
         /// 使用XmlSerializer序列化对象
         /// </summary>
@@ -588,7 +617,6 @@ namespace FreezerProUtility.Fp_Common
         /// <returns>序列化后的字符串</returns>
         public static string XmlSerialize<T>(T obj, bool omitXmlDeclaration)
         {
-
             /* This property only applies to XmlWriter instances that output text content to a stream; otherwise, this setting is ignored.
             可能很多朋友遇见过 不能转换成Xml不能反序列化成为UTF8XML声明的情况,就是这个原因。
             */
@@ -631,7 +659,7 @@ namespace FreezerProUtility.Fp_Common
         private static byte[] ShareReadFile(string filePath)
         {
             byte[] bytes;
-            //避免"正由另一进程使用,因此该进程无法访问此文件"造成异常 共享锁 flieShare必须为ReadWrite,但是如果文件不存在的话,还是会出现异常,所以这里不能吃掉任何异常,但是需要考虑到这些问题 
+            //避免"正由另一进程使用,因此该进程无法访问此文件"造成异常 共享锁 flieShare必须为ReadWrite,但是如果文件不存在的话,还是会出现异常,所以这里不能吃掉任何异常,但是需要考虑到这些问题
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 bytes = new byte[fs.Length];
@@ -648,6 +676,7 @@ namespace FreezerProUtility.Fp_Common
             }
             return bytes;
         }
+
         /// <summary>
         /// 从文件读取并反序列化为对象 （解决: 多线程或多进程下读写并发问题）
         /// </summary>
@@ -689,16 +718,15 @@ namespace FreezerProUtility.Fp_Common
             return (T)new XmlSerializer(typeof(T)).Deserialize(xmlReader);
         }
 
-        #endregion
-
-
+        #endregion XML序列化反序列化相关的静态方法
 
         #region 私有方法
+
         /// <summary>
         /// 加载XML文件
         /// </summary>
         /// <param name="XMLPath">XML文件路径</param>
-        public  static XmlDocument XMLLoad(string XMLPath)
+        public static XmlDocument XMLLoad(string XMLPath)
         {
             string XMLFile = XMLPath;
             XmlDocument xmldoc = new XmlDocument();
@@ -711,6 +739,7 @@ namespace FreezerProUtility.Fp_Common
             { }
             return xmldoc;
         }
+
         /// <summary>
         /// 返回完整路径
         /// </summary>
@@ -726,7 +755,7 @@ namespace FreezerProUtility.Fp_Common
                 return System.Web.HttpContext.Current.Server.MapPath(strPath);
             }
         }
-        #endregion
 
+        #endregion 私有方法
     }
 }

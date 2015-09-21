@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-//
-using System.Threading;
+﻿//
 
 namespace FreezerProUtility.Fp_Model
 {
@@ -25,6 +20,5 @@ namespace FreezerProUtility.Fp_Model
         public string created_at { get; set; }
         public string updated_at { get; set; }
         public string location { get; set; }
-
     }
 }

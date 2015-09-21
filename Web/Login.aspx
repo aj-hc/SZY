@@ -67,11 +67,11 @@
 <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
 
     <form id="Form1" method="post" runat="server">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <table width="620" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
@@ -81,9 +81,9 @@
                 </tr>
                 <tr>
                     <td align="center" background="Images/Images/login_p_img03.gif">
-                        <br/>
+                        <br />
                         <table width="570" border="0" cellspacing="0" cellpadding="0">
-<%--                            <tr>
+                            <%--                            <tr>
                                 <td>
                                     <table cellspacing="0" cellpadding="0" width="570" border="0">
                                         <tbody>
@@ -95,7 +95,7 @@
                                 </td>
                             </tr>--%>
                             <tr>
-                                <img src="../Images/szy_Logo.jpg" style="width: 380px; height: 50px; z-index: 100;float:left; padding-left:40px"></img>
+                                <img src="../Images/szy_Logo.jpg" style="width: 450px; height: 70px; z-index: 100; float: left; padding-left: 40px"></img>
                                 <td>
                                     <img src="Images/Images/a_te01.gif" width="570" height="3">
                                 </td>
@@ -123,13 +123,13 @@
                                                             id="txtPass" runat="server" onkeypress="return focusNext('btnLogin', event,2,this)">
                                                         </td>
                                                     </tr>
-                                                   <%-- <tr>
+                                                    <%-- <tr>
                                                         <td valign="bottom" height="12">科&nbsp;&nbsp;&nbsp;室：
                                                             <asp:DropDownList ID="department" Style="margin-top: 8px" runat="server" class="nemo01" TabIndex="1" Font-Size="Small"></asp:DropDownList>
                                                         </td>
                                                     </tr>--%>
                                                 </table>
-                                                <br/>
+                                                <br />
                                                 <asp:Label ID="lblMsg" runat="server" BackColor="Transparent" ForeColor="Red"></asp:Label>
                                             </td>
                                         </tr>
@@ -158,7 +158,7 @@
                 </tr>
             </tbody>
         </table>
-        <br/>
+        <br />
     </form>
 </body>
 </html>

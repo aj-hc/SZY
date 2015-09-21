@@ -1,16 +1,12 @@
 ﻿using FreezerProUtility.Fp_DAL;
 using FreezerProUtility.Fp_Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace FreezerProUtility.Fp_BLL
 {
     public class Users
     {
-
         //获取用户信息
         private static List<User> GetAll(Fp_Common.UnameAndPwd up)
         {
@@ -22,6 +18,7 @@ namespace FreezerProUtility.Fp_BLL
             List<Fp_Model.User> list = call.getdata<Fp_Model.User>("Users");
             return list;
         }
+
         public static User GetBy(Fp_Common.UnameAndPwd up, string name)
         {
             List<User> list = GetAll(up);

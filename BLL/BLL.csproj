@@ -106,7 +106,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>G:\02.study\工具软件、插件\Json60r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -118,7 +118,9 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
@@ -127,6 +129,7 @@
   <ItemGroup>
     <Compile Include="EmpiInfo.cs" />
     <Compile Include="FormToDic.cs" />
+    <Compile Include="NormalLisItems.cs" />
     <Compile Include="NormalLisReport.cs" />
     <Compile Include="PatientDiagnose.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
@@ -135,29 +138,34 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="QueryRecoder.cs" />
-    <Compile Include="SZY\Bll_ClinicalData.cs" />
     <Compile Include="SZY\EmpiInfo.cs" />
-    <Compile Include="SZY\FpRelated\ImportDataToFp.cs" />
-    <Compile Include="SZY\FpRelated\Samples.cs" />
-    <Compile Include="SZY\FpRelated\SampleSocrce.cs" />
-    <Compile Include="SZY\FpRelated\TestData.cs" />
-    <Compile Include="SZY\FpRelated\Token.cs" />
-    <Compile Include="SZY\FpRelated\UserFields.cs" />
-    <Compile Include="SZY\GetDataFromHospital.cs" />
     <Compile Include="SZY\HospitalXmlStrHelper.cs" />
+    <Compile Include="SZY\NormalLisItems.cs" />
+    <Compile Include="SZY\NormalLisItems_F.cs" />
     <Compile Include="SZY\NormalLisReport.cs" />
+    <Compile Include="SZY\NormalLisReport_list_F.cs" />
     <Compile Include="SZY\PatientDiagnose.cs" />
+    <Compile Include="SZY\PatientDiagnose_list_F.cs" />
     <Compile Include="SZY\QueryRecoder.cs" />
     <Compile Include="SZY\QueryRecoderPartial.cs" />
     <Compile Include="SZY\Request\EmpiInfoRequest.cs" />
+    <Compile Include="SZY\Request\NormalLisItemsRequest.cs" />
     <Compile Include="SZY\Request\NormalLisReportRequest.cs" />
     <Compile Include="SZY\Request\PatientDiagnoseResuest.cs" />
     <Compile Include="SZY\Request\Request.cs" />
     <Compile Include="SZY\ValidationData.cs" />
-    <Compile Include="SZY\Web References\BasicData\Reference.cs" />
-    <Compile Include="SZY\Web References\ClinicalData\Reference.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="UnameAndPwd.cs" />
+    <Compile Include="Web References\BasicData\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ClinicalData\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -205,22 +213,58 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SZY\Web References\BasicData\EmpiService.disco" />
-    <Content Include="SZY\Web References\ClinicalData\PacsLisReportServices.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SZY\Web References\BasicData\EmpiService.wsdl" />
-    <None Include="SZY\Web References\BasicData\Reference.map" />
-    <None Include="SZY\Web References\ClinicalData\PacsLisReportServices.wsdl" />
-    <None Include="SZY\Web References\ClinicalData\Reference.map" />
+    <None Include="Web References\BasicData\EmpiService.wsdl" />
+    <None Include="Web References\BasicData\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ClinicalData\PacsLisReportServices.wsdl" />
+    <None Include="Web References\ClinicalData\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SZY\Service References\" />
+    <WebReferenceUrl Include="http://192.9.198.41:8016/EmpiService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\BasicData\</RelPath>
+      <UpdateFromURL>http://192.9.198.41:8016/EmpiService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>RuRo_BLL_BasicData_EmpiService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.9.198.41:8030/PacsLisReportServices.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ClinicalData\</RelPath>
+      <UpdateFromURL>http://192.9.198.41:8030/PacsLisReportServices.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>RuRo_BLL_ClinicalData_PacsLisReportServices</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\BasicData\EmpiService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ClinicalData\PacsLisReportServices.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

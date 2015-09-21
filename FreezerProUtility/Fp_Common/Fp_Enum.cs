@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FreezerProUtility.Fp_Common
+﻿namespace FreezerProUtility.Fp_Common
 {
-
     #region 调用fp方法返回值排序方式
+
     /// <summary>
     /// 调用fp方法返回值排序方式
     /// </summary>
     public enum Dir { ASC, DESC };
-    #endregion
+
+    #endregion 调用fp方法返回值排序方式
 
     #region Fp 所有方法枚举
+
     /// <summary>
     /// Fp_Api中的所有方法的枚举集合
     /// </summary>
@@ -124,12 +121,12 @@ namespace FreezerProUtility.Fp_Common
         location_info,
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         prescan_box,
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         put_samples_in,
 
@@ -139,7 +136,7 @@ namespace FreezerProUtility.Fp_Common
         roles,
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         sample_archive,
 
@@ -172,11 +169,11 @@ namespace FreezerProUtility.Fp_Common
         /// 样本源
         /// </summary>
         sample_sources,
+
         /// <summary>
         /// 样本源信息
         /// </summary>
         sample_source_info,
-
 
         /// <summary>
         /// 样本类型
@@ -209,7 +206,7 @@ namespace FreezerProUtility.Fp_Common
         samples_by_date,
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         samples_out,
 
@@ -254,7 +251,7 @@ namespace FreezerProUtility.Fp_Common
         take_samples_out,
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         update_box_view,
 
@@ -304,21 +301,21 @@ namespace FreezerProUtility.Fp_Common
         users,
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         vials_box,
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         vials_import,
 
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         vials_sample
     }
+
     //public  class GetDateFromFp
     //{
     //    Config config = new Config();//配置对象
@@ -353,8 +350,7 @@ namespace FreezerProUtility.Fp_Common
 
     //    //生成界面的方法：获取类型、字段
     //    //根据字段类型生成不同的文本框类型并绑定数据
-    //} 
-    #endregion
+    //}
 
-
+    #endregion Fp 所有方法枚举
 }

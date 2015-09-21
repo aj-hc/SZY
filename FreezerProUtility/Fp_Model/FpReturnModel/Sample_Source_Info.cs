@@ -9,9 +9,6 @@
 
 namespace FreezerProUtility.Fp_Model
 {
-    using System;
-    using System.Collections.Generic;
-
     public partial class Sample_Source_Info
     {
         public string id { get; set; }

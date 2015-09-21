@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
+
 namespace FreezerProUtility.Fp_Common
 {
     public static class FpUnicodeHelper
     {
         #region 01.UnicodeStringToChinese
+
         /// <summary>
         /// UnicodeStringToChinese
         /// </summary>
         /// <param name="unicodeString">UnicodeString</param>
         /// <returns>Chinese</returns>
 
-       static Regex re = new Regex("\\\\u[0123456789abcdef]{4}", RegexOptions.IgnoreCase);
-
+        private static Regex re = new Regex("\\\\u[0123456789abcdef]{4}", RegexOptions.IgnoreCase);
 
         public static string ConvertUnicodeStringToChinese(string unicodeString)
         {
@@ -39,7 +35,9 @@ namespace FreezerProUtility.Fp_Common
             outStr = (char)int.Parse(str.Remove(0, 2), System.Globalization.NumberStyles.HexNumber);
             return outStr;
         }
+
         #region ConvertChineseToUnicodeString
+
         //static Regex reUnicode = new Regex(@"\\u([0-9a-fA-F]{4})", RegexOptions.Compiled);
         //public static string ConvertChineseToUnicodeString(string chinese)
         //{
@@ -55,8 +53,8 @@ namespace FreezerProUtility.Fp_Common
         //    }
         //    return unicodeString;
         //}
-        
-        #endregion
+
+        #endregion ConvertChineseToUnicodeString
 
         public static string uncode(string str)
         {
@@ -69,9 +67,6 @@ namespace FreezerProUtility.Fp_Common
             return outStr;
         }
 
-
-        #endregion
-
+        #endregion 01.UnicodeStringToChinese
     }
-
 }

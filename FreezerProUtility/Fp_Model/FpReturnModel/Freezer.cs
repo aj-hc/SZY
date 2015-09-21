@@ -1,8 +1,7 @@
 ﻿namespace FreezerProUtility.Fp_Model
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class Freezer
     {
         public string id { get; set; }

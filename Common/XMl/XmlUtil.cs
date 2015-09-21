@@ -31,6 +31,7 @@ public class XmlUtil
         }
         catch (Exception e)
         {
+            
             return null;
         }
     }

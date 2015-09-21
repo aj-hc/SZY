@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+
 namespace FreezerProUtility.Fp_Common
 {
     public static class EncodeAndDecodeString
     {
-        const string KEY_64 = "ShYiFree";//注意了，是8个字符，64位（ShYi+freezerpro）
+        private const string KEY_64 = "ShYiFree";//注意了，是8个字符，64位（ShYi+freezerpro）
 
-        const string IV_64 = "ShYiFree";
+        private const string IV_64 = "ShYiFree";
+
         /// <summary>
         /// 加密字符串
         /// </summary>
@@ -29,8 +31,8 @@ namespace FreezerProUtility.Fp_Common
             cst.FlushFinalBlock();
             sw.Flush();
             return Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length);
-
         }
+
         /// <summary>
         /// 解密字符串
         /// </summary>
@@ -57,7 +59,9 @@ namespace FreezerProUtility.Fp_Common
                 return "";
             }
         }
+
         #region 方式2
+
         ////默认密钥向量
         //private static byte[] Keys = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF };
         ///**//**//**//// <summary>
@@ -110,7 +114,8 @@ namespace FreezerProUtility.Fp_Common
         //     {
         //        return decryptString;
         //    }
-        //} 
-        #endregion
+        //}
+
+        #endregion 方式2
     }
 }

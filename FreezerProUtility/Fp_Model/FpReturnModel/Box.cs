@@ -1,12 +1,11 @@
 ﻿namespace FreezerProUtility.Fp_Model
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class Box
     {
         public string id { get; set; }
-        public  string  obj_id { get; set; }
+        public string obj_id { get; set; }
         public string location { get; set; }
         public string name { get; set; }
         public string description { get; set; }

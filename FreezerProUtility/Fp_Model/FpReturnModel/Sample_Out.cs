@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-//
-using System.Threading;
+﻿//
 
 namespace FreezerProUtility.Fp_Model
 {
-   public partial class Sample_Out
+    public partial class Sample_Out
     {
-       public int obj_id { get; set; }
+        public int obj_id { get; set; }
         public string id { get; set; }
         public string sample_type { get; set; }
         public string name { get; set; }

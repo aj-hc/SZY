@@ -397,9 +397,9 @@ namespace RuRo.DAL
             return DbHelperSQL.Query(sqlstr);
         }
 
-        public int UpdataQueryRecoderIsDel(string uname,string adddate,string code,string queryType)
+        public int UpdataQueryRecoderIsDel(string uname, int IsDel, string code, string queryType)
         {
-            string sqlstr = "UPDATE QueryRecoder SET IsDel=" + true + " WHERE Uname='" + uname + "' AND AddDate='" + adddate + "' AND Code='" + code + "' AND QueryType='" + queryType + "'";
+            string sqlstr = "UPDATE QueryRecoder SET IsDel=1 WHERE Uname='" + uname + "' AND IsDel=" + IsDel + " AND Code='" + code + "' AND QueryType='" + queryType + "'";
             return DbHelperSQL.ExecuteSql(sqlstr);
         }
 		#endregion  ExtensionMethod

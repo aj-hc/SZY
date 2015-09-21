@@ -52,7 +52,7 @@ function editForm($dg, url) {
     }
 }
 /*删除选择数据,多条记录PK主键参数用逗号,分开*/
-function destroy($dg,url) {
+function destroy($dg, url) {
     var selecRows = $dg.datagrid('getSelections');
     if (selecRows.length > 0) {
         $.messager.confirm('提示', '是否确认删除数据？', function (r) {

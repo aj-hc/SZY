@@ -8,7 +8,7 @@ a:hover{ color:Red; text-decoration:underline;}
 .txt {border: #878787 1px solid;padding: 4px 3px;font:Verdana, Geneva, sans-serif,宋体;line-height: 14px; background-color: #fff;  height: auto; font-size: 14px;}
 .footer{text-align:center;color:#15428B; margin:0px; padding:0px;line-height:23px; font-weight:bold;}
 
-.head a,#laName{color:black;text-decoration:underline; position:relative; top:30px;}
+.head a,#laName{color:black;text-decoration:underline; position:relative; top:10px;}
 
 .easyui-accordion ul{list-style-type:none;margin:0px; padding:10px;}
 .easyui-accordion ul li{ padding:0px;}
@@ -27,4 +27,3 @@ a:hover{ color:Red; text-decoration:underline;}
 .icon-role{background-position: -360px -200px;}
 .icon-set{background-position: -380px -200px;}
 .icon-log{background-position: -380px -80px;}
-

@@ -18,6 +18,7 @@ namespace FreezerProUtility.Fp_Common
                 HttpContext.Current.Response.Cookies.Add(cookie);
             }
         }
+
         /// <summary>
         /// 获取指定Cookie值
         /// </summary>
@@ -33,6 +34,7 @@ namespace FreezerProUtility.Fp_Common
             }
             return str;
         }
+
         /// <summary>
         /// 添加一个Cookie（24小时过期）
         /// </summary>
@@ -42,6 +44,7 @@ namespace FreezerProUtility.Fp_Common
         {
             SetCookie(cookiename, cookievalue, DateTime.Now.AddDays(1.0));
         }
+
         /// <summary>
         /// 添加一个Cookie
         /// </summary>

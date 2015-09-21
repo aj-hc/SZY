@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Drawing;
+
 namespace RuRo.Web
 {
     public partial class ValidateCode : System.Web.UI.Page
@@ -52,6 +49,7 @@ namespace RuRo.Web
             }
             return randomCode;
         }
+
         private string GetRandomCode(int CodeCount)
         {
             string allChar = "0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,i,J,K,M,N,P,Q,R,S,T,U,W,X,Y,Z";
@@ -80,6 +78,7 @@ namespace RuRo.Web
 
             return RandomCode;
         }
+
         private void CreateImage(string checkCode)
         {
             int iwidth = (int)(checkCode.Length * 14);
@@ -118,13 +117,13 @@ namespace RuRo.Web
 
             System.IO.MemoryStream ms = new System.IO.MemoryStream();
             image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //history back 不重复 
-            Response.Cache.SetNoStore();//这一句 		
+            //history back 不重复
+            Response.Cache.SetNoStore();//这一句
             Response.ClearContent();
             Response.ContentType = "image/Jpeg";
             Response.BinaryWrite(ms.ToArray());
             g.Dispose();
             image.Dispose();
-        }        
+        }
     }
 }

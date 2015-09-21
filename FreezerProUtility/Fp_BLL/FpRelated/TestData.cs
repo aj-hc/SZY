@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
 
 namespace FreezerProUtility.Fp_BLL
 {
@@ -30,6 +27,7 @@ namespace FreezerProUtility.Fp_BLL
             }
             return result;
         }
+
         /// <summary>
         /// 提交临床数据到Fp
         /// </summary>
@@ -50,6 +48,7 @@ namespace FreezerProUtility.Fp_BLL
             }
             return result;
         }
+
         /// <summary>
         /// 导入多条临床数据
         /// </summary>
@@ -70,6 +69,7 @@ namespace FreezerProUtility.Fp_BLL
             }
             return result;
         }
+
         private static string ImportTestDataToFp(Fp_Common.UnameAndPwd up, Dictionary<string, string> jsonDic)
         {
             string result = string.Empty;
@@ -100,6 +100,7 @@ namespace FreezerProUtility.Fp_BLL
             List<Fp_Model.Subdivision> List = call.getdata<Fp_Model.Subdivision>("Subdivision");
             return List;
         }
+
         private static string CheckRes(string jsonResStr)
         {
             return "";

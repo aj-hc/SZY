@@ -1,6 +1,6 @@
 /**
  * jQuery EasyUI 1.4.3
- * 
+ *
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
@@ -336,4 +336,3 @@ return _4f.min+(_4f.max-_4f.min)*(pos/_4e);
 },onComplete:function(_54){
 }};
 })(jQuery);
-

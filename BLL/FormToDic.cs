@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace RuRo.BLL
 {
     public class FormToDic
     {
         #region 转换患者基本信息为字典 +private Dictionary<string, string> ConvertBaseInfoObjToDic(PageBaseInfo pageBaseInfo)
+
         /// <summary>
         /// 转换患者基本信息为字典  包含Name和描述
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public  static Dictionary<string, string> ConvertModelToDic(object obj)
+        public static Dictionary<string, string> ConvertModelToDic(object obj)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             Type type = obj.GetType();
@@ -34,8 +33,11 @@ namespace RuRo.BLL
             }
             return dic;
         }
-        #endregion
+
+        #endregion 转换患者基本信息为字典 +private Dictionary<string, string> ConvertBaseInfoObjToDic(PageBaseInfo pageBaseInfo)
+
         #region 将前台返回的form字典转换成对象 + private T GetFromInfo<T>(List<Dictionary<string, string>> dicList) where T : class,new()
+
         /// <summary>
         /// 将前台返回的form字典转换成对象
         /// </summary>
@@ -69,11 +71,10 @@ namespace RuRo.BLL
                     Common.LogHelper.WriteError(ex);
                     continue;
                 }
-
             }
             return t;
         }
-        #endregion
 
+        #endregion 将前台返回的form字典转换成对象 + private T GetFromInfo<T>(List<Dictionary<string, string>> dicList) where T : class,new()
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 
 namespace RuRo.Web.Sever
@@ -10,7 +8,6 @@ namespace RuRo.Web.Sever
     /// </summary>
     public class EmpiInfo : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -22,18 +19,23 @@ namespace RuRo.Web.Sever
                     case "inf":/*查询实体类*/
                         InfoData(context);
                         break;
+
                     case "ins":/*新增*/
                         SaveData(context);
                         break;
+
                     case "upd":/*修改*/
                         SaveData(context);
                         break;
+
                     case "del":/*删除*/
                         DeleteData(context);
                         break;
+
                     case "qry":/*查询*/
                         QueryData(context, false);
                         break;
+
                     case "post":/*提交*/
                         PostData(context);
                         break;
@@ -46,19 +48,17 @@ namespace RuRo.Web.Sever
         private void PostData(HttpContext context)
         {
             string empiInfo = context.Request.Params["empiInfo"];
-            string code = context.Request.Params["code"];
+            string code = context.Request.Params["code"].Trim();
             string codeType = context.Request.Params["codeType"];
             BLL.EmpiInfo bll = new BLL.EmpiInfo();
-            string result = bll.PostData(empiInfo,code, codeType);
+            string result = bll.PostData(empiInfo, code, codeType);
             context.Response.Write(result);
-
         }
 
         private void QueryData(HttpContext context, bool p)
         {
             if (p)
             {
-
             }
             else
             {
@@ -72,8 +72,8 @@ namespace RuRo.Web.Sever
                 //string jsonStrResult = state.Res();
                 context.Response.Write(result);
             }
-
         }
+
         private void DeleteData(HttpContext context)
         {
             throw new NotImplementedException();
@@ -86,8 +86,8 @@ namespace RuRo.Web.Sever
 
         private void InfoData(HttpContext context)
         {
-
         }
+
         public bool IsReusable
         {
             get

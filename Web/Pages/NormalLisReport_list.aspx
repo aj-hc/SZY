@@ -10,12 +10,11 @@
     <script src="../include/jquery-easyui-1.4.3/jquery.min.js"></script>
     <script src="../include/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
     <script src="../include/jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js"></script>
-
 </head>
 <body>
     <!--datagrid栏-->
-    <table id="NormalLisReportDg" title="临床检测" class="easyui-datagrid" style="width: auto; height: 260px"
-        url="" fit='false'
+    <table id="NormalLisReportDg" title="临床检测" class="easyui-datagrid" style="width: auto; height: 180px"
+        fit='false'
         pagination="false" rownumbers="true"
         fitcolumns="true" singleselect="false" toolbar="#toolbarN"
         striped="false"
@@ -26,7 +25,7 @@
                 <th field="id" width="100" hidden="true">id</th>
                 <th field="hospnum" width="100">门诊或住院号</th>
                 <th field="patname" width="100">姓名</th>
-                <th field="sex" width="100" sortable="true">性别</th>
+                <th field="sex" width="100" sortable="true" hidden="true">性别</th>
                 <th field="age" width="100" sortable="true" hidden="true">年龄</th>
                 <th field="age_month" width="100" sortable="true" hidden="true">月</th>
                 <th field="ext_mthd" width="100" sortable="true">项目总称</th>
@@ -61,6 +60,14 @@
     </div>
 
     <script type="text/javascript">
+        function ShowMsg(msg) {
+            $.messager.show({
+                title: "提示",
+                msg: msg,
+                timeout: 2000,
+                showType: 'fade'
+            });
+        }
         /*删除选择数据,多条记录PK主键参数用逗号,分开*/
         function destroy() {
             var $NormalLisReportDg = $('#NormalLisReportDg');
@@ -70,65 +77,42 @@
                 $NormalLisReportDg.datagrid('deleteRow', rowIndex);
             }
             $("#NormalLisReportDg").datagrid("clearSelections");
-
-            //var rows = $('#NormalLisReportDg').datagrid('getSelections');
-            //alert(rows);
-            //var allRows = $('#NormalLisReportDg').datagrid('getData');
-            //alert(allRows);
-            //if (rows.length > 0) {
-            //    $.messager.confirm('提示', '是否确认删除数据？', function (r) {
-            //        for (var row in rows) {
-            //            $('#NormalLisReportDg').datagrid('deleteRow', allRows);
-            //            $.removeData(allRows,rows[row])
-            //            delete allRows[rows[row]]
-            //        }
-            //        $('#NormalLisReportDg').datagrid('loadData', allRows);    //重新加载载数据
-            //    })
-            //}
-            //else {
-            //    $.messager.alert('警告', '请选择数据', 'warning');
-            //}
         }
 
         //POST临床数据到后台
-        function PostNormalLisReport_list()
-        {
+        function PostNormalLisReport_list() {
             var _NormalLisReport = $('#NormalLisReportDg').datagrid('getChecked');
-            if (_NormalLisReport.length <= 0) {
-                $.messager.alert('提示', '未选择诊断信息或诊断信息为空', 'error'); return;
-            }
-
+            //if (_NormalLisReport.length <= 0) {
+            //    $.messager.alert('提示', '未选择诊断信息或诊断信息为空', 'error'); return;
+            //}
             var code = $('#oldCode').textbox('getValue');
             var codeType = $('#oldCodeType').textbox('getValue');
-           var  count = Math.random();
-           var rowNormalLisReport = JSON.stringify(_NormalLisReport);
-           ajaxLoading();
+            var count = Math.random();
+            var rowNormalLisReport = JSON.stringify(_NormalLisReport);
+            ajaxLoading();
             $.ajax({
                 type: 'post',
                 dataType: "json",
-                url: '/Sever/NormalLisReport.ashx',
+                url: '/Sever/NormalLisReport.ashx' + "?count" + count,
                 data: {
                     "mode": "post",
-                    "count":count,
+                    //"count":count,
                     "NormalLis": rowNormalLisReport,
                     "code": code,
                     "codeType": codeType
                 },
-                success: function (data)
-                {
+                success: function (data) {
                     ajaxLoadEnd();
                     if (data.success) {
-                        alert("OK" + data.message);
+                        ShowMsg("临床检验信息："+data.message);
                     }
                     else {
-                        $.messager.alert('提示', obj.message, 'error');
+                        $.messager.alert('提示', data.message);
                     }
                 }
             });
-
+            ajaxLoadEnd();
         }
-
-</script>
-
+    </script>
 </body>
 </html>

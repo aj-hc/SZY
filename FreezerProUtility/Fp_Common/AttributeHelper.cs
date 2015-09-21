@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FreezerProUtility.Fp_Common
 {
@@ -12,7 +9,9 @@ namespace FreezerProUtility.Fp_Common
         {
             this.description = Description_in;
         }
+
         protected String description;
+
         public String Description
         {
             get

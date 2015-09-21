@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using LTP.Accounts.Bus;
+﻿using LTP.Accounts.Bus;
+using System;
 using System.Configuration;
 using System.Web.Security;
+using System.Web.UI;
 
 namespace Maticsoft.Web.Controls
 {
     public partial class CheckRight : System.Web.UI.UserControl
     {
         public int PermissionID = -1;
+
         protected void Page_Load(object sender, System.EventArgs e)
         {
         }
 
         #region Web 窗体设计器生成的代码
+
         override protected void OnInit(EventArgs e)
         {
             InitializeComponent();
             base.OnInit(e);
         }
+
         private void InitializeComponent()
         {
             if (!Page.IsPostBack)
@@ -44,7 +44,6 @@ namespace Maticsoft.Web.Controls
                         Response.Write("<script defer>window.alert('您没有权限进入本页！\\n请重新登录或与管理员联系');history.back();</script>");
                         Response.End();
                     }
-
                 }
                 else
                 {
@@ -55,9 +54,9 @@ namespace Maticsoft.Web.Controls
                     Response.Write("<script defer>window.alert('您没有权限进入本页或当前登录用户已过期！\\n请重新登录或与管理员联系！');parent.location='" + virtualPath + "/" + loginPage + "';</script>");
                     Response.End();
                 }
-
             }
         }
-        #endregion
+
+        #endregion Web 窗体设计器生成的代码
     }
 }
