@@ -56,7 +56,6 @@
             }
             var code = $('#oldCode').textbox('getValue');
             var codeType = $('#oldCodeType').textbox('getValue');
-            //[{ "name": "SourceType", "value": "" }, { "name": "PatientName", "value": "项恺" }, { "name": "Sex", "value": "男" }, { "name": "Birthday", "value": "2015-08-24" }, { "name": "CardId", "value": "110" }]
             ajaxLoading();
             $.ajax({
                 type: "POST",
@@ -71,7 +70,6 @@
                     ajaxLoadEnd();
                     if (response) {
                         var res = JSON.parse(response);
-                        //alert(response);
                         if (res.success || res.message.indexOf('should be unique.') > -1) {
                             ShowMsg("患者信息：" + "导入成功" +res.message);
                             //调用方法查询数据

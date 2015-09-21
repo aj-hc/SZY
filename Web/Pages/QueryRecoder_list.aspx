@@ -92,7 +92,6 @@
                         success: function (data) {
                             var obj = $.parseJSON(data);
                             if (obj.Qdata == "") {
-                                // $.messager.alert('提示', '后面没有啦！'); return;
                             }
                             else {
                                 var Qdata = $.parseJSON(obj.Qdata);

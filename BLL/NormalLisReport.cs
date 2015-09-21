@@ -165,15 +165,6 @@ namespace RuRo.BLL
         {
             return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
-
-        /// <summary>
-        /// 分页获取数据列表
-        /// </summary>
-        //public DataSet GetList(int PageSize,int PageIndex,string strWhere)
-        //{
-        //return dal.GetList(PageSize,PageIndex,strWhere);
-        //}
-
         #endregion BasicMethod
     }
 }

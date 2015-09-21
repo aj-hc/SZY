@@ -43,7 +43,7 @@
                     ajaxLoadEnd();
                     $('#oldCodeType').textbox('setValue', codeType);
                     $('#oldCode').textbox('setValue', code);
-                    if (!response) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+                    if (!response) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error'); return; }
                     else {
                         var obj = $.parseJSON(response);
                         if (obj.Statu == "err") {
@@ -52,13 +52,9 @@
                         }
                         else if (obj.Statu == "ok") {
                             var Qdata = obj.Data;
-
-                            if (Qdata.length > 0)
-                            {
-                                for (var i = 0; i < Qdata.length; i++)
-                                {
-                                    if (Qdata[i].Type == "1")
-                                    {
+                            if (Qdata.length > 0) {
+                                for (var i = 0; i < Qdata.length; i++) {
+                                    if (Qdata[i].Type == "1") {
                                         Qdata[i].Type = "中医疾病";
                                     }
                                     else if (Qdata[i].Type == "2") {
@@ -77,8 +73,12 @@
                                         Qdata[i].Flag = "中医诊断";
                                     }
                                 }
-                            } $('#PatientDiagnoseDg').datagrid("loadData", Qdata);
-                            // var row = $('#NormalLisReportDg').datagrid('getRows');
+                                $('#PatientDiagnoseDg').datagrid("loadData", Qdata);
+                            }
+                            else
+                            {
+                                $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error'); return;
+                            }
                         }
                     }
                 }

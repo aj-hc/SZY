@@ -44,7 +44,7 @@
                     ajaxLoadEnd();
                     $('#oldCodeType').textbox('setValue', codeType);
                     $('#oldCode').textbox('setValue', code);
-                    if (!response) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error') }
+                    if (!response) { $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error'); return; }
                     var obj = $.parseJSON(response);
                     if (obj.Statu == "err") {
                         ShowMsg("临床监测数据：" + obj.Msg);
@@ -52,20 +52,24 @@
                     }
                     else if (obj.Statu == "ok") {
                         var Qdata = obj.Data;
-                        for (var i = 0; i < Qdata.length; i++)
+                        if (Qdata.length > 0)
                         {
-                            if (Qdata[i].ref_flag == "1") {
-                                Qdata[i].ref_flag = "高";
+                            for (var i = 0; i < Qdata.length; i++) {
+                                if (Qdata[i].ref_flag == "1") {
+                                    Qdata[i].ref_flag = "高";
+                                }
+                                else if (Qdata[i].ref_flag == "2") {
+                                    Qdata[i].ref_flag = "低";
+                                }
+                                else if (Qdata[i].ref_flag == "3") {
+                                    Qdata[i].ref_flag = "阳性";
+                                }
                             }
-                            else if (Qdata[i].ref_flag == "2") {
-                                Qdata[i].ref_flag = "低";
-                            }
-                            else if (Qdata[i].ref_flag == "3") {
-                                Qdata[i].ref_flag = "阳性";
-                            }
+                            $('#NormalLisReportDg').datagrid("loadData", Qdata);
                         }
-                        $('#NormalLisReportDg').datagrid("loadData", Qdata);
-                        // var row = $('#NormalLisReportDg').datagrid('getRows');
+                        else {
+                            $.messager.alert('提示', '查询不到数据,请检查数据是否存在！', 'error'); return;
+                        }
                     }
                 }
             });
@@ -75,11 +79,6 @@
 </head>
 <body>
     <div class="easyui-panel">
-        <%-- <div>
-            <ul>
-                <li><b>查询诊断信息</b></li>
-            </ul>
-        </div>--%>
         <form id="querybycodeform">
             <div id="Div1" runat="server">
                 <select id="codeType" class="easyui-combobox" name="codeType" style="width: 150px;" data-options="panelHeight: 'auto'">
@@ -139,9 +138,6 @@
             <tr>
                 <!--button按钮工具栏-->
                 <td style="text-align: right;">
-                    <%--<a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonInfo" iconCls="icon-search" plain="false" onclick="infoForm();">查看</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonAdd" iconCls="icon-add" plain="false" onclick="newForm();">添加</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonEdit" iconCls="icon-edit" plain="false" onclick="editForm();">编辑</a>--%>
                     <a href="javascript:void(0)" class="easyui-linkbutton" id="linkbuttonDel" iconcls="icon-cancel" plain="false" onclick="destroy();">删除</a>
                 </td>
             </tr>
@@ -167,13 +163,9 @@
             }
             $("#NormalLisReportDg").datagrid("clearSelections");
         }
-
         //POST临床数据到后台
         function PostNormalLisReport_list() {
             var _NormalLisReport = $('#NormalLisReportDg').datagrid('getChecked');
-            //if (_NormalLisReport.length <= 0) {
-            //    $.messager.alert('提示', '未选择诊断信息或诊断信息为空', 'error'); return;
-            //}
             var code = $('#oldCode').textbox('getValue');
             var codeType = $('#oldCodeType').textbox('getValue');
             var count = Math.random();
@@ -185,7 +177,6 @@
                 url: '/Sever/NormalLisReport.ashx' + "?count" + count,
                 data: {
                     "mode": "post",
-                    //"count":count,
                     "NormalLis": rowNormalLisReport,
                     "code": code,
                     "codeType": codeType
