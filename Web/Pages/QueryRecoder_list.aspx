@@ -111,6 +111,7 @@
             });
         })
         /*删除选择数据,多条记录PK主键参数用逗号,分开*/
+
         function destroy() {
             var $QueryRecoderDg = $('#QueryRecoderDg');
             var row = $('#QueryRecoderDg').datagrid('getSelections');

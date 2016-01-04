@@ -642,6 +642,7 @@
     <Content Include="Pages\NormalLisReport_list_F.aspx" />
     <Content Include="Pages\PatientDiagnose_info.aspx" />
     <Content Include="Pages\PatientDiagnose_list.aspx" />
+    <Content Include="Pages\PatientDiagnose_list_KK.aspx" />
     <Content Include="Pages\PatientDiagnose_list_F.aspx" />
     <Content Include="Pages\QueryRecoder_list.aspx" />
     <Content Include="Pages\SampleInfo.html" />
@@ -650,6 +651,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Test\WebForm1.aspx" />
+    <Content Include="XML\queryDiagnosisReq.xml" />
+    <Content Include="XML\queryDiagnosisResp.xml" />
+    <Content Include="XML\queryPatientReq.xml" />
+    <Content Include="XML\queryPatientResp.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CheckRight.ascx.cs">
@@ -759,6 +764,13 @@
     </Compile>
     <Compile Include="Pages\PatientDiagnose_list.aspx.designer.cs">
       <DependentUpon>PatientDiagnose_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PatientDiagnose_list_KK.aspx.cs">
+      <DependentUpon>PatientDiagnose_list_KK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\PatientDiagnose_list_KK.aspx.designer.cs">
+      <DependentUpon>PatientDiagnose_list_KK.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\PatientDiagnose_list_F.aspx.cs">
       <DependentUpon>PatientDiagnose_list_F.aspx</DependentUpon>

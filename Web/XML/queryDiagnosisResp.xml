@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryDiagnosisResponse xmlns="http://chas.hit.com/transport/integration/common/msg">
+	<respHeader>
+		<respCode>000000</respCode>
+	</respHeader>
+	<diagnosis>
+		<seqNo>0</seqNo>
+		<diagnosisCode>BNG021</diagnosisCode>
+		<diagnosisName>黄疸-阴黄</diagnosisName>
+		<symptomCode>ZBFRM0</symptomCode>
+		<symptomName>风热毒蕴证</symptomName>
+		<type>中医入院诊断</type>
+		<diagnosisDate>2012-10-22 14:40:55</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>1</seqNo>
+		<diagnosisCode>BNG022</diagnosisCode>
+		<diagnosisName>黄疸-阳黄</diagnosisName>
+		<symptomCode>ZZXS11</symptomCode>
+		<symptomName>心肾不交、心胆失调</symptomName>
+		<type>中医入院诊断</type>
+		<diagnosisDate>2012-10-22 14:40:59</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>2</seqNo>
+		<diagnosisCode>BWR130</diagnosisCode>
+		<diagnosisName>乳悬</diagnosisName>
+		<symptomCode>ZBRD96</symptomCode>
+		<symptomName>热毒袭肺</symptomName>
+		<type>中医入院诊断</type>
+		<diagnosisDate>2012-10-22 14:41:03</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>3</seqNo>
+		<diagnosisCode>BNX061</diagnosisCode>
+		<diagnosisName>癫狂-癫</diagnosisName>
+		<symptomCode>ZZGS24</symptomCode>
+		<symptomName>肝肾亏虚,痰瘀阻络</symptomName>
+		<type>中医入院诊断</type>
+		<diagnosisDate>2012-10-22 15:43:21</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>0</seqNo>
+		<diagnosisCode>BNG011</diagnosisCode>
+		<diagnosisName>胆胀</diagnosisName>
+		<symptomCode>ZBI310</symptomCode>
+		<symptomName>湿郁卫气</symptomName>
+		<type>中医出院诊断</type>
+		<diagnosisDate>2012-10-22 14:41:21</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>1</seqNo>
+		<diagnosisCode>BNW150</diagnosisCode>
+		<diagnosisName>大头瘟</diagnosisName>
+		<symptomCode>ZZGPD1</symptomCode>
+		<symptomName>肝郁脾虚，湿瘀内阻</symptomName>
+		<type>中医出院诊断</type>
+		<diagnosisDate>2012-10-22 14:41:25</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>2</seqNo>
+		<diagnosisCode>BES040</diagnosisCode>
+		<diagnosisName>丹痧</diagnosisName>
+		<symptomCode>ZBRD96</symptomCode>
+		<symptomName>热毒袭肺</symptomName>
+		<type>中医出院诊断</type>
+		<diagnosisDate>2012-10-22 14:41:29</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>3</seqNo>
+		<diagnosisCode>BES040</diagnosisCode>
+		<diagnosisName>丹痧</diagnosisName>
+		<symptomCode>ZBFRD0</symptomCode>
+		<symptomName>风热蕴肌证</symptomName>
+		<type>中医出院诊断</type>
+		<diagnosisDate>2012-10-22 14:41:34</diagnosisDate>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>0</seqNo>
+		<diagnosisCode>C00.100</diagnosisCode>
+		<diagnosisName>外下唇恶性肿瘤</diagnosisName>
+		<symptomCode>M81200/1</symptomCode>
+		<symptomName>膀胱上皮乳头状瘤</symptomName>
+		<type>西医入院诊断</type>
+		<subjectType>主要诊断</subjectType>
+		<diagnosisDate>2012-10-22 10:42:16</diagnosisDate>
+		<remark>df</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>1</seqNo>
+		<diagnosisCode>A04.000</diagnosisCode>
+		<diagnosisName>肠道病原性大肠杆菌感染</diagnosisName>
+		<type>西医入院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 10:42:27</diagnosisDate>
+		<remark>f</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>2</seqNo>
+		<diagnosisCode>S89.900</diagnosisCode>
+		<diagnosisName>小腿损伤</diagnosisName>
+		<symptomCode>V26.200</symptomCode>
+		<symptomName>骑摩托车人员损伤，与特指非机动车辆碰撞，非交通事故</symptomName>
+		<type>西医入院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 10:42:31</diagnosisDate>
+		<remark>sd</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>3</seqNo>
+		<diagnosisCode>C00.200</diagnosisCode>
+		<diagnosisName>外唇恶性肿瘤</diagnosisName>
+		<symptomCode>M97140/3</symptomCode>
+		<symptomName>大细胞(ki-1＋)淋巴瘤</symptomName>
+		<type>西医入院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 10:42:42</diagnosisDate>
+		<remark>i</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>4</seqNo>
+		<diagnosisCode>A01.100</diagnosisCode>
+		<diagnosisName>副伤寒甲</diagnosisName>
+		<type>西医入院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 10:42:59</diagnosisDate>
+		<remark></remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>5</seqNo>
+		<diagnosisCode>C00.800</diagnosisCode>
+		<diagnosisName>唇交搭跨越恶性肿瘤</diagnosisName>
+		<symptomCode>M82000/0</symptomCode>
+		<symptomName>外分泌性皮肤圆柱瘤</symptomName>
+		<type>西医入院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 10:50:05</diagnosisDate>
+		<remark>d</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>6</seqNo>
+		<diagnosisCode>C00.304</diagnosisCode>
+		<diagnosisName>上唇内面口腔面恶性肿瘤</diagnosisName>
+		<symptomCode>M83310/3</symptomCode>
+		<symptomName>高分化滤泡性腺癌</symptomName>
+		<type>西医入院诊断</type>
+		<subjectType>并发症</subjectType>
+		<diagnosisDate>2012-10-22 10:50:20</diagnosisDate>
+		<remark>bi</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>0</seqNo>
+		<diagnosisCode>A02.201+J17.0*</diagnosisCode>
+		<diagnosisName>沙门菌肺炎</diagnosisName>
+		<type>西医补充诊断</type>
+		<subjectType>主要诊断</subjectType>
+		<diagnosisDate>2012-10-22 10:51:05</diagnosisDate>
+		<remark></remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>0</seqNo>
+		<diagnosisCode>A04.803</diagnosisCode>
+		<diagnosisName>厌氧菌肠炎</diagnosisName>
+		<type>西医修正诊断</type>
+		<subjectType>主要诊断</subjectType>
+		<diagnosisDate>2012-10-22 10:50:52</diagnosisDate>
+		<remark>y</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>1</seqNo>
+		<diagnosisCode>C00.000</diagnosisCode>
+		<diagnosisName>外上唇恶性肿瘤</diagnosisName>
+		<symptomCode>M80460/3</symptomCode>
+		<symptomName>非小细胞癌</symptomName>
+		<type>西医修正诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 10:50:56</diagnosisDate>
+		<remark>fd</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>0</seqNo>
+		<diagnosisCode>C00.100</diagnosisCode>
+		<diagnosisName>外下唇恶性肿瘤</diagnosisName>
+		<symptomCode>M81200/1</symptomCode>
+		<symptomName>膀胱上皮乳头状瘤</symptomName>
+		<type>西医确认诊断</type>
+		<subjectType>主要诊断</subjectType>
+		<diagnosisDate>2012-10-22 10:42:16</diagnosisDate>
+		<remark>df</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>0</seqNo>
+		<diagnosisCode>C00.001</diagnosisCode>
+		<diagnosisName>外上唇口红区恶性肿瘤</diagnosisName>
+		<symptomCode>M80200/3</symptomCode>
+		<symptomName>未分化型癌</symptomName>
+		<type>西医出院诊断</type>
+		<subjectType>主要诊断</subjectType>
+		<diagnosisDate>2012-10-22 14:41:42</diagnosisDate>
+		<remark>sd</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>1</seqNo>
+		<diagnosisCode>C00.300</diagnosisCode>
+		<diagnosisName>上唇内面恶性肿瘤</diagnosisName>
+		<symptomCode>M80120/6</symptomCode>
+		<symptomName>转移性大细胞癌</symptomName>
+		<type>西医出院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 14:41:50</diagnosisDate>
+		<remark>d</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>2</seqNo>
+		<diagnosisCode>C00.200</diagnosisCode>
+		<diagnosisName>外唇恶性肿瘤</diagnosisName>
+		<symptomCode>M80000/0</symptomCode>
+		<symptomName>良性肿瘤</symptomName>
+		<type>西医出院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 14:42:46</diagnosisDate>
+		<remark>d</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>3</seqNo>
+		<diagnosisCode>C00.400</diagnosisCode>
+		<diagnosisName>下唇内面恶性肿瘤</diagnosisName>
+		<symptomCode>M80530/0</symptomCode>
+		<symptomName>内翻性乳头状瘤</symptomName>
+		<type>西医出院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 14:42:54</diagnosisDate>
+		<remark></remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>4</seqNo>
+		<diagnosisCode>S89.900</diagnosisCode>
+		<diagnosisName>小腿损伤</diagnosisName>
+		<symptomCode>V36.200</symptomCode>
+		<symptomName>三轮机动车车辆外人员损伤，与特指的非机动车辆碰撞，非交通</symptomName>
+		<type>西医出院诊断</type>
+		<subjectType>伴随疾病</subjectType>
+		<diagnosisDate>2012-10-22 14:43:04</diagnosisDate>
+		<remark>d</remark>
+	</diagnosis>
+	<diagnosis>
+		<seqNo>5</seqNo>
+		<diagnosisCode>C00.600</diagnosisCode>
+		<diagnosisName>唇连合恶性肿瘤</diagnosisName>
+		<symptomCode>M80120/3</symptomCode>
+		<symptomName>大细胞癌</symptomName>
+		<type>西医出院诊断</type>
+		<subjectType>并发症</subjectType>
+		<diagnosisDate>2012-10-22 14:43:12</diagnosisDate>
+		<remark>bi</remark>
+	</diagnosis>
+	<diagnosis>
+		<diagnosisCode>A04.300</diagnosisCode>
+		<diagnosisName>肠出血性大肠杆菌感染</diagnosisName>
+		<type>医院感染诊断</type>
+	</diagnosis>
+	<diagnosis>
+		<diagnosisCode>A04.401</diagnosisCode>
+		<diagnosisName>大肠杆菌性肠炎</diagnosisName>
+		<type>医院感染诊断</type>
+	</diagnosis>
+</QueryDiagnosisResponse>

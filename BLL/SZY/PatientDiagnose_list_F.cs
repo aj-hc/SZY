@@ -20,76 +20,155 @@ namespace RuRo.BLL.SZY
         {
             Model.DTO.JsonModel jsonmodel = new Model.DTO.JsonModel() { Statu = "err", Msg = "无数据", Data = "" };
             List<string> requestStr = new List<string>();
-            requestStr = GetRequestStr(model);
-            //保存记录（查询记录数据,更新或添加）  string.IsNullOrEmpty(requestStr)存在值 修改修！string.IsNullOrEmpty(requestStr) kaka
-            if (requestStr != null && requestStr.Count > 0)
+            #region 返回卡号
+            if (model.codeType == "0")
             {
-                List<Model.PatientDiagnose> patientDiagnoseList = new List<Model.PatientDiagnose>();
-                StringBuilder msg = new StringBuilder();
-                //调用接口获取数据
-                foreach (var item in requestStr)
+                requestStr = GetRequestStr(model);
+                //保存记录（查询记录数据,更新或添加）  string.IsNullOrEmpty(requestStr)存在值 修改修！string.IsNullOrEmpty(requestStr) kaka
+                if (requestStr != null && requestStr.Count > 0)
                 {
-                    string xmlStr = GetWebServiceData(item);
-                    string _Msg = "";
-                    //返回数据缺少结束标记
-                    if (!xmlStr.Contains("</Response>"))
+                    List<Model.PatientDiagnose> patientDiagnoseList = new List<Model.PatientDiagnose>();
+                    StringBuilder msg = new StringBuilder();
+                    //调用接口获取数据
+                    foreach (var item in requestStr)
                     {
-                        xmlStr += "</Response>";
-                    }
-                    Model.DTO.PatientDiagnoseResuest request = XmlStrToPatientDiagnoseResuest(item);
-                    if (request != null)
-                    {
-                        List<Model.PatientDiagnose> patientDiagnoses = StrTObject(xmlStr, out _Msg, request);
-                        if (patientDiagnoses != null)
+                        string xmlStr = GetWebServiceData(item);
+                        string _Msg = "";
+                        //返回数据缺少结束标记
+                        if (!xmlStr.Contains("</Response>"))
                         {
-                            foreach (Model.PatientDiagnose patientDiagnose in patientDiagnoses)
+                            xmlStr += "</Response>";
+                        }
+                        Model.DTO.PatientDiagnoseResuest request = XmlStrToPatientDiagnoseResuest(item);
+                        if (request != null)
+                        {
+                            List<Model.PatientDiagnose> patientDiagnoses = StrTObject(xmlStr, out _Msg, request);
+                            if (patientDiagnoses != null)
                             {
-                                if (!patientDiagnoseList.Contains(patientDiagnose))
+                                foreach (Model.PatientDiagnose patientDiagnose in patientDiagnoses)
                                 {
-                                    bool check = CheckData(patientDiagnose);
-                                    if (!check)
+                                    if (!patientDiagnoseList.Contains(patientDiagnose))
                                     {
-                                        patientDiagnoseList.Add(patientDiagnose);
+                                        bool check = CheckData(patientDiagnose);
+                                        if (!check)
+                                        {
+                                            patientDiagnoseList.Add(patientDiagnose);
+                                        }
+                                    }
+                                    if (!string.IsNullOrEmpty(_Msg))
+                                    {
+                                        msg.Replace(_Msg, "");
+                                        msg.Replace("&nbsp", "");
+                                        msg.Replace(" ", "");
+                                        msg.Append(" &nbsp " + _Msg);
                                     }
                                 }
-                                if (!string.IsNullOrEmpty(_Msg))
-                                {
-                                    msg.Replace(_Msg, "");
-                                    msg.Replace("&nbsp", "");
-                                    msg.Replace(" ", "");
-                                    msg.Append(" &nbsp " + _Msg);
-                                }
+
                             }
-                           
+                        }
+                        //nnn.Add(model.Code);
+
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(_Msg))
+                            {
+                                msg.Replace(_Msg, "");
+                                msg.Replace("&nbsp", "");
+                                msg.Replace(" ", "");
+                                msg.Append(" &nbsp " + _Msg);
+                            }
                         }
                     }
-                    //nnn.Add(model.Code);
-
+                    if (patientDiagnoseList != null && patientDiagnoseList.Count > 0)
+                    {
+                        //有数据
+                        jsonmodel = CreatJsonMode("ok", msg.ToString(), patientDiagnoseList);
+                        // ChangeQueryRecordStatu(cq, msg.ToString());
+                    }
                     else
                     {
-                        if (!string.IsNullOrEmpty(_Msg))
+                        //无数据
+                        jsonmodel = CreatJsonMode("err", msg.ToString(), patientDiagnoseList);
+                        ///ChangeQueryRecordStatu(cq, msg.ToString());
+                    }
+                }
+            }
+            #endregion
+            #region 返回住院号
+            else if(model.codeType=="1")
+            {
+                RuRo.BLL.PK pk=new PK();
+                //获取住院入参
+                List<string> requestStrAdmissionDate = new List<string>();
+                requestStrAdmissionDate = pk.GetRequestStrForAdmissionDate(model);
+                //获取出院入参
+                List<string> requestStrDischargeDate = new List<string>();
+                requestStrDischargeDate = pk.GetRequestStrForDischargeDate(model);
+                #region 获取住院日期数据
+                //判断返回数据是否成功
+                if (requestStrAdmissionDate != null && requestStrAdmissionDate.Count > 0)
+                {
+                    List<Model.PatientDiagnose> patientDiagnoseList = new List<Model.PatientDiagnose>();
+                    StringBuilder msg = new StringBuilder();
+                    foreach (var item in requestStrAdmissionDate)
+                    {
+                        string xmlStr = pk.GetHTTPWebServiceData(item);
+                        string _Msg = "";
+                        //返回数据缺少结束标记
+                        if (!xmlStr.Contains("</Response>"))
                         {
-                            msg.Replace(_Msg, "");
-                            msg.Replace("&nbsp", "");
-                            msg.Replace(" ", "");
-                            msg.Append(" &nbsp " + _Msg);
+                            xmlStr += "</Response>";
+                        }
+                        Model.DTO.PatientDiagnoseResuest request = XmlStrToPatientDiagnoseResuest(item);
+                        if (request != null)
+                        {
+                            List<Model.PatientDiagnose> patientDiagnoses = StrTObject(xmlStr, out _Msg, request);
+                            if (patientDiagnoses != null)
+                            {
+                                foreach (Model.PatientDiagnose patientDiagnose in patientDiagnoses)
+                                {
+                                    if (!patientDiagnoseList.Contains(patientDiagnose))
+                                    {
+                                        bool check = CheckData(patientDiagnose);
+                                        if (!check)
+                                        {
+                                            patientDiagnoseList.Add(patientDiagnose);
+                                        }
+                                    }
+                                    if (!string.IsNullOrEmpty(_Msg))
+                                    {
+                                        msg.Replace(_Msg, "");
+                                        msg.Replace("&nbsp", "");
+                                        msg.Replace(" ", "");
+                                        msg.Append(" &nbsp " + _Msg);
+                                    }
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(_Msg))
+                            {
+                                msg.Replace(_Msg, "");
+                                msg.Replace("&nbsp", "");
+                                msg.Replace(" ", "");
+                                msg.Append(" &nbsp " + _Msg);
+                            }
                         }
                     }
                 }
-                if (patientDiagnoseList != null && patientDiagnoseList.Count > 0)
+                #endregion
+                #region 获取出院日期数据
+                if (requestStrDischargeDate != null && requestStrDischargeDate.Count > 0)
                 {
-                    //有数据
-                    jsonmodel = CreatJsonMode("ok", msg.ToString(), patientDiagnoseList);
-                    // ChangeQueryRecordStatu(cq, msg.ToString());
+                    
                 }
-                else
-                {
-                    //无数据
-                    jsonmodel = CreatJsonMode("err", msg.ToString(), patientDiagnoseList);
-                    ///ChangeQueryRecordStatu(cq, msg.ToString());
-                }
+                #endregion
             }
+            #endregion
             return JsonConvert.SerializeObject(jsonmodel);
+
         }
 
         private List<string> GetRequestStr(Model.DTO.PatientDiagnose_list_F model)
@@ -175,7 +254,7 @@ namespace RuRo.BLL.SZY
         {
             try
             {
-                 //return Test("");
+                //return Test("");
                 return string.IsNullOrEmpty(request) ? "" : clinicalData.GetPatientDiagnose(request);
             }
             catch (Exception ex)
@@ -222,7 +301,7 @@ namespace RuRo.BLL.SZY
 
         #endregion 将数据转换成对象
 
-        private List<Model.PatientDiagnose>  StrTObject(string xmlStr, out string msg, Model.DTO.PatientDiagnoseResuest request)
+        private List<Model.PatientDiagnose> StrTObject(string xmlStr, out string msg, Model.DTO.PatientDiagnoseResuest request)
         {
             XmlDocument xd = HospitalXmlStrHelper.HospitalXmlStrToXmlDoc(xmlStr);
             List<Model.PatientDiagnose> list = new List<Model.PatientDiagnose>();
@@ -280,7 +359,7 @@ namespace RuRo.BLL.SZY
                     }
                 }
             }
-            return list   ;
+            return list;
         }
 
         public Model.PatientDiagnose DicToNormalLisReportModel(Dictionary<string, string> dic)
