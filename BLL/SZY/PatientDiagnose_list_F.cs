@@ -114,12 +114,7 @@ namespace RuRo.BLL.SZY
                     {
                         string xmlStr = pk.GetHTTPWebServiceData(item);
                         string _Msg = "";
-                        //返回数据缺少结束标记
-                        if (!xmlStr.Contains("</Response>"))
-                        {
-                            xmlStr += "</Response>";
-                        }
-                        Model.DTO.PatientDiagnoseResuest request = XmlStrToPatientDiagnoseResuest(item);
+                        Model.DTO.PatientDiagnoseResuest request = pk.XmlStrToPatientDiagnoseResuestForZhuYuan(xmlStr);
                         if (request != null)
                         {
                             List<Model.PatientDiagnose> patientDiagnoses = StrTObject(xmlStr, out _Msg, request);

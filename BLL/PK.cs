@@ -1,21 +1,66 @@
-﻿using RuRo.Common;
+﻿using Newtonsoft.Json;
+using RuRo.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 namespace RuRo.BLL
 {
     public class PK
     {
+        //解析数据
+        //返回数据对象
+        public Model.DTO.PatientDiagnoseResuest XmlStrToPatientDiagnoseResuestForZhuYuan(string xml)
+        {
+            Model.DTO.PatientDiagnoseResuest pdr = new Model.DTO.PatientDiagnoseResuest();
+            System.Xml.XmlDocument xd = Common.XmlHelper.XMLLoad(xml);
+            try
+            {
+                XmlNode xn = xd.SelectSingleNode("//patient");
+                if (xn != null)
+                {
+                    string str = JsonConvert.SerializeXmlNode(xn, Newtonsoft.Json.Formatting.None, true);
+                    pdr = JsonConvert.DeserializeObject<Model.DTO.PatientDiagnoseResuest>(str);
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.LogHelper.WriteError(ex);
+            }
+            return pdr;
+        }
 
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public string GetHTTPWebServiceData(string request) 
         {
             //修改为读取HTTP请求WEBSERVICE
             string xml = PostData(request);
             //本地读取XML
-            string xml2 = "";
-            return xml2;
+            XmlDocument xm = RuRo.Common.XmlHelper.XMLLoad("XML//queryPatientResp.xml");
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xm.NameTable);
+            nsmgr.AddNamespace("ab", "http://chas.hit.com/transport/integration/common/msg");
+            XmlNodeList respHeaderlist = xm.SelectNodes("//ab:respHeader", nsmgr);
+            if (respHeaderlist.Count > 0 && respHeaderlist[0].InnerText.Contains("000000"))
+            {
+                XmlNodeList patientlist = xm.SelectNodes("//ab:patient", nsmgr);
+                
+                if (patientlist.Count>0)
+                {
+                    foreach (var item in patientlist)
+                    {
+                        XmlElement xe = (XmlElement)item;
+                        XmlDocument doc = new XmlDocument();
+                    }
+                }
+            }
+            return "";
+            //XmlNodeList rootNode = xm.GetElementsByTagName("QueryPatientResponse", "http://chas.hit.com/transport/integration/common/msg");
         }
 
         /// <summary>
@@ -51,7 +96,7 @@ namespace RuRo.BLL
             string html = result.Html;
             string cookie = result.Cookie;
             return html;
-        }  
+        }
         //获取传入参数
         public List<string> GetRequestStrForDischargeDate(Model.DTO.PatientDiagnose_list_F model)
         {
@@ -116,16 +161,16 @@ namespace RuRo.BLL
         //获取住院日期传参
         private string CreatRequestStrAdmissionDate(string code, DateTime ksrq00, DateTime jsrq00)
         {
-            StringBuilder sb=new StringBuilder();
-            string date=DateTime.Now.ToString();
+            StringBuilder sb = new StringBuilder();
+            string date = DateTime.Now.ToString();
             sb.Append("<?xml version='1.0' encoding='UTF-8' standalone='true'?>");
             sb.Append("<QueryPatientRequest xmlns='http://chas.hit.com/transport/integration/common/msg'>");
             sb.Append("<reqHeader><systemId>AJ</systemId>");
-            sb.Append("<reqTimestamp>"+date+"</reqTimestamp>");
+            sb.Append("<reqTimestamp>" + date + "</reqTimestamp>");
             sb.Append("<terminalIp>192.168.1.40</terminalIp></reqHeader>");
-            sb.Append("<patientNo>"+code+"</patientNo>");
-            sb.Append("<startDate>"+ksrq00.ToString("yyyy-MM-dd")+"</startDate>");
-            sb.Append("<endDate>"+jsrq00.ToString("yyyy-MM-dd")+"</endDate>");
+            sb.Append("<patientNo>" + code + "</patientNo>");
+            sb.Append("<startDate>" + ksrq00.ToString("yyyy-MM-dd") + "</startDate>");
+            sb.Append("<endDate>" + jsrq00.ToString("yyyy-MM-dd") + "</endDate>");
             sb.Append("<dateField>AdmissionDate</dateField>");
             sb.Append("<queryMode>ALL</queryMode></QueryPatientRequest>");
             return sb.ToString();
