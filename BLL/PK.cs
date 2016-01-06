@@ -31,9 +31,14 @@ namespace RuRo.BLL
                             {
                                 for (int i = 0; i < xn.Count; i++)
                                 {
+                                    //把数据赋值给PatientDiagnose
                                     patient.Cardno = xe.SelectSingleNode("ab:patientNo", nsmgr).InnerText;
                                     patient.PatientName = xe.SelectSingleNode("ab:name", nsmgr).InnerText;
                                     patient.Sex = xe.SelectSingleNode("ab:sexName", nsmgr).InnerText;
+                                    DateTime dt = new DateTime();
+                                    dt = Convert.ToDateTime(xe.SelectSingleNode("ab:birthday", nsmgr).InnerText);
+                                    patient.Brithday = dt;
+                                    patient.Csrq00 = DateTime.Now.ToString("yyyy-MM-dd");
                                     patient.Icd = xn[i].SelectSingleNode("ab:diagnosisCode", nsmgr).InnerText;
                                     patient.Diagnose = xn[i].SelectSingleNode("ab:diagnosisName", nsmgr).InnerText;
                                     patient.Type = xn[i].SelectSingleNode("ab:type", nsmgr).InnerText;

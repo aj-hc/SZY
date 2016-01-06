@@ -114,7 +114,6 @@ namespace RuRo.BLL.SZY
                     foreach (var item in requestStrAdmissionDate)
                     {
                         string _Msg = "";
-                        List<Model.DTO.PatientDiagnoseResuest> request = null;
                             List<Model.PatientDiagnose> patientDiagnoses = pk.GetHTTPWebServiceData(item);
                             if (patientDiagnoses != null&&patientDiagnoses.Count>0)
                             {
@@ -156,7 +155,6 @@ namespace RuRo.BLL.SZY
                     foreach (var item in requestStrDischargeDate)
                     {
                         string _Msg = "";
-                        List<Model.DTO.PatientDiagnoseResuest> request = null;
                         List<Model.PatientDiagnose> patientDiagnoses = pk.GetHTTPWebServiceData(item);
                         if (patientDiagnoses != null && patientDiagnoses.Count > 0)
                         {
