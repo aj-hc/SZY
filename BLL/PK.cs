@@ -12,24 +12,53 @@ namespace RuRo.BLL
     {
         //解析数据
         //返回数据对象
-        public Model.DTO.PatientDiagnoseResuest XmlStrToPatientDiagnoseResuestForZhuYuan(string xml)
+        public List<Model.PatientDiagnose> XmlStrToPatientDiagnoseResuestForZhuYuan(XmlNodeList xml, XmlNamespaceManager nsmgr)
         {
             Model.DTO.PatientDiagnoseResuest pdr = new Model.DTO.PatientDiagnoseResuest();
-            System.Xml.XmlDocument xd = Common.XmlHelper.XMLLoad(xml);
-            try
+            List<Model.PatientDiagnose> list = new List<Model.PatientDiagnose>();
+            Model.PatientDiagnose patient = new Model.PatientDiagnose();
+            if (xml.Count > 0)
             {
-                XmlNode xn = xd.SelectSingleNode("//patient");
-                if (xn != null)
+                foreach (var item in xml)
                 {
-                    string str = JsonConvert.SerializeXmlNode(xn, Newtonsoft.Json.Formatting.None, true);
-                    pdr = JsonConvert.DeserializeObject<Model.DTO.PatientDiagnoseResuest>(str);
+                    XmlElement xe = (XmlElement)item;
+                    try
+                    {
+                        if (xe != null)
+                        {
+                            XmlNodeList xn = xe.SelectNodes("ab:diagnosis",nsmgr);
+                            if (xn.Count>0&&xn!=null)
+                            {
+                                for (int i = 0; i < xn.Count; i++)
+                                {
+                                    patient.Cardno = xe.SelectSingleNode("ab:patientNo", nsmgr).InnerText;
+                                    patient.PatientName = xe.SelectSingleNode("ab:name", nsmgr).InnerText;
+                                    patient.Sex = xe.SelectSingleNode("ab:sexName", nsmgr).InnerText;
+                                    patient.Icd = xn[i].SelectSingleNode("ab:diagnosisCode", nsmgr).InnerText;
+                                    patient.Diagnose = xn[i].SelectSingleNode("ab:diagnosisName", nsmgr).InnerText;
+                                    patient.Type = xn[i].SelectSingleNode("ab:type", nsmgr).InnerText;
+                                    if (xn[i].SelectSingleNode("ab:type", nsmgr).InnerText.Contains("中医"))
+                                    {
+                                        patient.Flag = "中医诊断";
+                                    }
+                                    if (xn[i].SelectSingleNode("ab:type", nsmgr).InnerText.Contains("西医"))
+                                    {
+                                        patient.Flag = "西医诊断";
+                                    }
+                                    patient.DiagnoseDate = xn[i].SelectSingleNode("ab:diagnosisDate", nsmgr).InnerText;
+                                    list.Add(patient);
+                                    patient = new Model.PatientDiagnose();
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Common.LogHelper.WriteError(ex);
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                Common.LogHelper.WriteError(ex);
-            }
-            return pdr;
+            return list;
         }
 
         /// <summary>
@@ -37,7 +66,7 @@ namespace RuRo.BLL
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public string GetHTTPWebServiceData(string request) 
+        public List<Model.PatientDiagnose> GetHTTPWebServiceData(string request) 
         {
             //修改为读取HTTP请求WEBSERVICE
             string xml = PostData(request);
@@ -46,21 +75,18 @@ namespace RuRo.BLL
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(xm.NameTable);
             nsmgr.AddNamespace("ab", "http://chas.hit.com/transport/integration/common/msg");
             XmlNodeList respHeaderlist = xm.SelectNodes("//ab:respHeader", nsmgr);
+            XmlNodeList patientlist=null;
+            List<Model.PatientDiagnose> patientDiagnoseList = new List<Model.PatientDiagnose>();
             if (respHeaderlist.Count > 0 && respHeaderlist[0].InnerText.Contains("000000"))
             {
-                XmlNodeList patientlist = xm.SelectNodes("//ab:patient", nsmgr);
-                
-                if (patientlist.Count>0)
-                {
-                    foreach (var item in patientlist)
-                    {
-                        XmlElement xe = (XmlElement)item;
-                        XmlDocument doc = new XmlDocument();
-                    }
-                }
+                 patientlist = xm.SelectNodes("//ab:patient", nsmgr);
+                 patientDiagnoseList= XmlStrToPatientDiagnoseResuestForZhuYuan(patientlist,nsmgr);
             }
-            return "";
-            //XmlNodeList rootNode = xm.GetElementsByTagName("QueryPatientResponse", "http://chas.hit.com/transport/integration/common/msg");
+            else
+            {
+                
+            }
+            return patientDiagnoseList;
         }
 
         /// <summary>

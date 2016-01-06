@@ -42,6 +42,7 @@ namespace RuRo.BLL.SZY
                         Model.DTO.PatientDiagnoseResuest request = XmlStrToPatientDiagnoseResuest(item);
                         if (request != null)
                         {
+                            
                             List<Model.PatientDiagnose> patientDiagnoses = StrTObject(xmlStr, out _Msg, request);
                             if (patientDiagnoses != null)
                             {
@@ -104,21 +105,18 @@ namespace RuRo.BLL.SZY
                 //获取出院入参
                 List<string> requestStrDischargeDate = new List<string>();
                 requestStrDischargeDate = pk.GetRequestStrForDischargeDate(model);
+                List<Model.PatientDiagnose> patientDiagnoseList = new List<Model.PatientDiagnose>();//最终数据存放处
+                StringBuilder msg = new StringBuilder();
                 #region 获取住院日期数据
                 //判断返回数据是否成功
                 if (requestStrAdmissionDate != null && requestStrAdmissionDate.Count > 0)
                 {
-                    List<Model.PatientDiagnose> patientDiagnoseList = new List<Model.PatientDiagnose>();
-                    StringBuilder msg = new StringBuilder();
                     foreach (var item in requestStrAdmissionDate)
                     {
-                        string xmlStr = pk.GetHTTPWebServiceData(item);
                         string _Msg = "";
-                        Model.DTO.PatientDiagnoseResuest request = pk.XmlStrToPatientDiagnoseResuestForZhuYuan(xmlStr);
-                        if (request != null)
-                        {
-                            List<Model.PatientDiagnose> patientDiagnoses = StrTObject(xmlStr, out _Msg, request);
-                            if (patientDiagnoses != null)
+                        List<Model.DTO.PatientDiagnoseResuest> request = null;
+                            List<Model.PatientDiagnose> patientDiagnoses = pk.GetHTTPWebServiceData(item);
+                            if (patientDiagnoses != null&&patientDiagnoses.Count>0)
                             {
                                 foreach (Model.PatientDiagnose patientDiagnose in patientDiagnoses)
                                 {
@@ -138,7 +136,47 @@ namespace RuRo.BLL.SZY
                                         msg.Append(" &nbsp " + _Msg);
                                     }
                                 }
-
+                            }
+                            else
+                            {
+                                if (!string.IsNullOrEmpty(_Msg))
+                                {
+                                    msg.Replace(_Msg, "");
+                                    msg.Replace("&nbsp", "");
+                                    msg.Replace(" ", "");
+                                    msg.Append(" &nbsp " + _Msg);
+                                }
+                            }
+                    }
+                }
+                #endregion
+                #region 获取出院日期数据
+                if (requestStrDischargeDate != null && requestStrDischargeDate.Count > 0)
+                {
+                    foreach (var item in requestStrDischargeDate)
+                    {
+                        string _Msg = "";
+                        List<Model.DTO.PatientDiagnoseResuest> request = null;
+                        List<Model.PatientDiagnose> patientDiagnoses = pk.GetHTTPWebServiceData(item);
+                        if (patientDiagnoses != null && patientDiagnoses.Count > 0)
+                        {
+                            foreach (Model.PatientDiagnose patientDiagnose in patientDiagnoses)
+                            {
+                                if (!patientDiagnoseList.Contains(patientDiagnose))
+                                {
+                                    bool check = CheckData(patientDiagnose);
+                                    if (!check)
+                                    {
+                                        patientDiagnoseList.Add(patientDiagnose);
+                                    }
+                                }
+                                if (!string.IsNullOrEmpty(_Msg))
+                                {
+                                    msg.Replace(_Msg, "");
+                                    msg.Replace("&nbsp", "");
+                                    msg.Replace(" ", "");
+                                    msg.Append(" &nbsp " + _Msg);
+                                }
                             }
                         }
                         else
@@ -154,16 +192,21 @@ namespace RuRo.BLL.SZY
                     }
                 }
                 #endregion
-                #region 获取出院日期数据
-                if (requestStrDischargeDate != null && requestStrDischargeDate.Count > 0)
+                if (patientDiagnoseList != null && patientDiagnoseList.Count > 0)
                 {
-                    
+                    //有数据
+                    jsonmodel = CreatJsonMode("ok", msg.ToString(), patientDiagnoseList);
+                    // ChangeQueryRecordStatu(cq, msg.ToString());
                 }
-                #endregion
+                else
+                {
+                    //无数据
+                    jsonmodel = CreatJsonMode("err", msg.ToString(), patientDiagnoseList);
+                    ///ChangeQueryRecordStatu(cq, msg.ToString());
+                }
             }
             #endregion
             return JsonConvert.SerializeObject(jsonmodel);
-
         }
 
         private List<string> GetRequestStr(Model.DTO.PatientDiagnose_list_F model)
