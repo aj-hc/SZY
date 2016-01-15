@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://192.9.200.59:9080/ChasSvc/services/ChasCommonPort/WEB-INF/wsdl/intf/com.hit.chas.transport.integration.common.intf.ChasCommonSvc.wsdl" filename="Chas4PivasSvc.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>
