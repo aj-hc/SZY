@@ -119,6 +119,8 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
@@ -139,6 +141,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="QueryRecoder.cs" />
+    <Compile Include="Service References\GetQueryPT\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SZY\EmpiInfo.cs" />
     <Compile Include="SZY\HospitalXmlStrHelper.cs" />
     <Compile Include="SZY\NormalLisItems.cs" />
@@ -163,6 +170,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\ClinicalData\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PTtest\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -219,6 +231,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Service References\GetQueryPT\Chas4PivasSvc.wsdl" />
     <None Include="Web References\BasicData\EmpiService.wsdl" />
     <None Include="Web References\BasicData\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -229,8 +242,15 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\PTtest\Chas4PivasSvc.wsdl" />
+    <None Include="Web References\PTtest\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GetQueryPT\" />
+  </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
@@ -257,6 +277,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>RuRo_BLL_ClinicalData_PacsLisReportServices</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.9.200.59:9080/ChasSvc/services/ChasCommonPort/WEB-INF/wsdl/intf/com.hit.chas.transport.integration.common.intf.ChasCommonSvc.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PTtest\</RelPath>
+      <UpdateFromURL>http://192.9.200.59:9080/ChasSvc/services/ChasCommonPort/WEB-INF/wsdl/intf/com.hit.chas.transport.integration.common.intf.ChasCommonSvc.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>RuRo_BLL_PTtest_ChasCommonSvc</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\BasicData\EmpiService.disco" />
@@ -266,6 +297,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\ClinicalData\PacsLisReportServices.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GetQueryPT\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GetQueryPT\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GetQueryPT\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

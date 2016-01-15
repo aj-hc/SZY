@@ -62,5 +62,15 @@ namespace RuRo.BLL.Properties {
                 return ((string)(this["RuRo_BLL_ClinicalData_PacsLisReportServices"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.9.200.59:9080/ChasSvc/services/ChasCommonPort")]
+        public string RuRo_BLL_PTtest_ChasCommonSvc {
+            get {
+                return ((string)(this["RuRo_BLL_PTtest_ChasCommonSvc"]));
+            }
+        }
     }
 }

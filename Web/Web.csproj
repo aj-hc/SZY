@@ -653,7 +653,9 @@
     <Content Include="Test\WebForm1.aspx" />
     <Content Include="XML\queryDiagnosisReq.xml" />
     <Content Include="XML\queryDiagnosisResp.xml" />
-    <Content Include="XML\queryPatientReq.xml" />
+    <Content Include="XML\queryPatientReq.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XML\queryPatientResp.xml" />
   </ItemGroup>
   <ItemGroup>
