@@ -101,10 +101,10 @@ namespace RuRo.BLL.SZY
                 RuRo.BLL.PK pk = new PK();
                 //获取住院入参
                 List<string> requestStrAdmissionDate = new List<string>();
-                requestStrAdmissionDate = pk.GetRequestStrForAdmissionDate(model);
+                requestStrAdmissionDate = pk.GetRequestStr(model,"AdmissionDate");
                 //获取出院入参
                 List<string> requestStrDischargeDate = new List<string>();
-                requestStrDischargeDate = pk.GetRequestStrForDischargeDate(model);
+                requestStrDischargeDate = pk.GetRequestStr(model,"DischargeDate");
                 List<Model.PatientDiagnose> patientDiagnoseList = new List<Model.PatientDiagnose>();//最终数据存放处
                 StringBuilder msg = new StringBuilder();
                 #region 获取住院日期数据
@@ -552,10 +552,10 @@ namespace RuRo.BLL.SZY
                 RuRo.BLL.PK pk = new PK();
                 //获取住院入参
                 List<string> requestStrAdmissionDate = new List<string>();
-                requestStrAdmissionDate = pk.GetRequestStrForAdmissionDate(model);
+                requestStrAdmissionDate = pk.GetRequestStr(model,"AdmissionDate");
                 //获取出院入参
                 List<string> requestStrDischargeDate = new List<string>();
-                requestStrDischargeDate = pk.GetRequestStrForDischargeDate(model);
+                requestStrDischargeDate = pk.GetRequestStr(model, "DischargeDate");
                 #region 获取住院日期数据
                 //判断返回数据是否成功
                 //if (requestStrAdmissionDate != null && requestStrAdmissionDate.Count > 0)

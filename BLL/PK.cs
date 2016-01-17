@@ -177,8 +177,13 @@ namespace RuRo.BLL
             string cookie = result.Cookie;
             return html;
         }
-        //获取传入参数
-        public List<string> GetRequestStrForDischargeDate(Model.DTO.PatientDiagnose_list_F model)
+        /// <summary>
+        /// 传入参数使用这个
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="mothod"></param>
+        /// <returns></returns>
+        public List<string> GetRequestStr(Model.DTO.PatientDiagnose_list_F model,string mothod)
         {
             List<string> list = new List<string>();
             DateTime ksrq00 = new DateTime();
@@ -187,73 +192,29 @@ namespace RuRo.BLL
             {
                 if (ksrq00 <= jsrq00)
                 {
-                    string str = CreatRequestStrDischargeDate(model.code, ksrq00, jsrq00);
+                    string str = CreatRequestStrmothod(model.code, ksrq00, jsrq00,mothod);
                     list.Add(str);
                 }
                 if (ksrq00 > jsrq00)
                 {
-                    string str = CreatRequestStrDischargeDate(model.code, jsrq00, ksrq00);
+                    string str = CreatRequestStrmothod(model.code, jsrq00, ksrq00, mothod);
                     list.Add(str);
                 }
             }
             return list;
         }
-
-        //获取出院日期传参
-        private string CreatRequestStrDischargeDate(string code, DateTime ksrq00, DateTime jsrq00)
+        /// <summary>
+        /// 获取传参使用
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="ksrq00"></param>
+        /// <param name="jsrq00"></param>
+        /// <param name="mothod"></param>
+        /// <returns></returns>
+        private string CreatRequestStrmothod(string code, DateTime ksrq00, DateTime jsrq00, string mothod)
         {
             StringBuilder sb = new StringBuilder();
             string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            sb.Append("<?xml version='1.0' encoding='UTF-8' standalone='yes'?>");
-            sb.Append("<QueryPatientRequest xmlns='http://chas.hit.com/transport/integration/common/msg'>");
-            sb.Append("<reqHeader><systemId>AJ</systemId>");
-            sb.Append("<reqTimestamp>" + date + "</reqTimestamp>");
-            sb.Append("<terminalIp>192.168.1.40</terminalIp></reqHeader>");
-            sb.Append("<patientNo>" + code + "</patientNo>");
-            sb.Append("<startDate>" + ksrq00.ToString("yyyy-MM-dd") + "</startDate>");
-            sb.Append("<endDate>" + jsrq00.ToString("yyyy-MM-dd") + "</endDate>");
-            sb.Append("<dateField>DischargeDate</dateField>");
-            sb.Append("<queryMode>ALL</queryMode></QueryPatientRequest>");
-            return sb.ToString();
-        }
-        //获取传入参数
-        public List<string> GetRequestStrForAdmissionDate(Model.DTO.PatientDiagnose_list_F model)
-        {
-            List<string> list = new List<string>();
-            DateTime ksrq00 = new DateTime();
-            DateTime jsrq00 = new DateTime();
-            if (DateTime.TryParse(model.ksrq00, out ksrq00) && DateTime.TryParse(model.jsrq00, out jsrq00))
-            {
-                if (ksrq00 <= jsrq00)
-                {
-                    string str = CreatRequestStrAdmissionDate(model.code, ksrq00, jsrq00);
-                    list.Add(str);
-                }
-                if (ksrq00 > jsrq00)
-                {
-                    string str = CreatRequestStrAdmissionDate(model.code, jsrq00, ksrq00);
-                    list.Add(str);
-                }
-            }
-            return list;
-        }
-
-        //获取住院日期传参
-        private string CreatRequestStrAdmissionDate(string code, DateTime ksrq00, DateTime jsrq00)
-        {
-            StringBuilder sb = new StringBuilder();
-            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            //sb.Append("<?xml version='1.0' encoding='UTF-8' standalone='yes'?>");
-            //sb.Append("<QueryPatientRequest xmlns='http://chas.hit.com/transport/integration/common/msg'>");
-            //sb.Append("<reqHeader><systemId>AJ</systemId>");
-            //sb.Append("<reqTimestamp>" + date + "</reqTimestamp>");
-            //sb.Append("<terminalIp>192.168.1.40</terminalIp></reqHeader>");
-            //sb.Append("<patientNo>" + code + "</patientNo>");
-            //sb.Append("<startDate>" + ksrq00.ToString("yyyy-MM-dd") + "</startDate>");
-            //sb.Append("<endDate>" + jsrq00.ToString("yyyy-MM-dd") + "</endDate>");
-            //sb.Append("<dateField>AdmissionDate</dateField>");
-            //sb.Append("<queryMode>ALL</queryMode></QueryPatientRequest>");
-            //return sb.ToString();
             string strxml = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>" +
                 "<QueryPatientRequest xmlns='http://chas.hit.com/transport/integration/common/msg'>" +
                 "<reqHeader>" +
@@ -264,7 +225,7 @@ namespace RuRo.BLL
                 "<patientNo>3027474</patientNo>" +
                 "<startDate>2012-10-21</startDate>" +
                 "<endDate>2012-10-23</endDate>" +
-                "<dateField>AdmissionDate</dateField>" +
+                "<dateField>"+mothod+"</dateField>" +
                 "<queryMode>ALL</queryMode>" +
                 "</QueryPatientRequest>";
             return strxml;
